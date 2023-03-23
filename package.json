@@ -79,12 +79,12 @@
         "vue-tsc": "^1.0.11"
     },
     "license": "MIT",
-    "homepage": "https://github.com/Qiu-Jun/dialog-edit-img#readme",
+    "homepage": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git#readme",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Qiu-Jun/dialog-edit-img.git"
+        "url": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git.git"
     },
     "bugs": {
-        "url": "https://github.com/Qiu-Jun/wx-signture/issues"
+        "url": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git/issues"
     }
 }
