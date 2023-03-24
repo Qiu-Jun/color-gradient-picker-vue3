@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: June
+ * @Date: 2023-03-17 23:48:15
+ * @LastEditors: June
+ * @LastEditTime: 2023-03-24 02:29:10
+-->
 <template>
     <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
         <div>

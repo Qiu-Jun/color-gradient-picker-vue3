@@ -2,11 +2,10 @@ import type { ConfigEnv, UserConfigExport } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import * as path from 'path';
-import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
     return {
-        plugins: [vue(), vueJsx(), vueSetupExtend()],
+        plugins: [vue(), vueJsx()],
         resolve: {
             alias: {
                 '@': path.resolve(__dirname, 'src'),
@@ -29,14 +28,14 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
                 },
             },
 
-            minify: 'terser',
-            terserOptions: {
-                compress: {
-                    //生产环境时移除console
-                    drop_console: true,
-                    drop_debugger: true,
-                },
-            },
+            // minify: 'terser',
+            // terserOptions: {
+            //     compress: {
+            //         //生产环境时移除console
+            //         drop_console: true,
+            //         drop_debugger: true,
+            //     },
+            // },
         },
     };
 };
