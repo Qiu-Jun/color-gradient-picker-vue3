@@ -5,13 +5,13 @@ export default function hsvToRgb(hue, saturation, value) {
     const sat = saturation / 100;
     let C = sat * value;
     const H = hue / 60;
-    let X = C * (1 - Math.abs(H % 2 - 1));
+    let X = C * (1 - Math.abs((H % 2) - 1));
     let m = value - C;
     const precision = 255;
 
-    C = (C + m) * precision | 0;
-    X = (X + m) * precision | 0;
-    m = m * precision | 0;
+    C = ((C + m) * precision) | 0;
+    X = ((X + m) * precision) | 0;
+    m = (m * precision) | 0;
 
     if (H >= 1 && H < 2) {
         return setRGBA(X, C, m);

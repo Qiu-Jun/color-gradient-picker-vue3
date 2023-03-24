@@ -1,15 +1,15 @@
 export default function getRgbByHue(hue) {
     let C = 1;
     const H = hue / 60;
-    let X = C * (1 - Math.abs(H % 2 - 1));
+    let X = C * (1 - Math.abs((H % 2) - 1));
     const m = 0;
     const precision = 255;
     let r = 0;
     let g = 0;
     let b = 0;
 
-    C = (C + m) * precision | 0;
-    X = (X + m) * precision | 0;
+    C = ((C + m) * precision) | 0;
+    X = ((X + m) * precision) | 0;
 
     if (H >= 0 && H < 1) {
         r = C | 0;

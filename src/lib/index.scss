@@ -4,7 +4,7 @@
 
 .ui-color-picker {
     margin: 8px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     width: 280px;
@@ -39,21 +39,28 @@
                         bottom: -3px;
                         left: -3px;
                         right: -3px;
-                        border: 2px solid #1F2667;
+                        border: 2px solid #1f2667;
                         border-radius: 50%;
                     }
                 }
 
                 &.liner-gradient {
-                    background: linear-gradient(270deg, #FFFFFF 0%, #1F2667 100%);
+                    background: linear-gradient(
+                        270deg,
+                        #ffffff 0%,
+                        #1f2667 100%
+                    );
                 }
 
                 &.radial-gradient {
                     margin-left: 8px;
-                    background: radial-gradient(circle, #FFFFFF 0%, #1F2667 100%);
+                    background: radial-gradient(
+                        circle,
+                        #ffffff 0%,
+                        #1f2667 100%
+                    );
                 }
             }
-
         }
 
         .gradient-degrees-options {
@@ -71,7 +78,7 @@
                 position: relative;
                 width: 28px;
                 height: 28px;
-                border: 3px solid #1F2667;
+                border: 3px solid #1f2667;
                 border-radius: 18px;
                 margin-right: 54px;
 
@@ -87,7 +94,7 @@
                         height: 6px;
                         top: 2px;
                         border-radius: 3px;
-                        background: #1F2667;
+                        background: #1f2667;
                     }
                 }
             }
@@ -137,13 +144,21 @@
             .picking-area-overlay1 {
                 height: 100%;
                 width: 100%;
-                background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
+                background: linear-gradient(
+                    to right,
+                    white 0%,
+                    rgba(255, 255, 255, 0) 100%
+                );
                 border-radius: 3px;
 
                 .picking-area-overlay2 {
                     height: 100%;
                     width: 100%;
-                    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 100%);
+                    background: linear-gradient(
+                        to bottom,
+                        rgba(0, 0, 0, 0) 0%,
+                        black 100%
+                    );
                     border-radius: 8px;
                 }
             }
@@ -159,7 +174,7 @@
                 height: 36px;
                 width: 36px;
                 border-radius: 8px;
-                border: 1px solid #EBEDF5;
+                border: 1px solid #ebedf5;
             }
 
             .color-hue-alpha {
@@ -180,11 +195,86 @@
                     .hue-area {
                         position: relative;
                         height: 14px;
-                        background: -webkit-linear-gradient(left, #ff0000, #ff0080, #ff00ff, #8000ff, #0000ff, #0080ff, #00ffff, #00ff80, #00ff00, #80ff00, #ffff00, #ff8000, #ff0000);
-                        background: -o-linear-gradient(left, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0000);
-                        background: -ms-linear-gradient(left, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0000);
-                        background: -moz-linear-gradient(left, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0000);
-                        background: linear-gradient(to right, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0000);
+                        background: -webkit-linear-gradient(
+                            left,
+                            #ff0000,
+                            #ff0080,
+                            #ff00ff,
+                            #8000ff,
+                            #0000ff,
+                            #0080ff,
+                            #00ffff,
+                            #00ff80,
+                            #00ff00,
+                            #80ff00,
+                            #ffff00,
+                            #ff8000,
+                            #ff0000
+                        );
+                        background: -o-linear-gradient(
+                            left,
+                            #ff0000,
+                            #ff8000,
+                            #ffff00,
+                            #80ff00,
+                            #00ff00,
+                            #00ff80,
+                            #00ffff,
+                            #0080ff,
+                            #0000ff,
+                            #8000ff,
+                            #ff00ff,
+                            #ff0080,
+                            #ff0000
+                        );
+                        background: -ms-linear-gradient(
+                            left,
+                            #ff0000,
+                            #ff8000,
+                            #ffff00,
+                            #80ff00,
+                            #00ff00,
+                            #00ff80,
+                            #00ffff,
+                            #0080ff,
+                            #0000ff,
+                            #8000ff,
+                            #ff00ff,
+                            #ff0080,
+                            #ff0000
+                        );
+                        background: -moz-linear-gradient(
+                            left,
+                            #ff0000,
+                            #ff8000,
+                            #ffff00,
+                            #80ff00,
+                            #00ff00,
+                            #00ff80,
+                            #00ffff,
+                            #0080ff,
+                            #0000ff,
+                            #8000ff,
+                            #ff00ff,
+                            #ff0080,
+                            #ff0000
+                        );
+                        background: linear-gradient(
+                            to right,
+                            #ff0000,
+                            #ff8000,
+                            #ffff00,
+                            #80ff00,
+                            #00ff00,
+                            #00ff80,
+                            #00ffff,
+                            #0080ff,
+                            #0000ff,
+                            #8000ff,
+                            #ff00ff,
+                            #ff0080,
+                            #ff0000
+                        );
                     }
                 }
 
@@ -207,7 +297,7 @@
                     .alpha-area {
                         width: 100%;
                         height: 100%;
-                        background: url("assets/images/alpha-background.svg");
+                        background: url('assets/images/alpha-background.svg');
                         background-size: auto;
                         background-position: 50% 50%;
                         border-radius: 10px;
@@ -244,7 +334,7 @@
             top: 1px;
             height: 12px;
             width: 12px;
-            border: 1px solid #FFFFFF;
+            border: 1px solid #ffffff;
             background: transparent;
             border-radius: 50%;
             box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
@@ -256,7 +346,7 @@
                 transform: translate(-50%, -50%);
                 height: 3px;
                 width: 3px;
-                background: #FFFFFF;
+                background: #ffffff;
                 border-radius: 50%;
                 opacity: 0;
                 transition: opacity 0.33s;
@@ -345,14 +435,14 @@
                 height: 24px;
                 width: 24px;
                 border-radius: 50%;
-                background-color: #EBEDF5;
+                background-color: #ebedf5;
                 cursor: pointer;
                 position: relative;
                 margin-top: 4px;
                 flex-shrink: 0;
 
                 &:not(.plus) {
-                    border: 1px solid #EBEDF5;
+                    border: 1px solid #ebedf5;
                 }
 
                 &.empty {
@@ -363,7 +453,7 @@
                     .line {
                         width: 2px;
                         height: 16px;
-                        background-color: #8892B3;
+                        background-color: #8892b3;
                         border-radius: 1px;
                         transform: rotate(45deg);
                     }
@@ -408,7 +498,7 @@
                         bottom: -3px;
                         left: -3px;
                         right: -3px;
-                        border: 2px solid #8892B3;
+                        border: 2px solid #8892b3;
                         border-radius: 50%;
                     }
                 }
