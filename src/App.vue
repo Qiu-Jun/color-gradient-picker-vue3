@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 18:23:07
+ * @LastEditTime: 2023-04-02 18:51:49
 -->
 <template>
     <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { Ref } from 'vue';
-import { ColorPicker } from './lib/index';
+import ColorPicker from './lib/index';
 
 interface IPoitItem {
     alpha?: number | string;

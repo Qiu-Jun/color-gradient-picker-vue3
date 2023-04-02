@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-03-24 09:22:41
+ * @LastEditTime: 2023-04-02 18:51:17
 -->
 
 ## color-gradient-picker-vue3
@@ -32,19 +32,34 @@ yarn add color-gradient-picker-vue3
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
     import { ref } from 'vue';
-    import { ColorPicker } from 'color-gradient-picker-vue3';
-    import 'color-gradient-picker-vue3/dist/style.css';
+    import type { Ref } from 'vue';
+    import ColorPicker from './lib/index';
 
-    const color = ref({
+    interface IPoitItem {
+        alpha?: number | string;
+        blue?: number | string;
+        green?: number | string;
+        left?: number | string;
+        red?: number | string;
+    }
+
+    interface Iattrs {
+        degree: number;
+        points: [IPoitItem];
+        style: string;
+        type: string;
+    }
+
+    const color: Ref<IPoitItem | Iattrs> = ref({
         red: 255,
         green: 0,
         blue: 0,
         alpha: 1,
     });
 
-    const onChange = (attrs, name) => {
+    const onChange = (attrs: Iattrs, name: string) => {
         color.value = { ...attrs };
     };
 </script>
