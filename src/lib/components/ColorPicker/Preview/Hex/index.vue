@@ -4,14 +4,12 @@
  * @Author: June
  * @Date: 2023-03-19 18:25:35
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 18:05:59
+ * @LastEditTime: 2023-04-02 18:25:51
 -->
 <template>
     <Input
         :value="state.hexValue"
         label="hex"
-        :on-focus="() => (state.inProgress = true)"
-        :on-blur="() => (state.inProgress = false)"
         :in-progress="state.inProgress"
         classes="hex"
         @input="changeHex"
@@ -32,14 +30,13 @@ const props = defineProps({
 });
 
 const state = reactive({
-    inProgress: false,
     hexValue: rgbToHex(props.red, props.green, props.blue),
 });
 
 const hex = computed(() => rgbToHex(props.red, props.green, props.blue));
 
 const setHex = () => {
-    if (hex.value.length === 6 && state.inProgress) {
+    if (hex.value.length === 6) {
         state.hexValue = hex.value;
     }
 };
@@ -52,7 +49,7 @@ const changeHex = (event) => {
 };
 
 watch(
-    () => [state.inProgress, props.red, props.green, props.blue],
+    () => [props.red, props.green, props.blue],
     () => setHex(),
 );
 </script>
