@@ -1,4 +1,12 @@
-export default function getRgbByHue(hue) {
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: June
+ * @Date: 2023-03-18 00:33:46
+ * @LastEditors: June
+ * @LastEditTime: 2023-04-02 16:26:26
+ */
+export default function getRgbByHue(hue: number) {
     let C = 1;
     const H = hue / 60;
     let X = C * (1 - Math.abs((H % 2) - 1));

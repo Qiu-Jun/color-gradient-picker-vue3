@@ -1,8 +1,26 @@
-export default function rgbToHSv({ red, green, blue }) {
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: June
+ * @Date: 2023-03-18 00:33:46
+ * @LastEditors: June
+ * @LastEditTime: 2023-04-02 17:00:27
+ */
+export default function rgbToHSv({
+    red,
+    green,
+    blue,
+    alpha,
+}: {
+    red: number;
+    green: number;
+    blue: number;
+    alpha: number;
+}) {
     let rr;
     let gg;
     let bb;
-    let h;
+    let h = 0;
     let s;
 
     const rabs = red / 255;
@@ -10,7 +28,7 @@ export default function rgbToHSv({ red, green, blue }) {
     const babs = blue / 255;
     const v = Math.max(rabs, gabs, babs);
     const diff = v - Math.min(rabs, gabs, babs);
-    const diffc = (c) => (v - c) / 6 / diff + 1 / 2;
+    const diffc = (c: number) => (v - c) / 6 / diff + 1 / 2;
     if (diff === 0) {
         h = 0;
         s = 0;

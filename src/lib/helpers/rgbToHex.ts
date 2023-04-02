@@ -1,4 +1,12 @@
-export default function rgbToHex(red, green, blue) {
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: June
+ * @Date: 2023-03-18 00:33:46
+ * @LastEditors: June
+ * @LastEditTime: 2023-04-02 16:23:47
+ */
+export default function rgbToHex(red: number, green: number, blue: number) {
     let r16 = red.toString(16);
     let g16 = green.toString(16);
     let b16 = blue.toString(16);

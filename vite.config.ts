@@ -1,11 +1,20 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: June
+ * @Date: 2023-03-17 22:02:02
+ * @LastEditors: June
+ * @LastEditTime: 2023-04-02 15:32:58
+ */
 import type { ConfigEnv, UserConfigExport } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import * as path from 'path';
+import VueSetupExtend from 'vite-plugin-vue-setup-extend';
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
     return {
-        plugins: [vue(), vueJsx()],
+        plugins: [vue(), vueJsx(), VueSetupExtend()],
         resolve: {
             alias: {
                 '@': path.resolve(__dirname, 'src'),

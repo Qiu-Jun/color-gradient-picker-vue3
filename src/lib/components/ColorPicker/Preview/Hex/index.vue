@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:25:35
  * @LastEditors: June
- * @LastEditTime: 2023-03-24 00:51:24
+ * @LastEditTime: 2023-04-02 18:05:59
 -->
 <template>
     <Input
@@ -39,8 +39,9 @@ const state = reactive({
 const hex = computed(() => rgbToHex(props.red, props.green, props.blue));
 
 const setHex = () => {
-    if (state.inProgress) return;
-    state.hexValue = hex.value;
+    if (hex.value.length === 6 && state.inProgress) {
+        state.hexValue = hex.value;
+    }
 };
 
 const changeHex = (event) => {

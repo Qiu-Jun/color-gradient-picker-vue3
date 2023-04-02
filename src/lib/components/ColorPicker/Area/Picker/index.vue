@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:47:22
  * @LastEditors: June
- * @LastEditTime: 2023-03-24 00:28:25
+ * @LastEditTime: 2023-04-02 15:46:04
 -->
 <template>
     <div
@@ -75,7 +75,6 @@ const mouseDownHandler = (event) => {
     const startY = event.pageY;
     const positionX = startX - elementX;
     const positionY = startY - elementY;
-
     const color = changePicker(
         positionX,
         positionY,
