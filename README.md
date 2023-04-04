@@ -4,12 +4,12 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 18:51:17
+ * @LastEditTime: 2023-04-05 01:07:28
 -->
 
 ## color-gradient-picker-vue3
 
-Color and gradient picker for vue3.js. color-gradient-picker 的 vue3 版本
+Color and gradient picker for vue3.js. [If you use vue2， plese use color-gradient-picker](https://github.com/arthay/vue-color-gradient-picker).color-gradient-picker-vue3 is an upgraded version of `color-gradient-picker`
 
 #### Usage
 
@@ -67,4 +67,4 @@ yarn add color-gradient-picker-vue3
 
 #### Todo
 
--   [] 处理 ts 问题
+-   [ ] fix to typescript
