@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-18 00:57:49
  * @LastEditors: June
- * @LastEditTime: 2023-03-19 20:42:43
+ * @LastEditTime: 2023-04-08 22:35:41
 -->
 <template>
     <div class="ui-color-picker">
@@ -34,7 +34,7 @@
     </div>
 </template>
 
-<script setup name="ColorPicker">
+<script lang="ts" setup name="ColorPicker">
 import Solid from './Solid/index.vue';
 import Gradient from './Gradient/index.vue';
 const props = defineProps({

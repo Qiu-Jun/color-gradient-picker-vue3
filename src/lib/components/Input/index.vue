@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-23 22:20:33
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 15:43:09
+ * @LastEditTime: 2023-04-10 10:52:33
 -->
 <template>
     <div :class="`input-field ${props.classes}`">
@@ -23,7 +23,7 @@
     </div>
 </template>
 
-<script setup name="Input">
+<script lang="ts" setup name="Input">
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -62,7 +62,7 @@ const value = computed({
     set: (val) => emits('update:value', val),
 });
 
-const onInput = (e) => {
+const onInput = (e: any) => {
     emits('input', e);
 };
 
