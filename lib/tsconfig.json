@@ -1,0 +1,8 @@
+{
+    "extends": "../tsconfig.json",
+    "path": {
+        "@c/*": ["lib/*"]
+    },
+    "exclude": ["**/dist/**"],
+    "include": ["lib/**/*.ts", "lib/**/*.d.ts", "lib/**/*.vue", "lib/**/*.tsx", "index.d.ts"]
+}

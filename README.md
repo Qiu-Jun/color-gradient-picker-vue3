@@ -19,6 +19,7 @@ yarn add color-gradient-picker-vue3
 ```
 
 #### Demo
+
 ```html
 <template>
     <div>

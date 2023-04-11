@@ -1,0 +1,62 @@
+{
+    "name": "color-gradient-picker-vue3",
+    "version": "0.1.5",
+    "type": "module",
+    "author": "June",
+    "private": false,
+    "description": "Color and gradient picker for vue3.js",
+    "keywords": [
+        "vue",
+        "vue.js",
+        "vue3",
+        "color-picker",
+        "picker",
+        "gradient"
+    ],
+    "tags": [
+        "vue",
+        "vue.js",
+        "vue3",
+        "color-picker",
+        "gradient"
+    ],
+    "files": [
+        "dist",
+        "src",
+        "index.d.ts"
+    ],
+    "main": "./dist/color-gradient-picker-vue3.umd.js",
+    "module": "./dist/color-gradient-picker-vue3.es.js",
+    "exports": {
+        ".": {
+            "require": "./dist/color-gradient-picker-vue3.umd.js",
+            "import": "./dist/color-gradient-picker-vue3.es.js"
+        },
+        "./dist/style.css": "./dist/style.css"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "build:js": "vite build",
+        "preview": "vite preview",
+        "eslint": "eslint --ext .ts,.tsx,.jsx,.js,.vue --ignore-path .gitignore --fix src",
+        "prettier": "prettier --write ."
+    },
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-conventional-changelog"
+        }
+    },
+    "dependencies": {
+        "vue": "^3.2.45"
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git/issues"
+    }
+}
