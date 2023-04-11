@@ -11,7 +11,7 @@ import devalue from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_
 import { renderToString } from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+vue@3.2.47/node_modules/vue/server-renderer/index.mjs';
 import { createFetch as createFetch$1, Headers } from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+ofetch@1.0.1/node_modules/ofetch/dist/node.mjs';
 import destr from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+destr@1.2.2/node_modules/destr/dist/index.mjs';
-import { createCall, createFetch } from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+unenv@1.3.0/node_modules/unenv/runtime/fetch/index.mjs';
+import { createCall, createFetch } from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+unenv@1.3.1/node_modules/unenv/runtime/fetch/index.mjs';
 import { createHooks } from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+hookable@5.5.3/node_modules/hookable/dist/index.mjs';
 import { snakeCase } from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+scule@1.0.0/node_modules/scule/dist/index.mjs';
 import defu, { defuFn } from 'file:///Users/june/Desktop/color-gradient-picker-vue3/node_modules/.pnpm/registry.npmmirror.com+defu@6.1.2/node_modules/defu/dist/defu.mjs';

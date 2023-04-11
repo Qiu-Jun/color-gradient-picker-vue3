@@ -47,9 +47,6 @@
             "path": "node_modules/cz-conventional-changelog"
         }
     },
-    "dependencies": {
-        "vue": "^3.2.45"
-    },
     "license": "MIT",
     "homepage": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git#readme",
     "repository": {

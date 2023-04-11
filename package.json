@@ -47,7 +47,8 @@
         "typescript": "^4.9.3",
         "vite": "^4.0.0",
         "vite-plugin-vue-setup-extend": "^0.4.0",
-        "vue-tsc": "^1.0.11"
+        "vue-tsc": "^1.0.11",
+        "webpack": "^5.78.0"
     },
     "dependencies": {
         "vue": "^3.2.47"
