@@ -14,6 +14,7 @@ const CWD = process.cwd();
 const PKG_DEV = resolve(CWD, './lib');
 const PKG_VUE3JS = resolve(CWD, './packages/vue3js');
 const PKG_VUE3TS = resolve(CWD, './packages/vue3ts');
+const PKG_NUXI = resolve(CWD, './packages/nuxi');
 
 const run = (bin, args, opts = {}) => {
     execa(bin, args, { stdio: 'inherit', ...opts });
@@ -41,6 +42,11 @@ async function create() {
                     name: 'vue3ts 例子',
                     value: 'vue3ts',
                 },
+                {
+                    key: '3',
+                    name: 'nuxi 例子',
+                    value: 'nuxi',
+                },
             ],
         },
     ]);
@@ -54,6 +60,9 @@ async function create() {
             break;
         case 'vue3ts':
             run('pnpm', ['dev'], { cwd: PKG_VUE3TS });
+            break;
+        case 'nuxi':
+            run('pnpm', ['dev'], { cwd: PKG_NUXI });
             break;
         default:
             break;
