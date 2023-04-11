@@ -22,7 +22,7 @@
     ],
     "files": [
         "dist",
-        "src",
+        "lib",
         "index.d.ts"
     ],
     "main": "./dist/color-gradient-picker-vue3.umd.js",
