@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:46
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 17:00:27
+ * @LastEditTime: 2023-04-26 11:45:22
  */
 export default function rgbToHSv({
     red,
@@ -15,7 +15,7 @@ export default function rgbToHSv({
     red: number;
     green: number;
     blue: number;
-    alpha: number;
+    alpha?: number;
 }) {
     let rr;
     let gg;

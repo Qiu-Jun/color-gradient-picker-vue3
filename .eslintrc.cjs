@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-02-21 23:42:31
  * @LastEditors: June
- * @LastEditTime: 2023-03-18 00:45:50
+ * @LastEditTime: 2023-04-26 09:36:58
  */
 module.exports = {
     root: true,
@@ -31,5 +31,6 @@ module.exports = {
         'vue/multi-word-component-names': 'off',
         'vue/prefer-import-from-vue': 'off',
         'vue/require-default-prop': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
     },
 };

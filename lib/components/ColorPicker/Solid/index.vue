@@ -20,36 +20,40 @@
     />
 </template>
 
-<script setup name="Solid">
+<script lang="ts" setup name="Solid">
 import { reactive, onMounted, computed, watch } from 'vue';
 import Area from '../Area/index.vue';
 import Preview from '../Preview/index.vue';
+import {
+    rgbToHsv,
+    getRightValue,
+    generateSolidStyle,
+} from '../../../helpers/index';
 
-import { rgbToHsv, getRightValue, generateSolidStyle } from '@c/helpers/index';
+interface Iprops {
+    red: number;
+    green: number;
+    blue: number;
+    alpha: number;
+    hue: number;
+    saturation: number;
+    value: number;
+    onStartChange: () => void;
+    onChange: () => void;
+    onEndChange: () => void;
+}
 
-const props = defineProps({
-    red: {
-        type: Number,
-        default: 255,
-    },
-    green: {
-        type: Number,
-        default: 0,
-    },
-    blue: {
-        type: Number,
-        default: 0,
-    },
-    alpha: {
-        type: Number,
-        default: 1,
-    },
-    hue: Number,
-    saturation: Number,
-    value: Number,
-    onStartChange: Function,
-    onChange: Function,
-    onEndChange: Function,
+const props = withDefaults(defineProps<Iprops>(), {
+    red: 255,
+    green: 0,
+    blue: 0,
+    alpha: 1,
+    hue: 0,
+    saturation: 0,
+    value: 0,
+    onStartChange: () => false,
+    onChange: () => false,
+    onEndChange: () => false,
 });
 
 const state = reactive({

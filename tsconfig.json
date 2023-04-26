@@ -15,5 +15,6 @@
         "types": ["node", "vite/client"],
         "baseUrl": "./"
     },
-    "exclude": ["**/dist/**", "**/node_modules/**"]
+    "exclude": ["**/dist/**", "**/node_modules/**"],
+    "include": ["./types/*.d.ts"]
 }

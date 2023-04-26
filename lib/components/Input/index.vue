@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-23 22:20:33
  * @LastEditors: June
- * @LastEditTime: 2023-04-10 10:52:33
+ * @LastEditTime: 2023-04-26 10:42:22
 -->
 <template>
     <div :class="`input-field ${props.classes}`">
@@ -26,33 +26,22 @@
 <script lang="ts" setup name="Input">
 import { computed } from 'vue';
 
-const props = defineProps({
-    value: {
-        type: [String, Number],
-        default: '',
-    },
-    label: {
-        type: String,
-        default: '',
-    },
-    type: {
-        type: String,
-        default: 'text',
-    },
-    classes: {
-        type: String,
-        default: '',
-    },
-    onFocus: {
-        type: Function,
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        default: () => {},
-    },
-    onBlur: {
-        type: Function,
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        default: () => {},
-    },
+interface Iprops {
+    value: string | number;
+    label: string;
+    type?: string;
+    classes: string;
+    onFocus?: () => void;
+    onBlur?: () => void;
+}
+
+const props = withDefaults(defineProps<Iprops>(), {
+    value: '',
+    label: '',
+    type: 'text',
+    classes: '',
+    onFocus: () => false,
+    onBlur: () => false,
 });
 
 const emits = defineEmits(['input', 'update:value']);
@@ -62,7 +51,7 @@ const value = computed({
     set: (val) => emits('update:value', val),
 });
 
-const onInput = (e: any) => {
+const onInput = (e: InputEvent) => {
     emits('input', e);
 };
 

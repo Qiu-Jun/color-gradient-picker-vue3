@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 15:46:19
+ * @LastEditTime: 2023-04-26 09:15:08
 -->
 
 ## color-gradient-picker-vue3
@@ -103,13 +103,13 @@ yarn add color-gradient-picker-vue3
 pnpm install
 
 # 启动lib(根目录或者lib下)
-pnpm run dev
+pnpm dev
 
 # 预览packages的子项目
 # 根目录
-pnpm run predev
+pnpm predev
 # 子项目下
-pnpm run dev
+pnpm dev
 ```
 
 #### Todo

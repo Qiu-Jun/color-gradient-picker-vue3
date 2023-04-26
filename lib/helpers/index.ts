@@ -1,3 +1,10 @@
+/*
+ * @Author: June
+ * @Description:
+ * @Date: 2023-04-08 22:26:19
+ * @LastEditors: June
+ * @LastEditTime: 2023-04-26 12:01:11
+ */
 export { default as rgbToHsv } from './rgbToHsv';
 export { default as getRgbByHue } from './getRgbByHue';
 export { default as changePicker } from './changePicker';

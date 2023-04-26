@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-18 00:57:49
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 14:25:18
+ * @LastEditTime: 2023-04-26 10:16:48
 -->
 <template>
     <div class="ui-color-picker">
@@ -34,63 +34,79 @@
     </div>
 </template>
 
-<script setup name="ColorPicker">
+<script lang="ts" setup name="ColorPicker">
 import Solid from './Solid/index.vue';
 import Gradient from './Gradient/index.vue';
 
-const props = defineProps({
-    isGradient: {
-        type: Boolean,
-        default: false,
-    },
-    color: {
-        type: Object,
-        default: () => ({
-            red: 255,
-            green: 0,
-            blue: 0,
-            alpha: 1,
-            hue: 0,
-            saturation: 100,
-            value: 100,
-        }),
-    },
+interface Iprops {
+    isGradient?: boolean;
+    color?: {
+        red: number;
+        green: number;
+        blue: number;
+        alpha: number;
+        hue: number;
+        saturation: number;
+        value: number;
+    };
+    gradient?: {
+        type: string;
+        degree: number;
+        points: [
+            {
+                left: number;
+                red: number;
+                green: number;
+                blue: number;
+                alpha: number;
+            },
+            {
+                left: number;
+                red: number;
+                green: number;
+                blue: number;
+                alpha: number;
+            },
+        ];
+    };
+    onChange?: () => void;
+    onStartChange?: () => void;
+    onEndChange?: () => void;
+}
 
-    gradient: {
-        type: Object,
-        default: () => ({
-            type: 'linear',
-            degree: 0,
-            points: [
-                {
-                    left: 0,
-                    red: 0,
-                    green: 0,
-                    blue: 0,
-                    alpha: 1,
-                },
-                {
-                    left: 100,
-                    red: 255,
-                    green: 0,
-                    blue: 0,
-                    alpha: 1,
-                },
-            ],
-        }),
-    },
-
-    onChange: {
-        type: Function,
-        default: () => false,
-    },
-    onStartChange: {
-        type: Function,
-        default: () => false,
-    },
-    onEndChange: {
-        type: Function,
-        default: () => false,
-    },
+const props = withDefaults(defineProps<Iprops>(), {
+    isGradient: false,
+    color: () => ({
+        red: 255,
+        green: 0,
+        blue: 0,
+        alpha: 1,
+        hue: 0,
+        saturation: 100,
+        value: 100,
+    }),
+    gradient: () => ({
+        type: 'linear',
+        degree: 0,
+        points: [
+            {
+                left: 0,
+                red: 0,
+                green: 0,
+                blue: 0,
+                alpha: 1,
+            },
+            {
+                left: 100,
+                red: 255,
+                green: 0,
+                blue: 0,
+                alpha: 1,
+            },
+        ],
+    }),
+    onChange: () => false,
+    onStartChange: () => false,
+    onEndChange: () => false,
 });
 </script>
