@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:41:58
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 12:01:51
+ * @LastEditTime: 2023-04-27 12:01:54
 -->
 <template>
     <div>
@@ -21,20 +21,35 @@
     </div>
 </template>
 
-<script setup name="RGBItem">
+<script lang="ts" setup name="RGBItem">
 import { reactive, watch, getCurrentInstance } from 'vue';
-import Input from '@c/components/Input/index.vue';
+import Input from '../../../../Input/index.vue';
+
+interface Iprops {
+    value: number | string;
+    type: string;
+    label: string;
+    onChange: (val?: number) => void;
+}
 
 const instance = getCurrentInstance();
-const props = defineProps({
-    value: [String, Number],
-    type: String,
-    label: String,
-    onChange: Function,
+const props = withDefaults(defineProps<Iprops>(), {
+    type: 'text',
+    label: '',
+    onChange: (val?: number) => false,
 });
+// const props = defineProps({
+//     value: [String, Number],
+//     type: String,
+//     label: String,
+//     onChange: Function,
+// });
 
-const state = reactive({
-    inputValue: props.value,
+const state = reactive<{
+    inputValue: any;
+    inProgress: boolean;
+}>({
+    inputValue: props.value || 0,
     inProgress: false,
 });
 
@@ -44,9 +59,9 @@ const setValue = () => {
     }
 };
 
-const onChangeHandler = (event) => {
-    const value = +event.target.value;
-    if (Number.isNaN(value) || value.length > 3 || value < 0 || value > 255) {
+const onChangeHandler = (event: any) => {
+    const value: number = +event.target.value;
+    if (Number.isNaN(value) || value < 0 || value > 255) {
         state.inputValue = props.value;
         instance?.proxy?.$forceUpdate();
         return;
@@ -56,7 +71,7 @@ const onChangeHandler = (event) => {
 };
 
 const onBlur = () => {
-    if (!state.inputValue && !state.inputValue !== 0) {
+    if (!state.inputValue) {
         state.inputValue = props.value;
     }
     state.inProgress = false;

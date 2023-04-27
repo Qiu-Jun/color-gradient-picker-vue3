@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:24:48
  * @LastEditors: June
- * @LastEditTime: 2023-03-23 23:26:56
+ * @LastEditTime: 2023-04-27 12:17:02
 -->
 <template>
     <RGBItem
@@ -26,26 +26,34 @@
         :on-change="(value) => changeValue('blue', value)"
     />
     <RGBItem
-        :value="parseInt(props.alpha * 100, 10)"
+        :value="~~props.alpha * 100"
         type="number"
         label="Alpha"
         :on-change="(value) => changeValue('alpha', value)"
     />
 </template>
 
-<script setup name="RGB">
+<script lang="ts" setup name="RGB">
 import RGBItem from './RGBItem/index.vue';
-import { rgbToHsv } from '@c/helpers/index';
+import { rgbToHsv } from '../../../../helpers/index';
 
-const props = defineProps({
-    red: Number,
-    green: Number,
-    blue: Number,
-    alpha: Number,
-    updateColor: Function,
+interface Iprops {
+    red: number;
+    green: number;
+    blue: number;
+    alpha: number;
+    updateColor: (value: any) => void;
+}
+
+const props = withDefaults(defineProps<Iprops>(), {
+    red: 0,
+    green: 0,
+    blue: 0,
+    alpha: 0,
+    updateColor: () => false,
 });
 
-const changeValue = (field, value) => {
+const changeValue = (field: string, value: any) => {
     if (field === 'alpha') {
         props.updateColor({ alpha: value / 100 });
         return;

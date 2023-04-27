@@ -4,29 +4,36 @@
  * @Author: June
  * @Date: 2023-03-19 18:25:35
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 12:01:42
+ * @LastEditTime: 2023-04-27 11:24:42
 -->
 <template>
     <Input
         :value="state.hexValue"
         label="hex"
-        :in-progress="state.inProgress"
         classes="hex"
         @input="changeHex"
     />
 </template>
 
-<script setup name="Preview">
+<script lang="ts" setup name="Preview">
 import { reactive, computed, watch } from 'vue';
-import Input from '@c/components/Input/index.vue';
-import { rgbToHex, hexToRgb } from '@c/helpers';
+import Input from '../../../Input/index.vue';
+import { rgbToHex, hexToRgb } from '../../../../helpers';
 
-const props = defineProps({
-    red: Number,
-    green: Number,
-    blue: Number,
-    alpha: Number,
-    updateColor: Function,
+interface Iprops {
+    red: number;
+    green: number;
+    blue: number;
+    alpha?: number;
+    updateColor: (any) => void;
+}
+
+// 这里的any后面处理
+const props = withDefaults(defineProps<Iprops>(), {
+    red: 0,
+    green: 0,
+    blue: 0,
+    updateColor: (any) => false,
 });
 
 const state = reactive({
