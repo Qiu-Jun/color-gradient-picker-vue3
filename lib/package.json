@@ -37,7 +37,6 @@
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc && vite build",
-        "build:js": "vite build",
         "preview": "vite preview",
         "eslint": "eslint --ext .ts,.tsx,.jsx,.js,.vue --ignore-path .gitignore --fix src",
         "prettier": "prettier --write ."

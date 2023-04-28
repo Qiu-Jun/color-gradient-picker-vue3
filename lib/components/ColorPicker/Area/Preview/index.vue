@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:57:51
  * @LastEditors: June
- * @LastEditTime: 2023-03-19 20:00:31
+ * @LastEditTime: 2023-04-28 11:27:02
 -->
 <template>
     <div class="preview-area">
@@ -12,19 +12,57 @@
     </div>
 </template>
 
-<script setup name="PickerPreView">
+<script lang="ts" setup name="PickerPreView">
 import { computed } from 'vue';
-import { generateSolidStyle, generateGradientStyle } from '@c/helpers/index';
+import {
+    generateSolidStyle,
+    generateGradientStyle,
+} from '../../../../helpers/index';
 
-const props = defineProps({
-    isGradient: Boolean,
-    red: Number,
-    green: Number,
-    blue: Number,
-    alpha: Number,
-    points: Array,
-    gradientDegree: Number,
-    gradientType: String,
+// 和gradient 一致  后面再处理
+type Ipoit = {
+    left: number;
+    red: number;
+    green: number;
+    blue: number;
+    alpha?: number;
+};
+
+interface Iprops {
+    isGradient: boolean;
+    red: number;
+    green: number;
+    blue: number;
+    alpha: number;
+    points: any;
+    gradientDegree: number;
+    gradientType: string;
+}
+
+const props = withDefaults(defineProps<Iprops>(), {
+    isGradient: false,
+    red: 255,
+    green: 0,
+    blue: 0,
+    alpha: 1,
+    points: () => [
+        {
+            left: 0,
+            red: 0,
+            green: 0,
+            blue: 0,
+            alpha: 1,
+        },
+        {
+            left: 100,
+            red: 255,
+            green: 0,
+            blue: 0,
+            alpha: 1,
+        },
+    ],
+    gradientType: '',
+    gradientDegree: 0,
 });
 
 const style = computed(() => {
@@ -38,7 +76,6 @@ const style = computed(() => {
 
         return { background: style };
     }
-
     style = generateSolidStyle(props.red, props.green, props.blue, props.alpha);
 
     return { backgroundColor: style };

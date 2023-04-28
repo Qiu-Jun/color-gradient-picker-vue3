@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:23:05
  * @LastEditors: June
- * @LastEditTime: 2023-03-23 23:53:43
+ * @LastEditTime: 2023-04-28 11:25:47
 -->
 <template>
     <div class="picker-area">
@@ -61,7 +61,7 @@
     </div>
 </template>
 
-<script setup name="ColorPicker">
+<script lang="ts" setup name="ColorPicker">
 import Picker from './Picker/index.vue';
 import Preview from './Preview/index.vue';
 import Hue from './Hue/index.vue';

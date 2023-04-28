@@ -3,19 +3,19 @@
         :class="`picker-pointer${activeClassName}`"
         :style="pointStyle"
         @mousedown="state.mouseEvents"
-        @dblclick="() => removePoint(index)"
+        @dblclick="() => props.removePoint(index)"
         @click.stop
     >
         <span :class="`child-point${activeClassName}`" />
     </div>
 </template>
 
-<script setup name="GradientPoint">
+<script lang="ts" setup name="GradientPoint">
 import { onMounted, reactive, computed } from 'vue';
-import { useMouseEvents } from '@c/hooks/index';
-import { updateGradientActivePercent } from '@c/helpers/index';
+import { useMouseEvents } from '../../../../../hooks/index';
+import { updateGradientActivePercent } from '../../../../../helpers/index';
 
-const props = defineProps({
+const props: any = defineProps({
     point: Object,
     activePointIndex: Number,
     index: Number,
@@ -27,7 +27,7 @@ const props = defineProps({
 });
 
 // 得处理
-const state = reactive({
+const state: any = reactive({
     mouseEvents: () => false,
 });
 

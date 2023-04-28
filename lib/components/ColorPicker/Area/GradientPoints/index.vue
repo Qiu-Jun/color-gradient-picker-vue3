@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:01:24
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 12:01:02
+ * @LastEditTime: 2023-04-28 11:37:41
 -->
 <template>
     <div class="gradient" :style="pointsStyle" @click="pointsContainerClick">
@@ -25,15 +25,15 @@
     </div>
 </template>
 
-<script setup name="GradientPoints">
+<script lang="ts" setup name="GradientPoints">
 import { ref, reactive, onMounted, computed } from 'vue';
-import GradientPoint from './GradientPoint';
+import GradientPoint from './GradientPoint/index.vue';
 import {
     generateGradientStyle,
     updateGradientActivePercent,
-} from '@c/helpers/index';
+} from '../../../../helpers/index';
 
-const props = defineProps({
+const props: any = defineProps({
     points: Array,
     activePointIndex: Number,
     changeActivePointIndex: Function,
@@ -42,9 +42,9 @@ const props = defineProps({
     removePoint: Function,
 });
 
-const pointsContainerRef = ref(null);
+const pointsContainerRef = ref<HTMLElement | null>(null);
 
-const state = reactive({
+const state: any = reactive({
     width: 0,
     positions: { x: 0, y: 0 },
 });

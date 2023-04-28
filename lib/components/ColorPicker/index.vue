@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-18 00:57:49
  * @LastEditors: June
- * @LastEditTime: 2023-04-26 10:16:48
+ * @LastEditTime: 2023-04-28 11:49:51
 -->
 <template>
     <div class="ui-color-picker">
@@ -40,15 +40,7 @@ import Gradient from './Gradient/index.vue';
 
 interface Iprops {
     isGradient?: boolean;
-    color?: {
-        red: number;
-        green: number;
-        blue: number;
-        alpha: number;
-        hue: number;
-        saturation: number;
-        value: number;
-    };
+    color?: any;
     gradient?: {
         type: string;
         degree: number;
@@ -69,9 +61,9 @@ interface Iprops {
             },
         ];
     };
-    onChange?: () => void;
-    onStartChange?: () => void;
-    onEndChange?: () => void;
+    onChange?: any;
+    onStartChange?: any;
+    onEndChange?: any;
 }
 
 const props = withDefaults(defineProps<Iprops>(), {

@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:47:22
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 12:01:21
+ * @LastEditTime: 2023-04-28 11:30:48
 -->
 <template>
     <div
@@ -21,12 +21,12 @@
     </div>
 </template>
 
-<script setup name="Picker">
+<script lang="ts" setup name="Picker">
 import { ref, reactive, onMounted, computed } from 'vue';
-import { getRgbByHue, changePicker } from '@c/helpers/index';
-import { useMouseEvents } from '@c/hooks/index';
+import { getRgbByHue, changePicker } from '../../../../helpers/index';
+import { useMouseEvents } from '../../../../hooks/index';
 
-const props = defineProps({
+const props: any = defineProps({
     red: Number,
     green: Number,
     blue: Number,
@@ -37,9 +37,9 @@ const props = defineProps({
     updateColor: Function,
 });
 
-const pickerAreaRef = ref(null);
+const pickerAreaRef = ref<HTMLElement | null>(null);
 
-const state = reactive({
+const state: any = reactive({
     width: 0,
     height: 0,
     mouseEvents: () => false,

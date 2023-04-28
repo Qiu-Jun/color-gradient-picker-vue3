@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:38:04
  * @LastEditors: June
- * @LastEditTime: 2023-03-23 23:04:40
+ * @LastEditTime: 2023-04-28 11:35:06
 -->
 <template>
     <div class="hue" @mousedown="state.mouseEvents">
@@ -14,21 +14,21 @@
     </div>
 </template>
 
-<script setup name="Hue">
+<script lang="ts" setup name="Hue">
 import { ref, reactive, onMounted, computed } from 'vue';
-import { getHue } from '@c/helpers';
-import { useMouseEvents } from '@c/hooks';
+import { getHue } from '../../../../helpers';
+import { useMouseEvents } from '../../../../hooks';
 
-const props = defineProps({
+const props: any = defineProps({
     hue: Number,
     saturation: Number,
     value: Number,
     updateColor: Function,
 });
 
-const hueRef = ref(null);
+const hueRef = ref<HTMLElement | null>(null);
 
-const state = reactive({
+const state = reactive<{ width: number; mouseEvents: any }>({
     width: 0,
     mouseEvents: () => false,
 });

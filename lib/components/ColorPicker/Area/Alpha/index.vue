@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-04-08 22:26:19
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 12:03:51
+ * @LastEditTime: 2023-04-28 11:34:16
 -->
 <template>
     <div class="alpha" @mousedown="state.mouseEvents">
@@ -16,20 +16,20 @@
     </div>
 </template>
 
-<script setup name="alpha">
+<script lang="ts" setup name="alpha">
 import { ref, reactive, onMounted, computed } from 'vue';
-import { getAlpha } from '@c/helpers/index';
-import { useMouseEvents } from '@c/hooks/index';
+import { getAlpha } from '../../../../helpers/index';
+import { useMouseEvents } from '../../../../hooks/index';
 
-const props = defineProps({
+const props: any = defineProps({
     red: Number,
     green: Number,
     blue: Number,
     alpha: Number,
     updateColor: Function,
 });
-const alphaMaskRef = ref(null);
-const state = reactive({
+const alphaMaskRef = ref<HTMLElement | null>(null);
+const state: any = reactive({
     width: 0,
     mouseEvents: () => false,
 });

@@ -11,6 +11,7 @@
         "resolveJsonModule": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
+        "noEmit": true,
         "jsx": "preserve",
         "types": ["node", "vite/client"],
         "baseUrl": "./"
