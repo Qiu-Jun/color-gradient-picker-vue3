@@ -12,4 +12,4 @@
 /// <reference path="schema/nuxt.schema.d.ts" />
 /// <reference path="types/nitro.d.ts" />
 
-export {}
+export {};

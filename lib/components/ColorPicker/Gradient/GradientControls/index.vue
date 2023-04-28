@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:16
  * @LastEditors: June
- * @LastEditTime: 2023-04-26 11:53:35
+ * @LastEditTime: 2023-04-28 10:15:54
 -->
 <template>
     <div class="gradient-controls">
@@ -25,7 +25,7 @@
         <div v-if="props.type === 'linear'" class="gradient-degrees-options">
             <div
                 class="gradient-degrees"
-                @mousedown="mouseEvents"
+                @mousedown="state.mouseEvents"
                 @click="onClickGradientDegree"
             >
                 <div class="gradient-degree-center" :style="degreesStyle">
@@ -39,10 +39,10 @@
     </div>
 </template>
 
-<script setup name="GradientControls">
+<script lang="ts" setup name="GradientControls">
 import { reactive, onMounted, computed } from 'vue';
-import { useMouseEvents } from '@c/hooks/index';
-import { calculateDegree } from '@c/helpers/index';
+import { useMouseEvents } from '../../../../hooks/index';
+import { calculateDegree } from '../../../../helpers/index';
 
 const props = defineProps({
     type: String,
@@ -53,7 +53,7 @@ const props = defineProps({
     },
 });
 
-const state = reactive({
+const state = reactive<{ disableClick: boolean; mouseEvents: any }>({
     disableClick: false,
     mouseEvents: () => false,
 });
@@ -65,8 +65,8 @@ const degreesStyle = computed(() => {
 const mouseDownHandler = (event) => {
     const pointer = event.target;
     const pointerBox = pointer.getBoundingClientRect();
-    const centerY = pointerBox.top + parseInt(8 - window.pageYOffset, 10);
-    const centerX = pointerBox.left + parseInt(8 - window.pageXOffset, 10);
+    const centerY = ~~(8 - window.pageYOffset) + pointerBox.top;
+    const centerX = ~~(8 - window.pageXOffset) + pointerBox.left;
 
     return {
         centerY,
@@ -83,7 +83,7 @@ const mouseMoveHandler = (event, { centerX, centerY }) => {
         centerY,
     );
 
-    props.changeGradientControl({ degree: parseInt(newDegree, 10) });
+    props.changeGradientControl({ degree: ~~newDegree });
 };
 
 const mouseUpHandler = (event) => {
@@ -105,13 +105,13 @@ const onClickGradientDegree = () => {
         return;
     }
 
-    let gradientDegree = props.degree + 45;
+    let gradientDegree = (props.degree || 0) + 45;
 
     if (gradientDegree >= 360) {
         gradientDegree = 0;
     }
 
-    props.changeGradientControl({ degree: parseInt(gradientDegree, 10) });
+    props.changeGradientControl({ degree: ~~gradientDegree });
 };
 
 onMounted(() => {

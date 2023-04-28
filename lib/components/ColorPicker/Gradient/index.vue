@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:11
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 12:01:30
+ * @LastEditTime: 2023-04-28 10:30:16
 -->
 <template>
     <GradientControls
@@ -43,7 +43,7 @@
     />
 </template>
 
-<script setup>
+<script lang="ts" setup name="Gradient">
 import { reactive, onMounted, onBeforeUnmount } from 'vue';
 import GradientControls from './GradientControls/index.vue';
 import Preview from '../Preview/index.vue';
@@ -52,44 +52,47 @@ import {
     getRightValue,
     rgbToHsv,
     generateGradientStyle,
-} from '@c/helpers/index';
-
-const props = defineProps({
-    type: {
-        type: String,
-        default: 'linear',
-    },
-    degree: {
-        type: Number,
-        default: 0,
-    },
-    points: {
-        type: Array,
-        default: () => {
-            return [
-                {
-                    left: 0,
-                    red: 0,
-                    green: 0,
-                    blue: 0,
-                    alpha: 1,
-                },
-                {
-                    left: 100,
-                    red: 255,
-                    green: 0,
-                    blue: 0,
-                    alpha: 1,
-                },
-            ];
+} from '../../../helpers/index';
+type Ipoit = {
+    left: number;
+    red: number;
+    green: number;
+    blue: number;
+    alpha?: number;
+};
+interface Iprops {
+    type: string;
+    degree: number;
+    points: Ipoit[];
+    onStartChange: (data: any) => void;
+    onChange: (data: any) => void;
+    onEndChange: (data: any) => void;
+}
+const props = withDefaults(defineProps<Iprops>(), {
+    type: 'linear',
+    degree: 0,
+    points: () => [
+        {
+            left: 0,
+            red: 0,
+            green: 0,
+            blue: 0,
+            alpha: 1,
         },
-    },
-    onStartChange: Function,
-    onChange: Function,
-    onEndChange: Function,
+        {
+            left: 100,
+            red: 255,
+            green: 0,
+            blue: 0,
+            alpha: 1,
+        },
+    ],
+    onStartChange: () => false,
+    onChange: () => false,
+    onEndChange: () => false,
 });
 
-const state = reactive({
+const state = reactive<any>({
     activePointIndex: 0,
     gradientPoints: props.points,
     activePoint: props.points[0],

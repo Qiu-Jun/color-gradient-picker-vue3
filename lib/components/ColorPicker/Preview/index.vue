@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-04-08 22:26:19
  * @LastEditors: June
- * @LastEditTime: 2023-04-27 12:22:10
+ * @LastEditTime: 2023-04-28 09:59:08
 -->
 <template>
     <div class="color-preview-area">
@@ -25,7 +25,7 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Preview">
 import Hex from './Hex/index.vue';
 import RGB from './RGB/index.vue';
 
