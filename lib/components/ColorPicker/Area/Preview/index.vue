@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:57:51
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 11:27:02
+ * @LastEditTime: 2023-05-08 00:01:10
 -->
 <template>
     <div class="preview-area">
@@ -14,10 +14,7 @@
 
 <script lang="ts" setup name="PickerPreView">
 import { computed } from 'vue';
-import {
-    generateSolidStyle,
-    generateGradientStyle,
-} from '../../../../helpers/index';
+import { generateSolidStyle, generateGradientStyle } from '@l/helpers/index';
 
 // 和gradient 一致  后面再处理
 type Ipoit = {

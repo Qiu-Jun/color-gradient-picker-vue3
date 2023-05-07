@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:47:22
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 11:30:48
+ * @LastEditTime: 2023-05-08 00:00:59
 -->
 <template>
     <div
@@ -23,8 +23,8 @@
 
 <script lang="ts" setup name="Picker">
 import { ref, reactive, onMounted, computed } from 'vue';
-import { getRgbByHue, changePicker } from '../../../../helpers/index';
-import { useMouseEvents } from '../../../../hooks/index';
+import { getRgbByHue, changePicker } from '@l/helpers/index';
+import { useMouseEvents } from '@l/hooks/index';
 
 const props: any = defineProps({
     red: Number,

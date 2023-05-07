@@ -24,11 +24,7 @@
 import { reactive, onMounted, computed, watch } from 'vue';
 import Area from '../Area/index.vue';
 import Preview from '../Preview/index.vue';
-import {
-    rgbToHsv,
-    getRightValue,
-    generateSolidStyle,
-} from '../../../helpers/index';
+import { rgbToHsv, getRightValue, generateSolidStyle } from '@l/helpers/index';
 
 interface Iprops {
     red: number;

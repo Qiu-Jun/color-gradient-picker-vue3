@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:38:04
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 11:35:06
+ * @LastEditTime: 2023-05-08 00:00:37
 -->
 <template>
     <div class="hue" @mousedown="state.mouseEvents">
@@ -16,8 +16,8 @@
 
 <script lang="ts" setup name="Hue">
 import { ref, reactive, onMounted, computed } from 'vue';
-import { getHue } from '../../../../helpers';
-import { useMouseEvents } from '../../../../hooks';
+import { getHue } from '@l/helpers';
+import { useMouseEvents } from '@l/hooks';
 
 const props: any = defineProps({
     hue: Number,

@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:11
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 10:30:16
+ * @LastEditTime: 2023-05-08 00:01:20
 -->
 <template>
     <GradientControls
@@ -52,7 +52,7 @@ import {
     getRightValue,
     rgbToHsv,
     generateGradientStyle,
-} from '../../../helpers/index';
+} from '@l/helpers/index';
 type Ipoit = {
     left: number;
     red: number;

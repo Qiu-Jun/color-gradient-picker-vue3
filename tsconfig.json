@@ -14,7 +14,6 @@
         "noEmit": true,
         "jsx": "preserve",
         "types": ["node", "vite/client"],
-        "baseUrl": "./"
     },
     "exclude": ["**/dist/**", "**/node_modules/**"],
     "include": ["./types/*.d.ts"]

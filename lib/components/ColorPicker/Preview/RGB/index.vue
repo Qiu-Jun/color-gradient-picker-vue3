@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:24:48
  * @LastEditors: June
- * @LastEditTime: 2023-04-27 12:17:02
+ * @LastEditTime: 2023-05-08 00:02:28
 -->
 <template>
     <RGBItem
@@ -35,7 +35,7 @@
 
 <script lang="ts" setup name="RGB">
 import RGBItem from './RGBItem/index.vue';
-import { rgbToHsv } from '../../../../helpers/index';
+import { rgbToHsv } from '@l/helpers/index';
 
 interface Iprops {
     red: number;

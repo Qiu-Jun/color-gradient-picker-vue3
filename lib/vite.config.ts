@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-04-11 11:17:35
  * @LastEditors: June
- * @LastEditTime: 2023-04-26 11:47:59
+ * @LastEditTime: 2023-05-08 00:03:23
  */
 import type { ConfigEnv, UserConfigExport } from 'vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -16,7 +16,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         plugins: [vue(), vueJsx(), VueSetupExtend()],
         resolve: {
             alias: {
-                '@c': path.resolve(__dirname, './'),
+                '@l': path.resolve(__dirname, './'),
+                '@c': path.resolve(__dirname, './components/'),
             },
             extensions: ['.js', '.ts', '.jsx', '.tsx', '.vue', '.json'],
         },

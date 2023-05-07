@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:01:24
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 11:37:41
+ * @LastEditTime: 2023-05-08 00:00:01
 -->
 <template>
     <div class="gradient" :style="pointsStyle" @click="pointsContainerClick">
@@ -31,7 +31,7 @@ import GradientPoint from './GradientPoint/index.vue';
 import {
     generateGradientStyle,
     updateGradientActivePercent,
-} from '../../../../helpers/index';
+} from '@l/helpers/index';
 
 const props: any = defineProps({
     points: Array,

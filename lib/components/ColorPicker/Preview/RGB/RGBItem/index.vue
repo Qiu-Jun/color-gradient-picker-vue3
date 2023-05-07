@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:41:58
  * @LastEditors: June
- * @LastEditTime: 2023-04-27 12:01:54
+ * @LastEditTime: 2023-05-08 00:04:06
 -->
 <template>
     <div>
@@ -23,7 +23,7 @@
 
 <script lang="ts" setup name="RGBItem">
 import { reactive, watch, getCurrentInstance } from 'vue';
-import Input from '../../../../Input/index.vue';
+import Input from '@c/Input/index.vue';
 
 interface Iprops {
     value: number | string;

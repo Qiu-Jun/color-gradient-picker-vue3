@@ -12,8 +12,8 @@
 
 <script lang="ts" setup name="GradientPoint">
 import { onMounted, reactive, computed } from 'vue';
-import { useMouseEvents } from '../../../../../hooks/index';
-import { updateGradientActivePercent } from '../../../../../helpers/index';
+import { useMouseEvents } from '@l/hooks/index';
+import { updateGradientActivePercent } from '@l/helpers/index';
 
 const props: any = defineProps({
     point: Object,

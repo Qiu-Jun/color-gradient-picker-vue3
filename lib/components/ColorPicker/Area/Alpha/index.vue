@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-04-08 22:26:19
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 11:34:16
+ * @LastEditTime: 2023-05-07 23:59:49
 -->
 <template>
     <div class="alpha" @mousedown="state.mouseEvents">
@@ -18,8 +18,8 @@
 
 <script lang="ts" setup name="alpha">
 import { ref, reactive, onMounted, computed } from 'vue';
-import { getAlpha } from '../../../../helpers/index';
-import { useMouseEvents } from '../../../../hooks/index';
+import { getAlpha } from '@l/helpers/index';
+import { useMouseEvents } from '@l/hooks/index';
 
 const props: any = defineProps({
     red: Number,

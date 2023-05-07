@@ -1,5 +1,12 @@
 {
     "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@l/*": ["./*"],
+            "@c/*": ["./components/*"]
+        }
+    },
     "include": [
         "./**/*.ts",
         "./**/*.d.ts",

@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:25:35
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 11:56:45
+ * @LastEditTime: 2023-05-08 00:04:48
 -->
 <template>
     <Input
@@ -17,8 +17,8 @@
 
 <script lang="ts" setup name="Preview">
 import { reactive, computed, watch } from 'vue';
-import Input from '../../../Input/index.vue';
-import { rgbToHex, hexToRgb } from '../../../../helpers';
+import Input from '@c/Input/index.vue';
+import { rgbToHex, hexToRgb } from '@l/helpers';
 
 interface Iprops {
     red: number;

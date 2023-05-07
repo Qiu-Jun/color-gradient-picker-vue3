@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:16
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 10:15:54
+ * @LastEditTime: 2023-05-08 00:01:32
 -->
 <template>
     <div class="gradient-controls">
@@ -41,8 +41,8 @@
 
 <script lang="ts" setup name="GradientControls">
 import { reactive, onMounted, computed } from 'vue';
-import { useMouseEvents } from '../../../../hooks/index';
-import { calculateDegree } from '../../../../helpers/index';
+import { useMouseEvents } from '@l/hooks/index';
+import { calculateDegree } from '@l/helpers/index';
 
 const props = defineProps({
     type: String,
