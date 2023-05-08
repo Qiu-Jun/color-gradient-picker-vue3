@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:11
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 00:01:20
+ * @LastEditTime: 2023-05-08 16:40:25
 -->
 <template>
     <GradientControls
@@ -60,14 +60,23 @@ type Ipoit = {
     blue: number;
     alpha?: number;
 };
+
+interface IchangeData {
+    points: Ipoit[];
+    type: string;
+    degree: number;
+    style: any;
+}
+
 interface Iprops {
     type: string;
     degree: number;
     points: Ipoit[];
-    onStartChange: (data: any) => void;
-    onChange: (data: any) => void;
-    onEndChange: (data: any) => void;
+    onStartChange: (data: IchangeData) => void;
+    onChange: (data: IchangeData) => void;
+    onEndChange: (data: IchangeData) => void;
 }
+
 const props = withDefaults(defineProps<Iprops>(), {
     type: 'linear',
     degree: 0,

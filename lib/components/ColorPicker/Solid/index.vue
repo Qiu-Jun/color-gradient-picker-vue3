@@ -34,9 +34,9 @@ interface Iprops {
     hue: number;
     saturation: number;
     value: number;
-    onStartChange: () => void;
-    onChange: () => void;
-    onEndChange: () => void;
+    onStartChange: void;
+    onChange: void;
+    onEndChange: void;
 }
 
 const props = withDefaults(defineProps<Iprops>(), {
@@ -47,9 +47,9 @@ const props = withDefaults(defineProps<Iprops>(), {
     hue: 0,
     saturation: 0,
     value: 0,
-    onStartChange: () => false,
-    onChange: () => false,
-    onEndChange: () => false,
+    onStartChange: (): void => {},
+    onChange: (): void => {},
+    onEndChange: (): void => {},
 });
 
 const state = reactive({

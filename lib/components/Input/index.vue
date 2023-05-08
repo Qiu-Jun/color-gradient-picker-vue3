@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-23 22:20:33
  * @LastEditors: June
- * @LastEditTime: 2023-04-26 10:42:22
+ * @LastEditTime: 2023-05-08 16:24:46
 -->
 <template>
     <div :class="`input-field ${props.classes}`">
@@ -31,8 +31,8 @@ interface Iprops {
     label: string;
     type?: string;
     classes: string;
-    onFocus?: () => void;
-    onBlur?: () => void;
+    onFocus?: void;
+    onBlur?: void;
 }
 
 const props = withDefaults(defineProps<Iprops>(), {
@@ -40,8 +40,8 @@ const props = withDefaults(defineProps<Iprops>(), {
     label: '',
     type: 'text',
     classes: '',
-    onFocus: () => false,
-    onBlur: () => false,
+    onFocus: (): void => {},
+    onBlur: (): void => {},
 });
 
 const emits = defineEmits(['input', 'update:value']);

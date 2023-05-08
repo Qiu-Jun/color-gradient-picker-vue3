@@ -4,14 +4,14 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:46
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 16:14:23
+ * @LastEditTime: 2023-05-08 16:37:12
  */
 export function generateSolidStyle(
     red: number,
     green: number,
     blue: number,
     alpha: number,
-) {
+): string {
     return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 }
 
@@ -27,7 +27,7 @@ export function generateGradientStyle(
     ],
     type: string,
     degree: number,
-) {
+): string {
     let style = '';
     const sortedPoints = points.slice();
 
