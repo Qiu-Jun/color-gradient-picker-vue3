@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-23 22:20:33
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 16:24:46
+ * @LastEditTime: 2023-05-12 23:12:41
 -->
 <template>
     <div :class="`input-field ${props.classes}`">
@@ -24,15 +24,15 @@
 </template>
 
 <script lang="ts" setup name="Input">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 
 interface Iprops {
     value: string | number;
     label: string;
     type?: string;
     classes: string;
-    onFocus?: void;
-    onBlur?: void;
+    onFocus?: () => void;
+    onBlur?: () => void;
 }
 
 const props = withDefaults(defineProps<Iprops>(), {
@@ -47,20 +47,13 @@ const props = withDefaults(defineProps<Iprops>(), {
 const emits = defineEmits(['input', 'update:value']);
 
 const value = computed({
-    get: () => props.value,
+    get: () => ~~props.value,
     set: (val) => emits('update:value', val),
 });
 
 const onInput = (e: InputEvent) => {
     emits('input', e);
 };
-
-// watch(
-//     () => [props.colorValue, value.value],
-//     (val) => {
-//         console.log(val);
-//     },
-// );
 </script>
 
 <style lang="scss" scoped>

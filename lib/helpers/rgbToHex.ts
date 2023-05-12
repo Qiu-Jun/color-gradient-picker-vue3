@@ -4,9 +4,13 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:46
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 16:23:47
+ * @LastEditTime: 2023-05-10 16:41:11
  */
-export default function rgbToHex(red: number, green: number, blue: number) {
+export default function rgbToHex(
+    red: number,
+    green: number,
+    blue: number,
+): string {
     let r16 = red.toString(16);
     let g16 = green.toString(16);
     let b16 = blue.toString(16);

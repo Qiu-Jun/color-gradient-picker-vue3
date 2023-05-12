@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:11
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 16:40:25
+ * @LastEditTime: 2023-05-12 22:58:54
 -->
 <template>
     <GradientControls
@@ -12,7 +12,6 @@
         :degree="state.gradientDegree"
         :change-gradient-control="changeGradientControl"
     />
-
     <Area
         :red="state.colorRed"
         :green="state.colorGreen"

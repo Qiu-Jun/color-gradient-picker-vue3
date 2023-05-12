@@ -129,7 +129,6 @@ const updateColor = (
     hue = getRightValue(hue, state.colorHue);
     saturation = getRightValue(saturation, state.colorSaturation);
     value = getRightValue(value, state.colorValue);
-
     state.colorRed = red;
     state.colorGreen = green;
     state.colorBlue = blue;

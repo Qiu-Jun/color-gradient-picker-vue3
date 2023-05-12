@@ -4,9 +4,9 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:46
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 17:11:23
+ * @LastEditTime: 2023-05-10 16:41:54
  */
-function isValidRGBValue(value: number) {
+function isValidRGBValue(value: number): boolean {
     return (
         typeof value === 'number' &&
         Number.isNaN(value) === false &&

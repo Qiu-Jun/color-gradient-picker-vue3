@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:24:48
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 00:02:28
+ * @LastEditTime: 2023-05-12 23:01:07
 -->
 <template>
     <RGBItem
@@ -26,7 +26,7 @@
         :on-change="(value) => changeValue('blue', value)"
     />
     <RGBItem
-        :value="~~props.alpha * 100"
+        :value="props.alpha * 100"
         type="number"
         label="Alpha"
         :on-change="(value) => changeValue('alpha', value)"

@@ -4,10 +4,11 @@
  * @Author: June
  * @Date: 2023-03-18 00:57:49
  * @LastEditors: June
- * @LastEditTime: 2023-04-28 11:49:51
+ * @LastEditTime: 2023-05-12 22:31:38
 -->
 <template>
     <div class="ui-color-picker">
+        <!-- 渐变picker -->
         <Gradient
             v-if="props.isGradient"
             :points="props.gradient.points"
@@ -18,6 +19,7 @@
             :on-end-change="props.onEndChange"
         />
 
+        <!-- 非渐变Picker -->
         <Solid
             v-else
             :red="props.color.red"
