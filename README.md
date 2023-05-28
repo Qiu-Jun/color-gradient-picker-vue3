@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-04-26 09:15:08
+ * @LastEditTime: 2023-05-10 16:13:15
 -->
 
 ## color-gradient-picker-vue3
@@ -22,6 +22,17 @@ yarn add color-gradient-picker-vue3
 
 ```html
 <template>
+    <!-- 纯色 -->
+    <div>
+        <ColorPicker
+            :color="color"
+            :on-start-change="(color) => onChange(color, 'start')"
+            :on-change="(color) => onChange(color, 'change')"
+            :on-end-change="(color) => onChange(color, 'end')"
+        />
+    </div>
+
+    <!-- 渐变 -->
     <div>
         <ColorPicker
             :is-gradient="true"
@@ -34,7 +45,8 @@ yarn add color-gradient-picker-vue3
 
 <script setup>
     import { ref } from 'vue';
-    import ColorPicker from './lib/index';
+    import ColorPicker from 'color-gradient-picker-vue3';
+    import 'color-gradient-picker-vue3/dist/style.css';
 
     const color = ref({
         red: 255,
@@ -53,6 +65,17 @@ yarn add color-gradient-picker-vue3
 
 ```html
 <template>
+    <!-- 纯色 -->
+    <div>
+        <ColorPicker
+            :color="color"
+            :on-start-change="(color: Iattrs) => onChange(color, 'start')"
+            :on-change="(color: Iattrs) => onChange(color, 'change')"
+            :on-end-change="(color: Iattrs) => onChange(color, 'end')"
+        />
+    </div>
+
+    <!-- 渐变 -->
     <div>
         <ColorPicker
             :is-gradient="true"
@@ -66,8 +89,8 @@ yarn add color-gradient-picker-vue3
 <script lang="ts" setup>
     import { ref } from 'vue';
     import type { Ref } from 'vue';
-    import ColorPicker from './lib/index';
-
+    import ColorPicker from 'color-gradient-picker-vue3';
+    import 'color-gradient-picker-vue3/dist/style.css';
     interface IPoitItem {
         alpha?: number | string;
         blue?: number | string;

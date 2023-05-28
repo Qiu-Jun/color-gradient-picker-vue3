@@ -22,6 +22,17 @@ yarn add color-gradient-picker-vue3
 
 ```html
 <template>
+    <!-- 纯色 -->
+    <div>
+        <ColorPicker
+            :color="color"
+            :on-start-change="(color) => onChange(color, 'start')"
+            :on-change="(color) => onChange(color, 'change')"
+            :on-end-change="(color) => onChange(color, 'end')"
+        />
+    </div>
+
+    <!-- 渐变 -->
     <div>
         <ColorPicker
             :is-gradient="true"
@@ -54,6 +65,17 @@ yarn add color-gradient-picker-vue3
 
 ```html
 <template>
+    <!-- 纯色 -->
+    <div>
+        <ColorPicker
+            :color="color"
+            :on-start-change="(color: Iattrs) => onChange(color, 'start')"
+            :on-change="(color: Iattrs) => onChange(color, 'change')"
+            :on-end-change="(color: Iattrs) => onChange(color, 'end')"
+        />
+    </div>
+
+    <!-- 渐变 -->
     <div>
         <ColorPicker
             :is-gradient="true"
