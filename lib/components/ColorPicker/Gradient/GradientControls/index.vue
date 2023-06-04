@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:16
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 00:01:32
+ * @LastEditTime: 2023-06-04 20:57:13
 -->
 <template>
     <div class="gradient-controls">
@@ -13,13 +13,13 @@
                 :class="`gradient-type-item liner-gradient ${
                     props.type === 'linear' ? 'active' : ''
                 }`"
-                @click="() => changeGradientControl({ type: 'linear' })"
+                @click="() => props.changeGradientControl({ type: 'linear' })"
             />
             <div
                 :class="`gradient-type-item radial-gradient ${
                     props.type === 'radial' ? 'active' : ''
                 }`"
-                @click="() => changeGradientControl({ type: 'radial' })"
+                @click="() => props.changeGradientControl({ type: 'radial' })"
             />
         </div>
         <div v-if="props.type === 'linear'" class="gradient-degrees-options">

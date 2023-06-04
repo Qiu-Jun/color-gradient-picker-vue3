@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2023-05-12 23:08:17
+ * @LastEditTime: 2023-06-04 21:09:43
 -->
 <template>
     <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
@@ -56,5 +56,6 @@ const color: Ref<IPoitItem | Iattrs> = ref({
 
 const onChange = (attrs: Iattrs, name: string) => {
     color.value = { ...attrs };
+    console.log(attrs);
 };
 </script>

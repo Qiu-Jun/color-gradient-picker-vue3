@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:11
  * @LastEditors: June
- * @LastEditTime: 2023-05-12 22:58:54
+ * @LastEditTime: 2023-06-04 21:19:13
 -->
 <template>
     <GradientControls
@@ -71,9 +71,9 @@ interface Iprops {
     type: string;
     degree: number;
     points: Ipoit[];
-    onStartChange: (data: IchangeData) => void;
-    onChange: (data: IchangeData) => void;
-    onEndChange: (data: IchangeData) => void;
+    onStartChange?: any;
+    onChange?: any;
+    onEndChange?: any;
 }
 
 const props = withDefaults(defineProps<Iprops>(), {
@@ -95,9 +95,9 @@ const props = withDefaults(defineProps<Iprops>(), {
             alpha: 1,
         },
     ],
-    onStartChange: () => false,
-    onChange: () => false,
-    onEndChange: () => false,
+    onStartChange: null,
+    onChange: null,
+    onEndChange: null,
 });
 
 const state = reactive<any>({
@@ -173,16 +173,17 @@ const changeGradientControl = ({ type, degree }) => {
     state.gradientType = type;
     state.gradientDegree = degree;
 
-    props.onChange({
-        points: state.gradientPoints,
-        type: state.gradientType,
-        degree: state.gradientDegree,
-        style: generateGradientStyle(
-            state.gradientPoints,
-            state.gradientType,
-            state.gradientDegree,
-        ),
-    });
+    props.onChange &&
+        props.onChange({
+            points: state.gradientPoints,
+            type: state.gradientType,
+            degree: state.gradientDegree,
+            style: generateGradientStyle(
+                state.gradientPoints,
+                state.gradientType,
+                state.gradientDegree,
+            ),
+        });
 };
 
 const updateColor = (

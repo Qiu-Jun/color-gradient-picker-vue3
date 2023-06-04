@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-04-11 11:17:35
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 00:03:23
+ * @LastEditTime: 2023-06-04 19:47:28
  */
 import type { ConfigEnv, UserConfigExport } from 'vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -22,6 +22,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
             extensions: ['.js', '.ts', '.jsx', '.tsx', '.vue', '.json'],
         },
         build: {
+            target: 'es2015',
             outDir: 'dist',
             lib: {
                 entry: path.resolve(__dirname, './index.ts'),
