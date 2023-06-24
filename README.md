@@ -7,7 +7,9 @@
  * @LastEditTime: 2023-05-10 16:13:15
 -->
 
-## color-gradient-picker-vue3
+# color-gradient-picker-vue3
+[![npm](https://badgen.net/npm/v/color-gradient-picker-vue3)](https://www.npmjs.com/package/color-gradient-picker-vue3)
+[![downloads](https://badgen.net/npm/dt/color-gradient-picker-vue3)](https://www.npmjs.com/package/color-gradient-picker-vue3)
 
 Color and gradient picker for vue3.js. [If you use vue2， plese use color-gradient-picker](https://github.com/arthay/vue-color-gradient-picker).color-gradient-picker-vue3 is an upgraded version of `color-gradient-picker`
 
