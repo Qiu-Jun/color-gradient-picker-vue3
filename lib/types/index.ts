@@ -4,9 +4,9 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2023-06-27 13:18:35
+ * @LastEditTime: 2023-06-27 22:28:01
  */
-interface IPoitItem {
+export interface IPoitItem {
     alpha?: number | string;
     blue?: number | string;
     green?: number | string;

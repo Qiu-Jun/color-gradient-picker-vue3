@@ -8,6 +8,7 @@
 -->
 
 # color-gradient-picker-vue3
+
 [![npm](https://badgen.net/npm/v/color-gradient-picker-vue3)](https://www.npmjs.com/package/color-gradient-picker-vue3)
 [![downloads](https://badgen.net/npm/dt/color-gradient-picker-vue3)](https://www.npmjs.com/package/color-gradient-picker-vue3)
 

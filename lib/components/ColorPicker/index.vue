@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-18 00:57:49
  * @LastEditors: June
- * @LastEditTime: 2023-06-27 16:06:45
+ * @LastEditTime: 2023-06-27 22:53:03
 -->
 <template>
     <div class="ui-color-picker">
@@ -38,15 +38,7 @@
 <script lang="ts" name="ColorPicker" setup>
 import Solid from './Solid/index.vue';
 import Gradient from './Gradient/index.vue';
-import type { Iattrs } from '@l/types';
-
-interface IPoitItem {
-    alpha?: number | string;
-    blue?: number | string;
-    green?: number | string;
-    left?: number | string;
-    red?: number | string;
-}
+import type { IPoitItem, Iattrs } from '@l/types';
 
 interface Iprops {
     isGradient?: boolean;
@@ -71,12 +63,9 @@ interface Iprops {
             },
         ];
     };
-    onChange?: any;
-    onStartChange?: any;
-    onEndChange?: any;
 }
 
-const emits = defineEmits(['on-change']);
+const emits = defineEmits(['onChange', 'onCancel']);
 const props = withDefaults(defineProps<Iprops>(), {
     isGradient: false,
     color: () => ({
@@ -129,9 +118,11 @@ provide('provideData', {
     },
 });
 
-const handleCancel = () => {};
+const handleCancel = () => {
+    emits('onCancel');
+};
 
 const handleConfirm = () => {
-    emits('on-change', { ...color.value });
+    emits('onChange', { ...color.value });
 };
 </script>
