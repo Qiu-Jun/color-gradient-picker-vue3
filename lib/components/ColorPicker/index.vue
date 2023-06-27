@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-18 00:57:49
  * @LastEditors: June
- * @LastEditTime: 2023-05-12 22:31:38
+ * @LastEditTime: 2023-06-27 16:06:45
 -->
 <template>
     <div class="ui-color-picker">
@@ -14,9 +14,6 @@
             :points="props.gradient.points"
             :type="props.gradient.type"
             :degree="props.gradient.degree"
-            :on-change="props.onChange"
-            :on-start-change="props.onStartChange"
-            :on-end-change="props.onEndChange"
         />
 
         <!-- 非渐变Picker -->
@@ -29,16 +26,27 @@
             :hue="props.color.hue"
             :saturation="props.color.saturation"
             :value="props.color.value"
-            :on-change="props.onChange"
-            :on-start-change="props.onStartChange"
-            :on-end-change="props.onEndChange"
         />
+
+        <div class="btns">
+            <div class="btn" @click="handleCancel">取消</div>
+            <div class="btn" @click="handleConfirm">确认</div>
+        </div>
     </div>
 </template>
 
-<script lang="ts" setup name="ColorPicker">
+<script lang="ts" name="ColorPicker" setup>
 import Solid from './Solid/index.vue';
 import Gradient from './Gradient/index.vue';
+import type { Iattrs } from '@l/types';
+
+interface IPoitItem {
+    alpha?: number | string;
+    blue?: number | string;
+    green?: number | string;
+    left?: number | string;
+    red?: number | string;
+}
 
 interface Iprops {
     isGradient?: boolean;
@@ -68,6 +76,7 @@ interface Iprops {
     onEndChange?: any;
 }
 
+const emits = defineEmits(['on-change']);
 const props = withDefaults(defineProps<Iprops>(), {
     isGradient: false,
     color: () => ({
@@ -99,8 +108,30 @@ const props = withDefaults(defineProps<Iprops>(), {
             },
         ],
     }),
-    onChange: () => false,
-    onStartChange: () => false,
-    onEndChange: () => false,
 });
+
+const color: Ref<IPoitItem | Iattrs> = ref({
+    red: 255,
+    green: 0,
+    blue: 0,
+    alpha: 1,
+});
+
+provide('provideData', {
+    onChange: (attrs: Iattrs) => {
+        color.value = { ...attrs };
+    },
+    onStartChange: (attrs: Iattrs) => {
+        color.value = { ...attrs };
+    },
+    onEndChange: (attrs: Iattrs) => {
+        color.value = { ...attrs };
+    },
+});
+
+const handleCancel = () => {};
+
+const handleConfirm = () => {
+    emits('on-change', { ...color.value });
+};
 </script>

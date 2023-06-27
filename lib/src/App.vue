@@ -4,24 +4,20 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2023-06-04 21:09:43
+ * @LastEditTime: 2023-06-27 11:49:39
 -->
 <template>
     <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
         <div>
-            <ColorPicker
-                :color="color"
-                :on-start-change="(color: Iattrs) => onChange(color, 'start')"
-                :on-change="(color: Iattrs) => onChange(color, 'change')"
-                :on-end-change="(color: Iattrs) => onChange(color, 'end')"
-            />
+            <ColorPicker :color="color" @on-change="onChange" />
         </div>
         <div>
             <ColorPicker
                 :is-gradient="true"
-                :on-start-change="(color: Iattrs) => onChange(color, 'start')"
-                :on-change="(color: Iattrs) => onChange(color, 'change')"
-                :on-end-change="(color: Iattrs) => onChange(color, 'end')"
+                :on-start-change="(color: Iattrs) => onChange1(color, 'start')"
+                :on-change="(color: Iattrs) => onChange1(color, 'change')"
+                :on-end-change="(color: Iattrs) => onChange1(color, 'end')"
+                @on-change="onChange"
             />
         </div>
     </div>
@@ -54,7 +50,11 @@ const color: Ref<IPoitItem | Iattrs> = ref({
     alpha: 1,
 });
 
-const onChange = (attrs: Iattrs, name: string) => {
+const onChange = (e) => {
+    console.log(e);
+};
+
+const onChange1 = (attrs: Iattrs, name: string) => {
     color.value = { ...attrs };
     console.log(attrs);
 };

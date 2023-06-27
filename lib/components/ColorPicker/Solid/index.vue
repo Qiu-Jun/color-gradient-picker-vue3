@@ -25,6 +25,7 @@ import { reactive, onMounted, computed, watch } from 'vue';
 import Area from '../Area/index.vue';
 import Preview from '../Preview/index.vue';
 import { rgbToHsv, getRightValue, generateSolidStyle } from '@l/helpers/index';
+import type { IProvideData } from '@l/types';
 
 interface Iprops {
     red: number;
@@ -34,9 +35,6 @@ interface Iprops {
     hue: number;
     saturation: number;
     value: number;
-    onStartChange: void;
-    onChange: void;
-    onEndChange: void;
 }
 
 const props = withDefaults(defineProps<Iprops>(), {
@@ -47,10 +45,9 @@ const props = withDefaults(defineProps<Iprops>(), {
     hue: 0,
     saturation: 0,
     value: 0,
-    onStartChange: (): void => {},
-    onChange: (): void => {},
-    onEndChange: (): void => {},
 });
+
+const provideData = inject('provideData') as IProvideData;
 
 const state = reactive({
     colorRed: props.red,
@@ -60,12 +57,12 @@ const state = reactive({
     colorHue: 0,
     colorSaturation: 100,
     colorValue: 100,
-    actions: {
-        onStartChange: props.onStartChange,
-        onChange: props.onChange,
-        onEndChange: props.onEndChange,
-    },
 });
+const actionsMap = {
+    onStartChange: provideData.onStartChange,
+    onChange: provideData.onChange,
+    onEndChange: provideData.onEndChange,
+};
 
 const hsv = computed(() => {
     if (
@@ -137,7 +134,7 @@ const updateColor = (
     state.colorSaturation = saturation;
     state.colorValue = value;
 
-    const action = state.actions[actionName];
+    const action = actionsMap[actionName];
 
     action &&
         action({

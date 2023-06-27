@@ -1,10 +1,9 @@
 <!--
- * @Descripttion: 
- * @version: 
+ * @Descripttion: Area
  * @Author: June
  * @Date: 2023-03-19 19:23:05
  * @LastEditors: June
- * @LastEditTime: 2023-05-10 16:43:02
+ * @LastEditTime: 2023-06-27 22:06:56
 -->
 <template>
     <div class="picker-area">

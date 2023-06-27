@@ -12,6 +12,8 @@
         "./**/*.d.ts",
         "./**/*.vue",
         "./**/*.tsx",
-        "./index.d.ts"
+        "./index.d.ts",
+        "./types/*.ts",
+        "./auto-imports.d.ts"
     ]
 }

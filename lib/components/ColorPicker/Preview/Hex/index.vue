@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 18:25:35
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 00:04:48
+ * @LastEditTime: 2023-06-27 15:27:22
 -->
 <template>
     <Input
@@ -57,6 +57,8 @@ const changeHex = (event) => {
 
 watch(
     () => [props.red, props.green, props.blue],
-    () => setHex(),
+    () => {
+        setHex();
+    },
 );
 </script>

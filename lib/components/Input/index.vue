@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-23 22:20:33
  * @LastEditors: June
- * @LastEditTime: 2023-05-12 23:12:41
+ * @LastEditTime: 2023-06-27 15:05:22
 -->
 <template>
     <div :class="`input-field ${props.classes}`">
@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<Iprops>(), {
 const emits = defineEmits(['input', 'update:value']);
 
 const value = computed({
-    get: () => ~~props.value,
+    get: () => props.value,
     set: (val) => emits('update:value', val),
 });
 

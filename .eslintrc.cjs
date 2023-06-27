@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-02-21 23:42:31
  * @LastEditors: June
- * @LastEditTime: 2023-04-26 09:36:58
+ * @LastEditTime: 2023-06-27 13:00:48
  */
 module.exports = {
     root: true,
@@ -24,6 +24,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'prettier',
         'plugin:prettier/recommended',
+        './lib/.eslintrc-auto-import.json',
     ],
 
     rules: {

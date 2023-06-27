@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 20:10:11
  * @LastEditors: June
- * @LastEditTime: 2023-06-04 21:19:13
+ * @LastEditTime: 2023-06-27 21:57:06
 -->
 <template>
     <GradientControls
@@ -52,6 +52,8 @@ import {
     rgbToHsv,
     generateGradientStyle,
 } from '@l/helpers/index';
+import type { IProvideData } from '@l/types';
+
 type Ipoit = {
     left: number;
     red: number;
@@ -76,6 +78,7 @@ interface Iprops {
     onEndChange?: any;
 }
 
+const provideData = inject('provideData') as IProvideData;
 const props = withDefaults(defineProps<Iprops>(), {
     type: 'linear',
     degree: 0,
@@ -95,9 +98,6 @@ const props = withDefaults(defineProps<Iprops>(), {
             alpha: 1,
         },
     ],
-    onStartChange: null,
-    onChange: null,
-    onEndChange: null,
 });
 
 const state = reactive<any>({
@@ -113,12 +113,13 @@ const state = reactive<any>({
     colorValue: 100,
     gradientType: props.type,
     gradientDegree: props.degree,
-    actions: {
-        onStartChange: props.onStartChange,
-        onChange: props.onChange,
-        onEndChange: props.onEndChange,
-    },
 });
+
+const actionsMap = {
+    onStartChange: provideData.onStartChange,
+    onChange: provideData.onChange,
+    onEndChange: provideData.onEndChange,
+};
 
 const removePoint = (index = state.activePointIndex) => {
     if (state.gradientPoints.length <= 2) {
@@ -217,7 +218,7 @@ const updateColor = (
     state.colorValue = value;
     state.gradientPoints = localGradientPoints;
 
-    const action = state.actions[actionName];
+    const action = actionsMap[actionName];
 
     action &&
         action({
@@ -235,7 +236,7 @@ const updateColor = (
 const updateGradientLeft = (left, index, actionName = 'onChange') => {
     state.gradientPoints[index].left = left;
 
-    const action = state.actions[actionName];
+    const action = actionsMap[actionName];
 
     action &&
         action({

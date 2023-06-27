@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:46
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 16:59:51
+ * @LastEditTime: 2023-06-27 03:29:33
  */
 import setRGBA from './setRgba';
 
@@ -20,7 +20,7 @@ export default function hsvToRgb(
     let X = C * (1 - Math.abs((H % 2) - 1));
     let m = value - C;
     const precision = 255;
-    const defaultAlpha = 0;
+    const defaultAlpha = 1;
     C = ((C + m) * precision) | 0;
     X = ((X + m) * precision) | 0;
     m = (m * precision) | 0;

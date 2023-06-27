@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2023-04-11 13:22:28
+ * @LastEditTime: 2023-06-27 12:42:11
 -->
 <template>
     <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
@@ -41,5 +41,6 @@ const color = ref({
 
 const onChange = (attrs, name) => {
     color.value = { ...attrs };
+    console.log(color.value);
 };
 </script>

@@ -4,14 +4,14 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:46
  * @LastEditors: June
- * @LastEditTime: 2023-04-09 11:03:51
+ * @LastEditTime: 2023-06-27 15:30:05
  */
 import { rgbToHsv, setRgba } from './index';
 
 const hexRegexp =
     /(^#{0,1}[0-9A-F]{6}$)|(^#{0,1}[0-9A-F]{3}$)|(^#{0,1}[0-9A-F]{8}$)/i;
 
-const regexp = /([0-9A-F])([0-9A-F])([0-9A-F])/i;
+// const regexp = /([0-9A-F])([0-9A-F])([0-9A-F])/i;
 
 export default function hexToRgb(value: string) {
     const valid = hexRegexp.test(value);

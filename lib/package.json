@@ -22,7 +22,6 @@
     ],
     "files": [
         "dist",
-        "lib",
         "index.d.ts"
     ],
     "main": "./dist/color-gradient-picker-vue3.umd.js",
@@ -54,5 +53,8 @@
     },
     "bugs": {
         "url": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git/issues"
+    },
+    "devDependencies": {
+        "unplugin-auto-import": "^0.16.4"
     }
 }

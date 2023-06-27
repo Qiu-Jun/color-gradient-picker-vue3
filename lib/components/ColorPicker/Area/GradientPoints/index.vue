@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-19 19:01:24
  * @LastEditors: June
- * @LastEditTime: 2023-05-08 00:00:01
+ * @LastEditTime: 2023-06-27 15:44:21
 -->
 <template>
     <div class="gradient" :style="pointsStyle" @click="pointsContainerClick">
@@ -44,7 +44,7 @@ const props: any = defineProps({
 
 const pointsContainerRef = ref<HTMLElement | null>(null);
 
-const state: any = reactive({
+const state = reactive<{ width: number; positions: { x: number; y: number } }>({
     width: 0,
     positions: { x: 0, y: 0 },
 });
