@@ -47,25 +47,25 @@ yarn add color-gradient-picker-vue3
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import type { Ref } from 'vue';
-import ColorPicker from 'color-gradient-picker-vue3';
-import 'color-gradient-picker-vue3/dist/style.css';
+    import { ref } from 'vue';
+    import type { Ref } from 'vue';
+    import ColorPicker from 'color-gradient-picker-vue3';
+    import 'color-gradient-picker-vue3/dist/style.css';
 
-const color = ref({
-    red: 255,
-    green: 0,
-    blue: 0,
-    alpha: 1,
-});
+    const color = ref({
+        red: 255,
+        green: 0,
+        blue: 0,
+        alpha: 1,
+    });
 
-const onCancel = () => {
-    console.log('取消');
-};
+    const onCancel = () => {
+        console.log('取消');
+    };
 
-const onChange = (color) => {
-    console.log(color);
-};
+    const onChange = (color) => {
+        console.log(color);
+    };
 </script>
 ```
 
