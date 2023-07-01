@@ -29,8 +29,26 @@
         />
 
         <div class="btns">
-            <div class="btn" @click="handleCancel">取消</div>
-            <div class="btn" @click="handleConfirm">确认</div>
+            <div
+                class="btn"
+                :style="{
+                    color: props.cancelColor,
+                    backgroundColor: props.cancelBg,
+                }"
+                @click="handleCancel"
+            >
+                {{ props.cancelText }}
+            </div>
+            <div
+                class="btn"
+                :style="{
+                    color: props.confirmColor,
+                    backgroundColor: props.confirmBg,
+                }"
+                @click="handleConfirm"
+            >
+                {{ props.confirmText }}
+            </div>
         </div>
     </div>
 </template>
@@ -63,6 +81,12 @@ interface Iprops {
             },
         ];
     };
+    cancelText?: string;
+    cancelColor?: string;
+    cancelBg?: string;
+    confirmText?: string;
+    confirmColor?: string;
+    confirmBg?: string;
 }
 
 const emits = defineEmits(['onChange', 'onCancel']);
@@ -97,14 +121,16 @@ const props = withDefaults(defineProps<Iprops>(), {
             },
         ],
     }),
+    cancelText: '取消',
+    cancelTextColor: '#333',
+    cancelTextBg: '#fff',
+    confirmText: '确认',
+    confirmTextColor: '#333',
+    confirmTextBg: '#fff',
 });
 
-const color: Ref<IPoitItem | Iattrs> = ref({
-    red: 255,
-    green: 0,
-    blue: 0,
-    alpha: 1,
-});
+const color: Ref<IPoitItem | Iattrs | undefined> = ref();
+color.value = props.isGradient ? { ...props.gradient } : { ...props.color };
 
 provide('provideData', {
     onChange: (attrs: Iattrs) => {

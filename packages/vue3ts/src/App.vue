@@ -11,6 +11,8 @@
         <div>
             <ColorPicker
                 :color="color"
+                cancel-text="cancel"
+                cancel-color="red"
                 @on-change="onChange"
                 @on-cancel="onCancel"
             />
@@ -41,7 +43,7 @@ const onCancel = () => {
     console.log('取消');
 };
 
-const onChange = (attrs) => {
-    color.value = { ...attrs };
+const onChange = (color) => {
+    console.log(color);
 };
 </script>

@@ -11,17 +11,17 @@
         <div>
             <ColorPicker
                 :color="color"
-                :on-start-change="(color) => onChange(color, 'start')"
-                :on-change="(color) => onChange(color, 'change')"
-                :on-end-change="(color) => onChange(color, 'end')"
+                cancel-text="cancel"
+                cancel-color="red"
+                @on-change="onChange"
+                @on-cancel="onCancel"
             />
         </div>
         <div>
             <ColorPicker
                 :is-gradient="true"
-                :on-start-change="(color) => onChange(color, 'start')"
-                :on-change="(color) => onChange(color, 'change')"
-                :on-end-change="(color) => onChange(color, 'end')"
+                @on-change="onChange"
+                @on-cancel="onCancel"
             />
         </div>
     </div>
@@ -39,7 +39,11 @@ const color = ref({
     alpha: 1,
 });
 
-const onChange = (attrs, name) => {
-    color.value = { ...attrs };
+const onCancel = () => {
+    console.log('取消');
+};
+
+const onChange = (color) => {
+    console.log(color);
 };
 </script>

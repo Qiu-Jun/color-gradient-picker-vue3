@@ -29,9 +29,10 @@ yarn add color-gradient-picker-vue3
     <div>
         <ColorPicker
             :color="color"
-            :on-start-change="(color) => onChange(color, 'start')"
-            :on-change="(color) => onChange(color, 'change')"
-            :on-end-change="(color) => onChange(color, 'end')"
+            cancel-text="cancel"
+            cancel-color="red"
+            @on-change="onChange"
+            @on-cancel="onCancel"
         />
     </div>
 
@@ -39,86 +40,32 @@ yarn add color-gradient-picker-vue3
     <div>
         <ColorPicker
             :is-gradient="true"
-            :on-start-change="(color) => onChange(color, 'start')"
-            :on-change="(color) => onChange(color, 'change')"
-            :on-end-change="(color) => onChange(color, 'end')"
-        />
-    </div>
-</template>
-
-<script setup>
-    import { ref } from 'vue';
-    import ColorPicker from 'color-gradient-picker-vue3';
-    import 'color-gradient-picker-vue3/dist/style.css';
-
-    const color = ref({
-        red: 255,
-        green: 0,
-        blue: 0,
-        alpha: 1,
-    });
-
-    const onChange = (attrs, name) => {
-        color.value = { ...attrs };
-    };
-</script>
-```
-
-#### ts Demo
-
-```html
-<template>
-    <!-- 纯色 -->
-    <div>
-        <ColorPicker
-            :color="color"
-            :on-start-change="(color: Iattrs) => onChange(color, 'start')"
-            :on-change="(color: Iattrs) => onChange(color, 'change')"
-            :on-end-change="(color: Iattrs) => onChange(color, 'end')"
-        />
-    </div>
-
-    <!-- 渐变 -->
-    <div>
-        <ColorPicker
-            :is-gradient="true"
-            :on-start-change="(color) => onChange(color, 'start')"
-            :on-change="(color) => onChange(color, 'change')"
-            :on-end-change="(color) => onChange(color, 'end')"
+            @on-change="onChange"
+            @on-cancel="onCancel"
         />
     </div>
 </template>
 
 <script lang="ts" setup>
-    import { ref } from 'vue';
-    import type { Ref } from 'vue';
-    import ColorPicker from 'color-gradient-picker-vue3';
-    import 'color-gradient-picker-vue3/dist/style.css';
-    interface IPoitItem {
-        alpha?: number | string;
-        blue?: number | string;
-        green?: number | string;
-        left?: number | string;
-        red?: number | string;
-    }
+import { ref } from 'vue';
+import type { Ref } from 'vue';
+import ColorPicker from 'color-gradient-picker-vue3';
+import 'color-gradient-picker-vue3/dist/style.css';
 
-    interface Iattrs {
-        degree: number;
-        points: [IPoitItem];
-        style: string;
-        type: string;
-    }
+const color = ref({
+    red: 255,
+    green: 0,
+    blue: 0,
+    alpha: 1,
+});
 
-    const color: Ref<IPoitItem | Iattrs> = ref({
-        red: 255,
-        green: 0,
-        blue: 0,
-        alpha: 1,
-    });
+const onCancel = () => {
+    console.log('取消');
+};
 
-    const onChange = (attrs: Iattrs, name: string) => {
-        color.value = { ...attrs };
-    };
+const onChange = (color) => {
+    console.log(color);
+};
 </script>
 ```
 
