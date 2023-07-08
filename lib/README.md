@@ -17,9 +17,10 @@ Color and gradient picker for vue3.js. [If you use vue2， plese use color-gradi
 yarn add color-gradient-picker-vue3
 # or npm install color-gradient-picker-vue3 or pnpm install color-gradient-picker-vue3
 ```
+
 #### Demo
 
-```html
+````html
 <template>
     <!-- 纯色 -->
     <div>
@@ -57,7 +58,7 @@ yarn add color-gradient-picker-vue3
 
     const onCancel = () => {
         console.log('取消');
-   
+
 #### 启动 lib
 
 ```bash
@@ -72,7 +73,7 @@ pnpm dev
 pnpm predev
 # 子项目下
 pnpm dev
-```
+````
 
 #### Todo
 
