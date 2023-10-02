@@ -1,19 +1,20 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": "./",
-        "paths": {
-            "@l/*": ["./*"],
-            "@c/*": ["./components/*"]
-        }
-    },
-    "include": [
-        "./**/*.ts",
-        "./**/*.d.ts",
-        "./**/*.vue",
-        "./**/*.tsx",
-        "./index.d.ts",
-        "./types/*.ts",
-        "./auto-imports.d.ts"
-    ]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@l/*": ["./*"],
+      "@c/*": ["./components/*"]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.d.ts",
+    "./**/*.vue",
+    "./**/*.tsx",
+    "./dts/*.d.ts",
+    "./index.d.ts",
+    "./types/*.ts",
+    "./auto-imports.d.ts"
+  ]
 }

@@ -12,6 +12,7 @@ node_modules
 packages/**/dist
 dist-ssr
 *.local
+.nuxi
 
 # Editor directories and files
 .vscode/*

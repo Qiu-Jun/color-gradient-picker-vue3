@@ -7,17 +7,17 @@
  * @LastEditTime: 2023-05-10 16:41:11
  */
 export default function rgbToHex(
-    red: number,
-    green: number,
-    blue: number,
+  red: number,
+  green: number,
+  blue: number,
 ): string {
-    let r16 = red.toString(16);
-    let g16 = green.toString(16);
-    let b16 = blue.toString(16);
+  let r16 = red.toString(16);
+  let g16 = green.toString(16);
+  let b16 = blue.toString(16);
 
-    if (red < 16) r16 = `0${r16}`;
-    if (green < 16) g16 = `0${g16}`;
-    if (blue < 16) b16 = `0${b16}`;
+  if (red < 16) r16 = `0${r16}`;
+  if (green < 16) g16 = `0${g16}`;
+  if (blue < 16) b16 = `0${b16}`;
 
-    return r16 + g16 + b16;
+  return r16 + g16 + b16;
 }

@@ -17,56 +17,56 @@ const PKG_VUE3TS = resolve(CWD, './packages/vue3ts');
 const PKG_NUXI = resolve(CWD, './packages/nuxi');
 
 const run = (bin, args, opts = {}) => {
-    execa(bin, args, { stdio: 'inherit', ...opts });
+  execa(bin, args, { stdio: 'inherit', ...opts });
 };
 
 async function create() {
-    const { result } = await inquirer.prompt([
+  const { result } = await inquirer.prompt([
+    {
+      type: 'list',
+      message: '请选择您要启动的子项目:',
+      name: 'result',
+      choices: [
         {
-            type: 'list',
-            message: '请选择您要启动的子项目:',
-            name: 'result',
-            choices: [
-                {
-                    key: '0',
-                    name: '开发',
-                    value: 'dev',
-                },
-                {
-                    key: '1',
-                    name: 'vue3js 例子',
-                    value: 'vue3js',
-                },
-                {
-                    key: '2',
-                    name: 'vue3ts 例子',
-                    value: 'vue3ts',
-                },
-                {
-                    key: '3',
-                    name: 'nuxi 例子',
-                    value: 'nuxi',
-                },
-            ],
+          key: '0',
+          name: '开发',
+          value: 'dev',
         },
-    ]);
+        {
+          key: '1',
+          name: 'vue3js 例子',
+          value: 'vue3js',
+        },
+        {
+          key: '2',
+          name: 'vue3ts 例子',
+          value: 'vue3ts',
+        },
+        {
+          key: '3',
+          name: 'nuxi 例子',
+          value: 'nuxi',
+        },
+      ],
+    },
+  ]);
 
-    switch (result) {
-        case 'dev':
-            run('pnpm', ['dev'], { cwd: PKG_DEV });
-            break;
-        case 'vue3js':
-            run('pnpm', ['dev'], { cwd: PKG_VUE3JS });
-            break;
-        case 'vue3ts':
-            run('pnpm', ['dev'], { cwd: PKG_VUE3TS });
-            break;
-        case 'nuxi':
-            run('pnpm', ['dev'], { cwd: PKG_NUXI });
-            break;
-        default:
-            break;
-    }
+  switch (result) {
+    case 'dev':
+      run('pnpm', ['dev'], { cwd: PKG_DEV });
+      break;
+    case 'vue3js':
+      run('pnpm', ['dev'], { cwd: PKG_VUE3JS });
+      break;
+    case 'vue3ts':
+      run('pnpm', ['dev'], { cwd: PKG_VUE3TS });
+      break;
+    case 'nuxi':
+      run('pnpm', ['dev'], { cwd: PKG_NUXI });
+      break;
+    default:
+      break;
+  }
 }
 
 create();

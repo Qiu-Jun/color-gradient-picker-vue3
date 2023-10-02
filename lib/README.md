@@ -77,6 +77,6 @@ pnpm dev
 
 #### Todo
 
--   [x] 支持 monorepo
+- [x] 支持 monorepo
 
--   [ ] fix to typescript
+- [ ] fix to typescript

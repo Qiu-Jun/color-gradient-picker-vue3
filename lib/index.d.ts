@@ -6,6 +6,6 @@
  * @LastEditTime: 2023-06-27 22:46:07
  */
 declare module 'color-gradient-picker-vue3' {
-    const content: any;
-    export default content;
+  const content: any;
+  export default content;
 }

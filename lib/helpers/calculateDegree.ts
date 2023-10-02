@@ -6,11 +6,11 @@
  * @LastEditTime: 2023-05-10 16:38:47
  */
 export default function calculateDegree(
-    x: number,
-    y: number,
-    centerX: number,
-    centerY: number,
+  x: number,
+  y: number,
+  centerX: number,
+  centerY: number,
 ): number {
-    const radians = Math.atan2(x - centerX, y - centerY);
-    return radians * (180 / Math.PI) * -1 + 180;
+  const radians = Math.atan2(x - centerX, y - centerY);
+  return radians * (180 / Math.PI) * -1 + 180;
 }

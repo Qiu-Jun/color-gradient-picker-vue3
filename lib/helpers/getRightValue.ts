@@ -7,5 +7,5 @@
  * @LastEditTime: 2023-05-10 16:40:06
  */
 export default function getRightValue(newValue?: number, oldValue?: number) {
-    return !newValue && newValue !== 0 ? oldValue : newValue;
+  return !newValue && newValue !== 0 ? oldValue : newValue;
 }
