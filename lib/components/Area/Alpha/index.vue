@@ -3,7 +3,7 @@
  * @Description: Area Alapha
  * @Date: 2023-09-27 19:22:18
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 11:08:05
+ * @LastEditTime: 2023-10-03 23:45:34
 -->
 <template>
   <div
@@ -107,7 +107,7 @@ watchEffect(() => {
 
 <style lang="scss" scoped>
 .alpha-area {
-  background: url('assets/images/alpha-background.svg');
+  background: url('@l/assets/images/alpha-background.svg');
   background-size: auto;
   background-position: 50% 50%;
 }

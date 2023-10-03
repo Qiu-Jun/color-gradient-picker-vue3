@@ -1,4 +1,5 @@
 .picker-color-ui {
+  width: 280px;
   .picker-area {
     .picker-pointer {
       position: absolute;
@@ -70,9 +71,6 @@
   .btns {
     box-sizing: border-box;
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     padding: 0 16px;
     .btn {
       border: 1px solid #ccc;

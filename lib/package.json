@@ -1,6 +1,6 @@
 {
   "name": "color-gradient-picker-vue3",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "author": "June",
   "description": "Color and gradient picker for vue3.js",
@@ -21,7 +21,8 @@
   ],
   "files": [
     "dist",
-    "index.d.ts"
+    "index.d.ts",
+    "types"
   ],
   "main": "./dist/color-gradient-picker-vue3.umd.js",
   "module": "./dist/color-gradient-picker-vue3.es.js",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "rollup-plugin-visualizer": "^5.9.2",
+    "unocss": "^0.56.5",
     "unplugin-auto-import": "^0.16.4"
   },
   "dependencies": {

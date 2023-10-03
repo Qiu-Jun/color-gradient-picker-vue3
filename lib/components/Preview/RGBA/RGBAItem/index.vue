@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 21:58:47
  * @LastEditors: June
- * @LastEditTime: 2023-10-02 14:34:54
+ * @LastEditTime: 2023-10-04 00:15:44
 -->
 <template>
   <div>
@@ -56,7 +56,6 @@ const RGBValue = computed(() => {
 
 const onInput = (event) => {
   let value = +event.target.value;
-  console.log(value < 0);
   if (value <= 0) {
     value = 0;
   } else if (value > 255) {

@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 22:30:22
+ * @LastEditTime: 2023-10-04 00:40:04
 -->
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
@@ -14,12 +14,6 @@
     <div>
       <ColorPicker is-gradient @on-change="onChange" @on-cancel="onCancel" />
     </div>
-
-    <el-dialog v-model="show">
-      <div v-if="show">
-        <ColorPicker :color="color" />
-      </div>
-    </el-dialog>
   </div>
 </template>
 

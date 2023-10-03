@@ -3,17 +3,40 @@
  * @Description: 
  * @Date: 2023-09-27 12:54:30
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 22:59:50
+ * @LastEditTime: 2023-10-04 00:42:11
 -->
 <template>
   <div
-    class="picker-color-ui border-box w-280px m-8px bg-[#fff] flex flex-col slelect-none"
+    class="picker-color-ui border-box m-8px bg-[#fff] flex flex-col slelect-none"
   >
     <!-- 渐变 -->
     <Gradient v-if="props.isGradient" />
 
     <!-- 纯色 -->
     <Solid v-else />
+
+    <div class="btns flex justify-end items-center select-none">
+      <div
+        class="btn"
+        :style="{
+          color: props.cancelColor,
+          backgroundColor: props.cancelBg,
+        }"
+        @click="onClose"
+      >
+        {{ props.cancelText }}
+      </div>
+      <div
+        class="btn"
+        :style="{
+          color: props.confirmColor,
+          backgroundColor: props.confirmBg,
+        }"
+        @click="onConfirm"
+      >
+        {{ props.confirmText }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,83 +46,95 @@ import Gradient from './components/Gradient/index.vue';
 import { cloneDeep } from 'lodash-es';
 import { generateSolidStyle, generateGradientStyle } from '@l/helpers';
 import { v4 as uuidv4 } from 'uuid';
-import type { IColor, IGradient, IColorState, IColorRes } from '@l/types';
+import type { IColor, IGradient, IColorState } from '@l/types';
+import { PropType } from 'vue';
+
+interface IProps {
+  isGradient: boolean;
+  color?: IColor;
+  gradient?: IGradient;
+  cancelText?: string;
+  cancelColor?: string;
+  cancelBg?: string;
+  confirmText?: string;
+  confirmColor?: string;
+  confirmBg?: string;
+}
 
 const emits = defineEmits(['change']);
-const defaultColor: IColor = {
-  red: 255,
-  green: 0,
-  blue: 0,
-  alpha: 1,
-};
-
-const defaultGradient: IGradient = {
-  type: 'linear',
-  degree: 0,
-  points: [
-    {
-      id: uuidv4(),
-      left: 0,
-      red: 0,
-      green: 0,
-      blue: 0,
-      alpha: 1,
-    },
-    {
-      id: uuidv4(),
-      left: 100,
-      red: 255,
-      green: 0,
-      blue: 0,
-      alpha: 1,
-    },
-  ],
-};
-
-const props: IColorState = defineProps({
+const props: IProps = defineProps({
   isGradient: {
     type: Boolean,
     default: false,
   },
-  red: {
-    type: Number,
-    default: 255,
+  color: {
+    type: Object as PropType<IColor>,
+    default: () => ({ red: 255, green: 0, blue: 0, alpha: 1 }),
   },
-  green: {
-    type: Number,
-    default: 0,
+  gradient: {
+    type: Object as PropType<IGradient>,
+    default: () => ({
+      type: 'linear',
+      degree: 0,
+      points: [
+        {
+          id: uuidv4(),
+          left: 0,
+          red: 0,
+          green: 0,
+          blue: 0,
+          alpha: 1,
+        },
+        {
+          id: uuidv4(),
+          left: 100,
+          red: 255,
+          green: 0,
+          blue: 0,
+          alpha: 1,
+        },
+      ],
+    }),
   },
-  blue: {
-    type: Number,
-    default: 0,
+  cancelText: {
+    type: String,
+    default: 'Cancel',
   },
-  alpha: {
-    type: Number,
-    default: 1,
+
+  cancelColor: {
+    type: String,
+    default: '#333',
+  },
+  cancelBg: {
+    type: String,
+    default: '#fff',
+  },
+  confirmText: {
+    type: String,
+    default: 'Confirm',
+  },
+  confirmColor: {
+    type: String,
+    defualt: '#333',
+  },
+  confirmBg: {
+    type: String,
+    defualt: '#fff',
   },
 });
 
-const color = ref(
-  props.color
-    ? Object.assign(cloneDeep(defaultColor), props.color)
-    : cloneDeep(defaultColor),
-);
-const gradient = ref(
-  props.gradient
-    ? Object.assign(cloneDeep(defaultGradient), props.gradient)
-    : cloneDeep(defaultGradient),
-);
-
 const colorPickerState = reactive<IColorState>({
   isGradient: props.isGradient, // 是否是渐变
-  red: props.isGradient ? gradient.value?.points[1].red : color.value?.red,
-  green: props.isGradient
-    ? gradient.value?.points[1].green
-    : color.value?.green,
-  blue: props.isGradient ? gradient.value?.points[1].blue : color.value?.blue,
-  alpha: props.isGradient
-    ? gradient.value?.points[0].alpha
-    : color.value?.alpha,
+  red: (props.isGradient ? props.gradient?.points[1].red : props.color?.red)!,
+  green: (props.isGradient
+    ? props.gradient?.points[1].green
+    : props.color?.green)!,
+  blue: (props.isGradient
+    ? props.gradient?.points[1].blue
+    : props.color?.blue)!,
+  alpha: (props.isGradient
+    ? props.gradient?.points[0].alpha
+    : props.color?.alpha)!,
   hue: 0,
   saturation: 100,
   value: 100,
@@ -107,10 +142,8 @@ const colorPickerState = reactive<IColorState>({
   type: 'linear',
   degree: 0,
   activePointIndex: 1, // 因为默认颜色取了默认的1
-  activePoint: cloneDeep(defaultGradient.points[0]),
-  points: cloneDeep(defaultGradient.points),
-  // color: unref(color),
-  // gradient: unref(gradient),
+  activePoint: cloneDeep(props.gradient?.points[0]),
+  points: cloneDeep(props.gradient?.points),
 });
 
 const updateColor = (
@@ -177,14 +210,6 @@ function updateGradient(color: IColor, key?: string) {
     colorPickerState.type!,
     colorPickerState.degree!,
   );
-  emits('change', {
-    style: colorPickerState.style,
-    gradient: {
-      type: colorPickerState.type,
-      degree: colorPickerState.degree,
-      points: colorPickerState.points,
-    },
-  });
 }
 
 function updateSolid(color: IColor, key?: string) {
@@ -206,17 +231,55 @@ function updateSolid(color: IColor, key?: string) {
     colorPickerState.blue,
     colorPickerState.alpha,
   );
-  emits('change', {
-    style: colorPickerState.style,
-    color: {
-      red: colorPickerState.red,
-      green: colorPickerState.green,
-      blue: colorPickerState.blue,
-      alpha: colorPickerState.alpha,
-    },
-  });
 }
+
+const onClose = (cb) => {
+  cb && typeof cb === 'function' && cb();
+};
+
+const onConfirm = (cb) => {
+  const {
+    isGradient,
+    style,
+    type,
+    degree,
+    points,
+    red,
+    green,
+    blue,
+    alpha,
+    hue,
+  } = colorPickerState;
+
+  if (isGradient) {
+    emits('change', {
+      style,
+      gradient: {
+        type,
+        degree,
+        points,
+      },
+    });
+  } else {
+    emits('change', {
+      style,
+      color: {
+        red,
+        green,
+        blue,
+        hue,
+        alpha,
+      },
+    });
+  }
+  cb && typeof cb === 'function' && cb();
+};
 
 provide('colorPickerState', colorPickerState);
 provide('updateColor', updateColor);
+
+defineExpose({
+  onClose,
+  onConfirm,
+});
 </script>

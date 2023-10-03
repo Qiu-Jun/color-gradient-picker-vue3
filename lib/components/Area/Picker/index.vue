@@ -3,7 +3,7 @@
  * @Description: Area Picker
  * @Date: 2023-09-27 19:28:05
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 22:38:22
+ * @LastEditTime: 2023-10-04 00:15:53
 -->
 <template>
   <div
@@ -62,7 +62,6 @@ const mouseDownHandler = (event) => {
   const startY = event.pageY;
   const positionX = startX - elementX;
   const positionY = startY - elementY;
-  console.log(positionX, positionY, startX, elementX);
   const color = changePicker(
     positionX,
     positionY,
@@ -71,7 +70,6 @@ const mouseDownHandler = (event) => {
     colorPickerState.hue!,
     colorPickerState.alpha!,
   );
-  console.log(color);
   updateColor(color);
   return {
     startX,

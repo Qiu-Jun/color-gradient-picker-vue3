@@ -3,7 +3,7 @@
  * @Description: Area GradientPoints
  * @Date: 2023-09-27 19:26:27
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 22:02:48
+ * @LastEditTime: 2023-10-04 00:15:38
 -->
 <template>
   <div
@@ -72,7 +72,6 @@ watchEffect(() => {
   if (pointsContainerRef.value && !pointsContainerBoxInfo.value?.width) {
     pointsContainerBoxInfo.value =
       pointsContainerRef.value?.getBoundingClientRect() || null;
-    console.log(pointsContainerBoxInfo.value);
   }
 });
 </script>
