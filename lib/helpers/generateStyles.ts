@@ -4,22 +4,15 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:46
  * @LastEditors: June
- * @LastEditTime: 2023-09-30 21:36:08
+ * @LastEditTime: 2023-10-03 15:11:00
  */
+import type { IPoitItem } from '@l/types';
 export function generateSolidStyle(red, green, blue, alpha): string {
   return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 }
 
 export function generateGradientStyle(
-  points: [
-    {
-      left: number;
-      red: number;
-      green: number;
-      blue: number;
-      alpha: number;
-    },
-  ],
+  points: IPoitItem[],
   type: string,
   degree: number,
 ): string {
@@ -27,7 +20,6 @@ export function generateGradientStyle(
   const sortedPoints = points.slice();
 
   sortedPoints.sort((a, b) => a.left - b.left);
-
   if (type === 'linear') {
     style = `linear-gradient(${degree}deg,`;
   } else {

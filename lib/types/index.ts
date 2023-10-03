@@ -4,22 +4,16 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2023-09-30 23:00:18
+ * @LastEditTime: 2023-10-03 23:03:04
  */
 
 export interface IPoitItem {
+  id: string;
   red: number;
   green: number;
   blue: number;
   alpha: number;
   left: number;
-}
-
-export interface Iattrs {
-  degree: number;
-  points: IPoitItem[];
-  style: string;
-  type: string;
 }
 
 export interface IColor {
@@ -30,6 +24,9 @@ export interface IColor {
   hue?: number;
   saturation?: number;
   value?: number;
+  points?: IPoitItem[];
+  type?: string;
+  degree?: number;
 }
 
 export interface IGradient {
@@ -40,13 +37,18 @@ export interface IGradient {
 
 export interface IColorState extends IColor {
   isGradient: boolean;
+  type?: string;
+  degree?: number;
+  points?: IPoitItem[];
+  activePointIndex?: number;
+  activePoint?: IPoitItem;
   style?: string;
   color?: IColor;
   gradient?: IGradient;
 }
 
-// export interface IProvideData {
-//   onChange: (attrs: Iattrs) => void;
-//   onStartChange: (attrs: Iattrs) => void;
-//   onEndChange: (attrs: Iattrs) => void;
-// }
+export interface IColorRes {
+  style: string;
+  color?: IColor;
+  gradient?: IGradient;
+}

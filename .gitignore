@@ -12,7 +12,6 @@ node_modules
 packages/**/dist
 dist-ssr
 *.local
-.nuxi
 
 # Editor directories and files
 .vscode/*
@@ -24,3 +23,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# html
+stats.html

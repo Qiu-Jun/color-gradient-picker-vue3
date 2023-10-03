@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-04-11 11:17:35
  * @LastEditors: June
- * @LastEditTime: 2023-06-27 12:56:20
+ * @LastEditTime: 2023-10-03 23:15:22
  */
 import type { ConfigEnv, UserConfigExport } from 'vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -12,6 +12,7 @@ import * as path from 'path';
 import VueSetupExtend from 'vite-plugin-vue-setup-extend';
 import AutoImport from 'unplugin-auto-import/vite';
 import UnoCSS from 'unocss/vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
@@ -26,6 +27,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           enabled: true,
         },
       }),
+      visualizer(),
     ],
     resolve: {
       alias: {

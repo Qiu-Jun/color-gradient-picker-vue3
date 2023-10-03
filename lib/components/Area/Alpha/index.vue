@@ -3,7 +3,7 @@
  * @Description: Area Alapha
  * @Date: 2023-09-27 19:22:18
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 02:04:49
+ * @LastEditTime: 2023-10-03 11:08:05
 -->
 <template>
   <div
@@ -47,11 +47,6 @@ const mouseDownHandler = (event) => {
   const startX = event.pageX;
   const width = alphaMaskBoxInfo.value?.width || 0;
   let positionX = startX - elementX;
-  // if (positionX > width.value / 2) {
-  //   positionX += 12;
-  // } else {
-  //   positionX -= 12;
-  // }
 
   updateColor({ alpha: getAlpha(positionX, width) }, 'alpha');
   return {

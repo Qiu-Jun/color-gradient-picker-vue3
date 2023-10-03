@@ -3,14 +3,12 @@
  * @Description: 纯色
  * @Date: 2023-09-27 14:11:40
  * @LastEditors: June
- * @LastEditTime: 2023-09-28 18:41:02
+ * @LastEditTime: 2023-10-03 10:16:27
 -->
 <template>
-  <div>
-    <Area />
+  <Area />
 
-    <Preview />
-  </div>
+  <Preview />
 </template>
 
 <script name="Solid" lang="ts" setup>

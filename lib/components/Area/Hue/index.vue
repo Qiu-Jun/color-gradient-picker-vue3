@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 19:27:26
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 02:04:28
+ * @LastEditTime: 2023-10-03 10:56:14
 -->
 <template>
   <div
@@ -114,8 +114,6 @@ const mouseEvents = useMouseEvents(
 watchEffect(() => {
   if (hueRef.value && !hueBoxInfo.value?.width) {
     hueBoxInfo.value = hueRef.value?.getBoundingClientRect() || null;
-    console.log(hueBoxInfo.value);
-    console.log(hueRef.value.offsetWidth);
   }
 });
 </script>

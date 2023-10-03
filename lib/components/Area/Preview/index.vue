@@ -3,7 +3,7 @@
  * @Description: Area Preview
  * @Date: 2023-09-27 19:28:31
  * @LastEditors: June
- * @LastEditTime: 2023-10-01 14:41:06
+ * @LastEditTime: 2023-10-03 12:22:32
 -->
 <template>
   <div class="preview-area mr-8px">
@@ -22,11 +22,11 @@ const colorPickerState = inject('colorPickerState') as IColorState;
 const style = computed(() => {
   let _style = '';
   if (colorPickerState.isGradient) {
-    // _style = generateGradientStyle(
-    //   colorPickerState.points,
-    //   colorPickerState.gradientType,
-    //   colorPickerState.gradientDegree,
-    // );
+    _style = generateGradientStyle(
+      colorPickerState.points!,
+      colorPickerState.type!,
+      colorPickerState.degree!,
+    );
   } else {
     _style = generateSolidStyle(
       colorPickerState.red,
