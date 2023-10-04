@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 12:54:30
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 02:55:57
+ * @LastEditTime: 2023-10-04 11:29:28
 -->
 <template>
   <div
@@ -15,7 +15,7 @@
     <!-- 纯色 -->
     <Solid v-else />
 
-    <div class="btns flex justify-end items-center select-none">
+    <div v-if="showBtn" class="btns flex justify-end items-center select-none">
       <div
         class="btn"
         :style="{
@@ -43,7 +43,7 @@
 <script name="ColorPicker" lang="ts" setup>
 import Solid from './components/Solid/index.vue'
 import Gradient from './components/Gradient/index.vue'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, throttle } from 'lodash-es'
 import { generateSolidStyle, generateGradientStyle } from '@l/helpers'
 import { v4 as uuidv4 } from 'uuid'
 import type { IColor, IGradient, IColorState } from '@l/types'
@@ -51,6 +51,7 @@ import { PropType } from 'vue'
 
 interface IProps {
   isGradient: boolean
+  showBtn: boolean
   color?: IColor
   gradient?: IGradient
   cancelText?: string
@@ -64,6 +65,10 @@ interface IProps {
 const emits = defineEmits(['change'])
 const props: IProps = defineProps({
   isGradient: {
+    type: Boolean,
+    default: false,
+  },
+  showBtn: {
     type: Boolean,
     default: false,
   },
@@ -146,37 +151,38 @@ const colorPickerState = reactive<IColorState>({
   points: cloneDeep(props.gradient?.points),
 })
 
-const updateColor = (
-  {
-    red,
-    green,
-    blue,
-    alpha,
-    hue,
-    saturation,
-    value,
-    points,
-    type,
-    degree,
-  }: IColor,
-  key: string,
-): void => {
-  const params: IColor = {
-    red,
-    green,
-    blue,
-    alpha,
-    hue,
-    saturation,
-    value,
-    points,
-    type,
-    degree,
-  }
-  props.isGradient ? updateGradient(params, key) : updateSolid(params, key)
-}
-// const color = ref<IPoitItem | Iattrs | null>();
-// color.value = props.isGradient ? { ...props.gradient } : { ...props.color };
+const updateColor = throttle(
+  function (
+    {
+      red,
+      green,
+      blue,
+      alpha,
+      hue,
+      saturation,
+      value,
+      points,
+      type,
+      degree,
+    }: IColor,
+    key: string,
+  ): void {
+    const params: IColor = {
+      red,
+      green,
+      blue,
+      alpha,
+      hue,
+      saturation,
+      value,
+      points,
+      type,
+      degree,
+    }
+    props.isGradient ? updateGradient(params, key) : updateSolid(params, key)
+  },
+  props.showBtn ? 100 : 150,
+)
 
 function updateGradient(color: IColor, key?: string) {
   const {
@@ -205,11 +211,21 @@ function updateGradient(color: IColor, key?: string) {
     value && (colorPickerState.value = value)
     hue && (colorPickerState.hue = hue)
   }
-  colorPickerState.style = generateGradientStyle(
+  const style = generateGradientStyle(
     colorPickerState.points!,
     colorPickerState.type!,
     colorPickerState.degree!,
   )
+  colorPickerState.style = style
+  !props.showBtn &&
+    emits('change', {
+      style: colorPickerState.style,
+      gradient: {
+        type: colorPickerState.type,
+        degree: colorPickerState.degree,
+        points: colorPickerState.points,
+      },
+    })
 }
 
 function updateSolid(color: IColor, key?: string) {
@@ -225,12 +241,24 @@ function updateSolid(color: IColor, key?: string) {
     value && (colorPickerState.value = value)
     hue && (colorPickerState.hue = hue)
   }
-  colorPickerState.style = generateSolidStyle(
+  const style = generateSolidStyle(
     colorPickerState.red,
     colorPickerState.green,
     colorPickerState.blue,
     colorPickerState.alpha,
   )
+  colorPickerState.style = style
+  !props.showBtn &&
+    emits('change', {
+      style: style,
+      color: {
+        red: colorPickerState.red,
+        green: colorPickerState.green,
+        blue: colorPickerState.blue,
+        hue: colorPickerState.hue,
+        alpha: colorPickerState.alpha,
+      },
+    })
 }
 
 const onClose = (cb) => {
