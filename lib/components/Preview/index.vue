@@ -16,6 +16,6 @@
 </template>
 
 <script name="Preview" lang="ts" setup>
-import Hex from './Hex/index.vue';
-import RGBA from './RGBA/index.vue';
+import Hex from './Hex/index.vue'
+import RGBA from './RGBA/index.vue'
 </script>

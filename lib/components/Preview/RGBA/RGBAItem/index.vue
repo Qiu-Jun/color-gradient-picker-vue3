@@ -18,66 +18,66 @@
 </template>
 
 <script name="PreviewRGBItem" lang="ts" setup>
-import CInput from '@c/CInput/index.vue';
-import { hexToRgb, rgbToHex } from '@l/helpers/index';
-import type { IColorState } from '@l/types';
+import CInput from '@c/CInput/index.vue'
+import { hexToRgb, rgbToHex } from '@l/helpers/index'
+import type { IColorState } from '@l/types'
 
 interface Iprops {
-  type: string;
-  label: string;
+  type: string
+  label: string
 }
-const colorPickerState = inject('colorPickerState') as IColorState;
-const updateColor = inject('updateColor') as any;
+const colorPickerState = inject('colorPickerState') as IColorState
+const updateColor = inject('updateColor') as any
 const props = withDefaults(defineProps<Iprops>(), {
   type: 'text',
   label: '',
-});
+})
 
 const RGBValue = computed(() => {
-  let value: number | undefined = 0;
+  let value: number | undefined = 0
   switch (props.label) {
     case 'R':
-      value = colorPickerState.red;
-      break;
+      value = colorPickerState.red
+      break
     case 'G':
-      value = colorPickerState.green;
-      break;
+      value = colorPickerState.green
+      break
     case 'B':
-      value = colorPickerState.blue;
-      break;
+      value = colorPickerState.blue
+      break
     case 'A':
-      value = ~~(colorPickerState.alpha * 100);
-      break;
+      value = ~~(colorPickerState.alpha * 100)
+      break
     default:
-      break;
+      break
   }
-  return value;
-});
+  return value
+})
 
 const onInput = (event) => {
-  let value = +event.target.value;
+  let value = +event.target.value
   if (value <= 0) {
-    value = 0;
+    value = 0
   } else if (value > 255) {
-    value = 255;
+    value = 255
   } else if (props.label === 'A' && value > 100) {
-    value = 100;
+    value = 100
   }
 
   switch (props.label) {
     case 'R':
-      colorPickerState.red = value;
-      break;
+      colorPickerState.red = value
+      break
     case 'G':
-      colorPickerState.green = value;
-      break;
+      colorPickerState.green = value
+      break
     case 'B':
-      colorPickerState.blue = value;
+      colorPickerState.blue = value
     case 'A':
-      colorPickerState.alpha = value / 100;
-      break;
+      colorPickerState.alpha = value / 100
+      break
     default:
-      break;
+      break
   }
 
   nextTick(() => {
@@ -85,14 +85,14 @@ const onInput = (event) => {
       colorPickerState.red,
       colorPickerState.green,
       colorPickerState.blue,
-    );
-    const _rgb = hexToRgb(_hex);
+    )
+    const _rgb = hexToRgb(_hex)
     if (props.label === 'A') {
       // @ts-ignore
-      _rgb.alpha = updateColor(_rgb);
+      _rgb.alpha = updateColor(_rgb)
     } else {
-      updateColor(_rgb);
+      updateColor(_rgb)
     }
-  });
-};
+  })
+}
 </script>

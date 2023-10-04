@@ -9,6 +9,6 @@ export default function updateGradientActivePercent(
   offsetX: number,
   width: number,
 ): number {
-  const leftPercent = (offsetX * 100) / width;
-  return leftPercent < 0 ? 0 : leftPercent > 100 ? 100 : leftPercent;
+  const leftPercent = (offsetX * 100) / width
+  return leftPercent < 0 ? 0 : leftPercent > 100 ? 100 : leftPercent
 }

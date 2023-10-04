@@ -16,27 +16,27 @@
 </template>
 
 <script name="PreviewHex" lang="ts" setup>
-import CInput from '@c/CInput/index.vue';
-import { rgbToHex, hexToRgb } from '@l/helpers';
-import type { IColor, IColorState } from '@l/types';
+import CInput from '@c/CInput/index.vue'
+import { rgbToHex, hexToRgb } from '@l/helpers'
+import type { IColor, IColorState } from '@l/types'
 
-const colorPickerState = inject('colorPickerState') as IColorState;
-const updateColor = inject('updateColor') as any;
+const colorPickerState = inject('colorPickerState') as IColorState
+const updateColor = inject('updateColor') as any
 const hexValue = computed(() => {
   return rgbToHex(
     colorPickerState.red,
     colorPickerState.green,
     colorPickerState.blue,
-  );
-});
+  )
+})
 
 const changeHex = (event) => {
-  let val = event.target.value;
-  if (!val && val !== 0) return;
-  const color = hexToRgb(val) as IColor;
+  let val = event.target.value
+  if (!val && val !== 0) return
+  const color = hexToRgb(val) as IColor
   if (color) {
     // colorPickerState.color = color;
-    updateColor(color);
+    updateColor(color)
   }
-};
+}
 </script>

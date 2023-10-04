@@ -6,19 +6,19 @@
  * @LastEditors: June
  * @LastEditTime: 2023-04-11 15:33:42
  */
-import { execa } from 'execa';
-import inquirer from 'inquirer';
-import { resolve } from 'path';
+import { execa } from 'execa'
+import inquirer from 'inquirer'
+import { resolve } from 'path'
 
-const CWD = process.cwd();
-const PKG_DEV = resolve(CWD, './lib');
-const PKG_VUE3JS = resolve(CWD, './packages/vue3js');
-const PKG_VUE3TS = resolve(CWD, './packages/vue3ts');
-const PKG_NUXI = resolve(CWD, './packages/nuxi');
+const CWD = process.cwd()
+const PKG_DEV = resolve(CWD, './lib')
+const PKG_VUE3JS = resolve(CWD, './packages/vue3js')
+const PKG_VUE3TS = resolve(CWD, './packages/vue3ts')
+const PKG_NUXI = resolve(CWD, './packages/nuxi')
 
 const run = (bin, args, opts = {}) => {
-  execa(bin, args, { stdio: 'inherit', ...opts });
-};
+  execa(bin, args, { stdio: 'inherit', ...opts })
+}
 
 async function create() {
   const { result } = await inquirer.prompt([
@@ -49,24 +49,24 @@ async function create() {
         },
       ],
     },
-  ]);
+  ])
 
   switch (result) {
     case 'dev':
-      run('pnpm', ['dev'], { cwd: PKG_DEV });
-      break;
+      run('pnpm', ['dev'], { cwd: PKG_DEV })
+      break
     case 'vue3js':
-      run('pnpm', ['dev'], { cwd: PKG_VUE3JS });
-      break;
+      run('pnpm', ['dev'], { cwd: PKG_VUE3JS })
+      break
     case 'vue3ts':
-      run('pnpm', ['dev'], { cwd: PKG_VUE3TS });
-      break;
+      run('pnpm', ['dev'], { cwd: PKG_VUE3TS })
+      break
     case 'nuxi':
-      run('pnpm', ['dev'], { cwd: PKG_NUXI });
-      break;
+      run('pnpm', ['dev'], { cwd: PKG_NUXI })
+      break
     default:
-      break;
+      break
   }
 }
 
-create();
+create()

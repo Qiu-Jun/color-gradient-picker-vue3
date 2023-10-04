@@ -6,7 +6,7 @@
  * @LastEditTime: 2023-09-27 19:20:14
  */
 declare module '*.vue' {
-  import { ComponentOptions } from 'vue';
-  const componentOptions: ComponentOptions;
-  export default componentOptions;
+  import { ComponentOptions } from 'vue'
+  const componentOptions: ComponentOptions
+  export default componentOptions
 }

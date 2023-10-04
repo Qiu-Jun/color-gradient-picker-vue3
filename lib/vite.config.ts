@@ -5,14 +5,14 @@
  * @LastEditors: June
  * @LastEditTime: 2023-10-03 23:25:35
  */
-import type { ConfigEnv, UserConfigExport } from 'vite';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import vue from '@vitejs/plugin-vue';
-import * as path from 'path';
-import VueSetupExtend from 'vite-plugin-vue-setup-extend';
-import AutoImport from 'unplugin-auto-import/vite';
-import UnoCSS from 'unocss/vite';
-import { visualizer } from 'rollup-plugin-visualizer';
+import type { ConfigEnv, UserConfigExport } from 'vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import vue from '@vitejs/plugin-vue'
+import * as path from 'path'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+import AutoImport from 'unplugin-auto-import/vite'
+import UnoCSS from 'unocss/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
@@ -60,5 +60,5 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         },
       },
     },
-  };
-};
+  }
+}

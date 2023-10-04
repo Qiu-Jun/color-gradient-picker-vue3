@@ -42,80 +42,80 @@
 </template>
 
 <script name="GradientControls" lang="ts" setup>
-import { useMouseEvents } from '@l/hooks/index';
-import { calculateDegree } from '@l/helpers/index';
-import type { IColorState } from '@l/types';
+import { useMouseEvents } from '@l/hooks/index'
+import { calculateDegree } from '@l/helpers/index'
+import type { IColorState } from '@l/types'
 
-const colorPickerState = inject('colorPickerState') as IColorState;
-const updateColor = inject('updateColor') as any;
-const type = computed(() => colorPickerState.type);
-const degree = computed(() => colorPickerState.degree);
+const colorPickerState = inject('colorPickerState') as IColorState
+const updateColor = inject('updateColor') as any
+const type = computed(() => colorPickerState.type)
+const degree = computed(() => colorPickerState.degree)
 
 // 改变类型
 const handleType = (type: string) => {
-  updateColor({ type }, 'type');
-};
+  updateColor({ type }, 'type')
+}
 
-const disableClick = ref<boolean>(true);
+const disableClick = ref<boolean>(true)
 const onClickGradientDegree = () => {
   if (disableClick.value) {
-    disableClick.value = false;
-    return;
+    disableClick.value = false
+    return
   }
 
-  let gradientDegree = (colorPickerState.degree || 0) + 45;
+  let gradientDegree = (colorPickerState.degree || 0) + 45
 
   if (gradientDegree >= 360) {
-    gradientDegree = 0;
+    gradientDegree = 0
   }
 
-  updateColor({ degree: ~~gradientDegree }, 'degree');
-};
+  updateColor({ degree: ~~gradientDegree }, 'degree')
+}
 
 const degreesStyle = computed(() => {
-  return { transform: `rotate(${colorPickerState.degree}deg)` };
-});
+  return { transform: `rotate(${colorPickerState.degree}deg)` }
+})
 
 const mouseDownHandler = (event) => {
-  const pointer = event.target;
-  const pointerBox = pointer.getBoundingClientRect();
-  const centerY = ~~(8 - window.pageYOffset) + pointerBox.top;
-  const centerX = ~~(8 - window.pageXOffset) + pointerBox.left;
+  const pointer = event.target
+  const pointerBox = pointer.getBoundingClientRect()
+  const centerY = ~~(8 - window.pageYOffset) + pointerBox.top
+  const centerX = ~~(8 - window.pageXOffset) + pointerBox.left
 
   return {
     centerY,
     centerX,
-  };
-};
+  }
+}
 const mouseMoveHandler = (event, { centerX, centerY }) => {
-  disableClick.value = true;
+  disableClick.value = true
 
   const newDegree = calculateDegree(
     event.clientX,
     event.clientY,
     centerX,
     centerY,
-  );
+  )
 
-  updateColor({ degree: ~~newDegree }, 'degree');
-};
+  updateColor({ degree: ~~newDegree }, 'degree')
+}
 
 const mouseUpHandler = (event) => {
-  const targetClasses = event.target.classList;
-  disableClick.value = false;
+  const targetClasses = event.target.classList
+  disableClick.value = false
   if (
     targetClasses.contains('gradient-degrees') ||
     targetClasses.contains('icon-rotate')
   ) {
-    return;
+    return
   }
-};
+}
 
 const mouseEvents = useMouseEvents(
   mouseDownHandler,
   mouseMoveHandler,
   mouseUpHandler,
-);
+)
 </script>
 
 <style lang="scss" scoped>

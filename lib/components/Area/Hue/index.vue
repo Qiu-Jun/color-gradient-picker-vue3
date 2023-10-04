@@ -17,32 +17,32 @@
 </template>
 
 <script name="AreaHue" lang="ts" setup>
-import { useMouseEvents } from '@l/hooks';
-import { getHue } from '@l/helpers';
-import type { IColorState } from '@l/types';
+import { useMouseEvents } from '@l/hooks'
+import { getHue } from '@l/helpers'
+import type { IColorState } from '@l/types'
 
-const hueRef = ref<HTMLElement | null>(null);
-const hueBoxInfo = ref<DOMRect | null>(null);
-const colorPickerState = inject('colorPickerState') as IColorState;
-const updateColor = inject('updateColor') as any;
+const hueRef = ref<HTMLElement | null>(null)
+const hueBoxInfo = ref<DOMRect | null>(null)
+const colorPickerState = inject('colorPickerState') as IColorState
+const updateColor = inject('updateColor') as any
 const offsetLeft = computed(() => {
-  const width = hueBoxInfo.value?.width || 0;
-  const hue = colorPickerState.hue || 0;
-  return ((hue * (width - 14)) / 360) | 0;
-});
+  const width = hueBoxInfo.value?.width || 0
+  const hue = colorPickerState.hue || 0
+  return ((hue * (width - 14)) / 360) | 0
+})
 
 const pointerStyle = computed(() => {
   return {
     left: `${offsetLeft.value}px`,
-  };
-});
+  }
+})
 
 const mouseDownHandler = (event) => {
   // event.currentTarget.getBoundingClientRect().x
-  const elementX = hueBoxInfo.value?.x || 0;
-  const startX = event.pageX;
-  const width = hueBoxInfo.value?.width || 0;
-  const positionX = startX - elementX;
+  const elementX = hueBoxInfo.value?.x || 0
+  const startX = event.pageX
+  const width = hueBoxInfo.value?.width || 0
+  const positionX = startX - elementX
 
   const color = getHue(
     positionX,
@@ -50,29 +50,29 @@ const mouseDownHandler = (event) => {
     colorPickerState.saturation!,
     colorPickerState.value!,
     colorPickerState.alpha,
-  );
-  updateColor(color);
+  )
+  updateColor(color)
 
   return {
     startX,
     positionX,
-  };
-};
+  }
+}
 
 const changeObjectPositions = (event, { startX, positionX }) => {
-  const moveX = event.pageX - startX;
-  const width = hueBoxInfo.value?.width || 0;
-  positionX += moveX;
+  const moveX = event.pageX - startX
+  const width = hueBoxInfo.value?.width || 0
+  positionX += moveX
 
   // update value and saturation
-  const offsetX = positionX > width ? width : positionX <= 0 ? 0 : positionX;
+  const offsetX = positionX > width ? width : positionX <= 0 ? 0 : positionX
   const color = getHue(
     offsetX,
     width,
     colorPickerState.saturation!,
     colorPickerState.value!,
     colorPickerState.alpha,
-  );
+  )
 
   return {
     positions: {
@@ -80,42 +80,42 @@ const changeObjectPositions = (event, { startX, positionX }) => {
       startX: event.pageX,
     },
     color,
-  };
-};
+  }
+}
 
 const mouseMoveHandler = (event, { startX, positionX }) => {
   const { positions, color } = changeObjectPositions(event, {
     startX,
     positionX,
-  });
+  })
 
-  updateColor(color);
+  updateColor(color)
 
-  return positions;
-};
+  return positions
+}
 
 const mouseUpHandler = (event, { startX, positionX }) => {
   const { positions, color } = changeObjectPositions(event, {
     startX,
     positionX,
-  });
+  })
 
-  updateColor(color);
+  updateColor(color)
 
-  return positions;
-};
+  return positions
+}
 
 const mouseEvents = useMouseEvents(
   mouseDownHandler,
   mouseMoveHandler,
   mouseUpHandler,
-);
+)
 
 watchEffect(() => {
   if (hueRef.value && !hueBoxInfo.value?.width) {
-    hueBoxInfo.value = hueRef.value?.getBoundingClientRect() || null;
+    hueBoxInfo.value = hueRef.value?.getBoundingClientRect() || null
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>

@@ -25,29 +25,29 @@
 </template>
 
 <script name="AreaGradientPoints" lang="ts" setup>
-import GradientPoint from './GradientPoint/index.vue';
+import GradientPoint from './GradientPoint/index.vue'
 import {
   generateGradientStyle,
   updateGradientActivePercent,
-} from '@l/helpers/index';
-import { v4 as uuidv4 } from 'uuid';
-import type { IColorState, IPoitItem } from '@l/types';
-import { cloneDeep } from 'lodash-es';
+} from '@l/helpers/index'
+import { v4 as uuidv4 } from 'uuid'
+import type { IColorState, IPoitItem } from '@l/types'
+import { cloneDeep } from 'lodash-es'
 
-const colorPickerState = inject('colorPickerState') as IColorState;
-const updateColor = inject('updateColor') as any;
-const pointsContainerRef = ref<HTMLElement | null>(null);
-const pointsContainerBoxInfo = ref<DOMRect | null>(null);
+const colorPickerState = inject('colorPickerState') as IColorState
+const updateColor = inject('updateColor') as any
+const pointsContainerRef = ref<HTMLElement | null>(null)
+const pointsContainerBoxInfo = ref<DOMRect | null>(null)
 const pointsStyle = computed(() => {
-  const style = generateGradientStyle(colorPickerState.points!, 'linear', 90);
-  return { background: style };
-});
+  const style = generateGradientStyle(colorPickerState.points!, 'linear', 90)
+  return { background: style }
+})
 
 const handleAddPoit = (event) => {
-  const { x = 0, width = 0 } = pointsContainerBoxInfo.value || {};
-  const left = updateGradientActivePercent(event.pageX - x, width);
-  const { red, green, blue, alpha } = colorPickerState;
-  const points = cloneDeep(colorPickerState.points);
+  const { x = 0, width = 0 } = pointsContainerBoxInfo.value || {}
+  const left = updateGradientActivePercent(event.pageX - x, width)
+  const { red, green, blue, alpha } = colorPickerState
+  const points = cloneDeep(colorPickerState.points)
   const newPoint = {
     id: uuidv4(),
     red,
@@ -55,23 +55,23 @@ const handleAddPoit = (event) => {
     blue,
     alpha,
     left,
-  };
-  points?.push(newPoint);
+  }
+  points?.push(newPoint)
   colorPickerState.activePointIndex = points!.findIndex(
     (i: IPoitItem) => i.id === newPoint.id,
-  );
+  )
   updateColor(
     {
       points,
     },
     'points',
-  );
-};
+  )
+}
 
 watchEffect(() => {
   if (pointsContainerRef.value && !pointsContainerBoxInfo.value?.width) {
     pointsContainerBoxInfo.value =
-      pointsContainerRef.value?.getBoundingClientRect() || null;
+      pointsContainerRef.value?.getBoundingClientRect() || null
   }
-});
+})
 </script>

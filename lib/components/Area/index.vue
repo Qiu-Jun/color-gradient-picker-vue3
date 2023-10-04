@@ -24,14 +24,14 @@
 </template>
 
 <script name="Area" lang="ts" setup>
-import Picker from './Picker/index.vue';
-import Preview from './Preview/index.vue';
-import Hue from './Hue/index.vue';
-import Alpha from './Alpha/index.vue';
-import GradientPoints from './GradientPoints/index.vue';
-import type { IColorState } from '@l/types';
+import Picker from './Picker/index.vue'
+import Preview from './Preview/index.vue'
+import Hue from './Hue/index.vue'
+import Alpha from './Alpha/index.vue'
+import GradientPoints from './GradientPoints/index.vue'
+import type { IColorState } from '@l/types'
 
-const colorPickerState = inject('colorPickerState') as IColorState;
+const colorPickerState = inject('colorPickerState') as IColorState
 </script>
 
 <style></style>

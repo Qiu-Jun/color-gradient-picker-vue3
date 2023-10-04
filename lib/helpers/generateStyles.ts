@@ -6,9 +6,9 @@
  * @LastEditors: June
  * @LastEditTime: 2023-10-03 15:11:00
  */
-import type { IPoitItem } from '@l/types';
+import type { IPoitItem } from '@l/types'
 export function generateSolidStyle(red, green, blue, alpha): string {
-  return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+  return `rgba(${red}, ${green}, ${blue}, ${alpha})`
 }
 
 export function generateGradientStyle(
@@ -16,25 +16,25 @@ export function generateGradientStyle(
   type: string,
   degree: number,
 ): string {
-  let style = '';
-  const sortedPoints = points.slice();
+  let style = ''
+  const sortedPoints = points.slice()
 
-  sortedPoints.sort((a, b) => a.left - b.left);
+  sortedPoints.sort((a, b) => a.left - b.left)
   if (type === 'linear') {
-    style = `linear-gradient(${degree}deg,`;
+    style = `linear-gradient(${degree}deg,`
   } else {
-    style = 'radial-gradient(';
+    style = 'radial-gradient('
   }
 
   sortedPoints.forEach((point, index) => {
-    style += `rgba(${point.red}, ${point.green}, ${point.blue}, ${point.alpha}) ${point.left}%`;
+    style += `rgba(${point.red}, ${point.green}, ${point.blue}, ${point.alpha}) ${point.left}%`
 
     if (index !== sortedPoints.length - 1) {
-      style += ',';
+      style += ','
     }
-  });
+  })
 
-  style += ')';
+  style += ')'
 
-  return style;
+  return style
 }

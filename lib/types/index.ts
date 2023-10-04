@@ -8,47 +8,47 @@
  */
 
 export interface IPoitItem {
-  id: string;
-  red: number;
-  green: number;
-  blue: number;
-  alpha: number;
-  left: number;
+  id: string
+  red: number
+  green: number
+  blue: number
+  alpha: number
+  left: number
 }
 
 export interface IColor {
-  red: number;
-  green: number;
-  blue: number;
-  alpha: number;
-  hue?: number;
-  saturation?: number;
-  value?: number;
-  points?: IPoitItem[];
-  type?: string;
-  degree?: number;
+  red: number
+  green: number
+  blue: number
+  alpha: number
+  hue?: number
+  saturation?: number
+  value?: number
+  points?: IPoitItem[]
+  type?: string
+  degree?: number
 }
 
 export interface IGradient {
-  type: string;
-  degree: number;
-  points: IPoitItem[];
+  type: string
+  degree: number
+  points: IPoitItem[]
 }
 
 export interface IColorState extends IColor {
-  isGradient: boolean;
-  type?: string;
-  degree?: number;
-  points?: IPoitItem[];
-  activePointIndex?: number;
-  activePoint?: IPoitItem;
-  style?: string;
-  color?: IColor;
-  gradient?: IGradient;
+  isGradient: boolean
+  type?: string
+  degree?: number
+  points?: IPoitItem[]
+  activePointIndex?: number
+  activePoint?: IPoitItem
+  style?: string
+  color?: IColor
+  gradient?: IGradient
 }
 
 export interface IColorRes {
-  style: string;
-  color?: IColor;
-  gradient?: IGradient;
+  style: string
+  color?: IColor
+  gradient?: IGradient
 }

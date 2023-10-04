@@ -15,27 +15,27 @@
 </template>
 
 <script name="AreaPreview" lang="ts" setup>
-import { generateSolidStyle, generateGradientStyle } from '@l/helpers/index';
-import type { IColorState } from '@l/types';
+import { generateSolidStyle, generateGradientStyle } from '@l/helpers/index'
+import type { IColorState } from '@l/types'
 
-const colorPickerState = inject('colorPickerState') as IColorState;
+const colorPickerState = inject('colorPickerState') as IColorState
 const style = computed(() => {
-  let _style = '';
+  let _style = ''
   if (colorPickerState.isGradient) {
     _style = generateGradientStyle(
       colorPickerState.points!,
       colorPickerState.type!,
       colorPickerState.degree!,
-    );
+    )
   } else {
     _style = generateSolidStyle(
       colorPickerState.red,
       colorPickerState.green,
       colorPickerState.blue,
       colorPickerState.alpha,
-    );
+    )
   }
 
-  return { background: _style };
-});
+  return { background: _style }
+})
 </script>

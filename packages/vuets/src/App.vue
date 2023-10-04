@@ -22,18 +22,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import ColorPicker from 'color-gradient-picker-vue3';
-import 'color-gradient-picker-vue3/dist/style.css';
+import { ref } from 'vue'
+import ColorPicker from 'color-gradient-picker-vue3'
+import 'color-gradient-picker-vue3/dist/style.css'
 
 const color = ref({
   red: 255,
   green: 0,
   blue: 0,
   alpha: 1,
-});
+})
 
 const onChange = (color) => {
-  console.log(color);
-};
+  console.log(color)
+}
 </script>

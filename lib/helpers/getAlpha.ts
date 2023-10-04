@@ -7,8 +7,8 @@
  * @LastEditTime: 2023-10-02 12:33:30
  */
 export default function getAlpha(value: number, width: number) {
-  value = Number((value / width).toFixed(2));
-  return value > 1 ? 1 : value < 0 ? 0 : value;
+  value = Number((value / width).toFixed(2))
+  return value > 1 ? 1 : value < 0 ? 0 : value
   // return {
   //   red: 0,
   //   green: 0,

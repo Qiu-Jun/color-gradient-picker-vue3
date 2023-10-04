@@ -13,5 +13,5 @@
 </template>
 
 <script name="PreviewRGB" lang="ts" setup>
-import RGBAItem from './RGBAItem/index.vue';
+import RGBAItem from './RGBAItem/index.vue'
 </script>

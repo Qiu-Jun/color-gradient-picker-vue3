@@ -1,3 +1,10 @@
+/*
+ * @Author: June
+ * @Description:
+ * @Date: 2023-07-09 23:15:46
+ * @LastEditors: June
+ * @LastEditTime: 2023-10-04 10:49:56
+ */
 module.exports = {
   // 一行最多 80 字符
   printWidth: 80,
@@ -6,7 +13,7 @@ module.exports = {
   // 不使用 tab 缩进，而使用空格
   useTabs: false,
   // 行尾需要有分号
-  semi: true,
+  semi: false,
   // 使用单引号代替双引号
   singleQuote: true,
   // 对象的 key 仅在必要时用引号
@@ -34,4 +41,4 @@ module.exports = {
   htmlWhitespaceSensitivity: 'css',
   // 换行符使用 lf
   endOfLine: 'auto',
-};
+}

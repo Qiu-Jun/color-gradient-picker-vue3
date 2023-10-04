@@ -27,11 +27,11 @@
 
 <script lang="ts" setup name="Input">
 interface Iprops {
-  value: string | number;
-  label: string;
-  classes: string;
-  maxLen?: string | number;
-  type?: string;
+  value: string | number
+  label: string
+  classes: string
+  maxLen?: string | number
+  type?: string
 }
 
 const props = withDefaults(defineProps<Iprops>(), {
@@ -40,29 +40,29 @@ const props = withDefaults(defineProps<Iprops>(), {
   maxLen: '3',
   type: 'text',
   classes: '',
-});
+})
 
-const emits = defineEmits(['input', 'blur', 'focus', 'update:value']);
+const emits = defineEmits(['input', 'blur', 'focus', 'update:value'])
 
 const value = computed<string | number>({
   get: () => props.value,
   set: (val) => {
-    emits('update:value', val);
+    emits('update:value', val)
   },
-});
+})
 
 // input
 const onInput = (e: InputEvent) => {
-  emits('input', e);
-};
+  emits('input', e)
+}
 // blur
 const onBlur = () => {
-  emits('blur');
-};
+  emits('blur')
+}
 // focus
 const onFocus = () => {
-  emits('focus');
-};
+  emits('focus')
+}
 </script>
 
 <style lang="scss" scoped>

@@ -12,6 +12,6 @@
 </template>
 
 <script name="Solid" lang="ts" setup>
-import Area from '@c/Area/index.vue';
-import Preview from '@c/Preview/index.vue';
+import Area from '@c/Area/index.vue'
+import Preview from '@c/Preview/index.vue'
 </script>

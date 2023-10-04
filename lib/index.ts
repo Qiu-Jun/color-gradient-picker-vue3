@@ -6,7 +6,7 @@
  * @LastEditors: June
  * @LastEditTime: 2023-10-03 23:50:49
  */
-import ColorPicker from './components/ColorPicker/index.vue';
-import './index.scss';
-import 'virtual:uno.css';
-export default ColorPicker;
+import ColorPicker from './components/ColorPicker/index.vue'
+import './index.scss'
+import 'virtual:uno.css'
+export default ColorPicker

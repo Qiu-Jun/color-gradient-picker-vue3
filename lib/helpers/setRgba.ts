@@ -12,7 +12,7 @@ function isValidRGBValue(value: number): boolean {
     Number.isNaN(value) === false &&
     value >= 0 &&
     value <= 255
-  );
+  )
 }
 
 export default function setRGBA(
@@ -23,23 +23,23 @@ export default function setRGBA(
 ) {
   if (isValidRGBValue(red) && isValidRGBValue(green) && isValidRGBValue(blue)) {
     const color: {
-      red: number;
-      green: number;
-      blue: number;
-      alpha: number;
+      red: number
+      green: number
+      blue: number
+      alpha: number
     } = {
       red: red | 0,
       green: green | 0,
       blue: blue | 0,
       alpha: alpha | 0,
-    };
+    }
 
     if (isValidRGBValue(alpha) === true) {
-      color.alpha = alpha | 0;
+      color.alpha = alpha | 0
     }
 
     // RGBToHSL(color.r, color.g, color.b);
 
-    return color;
+    return color
   }
 }

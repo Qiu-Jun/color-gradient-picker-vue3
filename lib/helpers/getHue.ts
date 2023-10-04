@@ -6,7 +6,7 @@
  * @LastEditors: June
  * @LastEditTime: 2023-10-02 14:15:23
  */
-import { hsvToRgb } from './index';
+import { hsvToRgb } from './index'
 
 export default function getHue(
   offsetX: number,
@@ -15,13 +15,13 @@ export default function getHue(
   value: number,
   alpha: number,
 ) {
-  let hue = ((360 * offsetX) / width) | 0;
+  let hue = ((360 * offsetX) / width) | 0
 
-  hue = hue < 0 ? 0 : hue > 360 ? 360 : hue;
+  hue = hue < 0 ? 0 : hue > 360 ? 360 : hue
 
   return {
     ...hsvToRgb(hue, saturation, value, alpha),
     saturation,
     hue,
-  };
+  }
 }

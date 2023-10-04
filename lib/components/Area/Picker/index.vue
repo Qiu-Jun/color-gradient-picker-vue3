@@ -21,47 +21,47 @@
 </template>
 
 <script name="AreaPicker" lang="ts" setup>
-import { changePicker, getRgbByHue } from '@l/helpers/index';
-import { useMouseEvents } from '@l/hooks';
-import type { IColorState } from '@l/types';
+import { changePicker, getRgbByHue } from '@l/helpers/index'
+import { useMouseEvents } from '@l/hooks'
+import type { IColorState } from '@l/types'
 
-const pickerAreaRef = ref<HTMLElement | null>(null);
-const pickerBoxInfo = ref<DOMRect | null>(null);
-const colorPickerState = inject('colorPickerState') as IColorState;
-const updateColor = inject('updateColor') as any;
+const pickerAreaRef = ref<HTMLElement | null>(null)
+const pickerBoxInfo = ref<DOMRect | null>(null)
+const colorPickerState = inject('colorPickerState') as IColorState
+const updateColor = inject('updateColor') as any
 
 const pointerStyle = computed(() => {
-  const { width = 0, height = 0 } = pickerBoxInfo.value || {};
-  const saturation = colorPickerState.saturation || 0;
-  const value = colorPickerState.value || 0;
-  const offsetLeft = (((saturation * width) / 100) | 0) - 6;
-  const offsetTop = ((height - (value * height) / 100) | 0) - 6;
+  const { width = 0, height = 0 } = pickerBoxInfo.value || {}
+  const saturation = colorPickerState.saturation || 0
+  const value = colorPickerState.value || 0
+  const offsetLeft = (((saturation * width) / 100) | 0) - 6
+  const offsetTop = ((height - (value * height) / 100) | 0) - 6
   return {
     backgroundColor: `rgb(${colorPickerState.red}, ${colorPickerState.green}, ${colorPickerState.blue})`,
     left: `${offsetLeft}px`,
     top: `${offsetTop}px`,
-  };
-});
+  }
+})
 
 const pickerStyle = computed(() => {
   const {
     red = 255,
     green = 0,
     blue = 0,
-  } = getRgbByHue(colorPickerState.hue) || {};
+  } = getRgbByHue(colorPickerState.hue) || {}
   return {
     backgroundColor: `rgb(${red}, ${green}, ${blue})`,
-  };
-});
+  }
+})
 
 const mouseDownHandler = (event) => {
-  if (!pickerBoxInfo.value) return;
-  const { x: elementX, y: elementY } = pickerBoxInfo.value;
-  const { width = 0, height = 0 } = pickerBoxInfo.value || {};
-  const startX = event.pageX;
-  const startY = event.pageY;
-  const positionX = startX - elementX;
-  const positionY = startY - elementY;
+  if (!pickerBoxInfo.value) return
+  const { x: elementX, y: elementY } = pickerBoxInfo.value
+  const { width = 0, height = 0 } = pickerBoxInfo.value || {}
+  const startX = event.pageX
+  const startY = event.pageY
+  const positionX = startX - elementX
+  const positionY = startY - elementY
   const color = changePicker(
     positionX,
     positionY,
@@ -69,24 +69,24 @@ const mouseDownHandler = (event) => {
     width,
     colorPickerState.hue!,
     colorPickerState.alpha!,
-  );
-  updateColor(color);
+  )
+  updateColor(color)
   return {
     startX,
     startY,
     positionX,
     positionY,
-  };
-};
+  }
+}
 const changeObjectPositions = (
   event,
   { startX, startY, positionX, positionY },
 ) => {
-  const moveX = event.pageX - startX;
-  const moveY = event.pageY - startY;
-  const { width = 0, height = 0 } = pickerBoxInfo.value || {};
-  positionX += moveX;
-  positionY += moveY;
+  const moveX = event.pageX - startX
+  const moveY = event.pageY - startY
+  const { width = 0, height = 0 } = pickerBoxInfo.value || {}
+  positionX += moveX
+  positionY += moveY
   const color = changePicker(
     positionX,
     positionY,
@@ -94,7 +94,7 @@ const changeObjectPositions = (
     width,
     colorPickerState.hue!,
     colorPickerState.alpha,
-  );
+  )
   return {
     positions: {
       positionX,
@@ -103,8 +103,8 @@ const changeObjectPositions = (
       startY: event.pageY,
     },
     color,
-  };
-};
+  }
+}
 
 const mouseMoveHandler = (event, { startX, startY, positionX, positionY }) => {
   const { positions, color } = changeObjectPositions(event, {
@@ -112,10 +112,10 @@ const mouseMoveHandler = (event, { startX, startY, positionX, positionY }) => {
     startY,
     positionX,
     positionY,
-  });
-  updateColor(color);
-  return positions;
-};
+  })
+  updateColor(color)
+  return positions
+}
 
 const mouseUpHandler = (event, { startX, startY, positionX, positionY }) => {
   const { positions, color } = changeObjectPositions(event, {
@@ -123,23 +123,23 @@ const mouseUpHandler = (event, { startX, startY, positionX, positionY }) => {
     startY,
     positionX,
     positionY,
-  });
-  updateColor(color);
-  return positions;
-};
+  })
+  updateColor(color)
+  return positions
+}
 
 const mouseEvents = useMouseEvents(
   mouseDownHandler,
   mouseMoveHandler,
   mouseUpHandler,
-);
+)
 
 watchEffect(() => {
-  const pickerAreaEl = pickerAreaRef.value;
+  const pickerAreaEl = pickerAreaRef.value
   if (pickerAreaEl && !pickerBoxInfo.value?.width) {
-    pickerBoxInfo.value = pickerAreaEl.getBoundingClientRect() || null;
+    pickerBoxInfo.value = pickerAreaEl.getBoundingClientRect() || null
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>

@@ -18,19 +18,19 @@
 </template>
 
 <script lang="ts" setup>
-import ColorPicker from '../components/ColorPicker/index.vue';
-import '../index.scss';
+import ColorPicker from '../components/ColorPicker/index.vue'
+import '../index.scss'
 const color = {
   red: 255,
   green: 0,
   blue: 0,
   alpha: 1,
-};
+}
 
-const testStyle = ref('');
+const testStyle = ref('')
 
 const onChange = (e) => {
-  testStyle.value = `background: ${e.style}`;
-  console.log(e);
-};
+  testStyle.value = `background: ${e.style}`
+  console.log(e)
+}
 </script>

@@ -11,6 +11,6 @@ export default function calculateDegree(
   centerX: number,
   centerY: number,
 ): number {
-  const radians = Math.atan2(x - centerX, y - centerY);
-  return radians * (180 / Math.PI) * -1 + 180;
+  const radians = Math.atan2(x - centerX, y - centerY)
+  return radians * (180 / Math.PI) * -1 + 180
 }

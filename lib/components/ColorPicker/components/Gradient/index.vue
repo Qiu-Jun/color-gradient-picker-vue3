@@ -14,7 +14,7 @@
 </template>
 
 <script name="Gradient" lang="ts" setup>
-import Area from '@c/Area/index.vue';
-import Preview from '@c/Preview/index.vue';
-import GradientControls from '@c/GradientControls/index.vue';
+import Area from '@c/Area/index.vue'
+import Preview from '@c/Preview/index.vue'
+import GradientControls from '@c/GradientControls/index.vue'
 </script>
