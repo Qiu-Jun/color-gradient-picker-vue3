@@ -10,6 +10,7 @@
 ## color-gradient-picker-vue3
 
 Color and gradient picker for vue3.js. [If you use vue2， plese use color-gradient-picker](https://github.com/arthay/vue-color-gradient-picker).color-gradient-picker-vue3 is an upgraded version of `color-gradient-picker`
+
 #### Usage
 
 ```bash
