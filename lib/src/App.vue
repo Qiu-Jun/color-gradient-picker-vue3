@@ -4,11 +4,11 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 11:24:19
+ * @LastEditTime: 2023-10-04 12:24:19
 -->
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
-    <div style="padding: 100px">
+    <div>
       <ColorPicker :color="color" show-btn @change="onChange" />
     </div>
     <div>

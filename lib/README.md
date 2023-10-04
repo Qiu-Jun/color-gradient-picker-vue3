@@ -4,12 +4,14 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 11:30:40
+ * @LastEditTime: 2023-10-04 12:29:50
 -->
 
 ## color-gradient-picker-vue3
 
 Color and gradient picker for vue3.js. [If you use vue2， plese use color-gradient-picker](https://github.com/arthay/vue-color-gradient-picker).color-gradient-picker-vue3 is an upgraded version of `color-gradient-picker`
+
+<img src="./imgs/introduct.png" width="30%" />
 
 #### Usage
 
@@ -23,7 +25,7 @@ yarn add color-gradient-picker-vue3
 |              | introduct                                      | Default                                                                                                                                                          |
 | ------------ | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | isGradient   | isGradient(是否渐变)                           | false                                                                                                                                                            |
-| showBtn   | show footer buttons(是否显示地步的确认按钮)                           | false                                                                                                                                                            |
+| showBtn      | show footer buttons(是否显示地步的确认按钮)    | false                                                                                                                                                            |
 | color        | solid color(纯色 color)                        | `{ red: 255, green: 0, blue: 0, alpha: 1 }`                                                                                                                      |
 | gradient     | gradient color(渐变颜色)                       | `'{"type":"linear","degree":0,"points":[{"id":0,"left":0,"red":0,"green":0,"blue":0,"alpha":1},{"id":1,"left":100,"red":255,"green":0,"blue":0,"alpha":1}]}'` ｜ |
 | cancelText   | cancel button text(取消文本)                   | 'cancel'                                                                                                                                                         |
@@ -34,9 +36,9 @@ yarn add color-gradient-picker-vue3
 | confirmBg    | confirm button background color (确认背景颜色) | '#fff'                                                                                                                                                           |
 | change       | Event                                          |                                                                                                                                                                  |
 
-
 #### waring
-+ If don't show footer confirm button, it will emits frequently.You'd better use `debounce or throttle` to optimize `@change Event`
+
+- If don't show footer confirm button, it will emits frequently.You'd better use `debounce or throttle` to optimize `@change Event`
 
 #### Example
 
