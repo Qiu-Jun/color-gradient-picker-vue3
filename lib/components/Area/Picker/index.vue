@@ -3,7 +3,7 @@
  * @Description: Area Picker
  * @Date: 2023-09-27 19:28:05
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 00:15:53
+ * @LastEditTime: 2023-10-06 02:13:19
 -->
 <template>
   <div
@@ -32,12 +32,22 @@ const updateColor = inject('updateColor') as any
 
 const pointerStyle = computed(() => {
   const { width = 0, height = 0 } = pickerBoxInfo.value || {}
-  const saturation = colorPickerState.saturation || 0
-  const value = colorPickerState.value || 0
+  const {
+    saturation = 100,
+    value = 100,
+    isGradient,
+    activePointIndex,
+  } = colorPickerState
+
   const offsetLeft = (((saturation * width) / 100) | 0) - 6
   const offsetTop = ((height - (value * height) / 100) | 0) - 6
+  const points = colorPickerState.points!
+  const activePoint = points[activePointIndex || 0]
+  const red = isGradient ? activePoint?.red : colorPickerState.red
+  const green = isGradient ? activePoint?.green : colorPickerState.green
+  const blue = isGradient ? activePoint?.blue : colorPickerState.blue
   return {
-    backgroundColor: `rgb(${colorPickerState.red}, ${colorPickerState.green}, ${colorPickerState.blue})`,
+    backgroundColor: `rgb(${red}, ${green}, ${blue})`,
     left: `${offsetLeft}px`,
     top: `${offsetTop}px`,
   }
@@ -45,12 +55,22 @@ const pointerStyle = computed(() => {
 
 const pickerStyle = computed(() => {
   const {
-    red = 255,
-    green = 0,
-    blue = 0,
-  } = getRgbByHue(colorPickerState.hue) || {}
-  return {
-    backgroundColor: `rgb(${red}, ${green}, ${blue})`,
+    isGradient,
+    red,
+    green,
+    blue,
+    activePointIndex = 0,
+    points = [],
+  } = colorPickerState
+  if (isGradient) {
+    const activePoint = points[activePointIndex]
+    return {
+      backgroundColor: `rgb(${activePoint.red}, ${activePoint.green}, ${activePoint.blue})`,
+    }
+  } else {
+    return {
+      backgroundColor: `rgb(${red}, ${green}, ${blue})`,
+    }
   }
 })
 

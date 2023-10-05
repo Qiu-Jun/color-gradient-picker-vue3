@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 23:03:04
+ * @LastEditTime: 2023-10-05 22:18:49
  */
 
 export interface IPoitItem {
@@ -41,7 +41,6 @@ export interface IColorState extends IColor {
   degree?: number
   points?: IPoitItem[]
   activePointIndex?: number
-  activePoint?: IPoitItem
   style?: string
   color?: IColor
   gradient?: IGradient

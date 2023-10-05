@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 21:58:47
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 00:15:44
+ * @LastEditTime: 2023-10-06 02:19:20
 -->
 <template>
   <div>
@@ -19,7 +19,6 @@
 
 <script name="PreviewRGBItem" lang="ts" setup>
 import CInput from '@c/CInput/index.vue'
-import { hexToRgb, rgbToHex } from '@l/helpers/index'
 import type { IColorState } from '@l/types'
 
 interface Iprops {
@@ -34,19 +33,29 @@ const props = withDefaults(defineProps<Iprops>(), {
 })
 
 const RGBValue = computed(() => {
+  const {
+    isGradient,
+    red,
+    green,
+    blue,
+    alpha,
+    points = [],
+    activePointIndex = 0,
+  } = colorPickerState
+  const activePoint = points[activePointIndex]
   let value: number | undefined = 0
   switch (props.label) {
     case 'R':
-      value = colorPickerState.red
+      value = isGradient ? activePoint.red! : red
       break
     case 'G':
-      value = colorPickerState.green
+      value = isGradient ? activePoint.green : green
       break
     case 'B':
-      value = colorPickerState.blue
+      value = isGradient ? activePoint.blue : blue
       break
     case 'A':
-      value = ~~(colorPickerState.alpha * 100)
+      value = ~~((isGradient ? activePoint.alpha : alpha) * 100)
       break
     default:
       break
@@ -56,43 +65,32 @@ const RGBValue = computed(() => {
 
 const onInput = (event) => {
   let value = +event.target.value
-  if (value <= 0) {
+  const { isGradient, points = [], activePointIndex = 0 } = colorPickerState
+  // @ts-ignore
+  const activePoint = points[activePointIndex]
+
+  if (props.label === 'A' && value > 100) {
+    value = 100
+  } else if (value <= 0) {
     value = 0
   } else if (value > 255) {
     value = 255
-  } else if (props.label === 'A' && value > 100) {
-    value = 100
   }
-
   switch (props.label) {
     case 'R':
-      colorPickerState.red = value
+      updateColor({ red: value }, 'red')
       break
     case 'G':
-      colorPickerState.green = value
+      updateColor({ green: value }, 'green')
       break
     case 'B':
-      colorPickerState.blue = value
+      updateColor({ blue: value }, 'blue')
+      break
     case 'A':
-      colorPickerState.alpha = value / 100
+      updateColor({ alpha: value / 100 }, 'alpha')
       break
     default:
       break
   }
-
-  nextTick(() => {
-    const _hex = rgbToHex(
-      colorPickerState.red,
-      colorPickerState.green,
-      colorPickerState.blue,
-    )
-    const _rgb = hexToRgb(_hex)
-    if (props.label === 'A') {
-      // @ts-ignore
-      _rgb.alpha = updateColor(_rgb)
-    } else {
-      updateColor(_rgb)
-    }
-  })
 }
 </script>

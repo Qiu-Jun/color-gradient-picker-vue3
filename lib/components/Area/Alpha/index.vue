@@ -3,7 +3,7 @@
  * @Description: Area Alapha
  * @Date: 2023-09-27 19:22:18
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 23:45:34
+ * @LastEditTime: 2023-10-05 23:44:10
 -->
 <template>
   <div
@@ -30,12 +30,38 @@ const alphaMaskRef = ref<HTMLElement | null>(null)
 const alphaMaskBoxInfo = ref<DOMRect | null>(null)
 
 const offsetLeft = computed(() => {
+  const {
+    isGradient,
+    alpha,
+    activePointIndex = 0,
+    points = [],
+  } = colorPickerState
   const width = alphaMaskBoxInfo.value?.width || 0
-  return (colorPickerState.alpha * (width - 14)) | 0
+  if (isGradient) {
+    const activePoint = points[activePointIndex]
+    return (activePoint.alpha * (width - 14)) | 0
+  } else {
+    return (alpha * (width - 14)) | 0
+  }
 })
 const style = computed(() => {
-  return {
-    background: `linear-gradient(to right, rgba(0, 0, 0, 0), rgb(${colorPickerState.red}, ${colorPickerState.green}, ${colorPickerState.blue}))`,
+  const {
+    isGradient,
+    red,
+    green,
+    blue,
+    activePointIndex = 0,
+    points = [],
+  } = colorPickerState
+  if (isGradient) {
+    const activePoint = points[activePointIndex]
+    return {
+      background: `linear-gradient(to right, rgba(0, 0, 0, 0), rgb(${activePoint.red}, ${activePoint.green}, ${activePoint.blue}))`,
+    }
+  } else {
+    return {
+      background: `linear-gradient(to right, rgba(0, 0, 0, 0), rgb(${red}, ${green}, ${blue}))`,
+    }
   }
 })
 const pointerStyle = computed(() => {
@@ -85,9 +111,7 @@ const mouseUpHandler = (event, { startX, positionX }) => {
     startX,
     positionX,
   })
-
   updateColor({ alpha }, 'alpha')
-
   return positions
 }
 

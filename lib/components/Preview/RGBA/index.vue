@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 21:30:17
  * @LastEditors: June
- * @LastEditTime: 2023-10-01 22:40:35
+ * @LastEditTime: 2023-10-06 02:08:53
 -->
 <template>
   <RGBAItem type="number" label="R" />

@@ -14,7 +14,6 @@ Color and gradient picker for vue3.js. [If you use vue2， plese use color-gradi
 [![npm](https://badgen.net/npm/v/color-gradient-picker-vue3)](https://www.npmjs.com/package/color-gradient-picker-vue3)
 [![downloads](https://badgen.net/npm/dt/color-gradient-picker-vue3)](https://www.npmjs.com/package/color-gradient-picker-vue3)
 
-
 <img style="margin: 0 auto;" src="./imgs/introduct.png" width="50%" />
 
 [查看文档](./lib/README.md)

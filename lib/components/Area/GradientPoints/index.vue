@@ -3,7 +3,7 @@
  * @Description: Area GradientPoints
  * @Date: 2023-09-27 19:26:27
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 00:15:38
+ * @LastEditTime: 2023-10-06 00:58:57
 -->
 <template>
   <div
@@ -31,6 +31,7 @@ import {
   updateGradientActivePercent,
 } from '@l/helpers/index'
 import { v4 as uuidv4 } from 'uuid'
+import { hsvToRgb } from '@l/helpers'
 import type { IColorState, IPoitItem } from '@l/types'
 import { cloneDeep } from 'lodash-es'
 
@@ -46,16 +47,16 @@ const pointsStyle = computed(() => {
 const handleAddPoit = (event) => {
   const { x = 0, width = 0 } = pointsContainerBoxInfo.value || {}
   const left = updateGradientActivePercent(event.pageX - x, width)
-  const { red, green, blue, alpha } = colorPickerState
+  // saturation, value 基本是固定的
+  const { hue, saturation, value } = colorPickerState
   const points = cloneDeep(colorPickerState.points)
+  // @ts-ignore
+  const rgba = hsvToRgb(hue, saturation, value, 1)
   const newPoint = {
     id: uuidv4(),
-    red,
-    green,
-    blue,
-    alpha,
+    ...rgba,
     left,
-  }
+  } as IPoitItem
   points?.push(newPoint)
   colorPickerState.activePointIndex = points!.findIndex(
     (i: IPoitItem) => i.id === newPoint.id,

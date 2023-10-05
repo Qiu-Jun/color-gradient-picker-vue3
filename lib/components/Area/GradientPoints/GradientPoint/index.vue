@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-28 10:50:02
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 22:28:08
+ * @LastEditTime: 2023-10-06 00:30:39
 -->
 <template>
   <div
@@ -108,9 +108,10 @@ const removePoint = () => {
   let points = cloneDeep(colorPickerState.points)
   if (points!.length <= 2) return // 至少2个点
   const index = props.index
-
+  const newIdx = index === 0 ? 1 : index - 1
   points = points?.filter((i: IPoitItem) => i.id !== props.point.id)
-  colorPickerState.activePointIndex = index === 0 ? 1 : index - 1
+  colorPickerState.activePointIndex = newIdx
+
   updateColor({ points }, 'points')
 }
 </script>

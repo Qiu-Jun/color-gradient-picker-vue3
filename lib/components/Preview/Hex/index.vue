@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 21:29:54
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 02:06:01
+ * @LastEditTime: 2023-10-05 22:18:16
 -->
 <template>
   <CInput
@@ -23,11 +23,18 @@ import type { IColor, IColorState } from '@l/types'
 const colorPickerState = inject('colorPickerState') as IColorState
 const updateColor = inject('updateColor') as any
 const hexValue = computed(() => {
-  return rgbToHex(
-    colorPickerState.red,
-    colorPickerState.green,
-    colorPickerState.blue,
-  )
+  const { isGradient, activePointIndex } = colorPickerState
+  // @ts-ignore
+  const activePoint = colorPickerState.points[activePointIndex]
+  if (isGradient) {
+    return rgbToHex(activePoint!.red, activePoint!.green, activePoint!.blue)
+  } else {
+    return rgbToHex(
+      colorPickerState.red,
+      colorPickerState.green,
+      colorPickerState.blue,
+    )
+  }
 })
 
 const changeHex = (event) => {

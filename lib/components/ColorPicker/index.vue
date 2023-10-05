@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 12:54:30
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 11:29:28
+ * @LastEditTime: 2023-10-06 01:49:18
 -->
 <template>
   <div
@@ -52,8 +52,7 @@ import { PropType } from 'vue'
 interface IProps {
   isGradient: boolean
   showBtn: boolean
-  color?: IColor
-  gradient?: IGradient
+  color: any
   cancelText?: string
   cancelColor?: string
   cancelBg?: string
@@ -73,34 +72,61 @@ const props: IProps = defineProps({
     default: false,
   },
   color: {
-    type: Object as PropType<IColor>,
-    default: () => ({ red: 255, green: 0, blue: 0, alpha: 1 }),
+    type: Object as PropType<any>,
+    default: (_this) => {
+      if (_this.isGradient) {
+        return {
+          type: 'linear',
+          degree: 0,
+          points: [
+            {
+              id: uuidv4(),
+              left: 0,
+              red: 0,
+              green: 0,
+              blue: 0,
+              alpha: 1,
+            },
+            {
+              id: uuidv4(),
+              left: 100,
+              red: 255,
+              green: 0,
+              blue: 0,
+              alpha: 1,
+            },
+          ],
+        }
+      } else {
+        return { red: 255, green: 0, blue: 0, alpha: 1 }
+      }
+    },
   },
-  gradient: {
-    type: Object as PropType<IGradient>,
-    default: () => ({
-      type: 'linear',
-      degree: 0,
-      points: [
-        {
-          id: uuidv4(),
-          left: 0,
-          red: 0,
-          green: 0,
-          blue: 0,
-          alpha: 1,
-        },
-        {
-          id: uuidv4(),
-          left: 100,
-          red: 255,
-          green: 0,
-          blue: 0,
-          alpha: 1,
-        },
-      ],
-    }),
-  },
+  // gradient: {
+  //   type: Object as PropType<IGradient>,
+  //   default: () => ({
+  //     type: 'linear',
+  //     degree: 0,
+  //     points: [
+  //       {
+  //         id: uuidv4(),
+  //         left: 0,
+  //         red: 0,
+  //         green: 0,
+  //         blue: 0,
+  //         alpha: 1,
+  //       },
+  //       {
+  //         id: uuidv4(),
+  //         left: 100,
+  //         red: 255,
+  //         green: 0,
+  //         blue: 0,
+  //         alpha: 1,
+  //       },
+  //     ],
+  //   }),
+  // },
   cancelText: {
     type: String,
     default: 'Cancel',
@@ -127,28 +153,30 @@ const props: IProps = defineProps({
     defualt: '#fff',
   },
 })
-
+console.log(props)
+const pointLen = props.isGradient ? props.color?.points?.length || 0 : 0
 const colorPickerState = reactive<IColorState>({
   isGradient: props.isGradient, // 是否是渐变
-  red: (props.isGradient ? props.gradient?.points[1].red : props.color?.red)!,
-  green: (props.isGradient
-    ? props.gradient?.points[1].green
-    : props.color?.green)!,
-  blue: (props.isGradient
-    ? props.gradient?.points[1].blue
-    : props.color?.blue)!,
-  alpha: (props.isGradient
-    ? props.gradient?.points[0].alpha
-    : props.color?.alpha)!,
+  red: props.isGradient
+    ? props.color.points[pointLen - 1].red || 0
+    : props.color.red || 255,
+  green: props.isGradient
+    ? props.color.points[pointLen - 1].green || 0
+    : props.color.green || 0,
+  blue: props.isGradient
+    ? props.color.points[pointLen - 1].blue || 0
+    : props.color.blue || 0,
+  alpha: props.isGradient
+    ? props.color.points[pointLen - 1].alpha
+    : props.color.alpha,
   hue: 0,
-  saturation: 100,
+  saturation: 100, // 饱和
   value: 100,
   style: '',
   type: 'linear',
   degree: 0,
-  activePointIndex: 1, // 因为默认颜色取了默认的1
-  activePoint: cloneDeep(props.gradient?.points[0]),
-  points: cloneDeep(props.gradient?.points),
+  activePointIndex: pointLen - 1, // 当前渐变点的下标
+  points: props.isGradient ? cloneDeep(props.color.points) : [], // 渐变的点
 })
 
 const updateColor = throttle(
@@ -184,12 +212,13 @@ const updateColor = throttle(
   props.showBtn ? 100 : 150,
 )
 
+// 更新渐变 rgba在对应点更新
 function updateGradient(color: IColor, key?: string) {
   const {
     red = 0,
     green = 0,
     blue = 0,
-    alpha,
+    alpha = 0,
     hue,
     saturation,
     value,
@@ -197,20 +226,33 @@ function updateGradient(color: IColor, key?: string) {
     type,
     degree,
   } = color
+  // @ts-ignore
+  const activePoint = colorPickerState.points[colorPickerState.activePointIndex]
   if (key) {
-    colorPickerState[key] = color[key]
+    if (key === 'points' || key === 'type' || key === 'degree') {
+      // @ts-ignore
+      colorPickerState[key] = color[key]
+    } else {
+      activePoint[key] = color[key]
+    }
   } else {
-    colorPickerState.red = red
-    colorPickerState.green = green
-    colorPickerState.blue = blue
+    // 渐变不更新rgb,更新点的rgb
+    activePoint.red = red
+    activePoint.green = green
+    activePoint.blue = blue
+    colorPickerState.alpha = alpha
     points && (colorPickerState.points = points)
     type && (colorPickerState.type = type)
     degree && (colorPickerState.degree = degree)
-    alpha && (colorPickerState.alpha = alpha)
     saturation && (colorPickerState.saturation = saturation)
     value && (colorPickerState.value = value)
     hue && (colorPickerState.hue = hue)
   }
+
+  // if (curPoint) {
+  //   colorPickerState.activePoint =
+  //     colorPickerState.points[colorPickerState.activePointIndex]
+  // }
   const style = generateGradientStyle(
     colorPickerState.points!,
     colorPickerState.type!,
@@ -248,6 +290,7 @@ function updateSolid(color: IColor, key?: string) {
     colorPickerState.alpha,
   )
   colorPickerState.style = style
+  console.log(colorPickerState)
   !props.showBtn &&
     emits('change', {
       style: style,

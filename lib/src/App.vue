@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 12:24:19
+ * @LastEditTime: 2023-10-06 02:17:41
 -->
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
@@ -14,6 +14,8 @@
     <div>
       <ColorPicker is-gradient @change="onChange" />
     </div>
+
+    <div :style="testStyle" style="width: 300px; height: 300px"></div>
   </div>
 </template>
 
