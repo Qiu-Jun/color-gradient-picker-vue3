@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 12:54:30
  * @LastEditors: June
- * @LastEditTime: 2023-10-06 01:49:18
+ * @LastEditTime: 2023-10-06 02:24:15
 -->
 <template>
   <div
@@ -46,7 +46,7 @@ import Gradient from './components/Gradient/index.vue'
 import { cloneDeep, throttle } from 'lodash-es'
 import { generateSolidStyle, generateGradientStyle } from '@l/helpers'
 import { v4 as uuidv4 } from 'uuid'
-import type { IColor, IGradient, IColorState } from '@l/types'
+import type { IColor, IColorState } from '@l/types'
 import { PropType } from 'vue'
 
 interface IProps {
@@ -102,31 +102,6 @@ const props: IProps = defineProps({
       }
     },
   },
-  // gradient: {
-  //   type: Object as PropType<IGradient>,
-  //   default: () => ({
-  //     type: 'linear',
-  //     degree: 0,
-  //     points: [
-  //       {
-  //         id: uuidv4(),
-  //         left: 0,
-  //         red: 0,
-  //         green: 0,
-  //         blue: 0,
-  //         alpha: 1,
-  //       },
-  //       {
-  //         id: uuidv4(),
-  //         left: 100,
-  //         red: 255,
-  //         green: 0,
-  //         blue: 0,
-  //         alpha: 1,
-  //       },
-  //     ],
-  //   }),
-  // },
   cancelText: {
     type: String,
     default: 'Cancel',
@@ -153,7 +128,7 @@ const props: IProps = defineProps({
     defualt: '#fff',
   },
 })
-console.log(props)
+
 const pointLen = props.isGradient ? props.color?.points?.length || 0 : 0
 const colorPickerState = reactive<IColorState>({
   isGradient: props.isGradient, // 是否是渐变
@@ -290,7 +265,6 @@ function updateSolid(color: IColor, key?: string) {
     colorPickerState.alpha,
   )
   colorPickerState.style = style
-  console.log(colorPickerState)
   !props.showBtn &&
     emits('change', {
       style: style,
