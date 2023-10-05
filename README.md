@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 14:32:05
+ * @LastEditTime: 2023-10-06 02:21:39
 -->
 
 ## color-gradient-picker-vue3
@@ -16,7 +16,7 @@ Color and gradient picker for vue3.js. [If you use vue2， plese use color-gradi
 
 <img style="margin: 0 auto;" src="./imgs/introduct.png" width="50%" />
 
-[查看文档](./lib/README.md)
+[Document(查看文档)](./lib/README.md)
 
 #### Usage
 
