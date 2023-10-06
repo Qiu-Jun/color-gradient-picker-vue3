@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-10-06 19:37:41
+ * @LastEditTime: 2023-10-06 20:06:57
 -->
 
 ## color-gradient-picker-vue3
@@ -20,18 +20,18 @@ yarn add color-gradient-picker-vue3
 
 #### Attributes
 
-|              | introduct                                      | Default                                                                                                                                                          |
-| ------------ | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| isGradient   | isGradient(是否渐变)                           | false                                                                                                                                                            |
-| showBtn      | show footer buttons(是否显示地步的确认按钮)    | false                                                                                                                                                            |
-| color        | solid color(纯色 color)                        | `{ red: 255, green: 0, blue: 0, alpha: 1 } ` or `'{"type":"linear","degree":0,"points":[{"id":0,"left":0,"red":0,"green":0,"blue":0,"alpha":1},{"id":1,"left":100,"red":255,"green":0,"blue":0,"alpha":1}]}'`                                                                                                                      |
-| cancelText   | cancel button text(取消文本)                   | 'cancel'                                                                                                                                                         |
-| cancelColor  | cancel button font-color(取消文本颜色)         | '#333'                                                                                                                                                           |
-| cancelBg     | cancel button background color (取消背景颜色)  | '#fff'                                                                                                                                                           |
-| confirmText  | confirm button text(取消文本)                  | 'confirm'                                                                                                                                                        |
-| confirmColor | confirm button font-color(确认文本颜色)        | '#333'                                                                                                                                                           |
-| confirmBg    | confirm button background color (确认背景颜色) | '#fff'                                                                                                                                                           |
-| change       | Event                                          |                                                                                                                                                                  |
+|              | introduct                                      | Default                                                                                                                                                                                                       |
+| ------------ | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| isGradient   | isGradient(是否渐变)                           | false                                                                                                                                                                                                         |
+| showBtn      | show footer buttons(是否显示地步的确认按钮)    | false                                                                                                                                                                                                         |
+| color        | solid color(纯色 color)                        | `{ red: 255, green: 0, blue: 0, alpha: 1 } ` or `'{"type":"linear","degree":0,"points":[{"id":0,"left":0,"red":0,"green":0,"blue":0,"alpha":1},{"id":1,"left":100,"red":255,"green":0,"blue":0,"alpha":1}]}'` |
+| cancelText   | cancel button text(取消文本)                   | 'cancel'                                                                                                                                                                                                      |
+| cancelColor  | cancel button font-color(取消文本颜色)         | '#333'                                                                                                                                                                                                        |
+| cancelBg     | cancel button background color (取消背景颜色)  | '#fff'                                                                                                                                                                                                        |
+| confirmText  | confirm button text(取消文本)                  | 'confirm'                                                                                                                                                                                                     |
+| confirmColor | confirm button font-color(确认文本颜色)        | '#333'                                                                                                                                                                                                        |
+| confirmBg    | confirm button background color (确认背景颜色) | '#fff'                                                                                                                                                                                                        |
+| change       | Event                                          |                                                                                                                                                                                                               |
 
 #### waring
 
@@ -51,7 +51,7 @@ yarn add color-gradient-picker-vue3
       />
     </div>
     <div>
-      <ColorPicker :is-gradient="true" @change="onChange" />
+      <ColorPicker is-gradient :color="gradientColort" @change="onChange" />
     </div>
   </div>
 </template>
@@ -67,6 +67,47 @@ yarn add color-gradient-picker-vue3
     blue: 0,
     alpha: 1,
   })
+
+
+const gradientColort = {
+  type: 'linear',
+  degree: 0,
+  points: [
+    {
+      id: '81bcb3a0-00b9-4a26-bfc7-2b261722de02',
+      left: 0,
+      red: 0,
+      green: 0,
+      blue: 0,
+      alpha: 1,
+    },
+
+    {
+      id: 'a5d144fb-9ab5-40b3-9beb-e79161c5f546',
+      red: 0,
+      green: 153,
+      blue: 255,
+      alpha: 1,
+      left: 32.25806451612903,
+    },
+    {
+      id: 'b1bc25ad-7273-4bd8-ad22-d5d11cab0f55',
+      red: 0,
+      green: 153,
+      blue: 255,
+      alpha: 1,
+      left: 68.95161290322581,
+    },
+    {
+      id: 'd6c7ccb8-b1c4-4470-8b73-ee0b56739421',
+      left: 97.1774193548387,
+      red: 255,
+      green: 0,
+      blue: 63,
+      alpha: 1,
+    },
+  ],
+}
 
   const onChange = (color) => {
     // The results of solid and gradient are different
