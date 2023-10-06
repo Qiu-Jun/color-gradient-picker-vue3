@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 12:54:30
  * @LastEditors: June
- * @LastEditTime: 2023-10-06 02:24:15
+ * @LastEditTime: 2023-10-06 19:49:28
 -->
 <template>
   <div
@@ -130,27 +130,28 @@ const props: IProps = defineProps({
 })
 
 const pointLen = props.isGradient ? props.color?.points?.length || 0 : 0
+const lastPoint = pointLen ? pointLen - 1 : 0
+console.log(lastPoint)
+console.log(props.color.points)
 const colorPickerState = reactive<IColorState>({
   isGradient: props.isGradient, // 是否是渐变
-  red: props.isGradient
-    ? props.color.points[pointLen - 1].red || 0
-    : props.color.red || 255,
+  red: props.isGradient ? props.color.points[lastPoint].red : props.color.red,
   green: props.isGradient
-    ? props.color.points[pointLen - 1].green || 0
-    : props.color.green || 0,
+    ? props.color.points[lastPoint].green
+    : props.color.green,
   blue: props.isGradient
-    ? props.color.points[pointLen - 1].blue || 0
-    : props.color.blue || 0,
+    ? props.color.points[lastPoint].blue
+    : props.color.blue,
   alpha: props.isGradient
-    ? props.color.points[pointLen - 1].alpha
+    ? props.color.points[lastPoint].alpha
     : props.color.alpha,
   hue: 0,
   saturation: 100, // 饱和
   value: 100,
   style: '',
-  type: 'linear',
-  degree: 0,
-  activePointIndex: pointLen - 1, // 当前渐变点的下标
+  type: props.isGradient ? props.color.type : 'linear',
+  degree: props.isGradient ? props.color.degree : 0,
+  activePointIndex: lastPoint, // 当前渐变点的下标
   points: props.isGradient ? cloneDeep(props.color.points) : [], // 渐变的点
 })
 

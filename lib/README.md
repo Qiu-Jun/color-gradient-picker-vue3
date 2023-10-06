@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2023-10-04 12:34:58
+ * @LastEditTime: 2023-10-06 19:37:41
 -->
 
 ## color-gradient-picker-vue3
@@ -24,8 +24,7 @@ yarn add color-gradient-picker-vue3
 | ------------ | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | isGradient   | isGradient(是否渐变)                           | false                                                                                                                                                            |
 | showBtn      | show footer buttons(是否显示地步的确认按钮)    | false                                                                                                                                                            |
-| color        | solid color(纯色 color)                        | `{ red: 255, green: 0, blue: 0, alpha: 1 }`                                                                                                                      |
-| gradient     | gradient color(渐变颜色)                       | `'{"type":"linear","degree":0,"points":[{"id":0,"left":0,"red":0,"green":0,"blue":0,"alpha":1},{"id":1,"left":100,"red":255,"green":0,"blue":0,"alpha":1}]}'` ｜ |
+| color        | solid color(纯色 color)                        | `{ red: 255, green: 0, blue: 0, alpha: 1 } ` or `'{"type":"linear","degree":0,"points":[{"id":0,"left":0,"red":0,"green":0,"blue":0,"alpha":1},{"id":1,"left":100,"red":255,"green":0,"blue":0,"alpha":1}]}'`                                                                                                                      |
 | cancelText   | cancel button text(取消文本)                   | 'cancel'                                                                                                                                                         |
 | cancelColor  | cancel button font-color(取消文本颜色)         | '#333'                                                                                                                                                           |
 | cancelBg     | cancel button background color (取消背景颜色)  | '#fff'                                                                                                                                                           |
