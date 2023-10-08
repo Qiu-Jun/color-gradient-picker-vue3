@@ -3,17 +3,24 @@
  * @Description: 
  * @Date: 2023-09-27 12:54:30
  * @LastEditors: June
- * @LastEditTime: 2023-10-06 19:49:28
+ * @LastEditTime: 2023-10-08 22:19:54
 -->
 <template>
   <div
     class="picker-color-ui border-box m-8px bg-[#fff] flex flex-col slelect-none"
   >
-    <!-- 渐变 -->
-    <Gradient v-if="props.isGradient" />
+    <Suspense>
+      <template #default>
+        <!-- 渐变 -->
+        <Gradient v-if="props.isGradient" />
 
-    <!-- 纯色 -->
-    <Solid v-else />
+        <!-- 纯色 -->
+        <Solid v-else />
+      </template>
+      <template #fallback>
+        <p>Loading...</p>
+      </template>
+    </Suspense>
 
     <div v-if="showBtn" class="btns flex justify-end items-center select-none">
       <div
@@ -41,8 +48,6 @@
 </template>
 
 <script name="ColorPicker" lang="ts" setup>
-import Solid from './components/Solid/index.vue'
-import Gradient from './components/Gradient/index.vue'
 import { cloneDeep, throttle } from 'lodash-es'
 import { generateSolidStyle, generateGradientStyle } from '@l/helpers'
 import { v4 as uuidv4 } from 'uuid'
@@ -60,7 +65,10 @@ interface IProps {
   confirmColor?: string
   confirmBg?: string
 }
-
+const Gradient = defineAsyncComponent(
+  () => import('./components/Gradient/index.vue'),
+)
+const Solid = defineAsyncComponent(() => import('./components/Solid/index.vue'))
 const emits = defineEmits(['change'])
 const props: IProps = defineProps({
   isGradient: {
