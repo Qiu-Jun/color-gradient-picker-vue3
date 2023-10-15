@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-09-27 12:54:30
  * @LastEditors: June
- * @LastEditTime: 2023-10-08 22:19:54
+ * @LastEditTime: 2023-10-15 16:24:57
 -->
 <template>
   <div
@@ -24,6 +24,7 @@
 
     <div v-if="showBtn" class="btns flex justify-end items-center select-none">
       <div
+        v-if="showCancel"
         class="btn"
         :style="{
           color: props.cancelColor,
@@ -76,6 +77,10 @@ const props: IProps = defineProps({
     default: false,
   },
   showBtn: {
+    type: Boolean,
+    default: false,
+  },
+  showCancel: {
     type: Boolean,
     default: false,
   },
