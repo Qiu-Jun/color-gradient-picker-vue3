@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "vscode-icons-team.vscode-icons",
+    "stylelint.vscode-stylelint",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "vue.volar",
+    "eamodio.gitlens",
+    "OBKoro1.korofileheader"
+  ]
+}
