@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
+    "tinycolor2": "^1.6.0",
     "uuid": "^9.0.1"
   }
 }
