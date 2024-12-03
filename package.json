@@ -1,5 +1,5 @@
 {
-  "name": "@cgp/monorepo",
+  "name": "Color and gradient picker",
   "version": "1.0.0",
   "description": "Color and gradient picker for vue3.js",
   "private": true,
@@ -55,6 +55,6 @@
     "webpack": "^5.78.0"
   },
   "dependencies": {
-    "vue": "^3.2.47"
+    "vue": "^3.5.13"
   }
 }

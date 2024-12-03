@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-11-30 21:47:58
+ * @LastEditTime: 2024-12-02 15:17:05
  */
 export interface ColorPickerProps {
   value?: string
@@ -65,3 +65,10 @@ export type ThemeMode = {
 }
 
 export type Styles = Record<string, Record<string, string | number>>
+
+export interface IProvide {
+  value: string
+  width: number
+  height: number
+  hc: any
+}

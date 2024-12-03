@@ -1,0 +1,143 @@
+.cpg-box {
+  --gray: #e9e9f5;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+  @apply box-border rounded-8px bg-#fff relative p-8px z-100 text-#323136;
+
+  .cpg-gradient-controls-wrapper {
+    @apply bg-[var(--gray)] rounded-4px box-border p-4px text-12px mt-12px;
+  }
+
+  .cpg-gradientBar-warp {
+    @apply w-full h-14px mt-14px relative;
+    .cpg-gradientBar {
+      @apply wh-full rounded-10px;
+    }
+  }
+
+  .cpg-hue-wrap {
+    @apply h-14px mt-14px relative;
+    .cpg-hue-colors {
+      @apply w-full relative rounded-14px vertical-top;
+    }
+  }
+
+  .cpg-inputs-wrap {
+    @apply mt-14px box-border flex justify-between items-center overflow-hidden;
+    .cpg-inputItem-wrap {
+      @apply text-center text-12px;
+      .cpg-input {
+        @apply border-1px border-solid border-#bebebe rounded-6px box-border text-#000 h-32px font-400 outline-none p-2px w-full text-center;
+      }
+      .cpg-input-label {
+        @apply text-#565656 font-700;
+      }
+    }
+  }
+
+  .cpg-opacity-wrap {
+    @apply w-full h-14px mt-14px relative box-border;
+    .cpg-opacity-bar {
+      background: linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.18) 25%,
+          transparent 0,
+          transparent 75%,
+          rgba(0, 0, 0, 0.18) 0,
+          rgba(0, 0, 0, 0.18) 0
+        ),
+        linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.18) 25%,
+          transparent 0,
+          transparent 75%,
+          rgba(0, 0, 0, 0.18) 0,
+          rgba(0, 0, 0, 0.18) 0
+        ),
+        #fff;
+      background-clip: border-box, border-box;
+      background-origin: padding-box, padding-box;
+      background-position: 0 0, 7px 7px;
+      background-repeat: repeat, repeat;
+      background-size: 14px 14px, 14px 14px;
+      transition: none;
+      box-shadow: none;
+      text-shadow: none;
+      transform: scaleX(1) scaleY(1) scaleZ(1);
+      transform-origin: 0 0 0;
+      @apply w-full h-14px rounded-10px;
+    }
+    .cpg-opacity-color {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 0, 0, 0.5) 100%
+      );
+      @apply box-border absolute left-0 top-0 w-full h-14px rounded-10px overflow-hidden;
+    }
+  }
+
+  .cpg-controls-wrapper {
+    @apply flex justify-between items-center mt-8px;
+    .cpg-controls-item {
+      box-shadow: 1px 1px 3px transparent;
+      @apply f-center text-12px text-#565656 select-none box-border bg-#e9e9f5 rounded-4px p-4px;
+      .cpg-controls-item-btn {
+        transition: all 0.16s ease;
+        @apply h-24px f-center px-8px rounded-4px;
+      }
+    }
+    .cpg-control-active {
+      @apply bg-#fff text-#568cf5;
+    }
+  }
+
+  .cpg-gradient-controls-wrapper {
+    @apply w-full flex justify-between items-center h-28px;
+    .cpg-deg-input {
+      @apply bg-transparent border-none text-#323136 text-12px font-500 h-24px outline-none text-center w-34px;
+    }
+    .cpg-gradient-btn {
+      @apply box-border rounded-4px f-center px-8px py-4px cursor-pointer;
+    }
+    .cpg-gradient-btn-active {
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      transition: all 0.16s ease;
+      @apply bg-#fff text-#568cf5;
+    }
+  }
+
+  .cpg-wrapper {
+    @apply box-border relative select-none;
+    .cpg-picker-area {
+      @apply relative rounded-6px overflow-hidden;
+    }
+    .cpg-pointer {
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      transition: all 10ms linear;
+      @apply inline-block border-2px border-solid border-#fff w-18px h-18px absolute rounded-50% box-border cursor-pointer z-1000;
+    }
+  }
+
+  .cpg-preview-wrap {
+    @apply mt-14px flex  w-full justify-between items-center select-none;
+    .cpg-preview-color {
+      @apply w-50px h-50px rounded-6px shrink-0 bg-red;
+    }
+    .cpg-preview-presetColor {
+      @apply h-50px flex flex-wrap flex-1 justify-between ml-12px;
+      .cpg-preview-presetItem {
+        @apply w-[10.2%] h-24px line-block rounded-4px mb-2px box-border cursor-pointer;
+      }
+    }
+  }
+
+  // pointer
+  .cpg-pointer {
+    transition: all 10ms linear;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    @apply w-18px h-18px absolute left-0 -top-2px box-border border-2px border-solid border-#fff z-10 rounded-50%;
+  }
+}
+[role='button'] {
+  cursor: pointer;
+}
