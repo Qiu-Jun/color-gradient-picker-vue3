@@ -55,9 +55,11 @@
     "url": "https://github.com/Qiu-Jun/color-gradient-picker-vue3.git/issues"
   },
   "devDependencies": {
+    "autoprefixer": "^9.0.0",
     "rollup-plugin-visualizer": "^5.9.2",
     "unocss": "^0.56.5",
-    "unplugin-auto-import": "^0.16.4"
+    "unplugin-auto-import": "^0.16.4",
+    "vite-plugin-svg-icons": "^2.0.1"
   },
   "dependencies": {
     "lodash-es": "^4.17.21",

@@ -2,16 +2,61 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-11-30 22:05:32
+ * @LastEditTime: 2024-12-03 12:02:45
+ * @LastEditors: June
+-->
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-11-30 21:19:44
+ * @LastEditTime: 2024-12-03 10:31:30
  * @LastEditors: June
 -->
 <template>
-  <div>cos</div>
+  <div class="cpg-box">
+    <!-- PickerArea -->
+    <PickerArea />
+
+    <!-- operation -->
+    <Operation />
+
+    <!-- gradient operation -->
+    <OperationGradient />
+
+    <!-- GradientBar -->
+    <GradientBar />
+
+    <!-- Hue -->
+    <Hue />
+
+    <!-- Opacity -->
+    <Opacity />
+
+    <!-- Inputs -->
+    <Inputs />
+
+    <!-- Preview -->
+    <Preview />
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { LocalesProps } from '@/interfaces'
 import { defaultLocales } from '@/constants'
+import {
+  Opacity,
+  PickerArea,
+  Operation,
+  OperationGradient,
+  Preview,
+  GradientBar,
+  Inputs,
+  Hue,
+} from './components'
+import tinycolor from 'tinycolor2'
+import { isUpperCase, getColorObj, getDetails } from '@/utils/utils'
+import { low, high, getColors } from '@/utils/format'
+import { GradientProps, Styles, IProvide } from '@/interfaces'
 
 const props = defineProps({
   value: {
@@ -104,5 +149,25 @@ const props = defineProps({
   },
 })
 
+// context 待抽离hooks
+const context = reactive<IProvide>({
+  value: props.value,
+  width: props.width,
+  height: props.height,
+  hc: {},
+})
+const colors = getColors(props.value)
+const { degrees, degreeStr, isGradient, gradientType } = getDetails(props.value)
+const { currentColor, selectedColor, currentLeft } = getColorObj(colors)
+const tinyColor = tinycolor(currentColor)
+const rgba = tinyColor.toRgb()
+const hsv = tinyColor.toHsv()
+context.hc = { ...rgba, ...hsv }
+// context 待抽离hooks
+
+const styles = computed(() => `width: ${props.width}px`)
+
 console.log(props)
+
+provide('context', context)
 </script>

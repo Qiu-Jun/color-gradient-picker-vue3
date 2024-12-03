@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-04-11 11:17:35
  * @LastEditors: June
- * @LastEditTime: 2024-11-30 21:28:19
+ * @LastEditTime: 2024-12-02 12:06:27
  */
 import type { ConfigEnv, UserConfigExport } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -12,7 +12,9 @@ import * as path from 'path'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
+import autoprefixer from 'autoprefixer'
 import { visualizer } from 'rollup-plugin-visualizer'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
@@ -27,8 +29,19 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           enabled: true,
         },
       }),
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [path.resolve(process.cwd(), 'src/svgs')],
+        // 指定symbolId格式
+        symbolId: 'icon-[dir]-[name]',
+      }),
       visualizer(),
     ],
+    css: {
+      postcss: {
+        plugins: [autoprefixer],
+      },
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
