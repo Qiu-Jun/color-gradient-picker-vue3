@@ -2,14 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-03 12:02:45
- * @LastEditors: June
--->
-<!--
- * @Author: June
- * @Description: Description
- * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-03 10:31:30
+ * @LastEditTime: 2024-12-03 20:59:04
  * @LastEditors: June
 -->
 <template>
@@ -43,6 +36,7 @@
 <script lang="ts" setup>
 import { LocalesProps } from '@/interfaces'
 import { defaultLocales } from '@/constants'
+
 import {
   Opacity,
   PickerArea,

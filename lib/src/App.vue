@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2024-12-01 10:26:00
+ * @LastEditTime: 2024-12-03 20:47:52
 -->
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
