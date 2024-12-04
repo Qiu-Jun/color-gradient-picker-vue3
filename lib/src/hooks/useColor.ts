@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 23:02:32
- * @LastEditTime: 2024-12-04 19:16:36
+ * @LastEditTime: 2024-12-04 21:33:56
  * @LastEditors: June
  */
 import { getColors } from '@/utils/format'

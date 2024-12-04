@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 19:05:04
- * @LastEditTime: 2024-12-04 19:12:54
+ * @LastEditTime: 2024-12-04 21:36:46
  * @LastEditors: June
 -->
 <template>
@@ -49,7 +49,7 @@ const onChange = (e) => {
 
 watchEffect(() => {
   if (props.inputVal || props.inputVal === 0) {
-    inputVal.value = props.inputVal
+    inputVal.value = ~~props.inputVal
   }
 })
 </script>
