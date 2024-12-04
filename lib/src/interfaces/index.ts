@@ -4,8 +4,10 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-12-02 15:17:05
+ * @LastEditTime: 2024-12-04 11:59:51
  */
+import { InputType } from '@/enums'
+
 export interface ColorPickerProps {
   value?: string
   hideControls?: boolean
@@ -13,7 +15,6 @@ export interface ColorPickerProps {
   hideOpacity?: boolean
   hidePresets?: boolean
   hideHue?: boolean
-  presets?: any
   hideEyeDrop?: boolean
   hideAdvancedSliders?: boolean
   hideColorGuide?: boolean
@@ -25,10 +26,11 @@ export interface ColorPickerProps {
   hideGradientControls?: boolean
   width?: number
   height?: number
-  style?: any
-  locales?: any
   disableDarkMode?: boolean
   disableLightMode?: boolean
+  hc?: any
+  isGradient?: boolean
+  inputType?: InputType
 }
 
 export type ColorsProps = {
@@ -43,15 +45,6 @@ export type GradientProps = {
   left: number
 }
 
-export type LocalesProps = {
-  CONTROLS: controlsProps
-}
-
-type controlsProps = {
-  SOLID: string
-  GRADIENT: string
-}
-
 export type ThemeProps = {
   light: ThemeMode
   dark: ThemeMode
@@ -64,9 +57,7 @@ export type ThemeMode = {
   accent?: string
 }
 
-export type Styles = Record<string, Record<string, string | number>>
-
-export interface IProvide {
+export interface IProvide extends ColorPickerProps {
   value: string
   width: number
   height: number

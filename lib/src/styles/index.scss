@@ -67,23 +67,36 @@
       @apply w-full h-14px rounded-10px;
     }
     .cpg-opacity-color {
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 0, 0, 0.5) 100%
-      );
       @apply box-border absolute left-0 top-0 w-full h-14px rounded-10px overflow-hidden;
     }
   }
 
   .cpg-controls-wrapper {
-    @apply flex justify-between items-center mt-8px;
+    @apply flex justify-between items-center mt-4px;
     .cpg-controls-item {
       box-shadow: 1px 1px 3px transparent;
       @apply f-center text-12px text-#565656 select-none box-border bg-#e9e9f5 rounded-4px p-4px;
       .cpg-controls-item-btn {
         transition: all 0.16s ease;
-        @apply h-24px f-center px-8px rounded-4px;
+        @apply relative h-24px f-center px-8px rounded-4px;
+        .cpg-controls-inputType {
+          box-shadow: 1px 1px 14px 1px rgba(0, 0, 0, 0.25);
+          transition: opacity 120ms linear, visibility linear, z-index linear;
+          @apply box-border absolute -right-2px top-34px p-5px rounded-6px bg-#e9e9f5 z-1 opacity-100 visible;
+          .cpg-control-inputType-item {
+            transition: all 0.16s ease;
+            @apply f-center text-12px font-700 leading-1 h-24px px-8px rounded-4px;
+          }
+          .cpg-control-inputType-item-active {
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            @apply bg-#fff text-#568cf5;
+          }
+        }
+        .cpg-controls-hideInputType {
+          transition: opacity 150ms linear 50ms, visibility 100ms linear 150ms,
+            z-index 100ms linear 150ms;
+          @apply visible-hidden opacity-0 -z-100;
+        }
       }
     }
     .cpg-control-active {
@@ -121,7 +134,7 @@
   .cpg-preview-wrap {
     @apply mt-14px flex  w-full justify-between items-center select-none;
     .cpg-preview-color {
-      @apply w-50px h-50px rounded-6px shrink-0 bg-red;
+      @apply w-50px h-50px rounded-6px shrink-0 box-border;
     }
     .cpg-preview-presetColor {
       @apply h-50px flex flex-wrap flex-1 justify-between ml-12px;

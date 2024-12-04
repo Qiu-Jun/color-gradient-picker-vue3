@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-03 20:59:04
+ * @LastEditTime: 2024-12-04 19:07:55
  * @LastEditors: June
 -->
 <template>
@@ -10,23 +10,27 @@
     <!-- PickerArea -->
     <PickerArea />
 
-    <!-- operation -->
-    <Operation />
+    <template v-if="!props.hideControls">
+      <!-- operation -->
+      <Operation />
 
-    <!-- gradient operation -->
-    <OperationGradient />
+      <!-- gradient operation -->
+      <OperationGradient
+        v-if="!props.hideGradientControls && colorState.isGradient"
+      />
+    </template>
 
     <!-- GradientBar -->
-    <GradientBar />
+    <GradientBar v-if="!props.hideGradientControls && colorState.isGradient" />
 
     <!-- Hue -->
     <Hue />
 
     <!-- Opacity -->
-    <Opacity />
+    <Opacity v-if="!props.hideOpacity" />
 
     <!-- Inputs -->
-    <Inputs />
+    <Inputs v-if="!props.hideInputs" />
 
     <!-- Preview -->
     <Preview />
@@ -34,9 +38,6 @@
 </template>
 
 <script lang="ts" setup>
-import { LocalesProps } from '@/interfaces'
-import { defaultLocales } from '@/constants'
-
 import {
   Opacity,
   PickerArea,
@@ -47,10 +48,15 @@ import {
   Inputs,
   Hue,
 } from './components'
-import tinycolor from 'tinycolor2'
-import { isUpperCase, getColorObj, getDetails } from '@/utils/utils'
-import { low, high, getColors } from '@/utils/format'
-import { GradientProps, Styles, IProvide } from '@/interfaces'
+import { useColor } from '@/hooks/useColor'
+
+const { init, colorState } = useColor()
+
+watch(
+  () => colorState,
+  (val) => console.log(val, '监听colorState'),
+  { immediate: true },
+)
 
 const props = defineProps({
   value: {
@@ -73,53 +79,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  presets: {
-    type: Array as PropType<string[]>,
-    default: () => [],
-  },
-  hideHue: {
-    type: Boolean,
-    default: false,
-  },
-  hideEyeDrop: {
-    type: Boolean,
-    default: false,
-  },
-  hideAdvancedSliders: {
-    type: Boolean,
-    default: false,
-  },
   hideColorGuide: {
-    type: Boolean,
-    default: false,
-  },
-  hideInputType: {
-    type: Boolean,
-    default: false,
-  },
-  hideColorTypeBtns: {
-    type: Boolean,
-    default: false,
-  },
-  hideGradientType: {
-    type: Boolean,
-    default: false,
-  },
-  hideGradientAngle: {
-    type: Boolean,
-    default: false,
-  },
-  hideGradientStop: {
     type: Boolean,
     default: false,
   },
   hideGradientControls: {
     type: Boolean,
     default: false,
-  },
-  locales: {
-    type: Object as PropType<LocalesProps>,
-    default: () => defaultLocales,
   },
   width: {
     type: Number,
@@ -128,10 +94,6 @@ const props = defineProps({
   height: {
     type: Number,
     default: 300,
-  },
-  style: {
-    type: Object,
-    default: () => {},
   },
   disableDarkMode: {
     type: Boolean,
@@ -142,26 +104,5 @@ const props = defineProps({
     default: false,
   },
 })
-
-// context 待抽离hooks
-const context = reactive<IProvide>({
-  value: props.value,
-  width: props.width,
-  height: props.height,
-  hc: {},
-})
-const colors = getColors(props.value)
-const { degrees, degreeStr, isGradient, gradientType } = getDetails(props.value)
-const { currentColor, selectedColor, currentLeft } = getColorObj(colors)
-const tinyColor = tinycolor(currentColor)
-const rgba = tinyColor.toRgb()
-const hsv = tinyColor.toHsv()
-context.hc = { ...rgba, ...hsv }
-// context 待抽离hooks
-
-const styles = computed(() => `width: ${props.width}px`)
-
-console.log(props)
-
-provide('context', context)
+init(props)
 </script>

@@ -1,0 +1,55 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-12-03 19:05:04
+ * @LastEditTime: 2024-12-04 19:12:54
+ * @LastEditors: June
+-->
+<template>
+  <div class="cpg-inputItem-wrap" :style="{ width }">
+    <input v-model="inputVal" class="cpg-input" @change="onChange" />
+    <div class="cpg-input-label">{{ props.label }}</div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { useColor } from '@/hooks/useColor'
+import { formatInputValues } from '@/utils/format'
+
+const { colorState } = useColor()
+const width = computed(() => (colorState.hideOpacity ? '22%' : '18%'))
+
+const props = defineProps({
+  inputVal: {
+    type: Number,
+    default: 0,
+  },
+  max: {
+    type: Number,
+    default: 100,
+  },
+  label: {
+    type: String,
+    default: '',
+  },
+  callback: {
+    type: Function,
+  },
+})
+
+const inputVal = ref<number>(0)
+
+const onChange = (e) => {
+  const newVal = formatInputValues(parseFloat(e.target.value), 0, props.max)
+  inputVal.value = newVal
+  props.callback &&
+    typeof props.callback === 'function' &&
+    props.callback(newVal)
+}
+
+watchEffect(() => {
+  if (props.inputVal || props.inputVal === 0) {
+    inputVal.value = props.inputVal
+  }
+})
+</script>

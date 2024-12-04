@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:03:17
- * @LastEditTime: 2024-11-30 21:17:38
+ * @LastEditTime: 2024-12-04 14:43:44
  * @LastEditors: June
  */
 import { ColorsProps } from '@/interfaces'
@@ -24,7 +24,7 @@ export const getColors = (value: string) => {
     const isConic = value?.includes('conic')
     const safeValue = !isConic ? value : defaultGradient
     if (isConic) {
-      console.log('Sorry we cant handle conic gradients yet')
+      console.log("Sorry we can't handle conic gradients yet")
     }
     const obj = gradientParser(safeValue)
     return obj?.colorStops
@@ -34,6 +34,7 @@ export const getColors = (value: string) => {
   }
 }
 
+// input format
 export const formatInputValues = (value: number, min: number, max: number) => {
   return isNaN(value) ? min : value < min ? min : value > max ? max : value
 }

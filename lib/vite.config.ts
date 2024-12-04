@@ -9,7 +9,6 @@ import type { ConfigEnv, UserConfigExport } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vue from '@vitejs/plugin-vue'
 import * as path from 'path'
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import autoprefixer from 'autoprefixer'
@@ -18,11 +17,13 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
+    define: {
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
+    },
     plugins: [
       vue(),
       vueJsx(),
       UnoCSS(),
-      VueSetupExtend(),
       AutoImport({
         imports: ['vue'],
         eslintrc: {

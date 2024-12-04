@@ -1,9 +1,22 @@
-import { LocalesProps } from '@/interfaces'
+/*
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-11-30 21:13:34
+ * @LastEditTime: 2024-12-04 21:10:18
+ * @LastEditors: June
+ */
+import { InputType } from '@/enums'
+
+export const inputTypes: InputType[] = [
+  InputType.rgb,
+  InputType.hsl,
+  InputType.hsv,
+  InputType.cmyk,
+]
 
 export const config = {
   barSize: 18,
   crossSize: 18,
-  inputSize: 40,
   delay: 150,
   defaultColor: 'rgba(175, 51, 242, 1)',
   defaultGradient:

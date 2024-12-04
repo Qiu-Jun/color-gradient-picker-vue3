@@ -6,16 +6,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { IProvide } from '@/interfaces'
-
-const context = inject('context') as IProvide
 const backgroundImage = computed(() => {
-  if (context.value) {
-    console.log(force90degLinear(context.value), 'SSSSSSSSSSSSSS')
-    return force90degLinear(context.value)
-  } else {
-    return ''
-  }
+  return ''
 })
 
 function force90degLinear(color: string) {
