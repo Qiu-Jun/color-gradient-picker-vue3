@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 10:37:40
- * @LastEditTime: 2024-12-04 19:15:10
+ * @LastEditTime: 2024-12-05 13:35:34
  * @LastEditors: June
 -->
 <template>
@@ -41,5 +41,4 @@ const handleUpdateValue = debounce(function (e) {
   color && setValue(color)
   setHc(color)
 }, 250)
-console.log('valuesssss', colorState)
 </script>

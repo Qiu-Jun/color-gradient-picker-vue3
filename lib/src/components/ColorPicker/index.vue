@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-04 19:07:55
+ * @LastEditTime: 2024-12-05 14:06:18
  * @LastEditors: June
 -->
 <template>
@@ -13,6 +13,9 @@
     <template v-if="!props.hideControls">
       <!-- operation -->
       <Operation />
+
+      <!-- AdvancedControls -->
+      <AdvancedControls v-if="colorState.showAdvancedSliders" />
 
       <!-- gradient operation -->
       <OperationGradient
@@ -47,6 +50,7 @@ import {
   GradientBar,
   Inputs,
   Hue,
+  AdvancedControls,
 } from './components'
 import { useColor } from '@/hooks/useColor'
 

@@ -2,29 +2,67 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 11:02:31
- * @LastEditTime: 2024-12-04 18:28:11
+ * @LastEditTime: 2024-12-05 13:42:20
  * @LastEditors: June
 -->
 <template>
-  <div class="cpg-hue-wrap">
-    <div class="cpg-pointer"></div>
+  <div class="cpg-hue-wrap" @mousedown="handleDown" @mousemove="handleMove">
+    <div
+      class="cpg-pointer"
+      :style="{ left: colorState.hc?.h * ((colorState.width! - 18) / 360) + 'px'}"
+    ></div>
 
     <canvas
       ref="canvasRef"
       :width="colorState.width"
       height="14"
       class="cpg-hue-colors"
+      @click="handleClick"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
+import tinycolor from 'tinycolor2'
 import { useColor } from '@/hooks/useColor'
+import { debounce } from 'lodash-es'
+import { getHandleValue } from '@/utils/utils'
 
-const { colorState } = useColor()
+const { colorState, handleChange, setHcH } = useColor()
 // 渲染颜色
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-watchEffect(() => {
+const dragging = ref(false)
+const stopDragging = () => {
+  dragging.value = false
+}
+
+const handleDown = () => {
+  dragging.value = true
+}
+
+const handleHue = (e: any) => {
+  const newHue = getHandleValue(e) * 3.6
+  const tinyHsv = tinycolor({
+    h: newHue,
+    s: colorState.hc?.s,
+    v: colorState.hc?.v,
+  })
+  const { r, g, b } = tinyHsv.toRgb()
+  setHcH(newHue)
+  handleChange(`rgba(${r}, ${g}, ${b}, ${colorState.hc.a})`)
+}
+const handleMove = (e: any) => {
+  if (unref(dragging)) {
+    handleHue(e)
+  }
+}
+const handleClick = debounce(function (e) {
+  if (!unref(dragging)) {
+    handleHue(e)
+  }
+}, 250)
+
+onMounted(() => {
   const canvas = unref(canvasRef)
   if (canvas) {
     const ctx = canvas?.getContext('2d', { willReadFrequently: true })
@@ -39,5 +77,10 @@ watchEffect(() => {
       ctx.fill()
     }
   }
+  window.addEventListener('mouseup', stopDragging)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('mouseup', stopDragging)
 })
 </script>

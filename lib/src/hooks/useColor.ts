@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 23:02:32
- * @LastEditTime: 2024-12-04 21:33:56
+ * @LastEditTime: 2024-12-05 14:07:14
  * @LastEditors: June
  */
 import { getColors } from '@/utils/format'
@@ -14,6 +14,7 @@ import type { ColorPickerProps, GradientProps } from '@/interfaces'
 const colorState = reactive<ColorPickerProps>({
   width: 300,
   height: 300,
+  showAdvancedSliders: false,
 })
 const gradientType = ref<GradientType>(GradientType.linear)
 const tinycolor = ref<typeof tc | null>(null)
@@ -34,6 +35,12 @@ export function useColor() {
     // colorState.hc = hc
   }
 
+  const setHcH = (h: number) => {
+    if (colorState.hc?.h) {
+      colorState.hc.h = h
+    }
+  }
+
   const setValue = (color: string | string[]) => {
     colorState.value = (typeof color === 'string' ? color : color[0])?.replace(
       /\s+/g,
@@ -44,6 +51,10 @@ export function useColor() {
 
   const setInputType = (type: InputType) => {
     colorState.inputType = type
+  }
+
+  const setShowAdvance = (bol: boolean) => {
+    colorState.showAdvancedSliders = bol
   }
 
   // 生成渐变色string
@@ -99,6 +110,8 @@ export function useColor() {
     GradientType: unref(GradientType),
     tinycolor,
     init,
+    setHcH,
+    setShowAdvance,
     setValue,
     setHc,
     setIsGradient,

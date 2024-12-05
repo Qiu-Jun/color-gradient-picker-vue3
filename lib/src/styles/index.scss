@@ -82,7 +82,7 @@
         .cpg-controls-inputType {
           box-shadow: 1px 1px 14px 1px rgba(0, 0, 0, 0.25);
           transition: opacity 120ms linear, visibility linear, z-index linear;
-          @apply box-border absolute -right-2px top-34px p-5px rounded-6px bg-#e9e9f5 z-1 opacity-100 visible;
+          @apply box-border absolute -right-2px top-34px p-5px rounded-6px bg-#e9e9f5 z-1000 opacity-100 visible;
           .cpg-control-inputType-item {
             transition: all 0.16s ease;
             @apply f-center text-12px font-700 leading-1 h-24px px-8px rounded-4px;
@@ -140,6 +140,21 @@
       @apply h-50px flex flex-wrap flex-1 justify-between ml-12px;
       .cpg-preview-presetItem {
         @apply w-[10.2%] h-24px line-block rounded-4px mb-2px box-border cursor-pointer;
+      }
+    }
+  }
+
+  .cpg-advance-wrap {
+    transition: 120ms linear;
+    @apply w-full h-80px mt-12px select-none;
+    .cpg-advance-item {
+      @apply w-full mt-8px box-border relative;
+      .cpg-advance-text {
+        text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
+        @apply absolute left-50% top-50% -translate-y-50% -translate-x-50% z-1 text-center text-#fff text-12px;
+      }
+      .cpg-advance-canvas {
+        @apply relative rounded-14px;
       }
     }
   }
