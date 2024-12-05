@@ -22,6 +22,7 @@
 <script lang="ts" setup>
 import InputItem from './InputItem.vue'
 import { useColor } from '@/hooks/useColor'
+import { InputType } from '@/enums'
 
 const { colorState, handleChange } = useColor()
 const red = ref(colorState.hc?.r)
@@ -34,10 +35,12 @@ const handleRgb = ({ r, g, b }: { r: number; g: number; b: number }) => {
 watch(
   () => colorState.hc,
   (val) => {
-    const { r, g, b } = val
-    red.value = r
-    green.value = g
-    blue.value = b
+    if (colorState.inputType === InputType.rgb) {
+      const { r, g, b } = val
+      red.value = r
+      green.value = g
+      blue.value = b
+    }
   },
 )
 </script>

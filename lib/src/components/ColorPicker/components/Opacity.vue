@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-02 12:33:56
- * @LastEditTime: 2024-12-04 21:14:33
+ * @LastEditTime: 2024-12-05 11:45:04
  * @LastEditors: June
 -->
 <template>
@@ -47,6 +47,7 @@ const handleDown = () => {
 }
 
 const handleOpacity = (e: any) => {
+  if (!colorState.hc) return
   const { r, g, b } = colorState.hc
   const newO = getHandleValue(e) / 100
   const newColor = `rgba(${r}, ${g}, ${b}, ${newO})`

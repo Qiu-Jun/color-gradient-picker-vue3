@@ -22,7 +22,7 @@
   }
 
   .cpg-inputs-wrap {
-    @apply mt-14px box-border flex justify-between items-center overflow-hidden;
+    @apply mt-14px box-border select-none flex justify-between items-center overflow-hidden;
     .cpg-inputItem-wrap {
       @apply text-center text-12px;
       .cpg-input {

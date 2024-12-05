@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 11:43:15
- * @LastEditTime: 2024-12-04 16:09:48
+ * @LastEditTime: 2024-12-05 12:27:10
  * @LastEditors: June
 -->
 <template>
@@ -11,11 +11,12 @@
     <HSLInputs v-if="colorState.inputType === InputType.hsl" />
     <RGBInputs v-if="colorState.inputType === InputType.rgb" />
     <HSVInputs v-if="colorState.inputType === InputType.hsv" />
-    <CMKYInputs v-if="colorState.inputType === InputType.cmyk" />
+    <CMYKInputs v-if="colorState.inputType === InputType.cmyk" />
     <InputItem
       v-if="!colorState.hideOpacity"
       :input-val="colorState.hc.a * 100"
       label="A"
+      :callback="(val: number) => handleChange(`rgba(${colorState.hc?.r}, ${colorState.hc?.g}, ${colorState.hc?.b}, ${val / 100})`)"
     />
   </div>
 </template>
@@ -26,13 +27,13 @@ import {
   HSLInputs,
   RGBInputs,
   HSVInputs,
-  CMKYInputs,
+  CMYKInputs,
   InputItem,
 } from './components'
 import { useColor } from '@/hooks/useColor'
 import { InputType } from '@/enums'
 
-const { colorState } = useColor()
+const { colorState, handleChange } = useColor()
 
 watch(
   () => colorState.inputType,
