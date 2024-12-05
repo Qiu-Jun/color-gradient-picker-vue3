@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-05 14:06:18
+ * @LastEditTime: 2024-12-05 16:54:19
  * @LastEditors: June
 -->
 <template>
@@ -54,6 +54,7 @@ import {
 } from './components'
 import { useColor } from '@/hooks/useColor'
 
+const emits = defineEmits(['change'])
 const { init, colorState } = useColor()
 
 watch(
@@ -108,5 +109,7 @@ const props = defineProps({
     default: false,
   },
 })
-init(props)
+
+const onChange = (val) => emits('change', val)
+init(props, onChange)
 </script>

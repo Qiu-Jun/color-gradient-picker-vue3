@@ -4,13 +4,14 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-12-05 14:04:35
+ * @LastEditTime: 2024-12-05 22:15:05
  */
 import { InputType } from '@/enums'
 
 export interface ColorPickerProps {
   width: number
   height: number
+  degrees?: number
   value?: string
   showAdvancedSliders?: boolean
   hideControls?: boolean
@@ -32,6 +33,7 @@ export interface ColorPickerProps {
   hc?: any
   isGradient?: boolean
   inputType?: InputType
+  onChange?: any
 }
 
 export type ColorsProps = {

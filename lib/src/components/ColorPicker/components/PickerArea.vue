@@ -101,14 +101,8 @@ onBeforeUnmount(() => {
 })
 
 watch(
-  () => [colorState.hc.s, colorState.hc.v],
+  () => [colorState.hc?.s, colorState.hc?.v],
   () => {
-    console.log(
-      colorState.hc?.s,
-      colorState.hc?.v,
-      colorState.width,
-      colorState.height,
-    )
     const [x, y] = computeSquareXY(
       colorState.hc?.s,
       colorState.hc?.v * 100,
