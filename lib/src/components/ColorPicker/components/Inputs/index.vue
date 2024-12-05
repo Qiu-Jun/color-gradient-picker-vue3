@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 11:43:15
- * @LastEditTime: 2024-12-04 16:09:48
+ * @LastEditTime: 2024-12-05 11:44:38
  * @LastEditors: June
 -->
 <template>
@@ -16,6 +16,7 @@
       v-if="!colorState.hideOpacity"
       :input-val="colorState.hc.a * 100"
       label="A"
+      :callback="(val: number) => handleChange(`rgba(${colorState.hc?.r}, ${colorState.hc?.g}, ${colorState.hc?.b}, ${val / 100})`)"
     />
   </div>
 </template>
@@ -32,7 +33,7 @@ import {
 import { useColor } from '@/hooks/useColor'
 import { InputType } from '@/enums'
 
-const { colorState } = useColor()
+const { colorState, handleChange } = useColor()
 
 watch(
   () => colorState.inputType,
