@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 10:37:40
- * @LastEditTime: 2024-12-04 19:15:10
+ * @LastEditTime: 2024-12-06 10:53:14
  * @LastEditors: June
 -->
 <template>
@@ -12,7 +12,9 @@
       :style="{
         background: colorState.value,
         border:
-          colorState.value === 'rgba(255,255,255,1)' ? '1px solid #96959c' : '',
+          colorState.value === 'rgba(255,255,255,1)' || colorState.hc?.a === 1
+            ? '1px solid #96959c'
+            : '',
       }"
     ></div>
     <div class="cpg-preview-presetColor" @click="handleUpdateValue">
@@ -41,5 +43,4 @@ const handleUpdateValue = debounce(function (e) {
   color && setValue(color)
   setHc(color)
 }, 250)
-console.log('valuesssss', colorState)
 </script>

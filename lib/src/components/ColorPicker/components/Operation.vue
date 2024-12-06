@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 10:28:59
- * @LastEditTime: 2024-12-04 16:13:47
+ * @LastEditTime: 2024-12-05 16:36:56
  * @LastEditors: June
 -->
 <template>
@@ -26,9 +26,17 @@
       </div>
     </div>
     <div class="cpg-controls-item">
-      <div class="cpg-controls-item-btn" role="button">
-        <SvgIcon ext-class="text-14px " icon="regulate" />
-      </div>
+      <!-- <div
+        class="cpg-controls-item-btn"
+        :class="{ 'cpg-control-active': showAdvancedControl }"
+        role="button"
+      >
+        <SvgIcon
+          ext-class="text-14px "
+          icon="regulate"
+          @click="toggleShowAdvancedControl"
+        />
+      </div> -->
       <!-- <div class="cpg-controls-item-btn" role="button">
         <SvgIcon ext-class="text-14px " icon="guide" />
       </div> -->
@@ -71,8 +79,11 @@ import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 import { inputTypes } from '@/constants'
 import { InputType } from '@/enums'
+import { config } from '@/constants'
 
-const { colorState, setIsGradient, setInputType } = useColor()
+const { defaultColor, defaultGradient } = config
+const { colorState, setIsGradient, setInputType, setShowAdvance, setGradient } =
+  useColor()
 
 // input type
 const showInputTypes = ref(false)
@@ -84,7 +95,15 @@ const handleSetInputType = debounce(function (type: InputType) {
   toggleShowInputType()
 }, 250)
 
+// toggleShowAdvancedControl
+// const showAdvancedControl = ref(false)
+// const toggleShowAdvancedControl = debounce(function () {
+//   showAdvancedControl.value = !showAdvancedControl.value
+//   setShowAdvance(showAdvancedControl.value)
+// }, 250)
+
 const handleSetIsGradient = debounce(function (val: boolean) {
   setIsGradient(val)
+  setGradient(val ? defaultGradient : defaultColor)
 }, 250)
 </script>

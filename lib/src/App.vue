@@ -8,10 +8,14 @@
 -->
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
-    <ColorPicker />
+    <ColorPicker @change="onChange" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import ColorPicker from '@/components/ColorPicker'
+
+const onChange = (val: any) => {
+  console.log(val, 'colorpicker 回调')
+}
 </script>

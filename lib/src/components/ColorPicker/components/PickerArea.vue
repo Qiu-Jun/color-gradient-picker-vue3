@@ -1,20 +1,21 @@
 <template>
-  <section
-    class="cpg-wrapper"
-    :style="{
-      width: `${colorState.width}px`,
-    }"
-    @mouseup="stopDragging"
-    @touchend="stopDragging"
-    @mousedown="handleCanvasDown"
-    @touchstart="handleCanvasDown"
-    @mousemove="handleMove"
-  >
-    <div class="cpg-wrapper">
+  <section class="relative">
+    <div
+      class="cpg-picker-wrap"
+      :style="{
+        width: `${colorState.width}px`,
+      }"
+      @mouseup="stopDragging"
+      @touchend="stopDragging"
+      @mousedown="handleCanvasDown"
+      @touchstart="handleCanvasDown"
+      @mousemove="handleMove"
+    >
       <span
         class="cpg-pointer"
         :style="{
-          transform: `translate(${dragPos.x}px, ${dragPos.y}px)`,
+          left: `${dragPos.x}px`,
+          top: `${dragPos.y}px`,
         }"
         @mousedown="handleMouseDown"
       ></span>
@@ -60,7 +61,7 @@ const handleColor = throttle(function (e: any) {
     const y1 = Math.min(y + crossSize / 2, height - 1)
     const newS = (x1 / width) * 100
     const newY = 100 - (y1 / height) * 100
-    dragPos.x = newY === 0 ? dragPos?.x : x
+    dragPos.x = newY === 0 ? dragPos.x : x
     dragPos.y = y
     const updated = tc(
       `hsva(${colorState.hc?.h}, ${newS}%, ${newY}%, ${colorState.hc?.a})`,
@@ -69,13 +70,6 @@ const handleColor = throttle(function (e: any) {
   }
 }, 200)
 
-//   const onMouseMove = throttle(() => {
-//     console.log(e)
-//
-//   }, 3000)
-
-//   onMouseMove()
-// }
 const handleMove = throttle(function (e: any) {
   if (unref(dragging)) {
     handleColor(e)
@@ -100,27 +94,18 @@ onBeforeUnmount(() => {
   window.removeEventListener('mouseup', handleUp)
 })
 
-watch(
-  () => [colorState.hc.s, colorState.hc.v],
-  () => {
-    console.log(
-      colorState.hc?.s,
-      colorState.hc?.v,
-      colorState.width,
-      colorState.height,
-    )
+watchEffect(() => {
+  if (colorState.hc) {
     const [x, y] = computeSquareXY(
       colorState.hc?.s,
       colorState.hc?.v * 100,
       colorState.width!,
       colorState.height!,
     )
-    console.log(x, y)
     dragPos.x = x
-    dragPos.y - y
-  },
-  { immediate: true },
-)
+    dragPos.y = y
+  }
+})
 
 // drawing
 watchEffect(() => {

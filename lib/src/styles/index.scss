@@ -3,6 +3,12 @@
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
   @apply box-border rounded-8px bg-#fff relative p-8px z-100 text-#323136;
 
+  .cpg-picker-wrap {
+    .cpg-picker-area {
+      @apply rounded-6px overflow-hidden;
+    }
+  }
+
   .cpg-gradient-controls-wrapper {
     @apply bg-[var(--gray)] rounded-4px box-border p-4px text-12px mt-12px;
   }
@@ -82,7 +88,7 @@
         .cpg-controls-inputType {
           box-shadow: 1px 1px 14px 1px rgba(0, 0, 0, 0.25);
           transition: opacity 120ms linear, visibility linear, z-index linear;
-          @apply box-border absolute -right-2px top-34px p-5px rounded-6px bg-#e9e9f5 z-1 opacity-100 visible;
+          @apply box-border absolute -right-2px top-34px p-5px rounded-6px bg-#e9e9f5 z-1000 opacity-100 visible;
           .cpg-control-inputType-item {
             transition: all 0.16s ease;
             @apply f-center text-12px font-700 leading-1 h-24px px-8px rounded-4px;
@@ -107,7 +113,7 @@
   .cpg-gradient-controls-wrapper {
     @apply w-full flex justify-between items-center h-28px;
     .cpg-deg-input {
-      @apply bg-transparent border-none text-#323136 text-12px font-500 h-24px outline-none text-center w-34px;
+      @apply bg-transparent border-none text-#323136 text-12px font-500 h-24px outline-none  w-28px;
     }
     .cpg-gradient-btn {
       @apply box-border rounded-4px f-center px-8px py-4px cursor-pointer;
@@ -116,18 +122,6 @@
       box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
       transition: all 0.16s ease;
       @apply bg-#fff text-#568cf5;
-    }
-  }
-
-  .cpg-wrapper {
-    @apply box-border relative select-none;
-    .cpg-picker-area {
-      @apply relative rounded-6px overflow-hidden;
-    }
-    .cpg-pointer {
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-      transition: all 10ms linear;
-      @apply inline-block border-2px border-solid border-#fff w-18px h-18px absolute rounded-50% box-border cursor-pointer z-1000;
     }
   }
 
@@ -144,11 +138,32 @@
     }
   }
 
+  .cpg-advance-wrap {
+    transition: 120ms linear;
+    @apply w-full h-80px mt-12px select-none;
+    .cpg-advance-item {
+      @apply w-full mt-8px box-border relative;
+      .cpg-advance-text {
+        text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
+        @apply absolute left-50% top-50% -translate-y-50% -translate-x-50% z-1 text-center text-#fff text-12px;
+      }
+      .cpg-advance-canvas {
+        @apply relative rounded-14px;
+      }
+    }
+  }
+
   // pointer
   .cpg-pointer {
     transition: all 10ms linear;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     @apply w-18px h-18px absolute left-0 -top-2px box-border border-2px border-solid border-#fff z-10 rounded-50%;
+  }
+  .cpg-pointer-centerPoint {
+    &::after {
+      content: '';
+      @apply inline-block absolute left-50% top-50% -translate-x-50% -translate-y-50% w-5px h-5px rounded-50% bg-#fff;
+    }
   }
 }
 [role='button'] {

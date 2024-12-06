@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:13:34
- * @LastEditTime: 2024-12-04 21:10:18
+ * @LastEditTime: 2024-12-05 22:16:38
  * @LastEditors: June
  */
 import { InputType } from '@/enums'
@@ -20,7 +20,7 @@ export const config = {
   delay: 150,
   defaultColor: 'rgba(175, 51, 242, 1)',
   defaultGradient:
-    'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
+    'linear-gradient(90deg, rgb(245, 66, 245) 0%, rgb(0, 0, 255) 100%)',
 }
 
 export const defaultLocales = {
