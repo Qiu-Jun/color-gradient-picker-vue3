@@ -1,27 +1,27 @@
 <template>
   <InputItem
-    :input-val="round(valueState.c * 100)"
+    v-model:input-val="cmykState.c"
     label="C"
     :max="100"
-    :callback="(val: number) => handleCmyk({c: val / 100, m: valueState.m, y: valueState.y, k: valueState.k})"
+    :callback="(val: number) => handleCmyk({c: val / 100, m: cmykState.m, y: cmykState.y, k: cmykState.k})"
   />
   <InputItem
-    :input-val="round(valueState.m * 100)"
+    v-model:input-val="cmykState.m"
     label="M"
     :max="100"
-    :callback="(val: number) => handleCmyk({ c: valueState.c, m: val, y: valueState.y, k: valueState.k })"
+    :callback="(val: number) => handleCmyk({ c: cmykState.c, m: val / 100, y: cmykState.y, k: cmykState.k })"
   />
   <InputItem
-    :input-val="round(valueState.y * 100)"
+    v-model:input-val="cmykState.y"
     label="Y"
     :max="100"
-    :callback="(val: number) => handleCmyk({ c: valueState.c, m: valueState.m, y: val, k: valueState.k })"
+    :callback="(val: number) => handleCmyk({ c: cmykState.c, m: cmykState.m, y: val / 100, k: cmykState.k })"
   />
   <InputItem
-    :input-val="round(valueState.k * 100)"
+    v-model:input-val="cmykState.k"
     label="K"
     :max="100"
-    :callback="(val: number) => handleCmyk({ c: valueState.c, m: valueState.m, y: valueState.y, k: val })"
+    :callback="(val: number) => handleCmyk({ c: cmykState.c, m: cmykState.m, y: cmykState.y, k: val / 100 })"
   />
 </template>
 
@@ -39,7 +39,7 @@ const handleCmyk = (value: any) => {
   handleChange(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
 }
 
-const valueState = reactive({
+const cmykState = reactive({
   c: 0,
   m: 0,
   y: 0,
@@ -53,7 +53,12 @@ watchEffect(() => {
       colorState.hc?.g,
       colorState.hc?.b,
     )
-    Object.assign(valueState, { c, m, y, k })
+    Object.assign(cmykState, {
+      c: round(c * 100),
+      m: round(m * 100),
+      y: round(y * 100),
+      k: round(k * 100),
+    })
   }
 })
 </script>

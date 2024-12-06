@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 19:05:04
- * @LastEditTime: 2024-12-04 21:36:46
+ * @LastEditTime: 2024-12-06 11:57:14
  * @LastEditors: June
 -->
 <template>
@@ -19,6 +19,7 @@ import { formatInputValues } from '@/utils/format'
 const { colorState } = useColor()
 const width = computed(() => (colorState.hideOpacity ? '22%' : '18%'))
 
+const emits = defineEmits(['update:inputVal'])
 const props = defineProps({
   inputVal: {
     type: Number,
@@ -42,6 +43,7 @@ const inputVal = ref<number>(0)
 const onChange = (e) => {
   const newVal = formatInputValues(parseFloat(e.target.value), 0, props.max)
   inputVal.value = newVal
+  emits('update:inputVal', newVal)
   props.callback &&
     typeof props.callback === 'function' &&
     props.callback(newVal)
