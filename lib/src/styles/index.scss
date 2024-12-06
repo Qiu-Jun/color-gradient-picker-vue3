@@ -3,6 +3,12 @@
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
   @apply box-border rounded-8px bg-#fff relative p-8px z-100 text-#323136;
 
+  .cpg-picker-wrap {
+    .cpg-picker-area {
+      @apply rounded-6px overflow-hidden;
+    }
+  }
+
   .cpg-gradient-controls-wrapper {
     @apply bg-[var(--gray)] rounded-4px box-border p-4px text-12px mt-12px;
   }
