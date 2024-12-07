@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'iconfont'; /* Project id 4773720 */
+  src: url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAUMAAsAAAAACgwAAAS+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDQAqGfIYQATYCJAMYCw4ABCAFhGcHUhvOCCMRJmzyG9lfHNjGmsQeqS1qTrf3it/dGanRlpX+SJrnCOLvzdnXrlKjO2v0BYPpYp0CWikBgFipAv+H98wXVTkDaXsCks3J5mKC/o7YvugvIQAatxj+n4VzbmzsC1WStSOPPksuXPr+6Pp7jdP8R2At1e2l1oqfovFQMBSs5XojvDmPqJ8C7AzWIv/XCGDMQxj0IC6FArXr0o4mMIIz+gPExXFdW10KAl4Hr6EGgZKHHiyAvAIB0jM6Cbz4vx//vEIAkBAZjKucVsVWwIPXxh/aMfo/DZDfuH0CuTgBFchAtzBD3NXbbgELYx2MqCyCiwJQzyGAQr/Wry1fiz+0/x++jAnR1mwiKua/PBBQOAwBooEhm1KUQ2k9Or5NI8CXCY0EvixpFPAlppHBf7tOJVVtwMYFiBVA3JOUbnKDIPCgS11NVeMSAhw3EIm09VVVhUJtnX5OvGRiNLWIsZJljJE+1IrZtJQulXKklCHHUtzSEr24uAygVBO9tMQ9fMgs14jZ8HnMw4eR7I0z9Nmb3O3zzLlb0u7Tcw4dJ+arSVSUb38JwpwSqbAnAMbIQt8lVbn7CEEiZYySJDk5wPSCPlH5RacQQrVXg1UolPr9yuNHd+r0aHJyWlYmYhX6SoRZlih27T6uO7+pQOvIZPmsgtGXKuVyHUpGsnoSBZPQ6IobX0XK3mPuc3fpOxL2CH2UO84c6x+QM5JSvX6CXCbrUDJ6EnXOdStEGmxSIi/ZwBUgLH6gNrQqOLgqtPaHhbzhVcG1oT9yE/sDGgp8c318cn0LHlGIQhFK4j8Sy+oTpQqxRHHO2qx4noMk5wQnpwSX5AsuSU6JNKInSwMS+uLje7fF9/XFbaWQh8JJvX3xCa1OsQ6OsRSFxTpSfLLWQWk0tsdnz5iPWwVzm8zMPt1+7LDB/i8WGRb70zObv5SoWqla2Owlsx4lHkZiowccOuN/OH8d/ynpiYAhvUp6oMmTnkLAaXAqf6TQDDfG9UVDdaQqXu18OUqP/Lz87HNZX/lkrKJZV3CLCu+0eRDVmR/rXelb162tJvy48eWfVKdqain1neoxtbUxZfwEJeYq6iejVhtRvmLfWN8Yo3xS3UBd394EgefOTsKJ2YTw++o1lVrBRPHJU9Euyce6bSq1KnOy78VpTvxjyS7R3FPFWjAAgB5sNCcAkA/RSdCH0ZgGs1xsP1YJ0I+dwZC/6HngOvKGUbF6yFcBiQPgvfePwvf24IDz/mJyUHh/SHkBiFtUP62Udbd5kKMp+4CRBIzNHvAfdM08Hkoxh2X+8QrtGBI+Y8gErAiF4gQVyQsagVAYcxZ7fEJbC2CQIgSwt5IAhIaTgFJzEzAaRgg45SEQ9LwBHg1/QUSCqF6OZBcD9IGhBIZefwp66K2lFH/UK9w7Ky4KP8FzIINUF1U2eUEP7mPL/HGNiCXLQ0dn9m7IeaCRhwgthRcZ27K0ZT9S6KFbHBhKYOj1p6CH3rr4kv57V7h3VgwSnjGeAzk61UUFEC6yHuq6kOnzxzUill5meejorFqQzdhAY/m8CC2F7xAZ25LCs6ismF7R3eIBGC+MT2nLFDlK1GgxsGNlgsq7HHoo3hlkCNbeLLfHT3vlsFgAAAA=')
+      format('woff2'),
+    url('iconfont.woff?t=1733577750913') format('woff'),
+    url('iconfont.ttf?t=1733577750913') format('truetype');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cpg-radial:before {
+  content: '\e61b';
+}
+
+.cpg-linear:before {
+  content: '\e61c';
+}
+
+.cpg-delete:before {
+  content: '\e655';
+}
+
+.cpg-deg:before {
+  content: '\e621';
+}
+
+.cpg-exchage:before {
+  content: '\eb73';
+}

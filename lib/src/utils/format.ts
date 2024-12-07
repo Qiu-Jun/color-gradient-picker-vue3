@@ -2,19 +2,19 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:03:17
- * @LastEditTime: 2024-12-04 14:43:44
+ * @LastEditTime: 2024-12-07 11:10:04
  * @LastEditors: June
  */
-import { ColorsProps } from '@/interfaces'
 import { gradientParser } from './gradientParser'
 import { config } from '@/constants'
+import type { GradientProps } from '@/interfaces'
 
 const { defaultColor, defaultGradient } = config
-export const low = (color: ColorsProps) => {
+export const low = (color: GradientProps) => {
   return color.value.toLowerCase()
 }
 
-export const high = (color: ColorsProps) => {
+export const high = (color: GradientProps) => {
   return color.value.toUpperCase()
 }
 

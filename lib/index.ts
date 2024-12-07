@@ -4,9 +4,9 @@
  * @Author: June
  * @Date: 2023-03-18 00:33:21
  * @LastEditors: June
- * @LastEditTime: 2023-10-15 16:36:08
+ * @LastEditTime: 2024-12-07 21:24:44
  */
-import ColorPicker from './components/ColorPicker/index.vue'
-import './index.scss'
+export { ColorPicker } from './src/components/ColorPicker'
+export type { GradientProps, ColorPickerProps } from '@/interfaces'
+import './src/styles/index.scss'
 import 'virtual:uno.css'
-export default ColorPicker

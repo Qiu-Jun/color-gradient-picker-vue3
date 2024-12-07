@@ -1,6 +1,6 @@
 import { formatInputValues } from './format'
-import { ColorsProps } from '@/interfaces'
 import { config } from '@/constants'
+import type { GradientProps } from '@/interfaces'
 
 const { barSize, crossSize } = config
 
@@ -123,13 +123,13 @@ export const objectToString = (value: any) => {
   }
 }
 
-export const getColorObj = (colors: ColorsProps[]) => {
-  const idxCols = colors?.map((c: ColorsProps, i: number) => ({
+export const getColorObj = (colors: GradientProps[]) => {
+  const idxCols = colors?.map((c: GradientProps, i: number) => ({
     ...c,
     index: i,
   }))
 
-  const upperObj = idxCols?.find((c: ColorsProps) => isUpperCase(c.value))
+  const upperObj = idxCols?.find((c: GradientProps) => isUpperCase(c.value))
   const ccObj = upperObj || idxCols[0]
 
   return {

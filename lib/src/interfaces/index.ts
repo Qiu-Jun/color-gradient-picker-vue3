@@ -4,15 +4,17 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-12-05 22:15:05
+ * @LastEditTime: 2024-12-07 21:39:01
  */
-import { InputType } from '@/enums'
+import { InputType, Modes } from '@/enums'
 
 export interface ColorPickerProps {
   width: number
   height: number
+  gradientColorsIdx?: number // 当前的渐变点下标
   degrees?: number
-  value?: string
+  degreesStr?: string
+  value?: string // 预览颜色  最终结果
   showAdvancedSliders?: boolean
   hideControls?: boolean
   hideInputs?: boolean
@@ -34,30 +36,23 @@ export interface ColorPickerProps {
   isGradient?: boolean
   inputType?: InputType
   onChange?: any
+  mode?: IMode
+  gradientColors?: GradientProps[] // 渐变点颜色
 }
 
-export type ColorsProps = {
+export type GradientProps = {
   value: string
   index?: number
   left?: number
 }
 
-export type GradientProps = {
-  value: string
-  index: number
-  left: number
-}
+export type IMode = Modes.solid | Modes.gradient
 
-export type ThemeProps = {
-  light: ThemeMode
-  dark: ThemeMode
-}
-
-export type ThemeMode = {
-  color?: string
-  background?: string
-  highlights?: string
-  accent?: string
+export interface IColor {
+  mode: IMode
+  color: string
+  angle?: number
+  colors?: { color: string; offset: number }[]
 }
 
 export interface IProvide extends ColorPickerProps {

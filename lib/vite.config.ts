@@ -13,7 +13,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import autoprefixer from 'autoprefixer'
 import { visualizer } from 'rollup-plugin-visualizer'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
@@ -29,12 +28,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         eslintrc: {
           enabled: true,
         },
-      }),
-      createSvgIconsPlugin({
-        // 指定需要缓存的图标文件夹
-        iconDirs: [path.resolve(process.cwd(), 'src/svgs')],
-        // 指定symbolId格式
-        symbolId: 'icon-[dir]-[name]',
       }),
       visualizer(),
     ],

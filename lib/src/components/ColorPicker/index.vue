@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-05 16:54:19
+ * @LastEditTime: 2024-12-07 21:38:18
  * @LastEditors: June
 -->
 <template>
@@ -18,13 +18,11 @@
       <AdvancedControls v-if="colorState.showAdvancedSliders" />
 
       <!-- gradient operation -->
-      <OperationGradient
-        v-if="!props.hideGradientControls && colorState.isGradient"
-      />
+      <OperationGradient v-if="!props.hideGradientControls && isGradient" />
     </template>
 
     <!-- GradientBar -->
-    <GradientBar v-if="!props.hideGradientControls && colorState.isGradient" />
+    <GradientBar v-if="!props.hideGradientControls && isGradient" />
 
     <!-- Hue -->
     <Hue />
@@ -53,9 +51,10 @@ import {
   AdvancedControls,
 } from './components'
 import { useColor } from '@/hooks/useColor'
+import type { IColor } from '@/interfaces'
 
-const emits = defineEmits(['change'])
-const { init, colorState } = useColor()
+const emits = defineEmits(['update:value', 'change'])
+const { init, colorState, isGradient } = useColor()
 
 watch(
   () => colorState,
@@ -110,6 +109,9 @@ const props = defineProps({
   },
 })
 
-const onChange = (val) => emits('change', val)
+const onChange = (val: IColor) => {
+  emits('update:value', val.color)
+  emits('change', { ...val })
+}
 init(props, onChange)
 </script>

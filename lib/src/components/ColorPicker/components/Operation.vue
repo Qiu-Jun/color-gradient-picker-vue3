@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 10:28:59
- * @LastEditTime: 2024-12-05 16:36:56
+ * @LastEditTime: 2024-12-07 21:37:32
  * @LastEditors: June
 -->
 <template>
@@ -10,17 +10,17 @@
     <div class="cpg-controls-item">
       <div
         class="cpg-controls-item-btn"
-        :class="{ 'cpg-control-active': !colorState.isGradient }"
+        :class="{ 'cpg-control-active': !isGradient }"
         role="button"
-        @click="handleSetIsGradient(false)"
+        @click="handleSetIsGradient(Modes.solid)"
       >
         Solid
       </div>
       <div
         class="cpg-controls-item-btn"
-        :class="{ 'cpg-control-active': colorState.isGradient }"
+        :class="{ 'cpg-control-active': isGradient }"
         role="button"
-        @click="handleSetIsGradient(true)"
+        @click="handleSetIsGradient(Modes.gradient)"
       >
         Gradient
       </div>
@@ -45,9 +45,13 @@
         :class="{ 'cpg-control-active': showInputTypes }"
         role="button"
       >
-        <SvgIcon
-          :ext-class="showInputTypes ? 'text-14px text-#568cf5' : 'text-14px'"
-          icon="toggle"
+        <span
+          :class="
+            showInputTypes
+              ? 'text-14px iconfont cpg-exchage text-#568cf5'
+              : 'iconfont cpg-exchage text-14px'
+          "
+          icon=""
           @click="toggleShowInputType"
         />
 
@@ -74,16 +78,15 @@
 </template>
 
 <script lang="ts" setup>
-import SvgIcon from '@/components/SvgIcon'
 import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 import { inputTypes } from '@/constants'
-import { InputType } from '@/enums'
+import { InputType, Modes } from '@/enums'
 import { config } from '@/constants'
+import type { IMode } from '@/interfaces'
 
 const { defaultColor, defaultGradient } = config
-const { colorState, setIsGradient, setInputType, setShowAdvance, setGradient } =
-  useColor()
+const { colorState, isGradient, setInputType, setMode, setValue } = useColor()
 
 // input type
 const showInputTypes = ref(false)
@@ -102,8 +105,9 @@ const handleSetInputType = debounce(function (type: InputType) {
 //   setShowAdvance(showAdvancedControl.value)
 // }, 250)
 
-const handleSetIsGradient = debounce(function (val: boolean) {
-  setIsGradient(val)
-  setGradient(val ? defaultGradient : defaultColor)
+const handleSetIsGradient = debounce(function (mode: IMode) {
+  if (colorState.mode === mode) return
+  setMode(mode)
+  setValue(mode === Modes.gradient ? defaultGradient : defaultColor)
 }, 250)
 </script>
