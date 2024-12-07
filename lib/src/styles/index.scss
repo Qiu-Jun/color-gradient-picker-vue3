@@ -1,3 +1,5 @@
+@import url(./iconfont.css);
+
 .cpg-box {
   --gray: #e9e9f5;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
@@ -14,9 +16,9 @@
   }
 
   .cpg-gradientBar-warp {
-    @apply w-full h-14px mt-14px relative;
+    @apply h-14px mt-14px relative;
     .cpg-gradientBar {
-      @apply wh-full rounded-10px;
+      @apply h-full rounded-10px;
     }
   }
 

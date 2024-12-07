@@ -8,7 +8,7 @@
         }"
         @click="handleChangeType(GradientType.linear)"
       >
-        <SvgIcon ext-class="text-14px " icon="linear" />
+        <i class="text-14px iconfont cpg-linear"></i>
       </div>
       <div
         class="cpg-gradient-btn"
@@ -17,7 +17,7 @@
         }"
         @click="handleChangeType(GradientType.radial)"
       >
-        <SvgIcon ext-class="text-14px " icon="radial" />
+        <i class="text-14px iconfont cpg-radial"></i>
       </div>
     </div>
     <div class="flex justify-end items-center">
@@ -25,7 +25,7 @@
         v-if="gradientType === GradientType.linear"
         class="cpg-gradient-btn relative"
       >
-        <SvgIcon ext-class="text-14px " icon="deg" />
+        <i class="text-14px iconfont cpg-deg"></i>
         <input
           class="cpg-deg-input text-right"
           :value="colorState.degrees"
@@ -39,36 +39,39 @@
         <input class="cpg-deg-input" value="22" />
       </div> -->
       <div class="cpg-gradient-btn" @click="handleDeletePoint">
-        <SvgIcon
-          :ext-class="
-            disabledDelete
-              ? 'text-14px text-#ccc cursor-not-allowed'
-              : 'text-14px'
-          "
-          icon="delete"
-        />
+        <i
+          class="text-14px iconfont cpg-delete"
+          :class="{ 'text-#ccc cursor-not-allowed': disabledDelete }"
+        ></i>
       </div>
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import SvgIcon from '@/components/SvgIcon'
 import { GradientType } from '@/enums'
 import { debounce } from 'lodash-es'
 import { useColor } from '@/hooks/useColor'
-import { getColors } from '@/utils/format'
 
-const { colorState, gradientType, setLinear, setRadial, setDegrees } =
-  useColor()
-const colors = computed(() => getColors(colorState.value!))
-const disabledDelete = computed(() => !colors || colors.value.length <= 2)
+const {
+  colorState,
+  gradientType,
+  setLinear,
+  setRadial,
+  setDegrees,
+  createGradientStr,
+  setValue,
+} = useColor()
+const disabledDelete = computed(
+  () => !colorState.gradientColors || colorState.gradientColors.length <= 2,
+)
 // 渐变类型
-// const gradientType = ref<GradientType>(GradientType.linear)
 const handleChangeType = debounce(function (type: GradientType) {
   if (type === unref(gradientType)) return
   type === GradientType.linear && setLinear()
   type === GradientType.radial && setRadial()
+  colorState.gradientColors &&
+    setValue(createGradientStr(colorState.gradientColors))
 }, 250)
 
 // 角度设置
