@@ -145,8 +145,9 @@ const getDegrees = (value: string) => {
   return convertShortHandDeg(s2)
 }
 
+export const getIsGradient = (value: string) => value?.includes('gradient')
+
 export const getDetails = (value: string) => {
-  const isGradient = value?.includes('gradient')
   const gradientType = value?.split('(')[0]
   const degrees = getDegrees(value)
   const degreeStr =
@@ -155,7 +156,7 @@ export const getDetails = (value: string) => {
   return {
     degrees,
     degreeStr,
-    isGradient,
+
     gradientType,
   }
 }

@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-12-07 21:39:01
+ * @LastEditTime: 2024-12-07 22:15:30
  */
 import { InputType, Modes } from '@/enums'
 
@@ -14,7 +14,8 @@ export interface ColorPickerProps {
   gradientColorsIdx?: number // 当前的渐变点下标
   degrees?: number
   degreesStr?: string
-  value?: string // 预览颜色  最终结果
+  gradientColor?: string
+  value?: string
   showAdvancedSliders?: boolean
   hideControls?: boolean
   hideInputs?: boolean

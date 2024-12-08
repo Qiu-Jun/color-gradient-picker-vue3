@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 21:20:20
- * @LastEditTime: 2024-12-07 21:37:16
+ * @LastEditTime: 2024-12-07 23:34:38
  * @LastEditors: June
 -->
 <template>
@@ -11,7 +11,6 @@
       class="cpg-gradientBar"
       :style="{ width: colorState.width + 'px', backgroundImage }"
       @mousedown="handleDown"
-      @mousemove="test"
     ></div>
     <div
       v-for="(point, idx) in colorState.gradientColors"
@@ -28,15 +27,16 @@
 
 <script lang="ts" setup>
 import { useColor } from '@/hooks/useColor'
-import { getColors, low, high } from '@/utils/format'
+import { low, high } from '@/utils/format'
 import { getHandleValue } from '@/utils/utils'
-import type { GradientProps } from '@/interfaces'
-const test = () => console.log('tes')
-const { colorState, createGradientStr } = useColor()
+
+const { colorState, addPoint } = useColor()
 const leftMultiplyer = (colorState.width - 18) / 100
 
 const backgroundImage = computed(() => {
-  return colorState.value ? force90degLinear(colorState.value) : ''
+  return colorState.gradientColor
+    ? force90degLinear(colorState.gradientColor)
+    : ''
 })
 const colors = computed(() => colorState.gradientColors)
 const setSelectedColor = (index: number) => {
@@ -48,16 +48,10 @@ const setSelectedColor = (index: number) => {
   // )
   // createGradientStr(newGradStr)
 }
-watch(
-  () => colors.value,
-  (val) => console.log(val, '哈哈哈哈啊'),
-  { immediate: true },
-)
 
-const addPoint = (e) => {
-  console.log(e, '--------------------------------------')
+const handleCreatePoint = (e) => {
   const left = getHandleValue(e)
-  console.log(left)
+  addPoint(left)
 }
 
 const dragging = ref(false)
@@ -67,7 +61,7 @@ const stopDragging = () => {
 
 const handleDown = (e: any) => {
   if (unref(dragging)) return
-  addPoint(e)
+  handleCreatePoint(e)
   dragging.value = true
 }
 

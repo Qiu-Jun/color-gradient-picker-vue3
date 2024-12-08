@@ -2,13 +2,19 @@
  * @Author: June
  * @Description: store
  * @Date: 2024-12-03 23:02:32
- * @LastEditTime: 2024-12-07 13:02:38
+ * @LastEditTime: 2024-12-08 12:23:51
  * @LastEditors: June
  */
 import { getColors, formatInputValues, low, high } from '@/utils/format'
-import { getColorObj, getDetails, isUpperCase } from '@/utils/utils'
+import {
+  getColorObj,
+  getDetails,
+  getIsGradient,
+  isUpperCase,
+} from '@/utils/utils'
 import tc from 'tinycolor2'
 import { InputType, GradientType, Modes } from '@/enums'
+import { cloneDeep } from 'lodash-es'
 import type { ColorPickerProps, GradientProps, IMode } from '@/interfaces'
 
 const colorState = reactive<ColorPickerProps>({
@@ -18,6 +24,7 @@ const colorState = reactive<ColorPickerProps>({
   mode: Modes.solid,
   degrees: 90,
   degreesStr: '',
+  gradientColor: '',
   gradientColors: [],
   gradientColorsIdx: 0,
 })
@@ -33,40 +40,32 @@ export function useColor() {
     }
   }
 
-  const setValue = (color: string) => {
-    if (!color) return
-    const { degreeStr, isGradient } = getDetails(color)
-    setMode(isGradient ? Modes.gradient : Modes.solid)
-    const colors: GradientProps[] = getColors(color)
+  const setValue = (color?: string) => {
+    const _color = color || colorState.value!
+    const colors: GradientProps[] = getColors(_color)
+    const { degreeStr } = getDetails(_color)
     if (unref(isGradient)) {
       colorState.degreesStr = degreeStr
       colorState.gradientColors = colors
-      colorState.value = createGradientStr(colors)
+      colorState.gradientColor = createGradientStr(colors)
       tinycolor.value = tc(
         colorState.gradientColors[colorState.gradientColorsIdx!].value,
       )
-      onChange &&
-        onChange({
-          color: colorState.value,
-          mode: colorState.mode,
-          degrees: colorState.degrees,
-        })
-
       // colorState.gradientColors[colorState.gradientColorsIdx].value = color
     } else {
-      colorState.value = color.replace(/\s+/g, '')
-      onChange &&
-        onChange({
-          color: colorState.value,
-          mode: colorState.mode,
-          degrees: colorState.degrees,
-        })
+      colorState.value = colors[0].value?.replace(/\s+/g, '')
 
       tinycolor.value = tc(colors[0].value)
     }
     const rgba = tinycolor.value.toRgb()
     const hsv = tinycolor.value.toHsv()
     colorState.hc = { ...rgba, ...hsv }
+    onChange &&
+      onChange({
+        color: unref(isGradient) ? colorState.gradientColor : colorState.value,
+        mode: colorState.mode,
+        degrees: colorState.degrees,
+      })
     console.log('-----------------hc', colorState.hc)
   }
 
@@ -107,18 +106,18 @@ export function useColor() {
   }
 
   const handleGradient = (newColor: string, left?: number) => {
-    const colorValue = colorState.value
+    const colors = colorState.gradientColors || []
+    const colorValue = colors[colorState.gradientColorsIdx!]
     if (!colorValue) return
-    const colors = getColors(colorValue)
-    const { currentLeft } = getColorObj(colors)
-    const remaining = colors?.filter(
-      (c: GradientProps) => !isUpperCase(c.value),
-    )
-    const newColors = [
-      { value: newColor.toUpperCase(), left: left ?? currentLeft },
-      ...remaining,
-    ]
-    createGradientStr(newColors)
+    if (!left && left !== 0) {
+      colorValue.left = left
+    }
+    // 测试用
+    colorValue.left = 0
+    console.log(colorValue, '==--------=====******')
+    colorValue.value = newColor
+    const newGradStr = createGradientStr(colors)
+    setValue(newGradStr)
   }
 
   const setDegrees = (val: number) => {
@@ -138,7 +137,6 @@ export function useColor() {
   }
 
   const handleChange = (newColor: string) => {
-    console.log(newColor)
     if (unref(isGradient)) {
       handleGradient(newColor)
     } else {
@@ -147,13 +145,13 @@ export function useColor() {
   }
 
   const setLinear = () => {
-    const value = colorState.value?.split(/,(.+)/)[1]
+    const value = colorState.gradientColor?.split(/,(.+)/)[1]
     value && setValue(`linear-gradient(90deg, ${value}`)
     gradientType.value = GradientType.linear
   }
 
   const setRadial = () => {
-    const value = colorState.value?.split(/,(.+)/)[1]
+    const value = colorState.gradientColor?.split(/,(.+)/)[1]
     value && setValue(`radial-gradient(circle, ${value}`)
     gradientType.value = GradientType.radial
   }
@@ -162,9 +160,10 @@ export function useColor() {
     Object.assign(colorState, data)
     onChange = cb
     if (colorState.value) {
+      const isGradient = getIsGradient(colorState.value)
       colorState.inputType = InputType.rgb
-      const color = getColors(colorState.value)
-      setValue(typeof color === 'string' ? color : color[0].value)
+      setMode(isGradient ? Modes.gradient : Modes.solid)
+      setValue()
     }
   }
 
@@ -222,6 +221,16 @@ export function useColor() {
     }
   }
 
+  const setSelectedPoint = (index: number) => {
+    colorState.gradientColorsIdx = index
+  }
+
+  const updateSelectColor = (value: GradientProps) => {
+    const selectedPoint =
+      colorState.gradientColor![colorState.gradientColorsIdx!]
+    Object.assign(selectedPoint, value)
+  }
+
   // const setSelectedPoint = (index: number) => {
   //   if (unref(isGradient)) {
   //     const newGradStr = colors?.map((cc: GradientProps, i: number) => ({
@@ -236,18 +245,23 @@ export function useColor() {
   //   }
   // }
 
-  // const addPoint = (left: number) => {
-  //   const newColors = [
-  //     ...colors.map((c: GradientProps) => ({ ...c, value: low(c) })),
-  //     { value: currentColor, left: left },
-  //   ]
-  //   createGradientStr(newColors)
-  //   if (!left) {
-  //     console.log(
-  //       'You did not pass a stop value (left amount) for the new color point so it defaulted to 50',
-  //     )
-  //   }
-  // }
+  const addPoint = (left: number) => {
+    if (!left) {
+      console.log(
+        'You did not pass a stop value (left amount) for the new color point so it defaulted to 50',
+      )
+    }
+    const colors = cloneDeep(colorState.gradientColors!)
+    const newColors = [
+      ...colors?.map((c: GradientProps) => ({
+        ...c,
+        value: low(c),
+      })),
+      { value: colors[colorState.gradientColorsIdx!].value, left: left },
+    ]
+    const color = createGradientStr(newColors)
+    setValue(color)
+  }
 
   // const deletePoint = (index: number) => {
   //   if (colorState.gradientColors && colorState.gradientColors?.length > 2) {
@@ -283,7 +297,6 @@ export function useColor() {
     setValue,
     setInputType,
     handleChange,
-    // setGradientValue,
     setMode,
     setLinear,
     setRadial,
@@ -297,5 +310,8 @@ export function useColor() {
     setHue,
     setSaturation,
     setLightness,
+    addPoint,
+    setSelectedPoint,
+    updateSelectColor,
   }
 }

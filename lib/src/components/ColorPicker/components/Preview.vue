@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 10:37:40
- * @LastEditTime: 2024-12-07 21:38:03
+ * @LastEditTime: 2024-12-08 12:20:12
  * @LastEditors: June
 -->
 <template>
@@ -12,7 +12,7 @@
       :style="{
         background: colorValue,
         border:
-          colorValue === 'rgba(255,255,255,1)' || colorState.hc?.a === 1
+          colorValue === 'rgba(255,255,255,1)' && colorState.hc?.a === 1
             ? '1px solid #96959c'
             : '',
       }"
@@ -37,13 +37,24 @@ import { fakePresets } from '@/constants'
 import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 
-const { colorState, setValue } = useColor()
+const { colorState, isGradient, handleChange, setValue, updateSelectColor } =
+  useColor()
 
-const colorValue = computed(() => colorState?.value || '')
+const colorValue = computed(() => {
+  if (unref(isGradient)) {
+    return colorState.gradientColor ?? ''
+  } else {
+    return colorState.value ?? ''
+  }
+})
 
-// 渐变时未处理  只改变当前选中的点
 const handleUpdateValue = debounce(function (e) {
   const color = e.target.dataset.color
-  color && setValue(color)
+  if (!color) return
+  if (unref(isGradient)) {
+    handleChange(color)
+  } else {
+    setValue(color)
+  }
 }, 250)
 </script>
