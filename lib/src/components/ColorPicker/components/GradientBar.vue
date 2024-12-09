@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 21:20:20
- * @LastEditTime: 2024-12-07 23:34:38
+ * @LastEditTime: 2024-12-09 14:36:46
  * @LastEditors: June
 -->
 <template>
@@ -10,7 +10,8 @@
     <div
       class="cpg-gradientBar"
       :style="{ width: colorState.width + 'px', backgroundImage }"
-      @mousedown="handleDown"
+      @mousedown="handleBarDown"
+      @mousemove="handleMove"
     ></div>
     <div
       v-for="(point, idx) in colorState.gradientColors"
@@ -20,17 +21,17 @@
         'cpg-pointer-centerPoint': colorState.gradientColorsIdx === idx,
       }"
       :style="{ left: point.left! * leftMultiplyer + 'px' }"
-      @mousedown.stop="() => false"
+      @mousedown="handlePoinDown($event, idx)"
     ></div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useColor } from '@/hooks/useColor'
-import { low, high } from '@/utils/format'
 import { getHandleValue } from '@/utils/utils'
+import { throttle } from 'lodash-es'
 
-const { colorState, addPoint } = useColor()
+const { colorState, handleGradient, addPoint, setSelectColorIdx } = useColor()
 const leftMultiplyer = (colorState.width - 18) / 100
 
 const backgroundImage = computed(() => {
@@ -38,37 +39,31 @@ const backgroundImage = computed(() => {
     ? force90degLinear(colorState.gradientColor)
     : ''
 })
-const colors = computed(() => colorState.gradientColors)
-const setSelectedColor = (index: number) => {
-  // const newGradStr = colorState.gradientColors?.map(
-  //   (cc: GradientProps, i: number) => ({
-  //     ...cc,
-  //     value: i === index ? high(cc) : low(cc),
-  //   }),
-  // )
-  // createGradientStr(newGradStr)
-}
-
-const handleCreatePoint = (e) => {
-  const left = getHandleValue(e)
-  addPoint(left)
-}
 
 const dragging = ref(false)
 const stopDragging = () => {
   dragging.value = false
 }
 
-const handleDown = (e: any) => {
-  if (unref(dragging)) return
-  handleCreatePoint(e)
+const handleMove = throttle(function (e) {
+  if (unref(dragging)) {
+    const { gradientColors, gradientColorsIdx } = colorState
+    const color = gradientColors![gradientColorsIdx!].value
+    handleGradient(color, getHandleValue(e))
+  }
+}, 100)
+
+const handlePoinDown = (e: any, idx: number) => {
+  e.stopPropagation()
+  setSelectColorIdx(idx)
   dragging.value = true
 }
 
-const handleMove = (e: any) => {
-  console.log('sdfsdf')
+const handleBarDown = (e: any) => {
   if (unref(dragging)) return
-  // handleGradient(currentColor, getHandleValue(e))
+  const left = getHandleValue(e)
+  addPoint(left)
+  dragging.value = true
 }
 
 onMounted(() => {

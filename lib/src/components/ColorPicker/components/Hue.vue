@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 11:02:31
- * @LastEditTime: 2024-12-05 13:42:20
+ * @LastEditTime: 2024-12-09 14:31:43
  * @LastEditors: June
 -->
 <template>
@@ -28,7 +28,8 @@ import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 import { getHandleValue } from '@/utils/utils'
 
-const { colorState, handleChange, setHcH } = useColor()
+const { colorState, isGradient, handleChange, setHcH, updateSelectColor } =
+  useColor()
 // 渲染颜色
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const dragging = ref(false)
@@ -49,7 +50,8 @@ const handleHue = (e: any) => {
   })
   const { r, g, b } = tinyHsv.toRgb()
   setHcH(newHue)
-  handleChange(`rgba(${r}, ${g}, ${b}, ${colorState.hc.a})`)
+  const rgbaColor = `rgba(${r}, ${g}, ${b}, ${colorState.hc.a})`
+  unref(isGradient) ? updateSelectColor(rgbaColor) : handleChange(rgbaColor)
 }
 const handleMove = (e: any) => {
   if (unref(dragging)) {

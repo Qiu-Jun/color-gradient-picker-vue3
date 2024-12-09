@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: store
  * @Date: 2024-12-03 23:02:32
- * @LastEditTime: 2024-12-08 12:23:51
+ * @LastEditTime: 2024-12-09 14:30:43
  * @LastEditors: June
  */
 import { getColors, formatInputValues, low, high } from '@/utils/format'
@@ -54,17 +54,18 @@ export function useColor() {
       // colorState.gradientColors[colorState.gradientColorsIdx].value = color
     } else {
       colorState.value = colors[0].value?.replace(/\s+/g, '')
-
       tinycolor.value = tc(colors[0].value)
     }
     const rgba = tinycolor.value.toRgb()
     const hsv = tinycolor.value.toHsv()
+    console.log(rgba, ';;;;;;;;;;;;;;;;;;;;;;;;;;;')
     colorState.hc = { ...rgba, ...hsv }
     onChange &&
       onChange({
         color: unref(isGradient) ? colorState.gradientColor : colorState.value,
         mode: colorState.mode,
         degrees: colorState.degrees,
+        gradientColors: [...colorState.gradientColors!],
       })
     console.log('-----------------hc', colorState.hc)
   }
@@ -101,7 +102,6 @@ export function useColor() {
     const newGrade = `${unref(
       gradientType,
     )}-gradient(${`${colorState.degreesStr!}`}, ${colorString.join(', ')})`
-
     return newGrade
   }
 
@@ -109,12 +109,7 @@ export function useColor() {
     const colors = colorState.gradientColors || []
     const colorValue = colors[colorState.gradientColorsIdx!]
     if (!colorValue) return
-    if (!left && left !== 0) {
-      colorValue.left = left
-    }
-    // 测试用
-    colorValue.left = 0
-    console.log(colorValue, '==--------=====******')
+    colorValue.left = left ?? colorValue.left
     colorValue.value = newColor
     const newGradStr = createGradientStr(colors)
     setValue(newGradStr)
@@ -163,7 +158,7 @@ export function useColor() {
       const isGradient = getIsGradient(colorState.value)
       colorState.inputType = InputType.rgb
       setMode(isGradient ? Modes.gradient : Modes.solid)
-      setValue()
+      setValue(colorState.value)
     }
   }
 
@@ -225,25 +220,14 @@ export function useColor() {
     colorState.gradientColorsIdx = index
   }
 
-  const updateSelectColor = (value: GradientProps) => {
-    const selectedPoint =
-      colorState.gradientColor![colorState.gradientColorsIdx!]
-    Object.assign(selectedPoint, value)
+  const updateSelectColor = (value: string) => {
+    const colors = colorState.gradientColors || []
+    const colorValue = colors[colorState.gradientColorsIdx!]
+    if (!colorValue) return
+    colorValue.value = value
+    const newGradStr = createGradientStr(colors)
+    setValue(newGradStr)
   }
-
-  // const setSelectedPoint = (index: number) => {
-  //   if (unref(isGradient)) {
-  //     const newGradStr = colors?.map((cc: GradientProps, i: number) => ({
-  //       ...cc,
-  //       value: i === index ? high(cc) : low(cc),
-  //     }))
-  //     createGradientStr(newGradStr)
-  //   } else {
-  //     console.log(
-  //       'This function is only relevant when the picker is in gradient mode',
-  //     )
-  //   }
-  // }
 
   const addPoint = (left: number) => {
     if (!left) {
@@ -282,10 +266,6 @@ export function useColor() {
   //   }
   // }
 
-  // const setPointLeft = (left: number) => {
-  //   handleGradient(currentColor, formatInputValues(left, 0, 100))
-  // }
-
   return {
     colorState,
     tinycolor,
@@ -312,6 +292,7 @@ export function useColor() {
     setLightness,
     addPoint,
     setSelectedPoint,
+    handleGradient,
     updateSelectColor,
   }
 }

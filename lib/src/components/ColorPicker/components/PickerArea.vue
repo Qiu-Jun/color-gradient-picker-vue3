@@ -38,7 +38,7 @@ import { config } from '@/constants'
 import tc from 'tinycolor2'
 import { useColor } from '@/hooks/useColor'
 
-const { colorState, setValue } = useColor()
+const { colorState, isGradient, setValue, updateSelectColor } = useColor()
 const { crossSize } = config
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
@@ -66,7 +66,8 @@ const handleColor = throttle(function (e: any) {
     const updated = tc(
       `hsva(${colorState.hc?.h}, ${newS}%, ${newY}%, ${colorState.hc?.a})`,
     )
-    setValue(updated.toRgbString())
+    const color = updated.toRgbString()
+    unref(isGradient) ? updateSelectColor(color) : setValue(color)
   }
 }, 200)
 
