@@ -1,17 +1,12 @@
 /*
  * @Author: June
- * @Description: store
- * @Date: 2024-12-03 23:02:32
- * @LastEditTime: 2024-12-09 14:30:43
+ * @Description: Description
+ * @Date: 2024-12-04 21:20:20
+ * @LastEditTime: 2024-12-09 16:04:13
  * @LastEditors: June
  */
 import { getColors, formatInputValues, low, high } from '@/utils/format'
-import {
-  getColorObj,
-  getDetails,
-  getIsGradient,
-  isUpperCase,
-} from '@/utils/utils'
+import { getDetails, getIsGradient } from '@/utils/utils'
 import tc from 'tinycolor2'
 import { InputType, GradientType, Modes } from '@/enums'
 import { cloneDeep } from 'lodash-es'
@@ -58,7 +53,6 @@ export function useColor() {
     }
     const rgba = tinycolor.value.toRgb()
     const hsv = tinycolor.value.toHsv()
-    console.log(rgba, ';;;;;;;;;;;;;;;;;;;;;;;;;;;')
     colorState.hc = { ...rgba, ...hsv }
     onChange &&
       onChange({
@@ -116,19 +110,28 @@ export function useColor() {
   }
 
   const setDegrees = (val: number) => {
-    if (gradientType.value !== GradientType.linear) return false
-    colorState.degrees = val
-    const value = colorState.value?.split(/,(.+)/)[1]
-    setValue(`linear-gradient(${formatInputValues(val, 0, 360)}deg, ${value}`)
-    {
-      console.log(
+    if (gradientType.value !== GradientType.linear)
+      return console.log(
         'Warning: you are updating degrees when the gradient type is not linear. This will change the gradients type which may be undesired',
       )
-    }
+
+    const remaining = colorState.gradientColor?.split(/,(.+)/)[1]
+    if (!remaining) return
+    colorState.degrees = val
+    setValue(
+      `linear-gradient(${formatInputValues(val, 0, 360)}deg, ${remaining}`,
+    )
   }
 
   const setSelectColorIdx = (idx: number) => {
     colorState.gradientColorsIdx = idx
+    // warning: Here is update hc， but not need to handle onChange
+    tinycolor.value = tc(
+      colorState.gradientColors![colorState.gradientColorsIdx!].value,
+    )
+    const rgba = tinycolor.value.toRgb()
+    const hsv = tinycolor.value.toHsv()
+    colorState.hc = { ...rgba, ...hsv }
   }
 
   const handleChange = (newColor: string) => {
@@ -230,41 +233,44 @@ export function useColor() {
   }
 
   const addPoint = (left: number) => {
-    if (!left) {
+    if (!left && left !== 0) {
       console.log(
         'You did not pass a stop value (left amount) for the new color point so it defaulted to 50',
       )
     }
     const colors = cloneDeep(colorState.gradientColors!)
+    const curColorValue = colors[colorState.gradientColorsIdx!]
+
     const newColors = [
       ...colors?.map((c: GradientProps) => ({
         ...c,
         value: low(c),
       })),
-      { value: colors[colorState.gradientColorsIdx!].value, left: left },
-    ]
+      { value: curColorValue.value, left: left },
+    ]?.sort((a: any, b: any) => a.left - b.left)
+
+    colorState.gradientColorsIdx = newColors.findIndex((i) => i.left === left)
     const color = createGradientStr(newColors)
     setValue(color)
   }
 
-  // const deletePoint = (index: number) => {
-  //   if (colorState.gradientColors && colorState.gradientColors?.length > 2) {
-  //     const pointToDelete = index ?? colorState.gradientColorsIdx
-  //     const remaining = colors?.filter(
-  //       (rc: ColorsProps, i: number) => i !== pointToDelete,
-  //     )
-  //     createGradientStr(remaining)
-  //     if (!index) {
-  //       console.log(
-  //         'You did not pass in the index of the point you wanted to delete so the function default to the currently selected point',
-  //       )
-  //     }
-  //   } else {
-  //     console.log(
-  //       'A gradient must have atleast two colors, disable your delete button when necessary',
-  //     )
-  //   }
-  // }
+  const deletePoint = (index?: number) => {
+    const colors = colorState.gradientColors
+    if (colors && colors?.length > 2) {
+      const pointToDelete = index ?? colorState.gradientColorsIdx
+      const remaining = colors?.filter(
+        (rc: GradientProps, i: number) => i !== pointToDelete,
+      )
+      colorState.gradientColors = cloneDeep(remaining)
+
+      const newGradientColor = createGradientStr(remaining)
+      setValue(newGradientColor)
+    } else {
+      console.log(
+        'A gradient must have atleast two colors, disable your delete button when necessary',
+      )
+    }
+  }
 
   return {
     colorState,
@@ -294,5 +300,6 @@ export function useColor() {
     setSelectedPoint,
     handleGradient,
     updateSelectColor,
+    deletePoint,
   }
 }

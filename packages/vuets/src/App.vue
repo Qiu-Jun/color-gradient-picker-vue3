@@ -3,37 +3,28 @@
  * @Description: 
  * @Date: 2023-10-03 23:30:50
  * @LastEditors: June
- * @LastEditTime: 2023-10-03 23:32:04
+ * @LastEditTime: 2024-12-09 16:19:41
 -->
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">
     <div>
-      <ColorPicker
-        :color="color"
-        cancel-text="cancel"
-        cancel-color="red"
-        @change="onChange"
-      />
+      <ColorPicker v-model:value="curColor" @change="onChange" />
     </div>
-    <div>
-      <ColorPicker :is-gradient="true" @change="onChange" />
-    </div>
+
+    <div
+      class="w-50px h-50px rounded-10px"
+      :style="{ background: curColor }"
+    ></div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import ColorPicker from 'color-gradient-picker-vue3'
+import { ColorPicker } from 'color-gradient-picker-vue3'
 import 'color-gradient-picker-vue3/dist/style.css'
 
-const color = ref({
-  red: 255,
-  green: 0,
-  blue: 0,
-  alpha: 1,
-})
-
-const onChange = (color) => {
-  console.log(color)
+const curColor = ref('rgba(175, 51, 242, 1)')
+const onChange = (val: any) => {
+  console.log(val, 'colorpicker 回调')
 }
 </script>

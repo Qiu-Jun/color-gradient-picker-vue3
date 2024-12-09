@@ -61,6 +61,7 @@ const {
   setDegrees,
   createGradientStr,
   setValue,
+  deletePoint,
 } = useColor()
 const disabledDelete = computed(
   () => !colorState.gradientColors || colorState.gradientColors.length <= 2,
@@ -77,7 +78,6 @@ const handleChangeType = debounce(function (type: GradientType) {
 // 角度设置
 const onSetDegrees = (e) => {
   const val = e.target.value
-  console.log(val)
   setDegrees(val)
 }
 
@@ -87,5 +87,6 @@ const onSetDegrees = (e) => {
 const handleDeletePoint = debounce(function () {
   if (unref(disabledDelete)) return
   console.log('删除')
+  deletePoint()
 }, 250)
 </script>

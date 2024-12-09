@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 21:20:20
- * @LastEditTime: 2024-12-09 14:36:46
+ * @LastEditTime: 2024-12-09 14:52:25
  * @LastEditors: June
 -->
 <template>
@@ -45,13 +45,13 @@ const stopDragging = () => {
   dragging.value = false
 }
 
-const handleMove = throttle(function (e) {
+const handleMove = (e) => {
   if (unref(dragging)) {
     const { gradientColors, gradientColorsIdx } = colorState
     const color = gradientColors![gradientColorsIdx!].value
     handleGradient(color, getHandleValue(e))
   }
-}, 100)
+}
 
 const handlePoinDown = (e: any, idx: number) => {
   e.stopPropagation()

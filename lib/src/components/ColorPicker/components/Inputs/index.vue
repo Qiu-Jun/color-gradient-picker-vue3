@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 11:43:15
- * @LastEditTime: 2024-12-06 11:01:29
+ * @LastEditTime: 2024-12-09 16:01:28
  * @LastEditors: June
 -->
 <template>
@@ -14,7 +14,7 @@
     <CMYKInputs v-if="colorState.inputType === InputType.cmyk" />
     <InputItem
       v-if="!colorState.hideOpacity"
-      :input-val="colorState.hc.a * 100"
+      :input-val="(colorState.hc?.a ?? 0) * 100"
       label="A"
       :callback="(val: number) => handleChange(`rgba(${colorState.hc?.r}, ${colorState.hc?.g}, ${colorState.hc?.b}, ${val / 100})`)"
     />
@@ -34,9 +34,4 @@ import { useColor } from '@/hooks/useColor'
 import { InputType } from '@/enums'
 
 const { colorState, handleChange } = useColor()
-
-watch(
-  () => colorState.inputType,
-  (val) => console.log('噢噢噢噢', val),
-)
 </script>

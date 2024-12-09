@@ -33,6 +33,29 @@ yarn add color-gradient-picker-vue3
 | confirmBg    | confirm button background color (确认背景颜色) | '#fff'                                                                                                                                                                                                        |
 | change       | Event                                          |                                                                                                                                                                                                               |
 
+```html
+<!-- beta -->
+<template>
+  <div id="app" class="flex justify-start items-center">
+    <ColorPicker v-model:value="curColor" @change="onChange" />
+
+    <div
+      class="w-50px h-50px rounded-10px"
+      :style="{ background: curColor }"
+    ></div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ColorPicker } from '@/components/ColorPicker'
+
+const curColor = ref('rgba(175, 51, 242, 1)')
+const onChange = (val: any) => {
+  console.log(val, 'colorpicker 回调')
+}
+</script>
+```
+
 #### waring
 
 - If don't show footer confirm button, it will emits frequently.You'd better use `debounce or throttle` to optimize `@change Event`
