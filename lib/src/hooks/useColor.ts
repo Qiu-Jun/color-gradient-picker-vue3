@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 21:20:20
- * @LastEditTime: 2024-12-09 16:04:13
+ * @LastEditTime: 2024-12-10 13:41:41
  * @LastEditors: June
  */
 import { getColors, formatInputValues, low, high } from '@/utils/format'
@@ -54,14 +54,27 @@ export function useColor() {
     const rgba = tinycolor.value.toRgb()
     const hsv = tinycolor.value.toHsv()
     colorState.hc = { ...rgba, ...hsv }
-    onChange &&
-      onChange({
-        color: unref(isGradient) ? colorState.gradientColor : colorState.value,
-        mode: colorState.mode,
-        degrees: colorState.degrees,
-        gradientColors: [...colorState.gradientColors!],
-      })
-    console.log('-----------------hc', colorState.hc)
+    if (onChange) {
+      if (unref(isGradient)) {
+        onChange({
+          color: colorState.gradientColor,
+          mode: colorState.mode,
+          degrees: colorState.degrees,
+          gradientType: unref(gradientType),
+          gradientColors: cloneDeep(
+            colorState.gradientColors?.map((i: GradientProps) => ({
+              color: i.value?.toLowerCase(),
+              left: i.left,
+            })),
+          ),
+        })
+      } else {
+        onChange({
+          color: colorState.value,
+          mode: colorState.mode,
+        })
+      }
+    }
   }
 
   // const setGradientValue = (startingGradiant: string) => {

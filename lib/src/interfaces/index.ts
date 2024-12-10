@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-12-07 22:15:30
+ * @LastEditTime: 2024-12-10 12:54:02
  */
 import { InputType, Modes } from '@/enums'
 
@@ -62,3 +62,4 @@ export interface IProvide extends ColorPickerProps {
   height: number
   hc: any
 }
+export type IColorPicker = any

@@ -57,6 +57,7 @@
   "devDependencies": {
     "autoprefixer": "^9.0.0",
     "rollup-plugin-visualizer": "^5.9.2",
+    "terser": "^5.18.1",
     "unocss": "^0.56.5",
     "unplugin-auto-import": "^0.16.4"
   },

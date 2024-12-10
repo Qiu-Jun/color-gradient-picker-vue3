@@ -1,8 +1,8 @@
 @import url(./iconfont.css);
 
 .cpg-box {
-  --gray: #e9e9f5;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+  min-width: 320px !important;
   @apply box-border rounded-8px bg-#fff relative p-8px z-100 text-#323136;
 
   .cpg-picker-wrap {
@@ -12,7 +12,7 @@
   }
 
   .cpg-gradient-controls-wrapper {
-    @apply bg-[var(--gray)] rounded-4px box-border p-4px text-12px mt-12px;
+    @apply bg-#e9e9f5 rounded-4px box-border p-4px text-12px mt-12px;
   }
 
   .cpg-gradientBar-warp {

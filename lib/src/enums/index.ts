@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 枚举
  * @Date: 2024-12-04 11:58:12
- * @LastEditTime: 2024-12-06 09:16:43
+ * @LastEditTime: 2024-12-10 13:15:02
  * @LastEditors: June
  */
 export enum InputType {
@@ -18,6 +18,6 @@ export enum GradientType {
 }
 
 export enum Modes {
-  solid = 'Solid',
-  gradient = 'Gradient',
+  solid = 'solid',
+  gradient = 'gradient',
 }
