@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 10:28:59
- * @LastEditTime: 2024-12-07 21:37:32
+ * @LastEditTime: 2024-12-10 16:24:40
  * @LastEditors: June
 -->
 <template>
@@ -17,6 +17,7 @@
         Solid
       </div>
       <div
+        v-if="!colorState.hideGradientControls && isGradient"
         class="cpg-controls-item-btn"
         :class="{ 'cpg-control-active': isGradient }"
         role="button"

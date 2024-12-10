@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-10 13:05:21
+ * @LastEditTime: 2024-12-10 16:27:03
  * @LastEditors: June
 -->
 <template>
@@ -18,11 +18,13 @@
       <AdvancedControls v-if="colorState.showAdvancedSliders" />
 
       <!-- gradient operation -->
-      <OperationGradient v-if="!props.hideGradientControls && isGradient" />
+      <OperationGradient
+        v-if="!colorState.hideGradientControls && isGradient"
+      />
     </template>
 
     <!-- GradientBar -->
-    <GradientBar v-if="!props.hideGradientControls && isGradient" />
+    <GradientBar v-if="!colorState.hideGradientControls && isGradient" />
 
     <!-- Hue -->
     <Hue />
@@ -55,12 +57,6 @@ import type { IColor } from '@/interfaces'
 
 const emits = defineEmits(['update:value', 'change'])
 const { init, colorState, isGradient } = useColor()
-
-watch(
-  () => colorState,
-  (val) => console.log(val, '监听colorState'),
-  { immediate: true },
-)
 
 const props = defineProps({
   value: {

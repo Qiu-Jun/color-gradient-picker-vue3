@@ -17,9 +17,6 @@ Color and gradient picker for vue3.js.
 
 <img style="margin: 0 auto;" src="./imgs/introduct.png" width="50%" />
 
-
-
-
 ## color-gradient-picker-vue3
 
 Color and gradient picker for vue3.js. It supports `RBG`, `HSL`, `HSV`, `CMYK`.
@@ -30,6 +27,7 @@ Color and gradient picker for vue3.js. It supports `RBG`, `HSL`, `HSV`, `CMYK`.
 yarn add color-gradient-picker-vue3
 # or npm install color-gradient-picker-vue3 or pnpm install color-gradient-picker-vue3
 ```
+
 ```html
 <!-- beta -->
 <template>
@@ -44,36 +42,37 @@ yarn add color-gradient-picker-vue3
 </template>
 
 <script lang="ts" setup>
-import { ColorPicker } from '@/components/ColorPicker'
+  import { ColorPicker } from '@/components/ColorPicker'
 
-const curColor = ref('rgba(175, 51, 242, 1)')
-const onChange = (val: any) => {
-  console.log(val, 'colorpicker 回调')
-}
-// 文档未完善
-// 返回值说明
-// {
-//     "color": "linear-gradient(90deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 40%, rgba(0,0,255,1) 100%)",  颜色字符串
-//     "mode": "gradient", 模式  gradient | solid
-//     "degrees": 90,  渐变角度  gradient时返回
-//     "gradientType": "linear", 渐变类型 gradient时返回
-//     "gradientColors": [ // 渐变颜色数组
-//         {
-//             "color": "rgba(245,66,245,1)",
-//             "left": 0
-//         },
-//         {
-//             "color": "rgba(245,66,245,1)",
-//             "left": 40
-//         },
-//         {
-//             "color": "rgba(0,0,255,1)",
-//             "left": 100
-//         }
-//     ]
-// }
+  const curColor = ref('rgba(175, 51, 242, 1)')
+  const onChange = (val: any) => {
+    console.log(val, 'colorpicker 回调')
+  }
+  // 文档未完善
+  // 返回值说明
+  // {
+  //     "color": "linear-gradient(90deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 40%, rgba(0,0,255,1) 100%)",  颜色字符串
+  //     "mode": "gradient", 模式  gradient | solid
+  //     "degrees": 90,  渐变角度  gradient时返回
+  //     "gradientType": "linear", 渐变类型 gradient时返回
+  //     "gradientColors": [ // 渐变颜色数组
+  //         {
+  //             "color": "rgba(245,66,245,1)",
+  //             "left": 0
+  //         },
+  //         {
+  //             "color": "rgba(245,66,245,1)",
+  //             "left": 40
+  //         },
+  //         {
+  //             "color": "rgba(0,0,255,1)",
+  //             "left": 100
+  //         }
+  //     ]
+  // }
 </script>
 ```
+
 #### 启动 lib
 
 ```bash

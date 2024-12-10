@@ -86,7 +86,6 @@ const onSetDegrees = (e) => {
 // 删除点
 const handleDeletePoint = debounce(function () {
   if (unref(disabledDelete)) return
-  console.log('删除')
   deletePoint()
 }, 250)
 </script>
