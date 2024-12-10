@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2024-12-10 13:57:39
+ * @LastEditTime: 2024-12-10 16:34:47
 -->
 
 ## color-gradient-picker-vue3
@@ -32,7 +32,8 @@ yarn add color-gradient-picker-vue3
 </template>
 
 <script lang="ts" setup>
-  import { ColorPicker } from '@/components/ColorPicker'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
   const curColor = ref('rgba(175, 51, 242, 1)')
   const onChange = (val: any) => {

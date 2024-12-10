@@ -42,7 +42,8 @@ yarn add color-gradient-picker-vue3
 </template>
 
 <script lang="ts" setup>
-  import { ColorPicker } from '@/components/ColorPicker'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
   const curColor = ref('rgba(175, 51, 242, 1)')
   const onChange = (val: any) => {
