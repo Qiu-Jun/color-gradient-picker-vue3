@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-12-10 12:54:02
+ * @LastEditTime: 2024-12-13 17:01:31
  */
 import { InputType, Modes } from '@/enums'
 
@@ -16,8 +16,8 @@ export interface ColorPickerProps {
   degreesStr?: string
   gradientColor?: string
   value?: string
+  hideGradient?: boolean
   showAdvancedSliders?: boolean
-  hideControls?: boolean
   hideInputs?: boolean
   hideOpacity?: boolean
   hidePresets?: boolean
@@ -30,7 +30,6 @@ export interface ColorPickerProps {
   hideGradientType?: boolean
   hideGradientAngle?: boolean
   hideGradientStop?: boolean
-  hideGradientControls?: boolean
   disableDarkMode?: boolean
   disableLightMode?: boolean
   hc?: any

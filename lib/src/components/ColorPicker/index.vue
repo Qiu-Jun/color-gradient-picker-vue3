@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-10 16:27:03
+ * @LastEditTime: 2024-12-13 18:02:32
  * @LastEditors: June
 -->
 <template>
@@ -10,21 +10,17 @@
     <!-- PickerArea -->
     <PickerArea />
 
-    <template v-if="!props.hideControls">
-      <!-- operation -->
-      <Operation />
+    <!-- operation -->
+    <Operation />
 
-      <!-- AdvancedControls -->
-      <AdvancedControls v-if="colorState.showAdvancedSliders" />
+    <!-- AdvancedControls -->
+    <AdvancedControls v-if="colorState.showAdvancedSliders" />
 
-      <!-- gradient operation -->
-      <OperationGradient
-        v-if="!colorState.hideGradientControls && isGradient"
-      />
-    </template>
+    <!-- gradient operation -->
+    <OperationGradient v-if="!colorState.hideGradient && isGradient" />
 
     <!-- GradientBar -->
-    <GradientBar v-if="!colorState.hideGradientControls && isGradient" />
+    <GradientBar v-if="!colorState.hideGradient && isGradient" />
 
     <!-- Hue -->
     <Hue />
@@ -63,10 +59,6 @@ const props = defineProps({
     type: String,
     default: 'rgba(175, 51, 242, 1)',
   },
-  hideControls: {
-    type: Boolean,
-    default: false,
-  },
   hideInputs: {
     type: Boolean,
     default: false,
@@ -83,7 +75,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  hideGradientControls: {
+  hideGradient: {
     type: Boolean,
     default: false,
   },

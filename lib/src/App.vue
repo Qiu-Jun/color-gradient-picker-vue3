@@ -4,27 +4,23 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2024-12-10 16:21:24
+ * @LastEditTime: 2024-12-13 17:08:29
 -->
 <template>
   <div id="app" class="flex justify-start items-start">
-    <ColorPicker v-model:value="curColor" @change="onChange" />
+    <ColorPicker v-model:value="curColor" hide-gradient @change="onChange" />
 
     <div
       class="w-50px h-50px rounded-10px"
       :style="{ background: curColor }"
     ></div>
 
-    <el-popover placement="right" width="340px" trigger="hover">
+    <!-- <el-popover placement="right" width="340px" trigger="hover">
       <template #reference>
         <el-button class="m-2">Hover to activate</el-button>
       </template>
-      <ColorPicker
-        v-model:value="curColor"
-        hide-gradient-controls
-        @change="onChange"
-      />
-    </el-popover>
+      <ColorPicker v-model:value="curColor" @change="onChange" />
+    </el-popover> -->
   </div>
 </template>
 

@@ -8,10 +8,9 @@
 import type { ConfigEnv, UserConfigExport } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vue from '@vitejs/plugin-vue'
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
-    plugins: [vue(), vueJsx(), VueSetupExtend()],
+    plugins: [vue(), vueJsx()],
   }
 }
