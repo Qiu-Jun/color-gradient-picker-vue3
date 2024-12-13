@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 22:02:02
  * @LastEditors: June
- * @LastEditTime: 2024-12-13 18:04:13
+ * @LastEditTime: 2024-12-13 18:10:58
 -->
 
 ## color-gradient-picker-vue3
@@ -19,13 +19,14 @@ yarn add color-gradient-picker-vue3
 ```
 
 #### 配置说明
-+ hide-opacity 隐藏透明opacity
-+ hide-inputs 隐藏输入input
-+ hide-gradient 隐藏渐变
+
+- hide-opacity 隐藏透明 opacity
+- hide-inputs 隐藏输入 input
+- hide-gradient 隐藏渐变
 
 ```html
 <!-- beta -->
- <!-- 注意目前宽度需要340px, 后续会优化配置宽度 -->
+<!-- 注意目前宽度需要340px, 后续会优化配置宽度 -->
 <template>
   <div id="app" class="flex justify-start items-center">
     <ColorPicker v-model:value="curColor" @change="onChange" />
