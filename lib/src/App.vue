@@ -4,11 +4,11 @@
  * @Author: June
  * @Date: 2023-03-17 23:48:15
  * @LastEditors: June
- * @LastEditTime: 2024-12-13 17:08:29
+ * @LastEditTime: 2024-12-14 15:01:55
 -->
 <template>
   <div id="app" class="flex justify-start items-start">
-    <ColorPicker v-model:value="curColor" hide-gradient @change="onChange" />
+    <ColorPicker v-model:value="curColor" @change="onChange" />
 
     <div
       class="w-50px h-50px rounded-10px"
