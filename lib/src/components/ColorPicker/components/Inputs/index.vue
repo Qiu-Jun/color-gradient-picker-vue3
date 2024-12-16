@@ -2,11 +2,11 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 11:43:15
- * @LastEditTime: 2024-12-09 16:01:28
+ * @LastEditTime: 2024-12-16 17:37:04
  * @LastEditors: June
 -->
 <template>
-  <div class="cpg-inputs-wrap" :style="{ width: `${colorState.width}px` }">
+  <div class="cpg-inputs-wrap">
     <InputHex v-if="colorState.inputType !== InputType.cmyk" />
     <HSLInputs v-if="colorState.inputType === InputType.hsl" />
     <RGBInputs v-if="colorState.inputType === InputType.rgb" />

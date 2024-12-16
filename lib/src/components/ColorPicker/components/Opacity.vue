@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-02 12:33:56
- * @LastEditTime: 2024-12-09 13:55:12
+ * @LastEditTime: 2024-12-16 17:48:28
  * @LastEditors: June
 -->
 <template>
@@ -30,7 +30,7 @@ import { useColor } from '@/hooks/useColor'
 
 const { colorState, handleChange } = useColor()
 const dragging = ref(false)
-const left = ref(colorState.width! - 18) // 18是point的大小
+const left = ref(colorState.width! - 18) //  18是point的大小
 const bg = computed(() => {
   if (colorState.hc) {
     const { r, g, b } = colorState.hc

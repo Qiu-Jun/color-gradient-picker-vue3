@@ -10,7 +10,7 @@ import { InputType, Modes } from '@/enums'
 
 export interface ColorPickerProps {
   width: number
-  height: number
+  height?: number
   gradientColorsIdx?: number // 当前的渐变点下标
   degrees?: number
   degreesStr?: string

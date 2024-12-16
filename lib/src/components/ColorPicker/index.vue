@@ -2,11 +2,11 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-13 18:02:32
+ * @LastEditTime: 2024-12-16 17:33:53
  * @LastEditors: June
 -->
 <template>
-  <div class="cpg-box">
+  <div class="cpg-box" :style="{ width: props.width + 'px' }">
     <!-- PickerArea -->
     <PickerArea />
 
@@ -80,10 +80,6 @@ const props = defineProps({
     default: false,
   },
   width: {
-    type: Number,
-    default: 300,
-  },
-  height: {
     type: Number,
     default: 300,
   },

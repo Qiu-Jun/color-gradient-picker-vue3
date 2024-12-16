@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-04 21:20:20
- * @LastEditTime: 2024-12-10 13:41:41
+ * @LastEditTime: 2024-12-16 17:52:25
  * @LastEditors: June
  */
 import { getColors, formatInputValues, low, high } from '@/utils/format'
@@ -169,6 +169,8 @@ export function useColor() {
 
   const init = (data: ColorPickerProps, cb?: any) => {
     Object.assign(colorState, data)
+    colorState.width = data.width <= 320 ? 304 : data.width - 16
+    colorState.height = data.width // 让宽等于高，area区域称为正方形
     onChange = cb
     if (colorState.value) {
       const isGradient = getIsGradient(colorState.value)
