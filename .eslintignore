@@ -4,3 +4,4 @@ index.html
 auto-imports.d.ts
 .eslintrc-auto-import.json
 .nuxi
+docs/.vitepress/dist
