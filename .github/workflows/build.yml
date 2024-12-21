@@ -2,7 +2,7 @@ name: 部署VitePress
 
 on:
   push:
-    branches: ['master']
+    branches: ['main']
 
 jobs:
   build-and-deploy:
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: master # 这一步检查 master 代码
+          ref: main # 这一步检查 main 代码
 
       - name: Setup Node.js and pnpm
         uses: actions/setup-node@v3
