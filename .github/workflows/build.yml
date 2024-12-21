@@ -29,5 +29,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.DEPLOY }}
-          publish_dir: docs/.vitepress/dist # 指定该文件夹中的 dist
+          publish_dir: .vitepress/dist # 指定该文件夹中的 dist
           publish_branch: gh-pages # 推送到关联仓库的 gh-pages 分支
