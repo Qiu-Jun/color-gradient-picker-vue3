@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-21 12:52:42
- * @LastEditTime: 2024-12-21 15:20:51
+ * @LastEditTime: 2024-12-21 16:18:48
  * @LastEditors: June
  */
 import { defineConfig } from 'vitepress'
