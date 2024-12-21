@@ -9,6 +9,7 @@
     "build": "pnpm run -C lib build",
     "dev": "pnpm run -C lib dev",
     "predev": "node scripts/dev.js",
+    "build:docs": "pnpm run -C lib build",
     "eslint": "eslint --ext .ts,.tsx,.jsx,.js,.vue --ignore-path .gitignore --fix src",
     "prettier": "prettier --write .",
     "prepare": "husky install",

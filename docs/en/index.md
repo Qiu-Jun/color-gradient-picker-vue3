@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "color-gradient-picker-vue3"
+  name: 'color-gradient-picker-vue3'
   # text: "color-gradient-picker-vue3-docs"
   tagline: Color and gradient picker for vue3.js. It supports RBG, HSL, HSV, CMYK.
   actions:
@@ -22,4 +22,3 @@ features:
   - title: 各种颜色转换
     details: 支持hsv,hsl,cmyk
 ---
-

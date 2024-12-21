@@ -3,6 +3,7 @@ outline: deep
 ---
 
 # 例子
+
 ```HTML
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">

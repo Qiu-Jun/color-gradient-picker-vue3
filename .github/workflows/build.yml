@@ -1,0 +1,33 @@
+name: 部署VitePress
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: master # 这一步检查 master 代码
+
+      - name: Setup Node.js and pnpm
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.10.0' # 设置 nodejs 的版本
+
+      - name: Build
+        run: |
+          npm i -g pnpm
+          pnpm install
+          pnpm run build:docs
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.DEPLOY }}
+          publish_dir: .vitepress/dist # 指定该文件夹中的 dist
+          publish_branch: gh-pages # 推送到关联仓库的 gh-pages 分支
