@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-21 12:52:42
- * @LastEditTime: 2024-12-21 14:17:53
+ * @LastEditTime: 2024-12-22 00:23:32
  * @LastEditors: June
 -->
 
@@ -36,10 +36,11 @@ yarn add color-gradient-picker-vue3
 
 ## 配置说明
 
-| 参数         | 类型    | 默认值                | 描述                                     |
-| ------------ | ------- | --------------------- | ---------------------------------------- |
-| value        | String  | rgba(175, 51, 242, 1) | 默认颜色                                 |
-| width        | Number  | 320                   | 宽度(注意，颜色选择区域的高度会等于宽度) |
-| hideInputs   | Boolean | false                 | 隐藏输入                                 |
-| hideOpacity  | Boolean | false                 | 隐藏透明度设置滑块                       |
-| hideGradient | Boolean | false                 | 隐藏渐变                                 |
+| 参数         | 类型     | 默认值                | 描述                                     |
+| ------------ | -------- | --------------------- | ---------------------------------------- |
+| value        | String   | rgba(175, 51, 242, 1) | 默认颜色                                 |
+| width        | Number   | 320                   | 宽度(注意，颜色选择区域的高度会等于宽度) |
+| hideInputs   | Boolean  | false                 | 隐藏输入                                 |
+| hideOpacity  | Boolean  | false                 | 隐藏透明度设置滑块                       |
+| hideGradient | Boolean  | false                 | 隐藏渐变                                 |
+| presetColors | String[] | String[]              | 预设颜色                                 |

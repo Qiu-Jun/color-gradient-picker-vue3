@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:13:34
- * @LastEditTime: 2024-12-05 22:16:38
+ * @LastEditTime: 2024-12-22 00:03:52
  * @LastEditors: June
  */
 import { InputType } from '@/enums'
@@ -30,7 +30,7 @@ export const defaultLocales = {
   },
 }
 
-export const fakePresets = [
+export const presetColors = [
   'rgba(0,0,0,1)',
   'rgba(128,128,128, 1)',
   'rgba(192,192,192, 1)',

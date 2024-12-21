@@ -134,9 +134,9 @@
       @apply w-50px h-50px rounded-6px shrink-0 box-border;
     }
     .cpg-preview-presetColor {
-      @apply h-50px flex flex-wrap flex-1 justify-between ml-12px;
+      @apply h-50px flex flex-wrap flex-1 justify-start ml-12px;
       .cpg-preview-presetItem {
-        @apply w-[10.2%] h-24px line-block rounded-4px mb-2px box-border cursor-pointer;
+        @apply w-[10.2%] h-24px line-block rounded-4px ml-2px mb-2px box-border cursor-pointer;
       }
     }
   }

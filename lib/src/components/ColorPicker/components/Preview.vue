@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-03 10:37:40
- * @LastEditTime: 2024-12-08 12:20:12
+ * @LastEditTime: 2024-12-22 00:19:31
  * @LastEditors: June
 -->
 <template>
@@ -19,7 +19,7 @@
     ></div>
     <div class="cpg-preview-presetColor" @click="handleUpdateValue">
       <span
-        v-for="(color, idx) in fakePresets"
+        v-for="(color, idx) in colorState.presetColors"
         :key="color + idx"
         class="cpg-preview-presetItem"
         :style="{
@@ -33,7 +33,6 @@
 </template>
 
 <script lang="ts" setup>
-import { fakePresets } from '@/constants'
 import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 

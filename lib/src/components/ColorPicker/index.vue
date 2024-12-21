@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-21 13:56:09
+ * @LastEditTime: 2024-12-22 00:06:48
  * @LastEditors: June
 -->
 <template>
@@ -49,6 +49,7 @@ import {
   AdvancedControls,
 } from './components'
 import { useColor } from '@/hooks/useColor'
+import { presetColors } from '@/constants'
 import type { IColor } from '@/interfaces'
 
 const emits = defineEmits(['update:value', 'change'])
@@ -75,15 +76,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  presetColors: {
+    type: Array as PropType<string[]>,
+    default: () => presetColors,
+  },
   hidePresets: {
-    type: Boolean,
-    default: false,
-  },
-  disableDarkMode: {
-    type: Boolean,
-    default: false,
-  },
-  disableLightMode: {
     type: Boolean,
     default: false,
   },

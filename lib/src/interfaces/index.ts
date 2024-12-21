@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-06-27 13:16:45
  * @LastEditors: June
- * @LastEditTime: 2024-12-13 17:01:31
+ * @LastEditTime: 2024-12-22 00:02:02
  */
 import { InputType, Modes } from '@/enums'
 
@@ -20,23 +20,14 @@ export interface ColorPickerProps {
   showAdvancedSliders?: boolean
   hideInputs?: boolean
   hideOpacity?: boolean
-  hidePresets?: boolean
-  hideHue?: boolean
-  hideEyeDrop?: boolean
-  hideAdvancedSliders?: boolean
-  hideInputType?: boolean
-  hideColorTypeBtns?: boolean
-  hideGradientType?: boolean
-  hideGradientAngle?: boolean
-  hideGradientStop?: boolean
-  disableDarkMode?: boolean
-  disableLightMode?: boolean
   hc?: any
   isGradient?: boolean
   inputType?: InputType
   onChange?: any
   mode?: IMode
   gradientColors?: GradientProps[] // 渐变点颜色
+  presetColors?: string[]
+  hidePresets?: boolean
 }
 
 export type GradientProps = {
