@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-12-21 12:52:42
- * @LastEditTime: 2024-12-21 16:18:48
+ * @LastEditTime: 2024-12-21 16:30:20
  * @LastEditors: June
  */
 import { defineConfig } from 'vitepress'
@@ -15,6 +15,7 @@ import { enConfig } from '../configs/en'
 import { zhConfig } from '../configs/zh'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/color-gradient-picker-vue3/',
   /* 文档配置 */
   ...docsConfig,
   /* 标头配置 */

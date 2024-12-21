@@ -167,8 +167,8 @@ import {
   withKeys,
   withMemo,
   withModifiers,
-  withScopeId,
-} from './chunk-2FQGWGWR.js'
+  withScopeId
+} from "./chunk-2FQGWGWR.js";
 export {
   BaseTransition,
   BaseTransitionPropsValidators,
@@ -338,6 +338,6 @@ export {
   withKeys,
   withMemo,
   withModifiers,
-  withScopeId,
-}
+  withScopeId
+};
 //# sourceMappingURL=vue.js.map
