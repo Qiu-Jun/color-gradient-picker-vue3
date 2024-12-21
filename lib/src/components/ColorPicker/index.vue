@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-16 17:33:53
+ * @LastEditTime: 2024-12-21 13:56:09
  * @LastEditors: June
 -->
 <template>
@@ -59,6 +59,10 @@ const props = defineProps({
     type: String,
     default: 'rgba(175, 51, 242, 1)',
   },
+  width: {
+    type: Number,
+    default: 300,
+  },
   hideInputs: {
     type: Boolean,
     default: false,
@@ -67,21 +71,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  hidePresets: {
-    type: Boolean,
-    default: false,
-  },
-  hideColorGuide: {
-    type: Boolean,
-    default: false,
-  },
   hideGradient: {
     type: Boolean,
     default: false,
   },
-  width: {
-    type: Number,
-    default: 300,
+  hidePresets: {
+    type: Boolean,
+    default: false,
   },
   disableDarkMode: {
     type: Boolean,

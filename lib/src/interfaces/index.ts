@@ -24,7 +24,6 @@ export interface ColorPickerProps {
   hideHue?: boolean
   hideEyeDrop?: boolean
   hideAdvancedSliders?: boolean
-  hideColorGuide?: boolean
   hideInputType?: boolean
   hideColorTypeBtns?: boolean
   hideGradientType?: boolean
