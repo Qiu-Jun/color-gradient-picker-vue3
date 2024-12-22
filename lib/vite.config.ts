@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-04-11 11:17:35
  * @LastEditors: June
- * @LastEditTime: 2024-12-13 17:59:08
+ * @LastEditTime: 2024-12-22 12:46:23
  */
 import type { ConfigEnv, UserConfigExport } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
