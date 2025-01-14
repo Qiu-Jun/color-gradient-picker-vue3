@@ -116,7 +116,9 @@ const onChange = (val: IColor) => {
   emits('change', { ...val })
 }
 
+// 渐变类型
 const isGradient = computed(() => colorState.mode === Modes.gradient)
+// 设置纯色或渐变模式
 const setMode = (mode: IMode) => {
   if (mode === Modes.solid) {
     colorState.degrees = 90
@@ -126,6 +128,7 @@ const setMode = (mode: IMode) => {
   colorState.mode = mode
 }
 
+// 更新颜色
 const setValue = (color?: string) => {
   const _color = color || colorState.value!
   const colors: GradientProps[] = getColors(_color)
@@ -148,7 +151,7 @@ const setValue = (color?: string) => {
   }
   const rgba = tinycolor.value.toRgb()
   const hsv = tinycolor.value.toHsv()
-  colorState.hc = { ...rgba, ...hsv }
+  colorState.hc = { ...rgba, s: hsv.s, v: hsv.v, h: hsv.h === 0 ? colorState.hc?.h : hsv.h }
   if (onChange) {
     if (unref(isGradient)) {
       onChange({
@@ -213,7 +216,7 @@ const setSelectColorIdx = (idx: number) => {
   )
   const rgba = tinycolor.value.toRgb()
   const hsv = tinycolor.value.toHsv()
-  colorState.hc = { ...rgba, ...hsv }
+  colorState.hc = { ...rgba, ...hsv, }
 }
 
 // 设置inputs的类型

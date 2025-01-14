@@ -6,10 +6,11 @@
  * @LastEditors: June
 -->
 <template>
-  <div class="cpg-hue-wrap" @mousedown="handleDown" @mousemove="handleMove">
+  <div class="cpg-hue-wrap" @mousedown="onMousedown" @mousemove="onMousemove" @mouseup="stopDragging
+  ">
     <div
       class="cpg-pointer"
-      :style="{ left: colorState.hc?.h * ((colorState.width! - 18) / 360) + 'px'}"
+      :style="{ left: colorState.hc.h * ((colorState.width! - 18) / 360) + 'px'}"
     ></div>
 
     <canvas
@@ -36,7 +37,7 @@ const stopDragging = () => {
   dragging.value = false
 }
 
-const handleDown = () => {
+const onMousedown = () => {
   dragging.value = true
 }
 
@@ -52,7 +53,7 @@ const handleHue = (e: any) => {
   const rgbaColor = `rgba(${r}, ${g}, ${b}, ${colorState.hc.a})`
   unref(isGradient) ? updateSelectColor(rgbaColor) : changeColor(rgbaColor)
 }
-const handleMove = (e: any) => {
+const onMousemove = (e: any) => {
   if (unref(dragging)) {
     handleHue(e)
   }

@@ -10,8 +10,9 @@
     <div
       class="cpg-gradientBar"
       :style="{ width: colorState.width + 'px', backgroundImage }"
-      @mousedown="handleBarDown"
-      @mousemove="handleMove"
+      @mousedown="onMouseBarDown"
+      @mousemove="onMousemove"
+      @mouseup="stopDragging"
     ></div>
     <div
       v-for="(point, idx) in colorState.gradientColors"
@@ -45,7 +46,7 @@ const stopDragging = () => {
   dragging.value = false
 }
 
-const handleMove = (e) => {
+const onMousemove = (e) => {
   if (unref(dragging)) {
     const { gradientColors, gradientColorsIdx } = colorState
     const color = gradientColors![gradientColorsIdx!].value
@@ -59,7 +60,7 @@ const handlePoinDown = (e: any, idx: number) => {
   dragging.value = true
 }
 
-const handleBarDown = (e: any) => {
+const onMouseBarDown = (e: any) => {
   if (unref(dragging)) return
   const left = getHandleValue(e)
   addPoint(left)

@@ -8,8 +8,9 @@
 <template>
   <section
     class="cpg-opacity-wrap"
-    @mousedown="handleDown"
-    @mousemove="handleMove"
+    @mousedown="onMousedown"
+    @mousemove="onMouseMove"
+    @mouseup="stopDragging"
   >
     <div class="cpg-opacity-bar"></div>
     <div
@@ -41,7 +42,7 @@ const stopDragging = () => {
   dragging.value = false
 }
 
-const handleDown = () => {
+const onMousedown = () => {
   dragging.value = true
 }
 
@@ -53,7 +54,7 @@ const handleOpacity = (e: any) => {
   changeColor(newColor)
 }
 
-const handleMove = (e: any) => {
+const onMouseMove = (e: any) => {
   if (unref(dragging)) {
     handleOpacity(e)
   }
