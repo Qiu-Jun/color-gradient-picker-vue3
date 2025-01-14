@@ -7,10 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
 import tc from 'tinycolor2'
 
-const { colorState, tinycolor } = useColor()
+const { colorState, tinycolor } = inject('colorProvider') as any
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 

@@ -20,12 +20,12 @@
       :style="{ background: curColor }"
     ></div>
 
-    <!-- <el-popover placement="right" width="340px" trigger="hover">
+    <el-popover placement="right" width="340px" trigger="hover">
       <template #reference>
         <el-button class="m-2">Hover to activate</el-button>
       </template>
       <ColorPicker v-model:value="curColor" @change="onChange" />
-    </el-popover> -->
+    </el-popover>
   </div>
 </template>
 

@@ -26,9 +26,8 @@
 
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
-import { useColor } from '@/hooks/useColor'
 
-const { colorState, handleChange } = useColor()
+const { colorState, changeColor } = inject('colorProvider') as any
 const dragging = ref(false)
 const left = ref(colorState.width! - 18) //  18是point的大小
 const bg = computed(() => {
@@ -51,7 +50,7 @@ const handleOpacity = (e: any) => {
   const { r, g, b } = colorState.hc
   const newO = getHandleValue(e) / 100
   const newColor = `rgba(${r}, ${g}, ${b}, ${newO})`
-  handleChange(newColor)
+  changeColor(newColor)
 }
 
 const handleMove = (e: any) => {

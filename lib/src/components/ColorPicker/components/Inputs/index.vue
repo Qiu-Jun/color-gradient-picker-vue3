@@ -16,7 +16,7 @@
       v-if="!colorState.hideOpacity"
       :input-val="(colorState.hc?.a ?? 0) * 100"
       label="A"
-      :callback="(val: number) => handleChange(`rgba(${colorState.hc?.r}, ${colorState.hc?.g}, ${colorState.hc?.b}, ${val / 100})`)"
+      :callback="(val: number) => changeColor(`rgba(${colorState.hc?.r}, ${colorState.hc?.g}, ${colorState.hc?.b}, ${val / 100})`)"
     />
   </div>
 </template>
@@ -30,8 +30,7 @@ import {
   CMYKInputs,
   InputItem,
 } from './components'
-import { useColor } from '@/hooks/useColor'
 import { InputType } from '@/enums'
 
-const { colorState, handleChange } = useColor()
+const { colorState, changeColor } = inject('colorProvider') as any
 </script>

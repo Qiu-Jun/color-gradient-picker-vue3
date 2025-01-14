@@ -13,10 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
 import { formatInputValues } from '@/utils/format'
 
-const { colorState } = useColor()
+const { colorState } = inject('colorProvider') as any
 const width = computed(() => (colorState.hideOpacity ? '22%' : '18%'))
 
 const emits = defineEmits(['update:inputVal'])

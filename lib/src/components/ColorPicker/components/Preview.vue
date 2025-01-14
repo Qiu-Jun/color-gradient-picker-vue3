@@ -33,11 +33,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 
-const { colorState, isGradient, handleChange, setValue, updateSelectColor } =
-  useColor()
+const { colorState, isGradient, changeColor, setValue } = inject('colorProvider') as any
 
 const colorValue = computed(() => {
   if (unref(isGradient)) {
@@ -51,7 +49,7 @@ const handleUpdateValue = debounce(function (e) {
   const color = e.target.dataset.color
   if (!color) return
   if (unref(isGradient)) {
-    handleChange(color)
+    changeColor(color)
   } else {
     setValue(color)
   }

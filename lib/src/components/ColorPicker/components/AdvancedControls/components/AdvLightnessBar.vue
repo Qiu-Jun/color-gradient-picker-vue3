@@ -16,12 +16,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
 import { getHandleValue } from '@/utils/utils'
 import { debounce } from 'lodash-es'
 import tc from 'tinycolor2'
 
-const { colorState, tinycolor, handleChange } = useColor()
+const { colorState, tinycolor, changeColor } = inject('colorProvider') as any
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const setLight = (value: number) => {
   const { s } = tinycolor.value.toHsl()
@@ -30,7 +29,7 @@ const setLight = (value: number) => {
     s,
     l: value / 100,
   }).toRgb()
-  handleChange(`rgba(${r},${g},${b},${colorState.hc?.a})`)
+  changeColor(`rgba(${r},${g},${b},${colorState.hc?.a})`)
 }
 const left = ref(0)
 

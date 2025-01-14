@@ -79,7 +79,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 import { inputTypes } from '@/constants'
 import { InputType, Modes } from '@/enums'
@@ -87,7 +86,7 @@ import { config } from '@/constants'
 import type { IMode } from '@/interfaces'
 
 const { defaultColor, defaultGradient } = config
-const { colorState, isGradient, setInputType, setMode, setValue } = useColor()
+const { colorState, isGradient, setInputType, setMode, setValue } = inject('colorProvider') as any
 
 // input type
 const showInputTypes = ref(false)

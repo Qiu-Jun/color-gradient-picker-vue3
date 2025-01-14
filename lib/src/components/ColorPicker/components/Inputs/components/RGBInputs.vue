@@ -21,15 +21,14 @@
 
 <script lang="ts" setup>
 import InputItem from './InputItem.vue'
-import { useColor } from '@/hooks/useColor'
 import { InputType } from '@/enums'
 
-const { colorState, handleChange } = useColor()
+const { colorState, changeColor } = inject('colorProvider') as any
 const red = ref(colorState.hc?.r)
 const green = ref(colorState.hc?.g)
 const blue = ref(colorState.hc?.n)
 const handleRgb = ({ r, g, b }: { r: number; g: number; b: number }) => {
-  handleChange(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
+  changeColor(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
 }
 
 watch(

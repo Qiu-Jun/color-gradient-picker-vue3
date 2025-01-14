@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import { GradientType } from '@/enums'
 import { debounce } from 'lodash-es'
-import { useColor } from '@/hooks/useColor'
+import { createGradientStr } from '@/utils/color'
 
 const {
   colorState,
@@ -59,10 +59,9 @@ const {
   setLinear,
   setRadial,
   setDegrees,
-  createGradientStr,
   setValue,
   deletePoint,
-} = useColor()
+} = inject('colorProvider') as any
 const disabledDelete = computed(
   () => !colorState.gradientColors || colorState.gradientColors.length <= 2,
 )
@@ -72,7 +71,7 @@ const handleChangeType = debounce(function (type: GradientType) {
   type === GradientType.linear && setLinear()
   type === GradientType.radial && setRadial()
   colorState.gradientColors &&
-    setValue(createGradientStr(colorState.gradientColors))
+    setValue(createGradientStr(colorState.gradientColors, unref(gradientType), colorState))
 }, 250)
 
 // 角度设置

@@ -14,9 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
-
-const { colorState, tinycolor } = useColor()
+const { colorState, tinycolor } = inject('colorProvider') as any
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 

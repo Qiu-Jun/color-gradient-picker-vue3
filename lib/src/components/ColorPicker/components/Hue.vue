@@ -24,12 +24,11 @@
 
 <script lang="ts" setup>
 import tinycolor from 'tinycolor2'
-import { useColor } from '@/hooks/useColor'
 import { debounce } from 'lodash-es'
 import { getHandleValue } from '@/utils/utils'
 
-const { colorState, isGradient, handleChange, setHcH, updateSelectColor } =
-  useColor()
+const { colorState, isGradient, changeColor, setHcH, updateSelectColor } =
+  inject('colorProvider') as any
 // 渲染颜色
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const dragging = ref(false)
@@ -51,7 +50,7 @@ const handleHue = (e: any) => {
   const { r, g, b } = tinyHsv.toRgb()
   setHcH(newHue)
   const rgbaColor = `rgba(${r}, ${g}, ${b}, ${colorState.hc.a})`
-  unref(isGradient) ? updateSelectColor(rgbaColor) : handleChange(rgbaColor)
+  unref(isGradient) ? updateSelectColor(rgbaColor) : changeColor(rgbaColor)
 }
 const handleMove = (e: any) => {
   if (unref(dragging)) {

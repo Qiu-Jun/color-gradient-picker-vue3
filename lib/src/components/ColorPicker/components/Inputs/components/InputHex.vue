@@ -13,10 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
 import tc from 'tinycolor2'
 
-const { colorState, setValue } = useColor()
+const { colorState, setValue } = inject('colorProvider') as any
 const hexVal = ref('')
 
 const onChange = (e) => {

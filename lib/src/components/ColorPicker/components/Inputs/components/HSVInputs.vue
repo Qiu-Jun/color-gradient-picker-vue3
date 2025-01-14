@@ -28,23 +28,22 @@
 
 <script lang="ts" setup>
 import InputItem from './InputItem.vue'
-import { useColor } from '@/hooks/useColor'
 import { round } from '@/utils/format'
 import tc from 'tinycolor2'
 import { InputType } from '@/enums'
 
 const sVal = ref(0)
 const vVal = ref(0)
-const { colorState, handleChange, tinycolor } = useColor()
+const { colorState, changeColor } =  inject('colorProvider') as any
 
 const handleSV = (value: any) => {
   const { r, g, b } = tc(value).toRgb()
-  handleChange(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
+  changeColor(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
 }
 
 const handleH = (h: number, s: number, v: number) => {
   const { r, g, b } = tc({ h: h, s: s, v: v }).toRgb()
-  handleChange(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
+  changeColor(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
 }
 
 watchEffect(() => {

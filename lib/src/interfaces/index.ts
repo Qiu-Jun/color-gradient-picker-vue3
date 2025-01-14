@@ -39,10 +39,12 @@ export type GradientProps = {
 export type IMode = Modes.solid | Modes.gradient
 
 export interface IColor {
-  mode: IMode
-  color: string
+  mode?: IMode
+  color?: string
   angle?: number
+  degrees?: number
   colors?: { color: string; offset: number }[]
+  [key: string]: any
 }
 
 export interface IProvide extends ColorPickerProps {

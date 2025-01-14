@@ -27,16 +27,15 @@
 
 <script lang="ts" setup>
 import InputItem from './InputItem.vue'
-import { useColor } from '@/hooks/useColor'
 import { round } from '@/utils/format'
 import { rgb2cmyk, cmykToRgb } from '@/utils/convert'
 import { InputType } from '@/enums'
 
-const { colorState, handleChange } = useColor()
+const { colorState, changeColor } =  inject('colorProvider') as any
 
 const handleCmyk = (value: any) => {
   const { r, g, b } = cmykToRgb(value)
-  handleChange(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
+  changeColor(`rgba(${r}, ${g}, ${b}, ${colorState.hc?.a})`)
 }
 
 const cmykState = reactive({

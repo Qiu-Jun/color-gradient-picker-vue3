@@ -27,11 +27,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useColor } from '@/hooks/useColor'
 import { getHandleValue } from '@/utils/utils'
-import { throttle } from 'lodash-es'
 
-const { colorState, handleGradient, addPoint, setSelectColorIdx } = useColor()
+const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject('colorProvider') as any
 const leftMultiplyer = (colorState.width - 18) / 100
 
 const backgroundImage = computed(() => {
