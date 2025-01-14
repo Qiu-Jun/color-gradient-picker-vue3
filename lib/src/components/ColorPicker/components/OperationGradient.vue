@@ -71,7 +71,13 @@ const handleChangeType = debounce(function (type: GradientType) {
   type === GradientType.linear && setLinear()
   type === GradientType.radial && setRadial()
   colorState.gradientColors &&
-    setValue(createGradientStr(colorState.gradientColors, unref(gradientType), colorState))
+    setValue(
+      createGradientStr(
+        colorState.gradientColors,
+        unref(gradientType),
+        colorState,
+      ),
+    )
 }, 250)
 
 // 角度设置

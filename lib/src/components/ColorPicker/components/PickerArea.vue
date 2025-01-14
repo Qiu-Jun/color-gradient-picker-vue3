@@ -37,7 +37,9 @@ import { computePickerPosition, computeSquareXY } from '@/utils/utils'
 import { config } from '@/constants'
 import tc from 'tinycolor2'
 
-const { colorState, isGradient, setValue, updateSelectColor } = inject('colorProvider') as any
+const { colorState, isGradient, setValue, updateSelectColor } = inject(
+  'colorProvider',
+) as any
 const { crossSize } = config
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)

@@ -27,7 +27,7 @@ import { InputType } from '@/enums'
 
 const sVal = ref(0)
 const lVal = ref(0)
-const { colorState, changeColor, tinycolor } =  inject('colorProvider') as any
+const { colorState, changeColor, tinycolor } = inject('colorProvider') as any
 
 const handleSl = (value: any) => {
   const { r, g, b } = tc(value).toRgb()

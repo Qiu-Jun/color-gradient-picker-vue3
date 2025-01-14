@@ -31,7 +31,7 @@ import { round } from '@/utils/format'
 import { rgb2cmyk, cmykToRgb } from '@/utils/convert'
 import { InputType } from '@/enums'
 
-const { colorState, changeColor } =  inject('colorProvider') as any
+const { colorState, changeColor } = inject('colorProvider') as any
 
 const handleCmyk = (value: any) => {
   const { r, g, b } = cmykToRgb(value)

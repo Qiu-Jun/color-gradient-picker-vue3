@@ -86,7 +86,9 @@ import { config } from '@/constants'
 import type { IMode } from '@/interfaces'
 
 const { defaultColor, defaultGradient } = config
-const { colorState, isGradient, setInputType, setMode, setValue } = inject('colorProvider') as any
+const { colorState, isGradient, setInputType, setMode, setValue } = inject(
+  'colorProvider',
+) as any
 
 // input type
 const showInputTypes = ref(false)

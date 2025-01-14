@@ -35,7 +35,9 @@
 <script lang="ts" setup>
 import { debounce } from 'lodash-es'
 
-const { colorState, isGradient, changeColor, setValue } = inject('colorProvider') as any
+const { colorState, isGradient, changeColor, setValue } = inject(
+  'colorProvider',
+) as any
 
 const colorValue = computed(() => {
   if (unref(isGradient)) {

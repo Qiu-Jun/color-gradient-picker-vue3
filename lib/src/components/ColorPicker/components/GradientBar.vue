@@ -29,7 +29,9 @@
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
 
-const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject('colorProvider') as any
+const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject(
+  'colorProvider',
+) as any
 const leftMultiplyer = (colorState.width - 18) / 100
 
 const backgroundImage = computed(() => {
