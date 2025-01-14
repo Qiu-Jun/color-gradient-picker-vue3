@@ -151,7 +151,12 @@ const setValue = (color?: string) => {
   }
   const rgba = tinycolor.value.toRgb()
   const hsv = tinycolor.value.toHsv()
-  colorState.hc = { ...rgba, s: hsv.s, v: hsv.v, h: hsv.h === 0 ? colorState.hc?.h : hsv.h }
+  colorState.hc = {
+    ...rgba,
+    s: hsv.s,
+    v: hsv.v,
+    h: hsv.h === 0 ? colorState.hc?.h || 0.1 : hsv.h,
+  }
   if (onChange) {
     if (unref(isGradient)) {
       onChange({
@@ -216,7 +221,7 @@ const setSelectColorIdx = (idx: number) => {
   )
   const rgba = tinycolor.value.toRgb()
   const hsv = tinycolor.value.toHsv()
-  colorState.hc = { ...rgba, ...hsv, }
+  colorState.hc = { ...rgba, ...hsv }
 }
 
 // 设置inputs的类型

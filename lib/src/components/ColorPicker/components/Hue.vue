@@ -6,8 +6,12 @@
  * @LastEditors: June
 -->
 <template>
-  <div class="cpg-hue-wrap" @mousedown="onMousedown" @mousemove="onMousemove" @mouseup="stopDragging
-  ">
+  <div
+    class="cpg-hue-wrap"
+    @mousedown="onMousedown"
+    @mousemove="onMousemove"
+    @mouseup="stopDragging"
+  >
     <div
       class="cpg-pointer"
       :style="{ left: colorState.hc.h * ((colorState.width! - 18) / 360) + 'px'}"

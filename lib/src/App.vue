@@ -20,11 +20,16 @@
       :style="{ background: curColor }"
     ></div>
 
+    <div
+      class="w-50px h-50px rounded-10px"
+      :style="{ background: curColor2 }"
+    ></div>
+
     <el-popover placement="right" width="340px" trigger="hover">
       <template #reference>
         <el-button class="m-2">Hover to activate</el-button>
       </template>
-      <ColorPicker v-model:value="curColor" @change="onChange" />
+      <ColorPicker v-model:value="curColor2" />
     </el-popover>
   </div>
 </template>
@@ -36,13 +41,15 @@ const presetColors = [
   'rgba(0,0,0,1)',
   'rgba(128,128,128, 1)',
   'rgba(192,192,192, 1)',
-  '#f34250'
+  '#f34250',
 ]
 const curColor = ref('rgba(175, 51, 242, 1)')
+const curColor2 = ref('rgba(0,0,0,1)')
 // const curColor = ref(
 //   'linear-gradient(90deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 47%, rgba(0,0,255,1) 100%)',
 // )
 const onChange = (val: any) => {
   // console.log(val, 'colorpicker 回调')
 }
+
 </script>
