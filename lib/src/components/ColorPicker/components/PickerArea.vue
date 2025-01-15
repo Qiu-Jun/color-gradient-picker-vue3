@@ -13,6 +13,7 @@
     >
       <span
         class="cpg-pointer"
+        :class="{'cpg-cursor-pointer': dragging}"
         :style="{
           left: `${dragPos.x}px`,
           top: `${dragPos.y}px`,
@@ -53,7 +54,7 @@ const dragPos = reactive({
   y: 0,
 })
 
-const handleColor = throttle(function (e: any) {
+const handleColor = (e: any) => {
   const [x, y] = computePickerPosition(e)
   if (x && y) {
     const width = colorState.width!
@@ -70,13 +71,13 @@ const handleColor = throttle(function (e: any) {
     const color = updated.toRgbString()
     unref(isGradient) ? updateSelectColor(color) : setValue(color)
   }
-}, 200)
+}
 
 const handleMove = throttle(function (e: any) {
   if (unref(dragging)) {
     handleColor(e)
   }
-}, 180)
+}, 50)
 const handleCanvasDown = (e: any) => {
   setDragging(true)
   handleColor(e)

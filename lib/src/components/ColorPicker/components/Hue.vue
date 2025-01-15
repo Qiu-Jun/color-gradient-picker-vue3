@@ -14,6 +14,7 @@
   >
     <div
       class="cpg-pointer"
+      :class="{'cpg-cursor-pointer': dragging}"
       :style="{ left: colorState.hc.h * ((colorState.width! - 18) / 360) + 'px'}"
     ></div>
 
@@ -29,7 +30,7 @@
 
 <script lang="ts" setup>
 import tinycolor from 'tinycolor2'
-import { debounce } from 'lodash-es'
+import { debounce, throttle } from 'lodash-es'
 import { getHandleValue } from '@/utils/utils'
 
 const { colorState, isGradient, changeColor, setHcH, updateSelectColor } =
@@ -57,11 +58,12 @@ const handleHue = (e: any) => {
   const rgbaColor = `rgba(${r}, ${g}, ${b}, ${colorState.hc.a})`
   unref(isGradient) ? updateSelectColor(rgbaColor) : changeColor(rgbaColor)
 }
-const onMousemove = (e: any) => {
+const onMousemove = throttle(function(e: any) {
   if (unref(dragging)) {
     handleHue(e)
   }
-}
+}, 80) 
+
 const handleClick = debounce(function (e) {
   if (!unref(dragging)) {
     handleHue(e)

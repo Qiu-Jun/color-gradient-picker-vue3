@@ -9,18 +9,16 @@
   <section class="cpg-controls-wrapper">
     <div class="cpg-controls-item">
       <div
-        class="cpg-controls-item-btn"
+        class="cpg-controls-item-btn cpg-cursor-pointer"
         :class="{ 'cpg-control-active': !isGradient }"
-        role="button"
         @click="handleSetIsGradient(Modes.solid)"
       >
         Solid
       </div>
       <div
         v-if="!colorState.hideGradient"
-        class="cpg-controls-item-btn"
+        class="cpg-controls-item-btn cpg-cursor-pointer"
         :class="{ 'cpg-control-active': isGradient }"
-        role="button"
         @click="handleSetIsGradient(Modes.gradient)"
       >
         Gradient
@@ -28,9 +26,8 @@
     </div>
     <div class="cpg-controls-item">
       <!-- <div
-        class="cpg-controls-item-btn"
+        class="cpg-controls-item-btn cpg-cursor-pointer"
         :class="{ 'cpg-control-active': showAdvancedControl }"
-        role="button"
       >
         <SvgIcon
           ext-class="text-14px "
@@ -38,13 +35,12 @@
           @click="toggleShowAdvancedControl"
         />
       </div> -->
-      <!-- <div class="cpg-controls-item-btn" role="button">
+      <!-- <div class="cpg-controls-item-btn cpg-cursor-pointer">
         <SvgIcon ext-class="text-14px " icon="guide" />
       </div> -->
       <div
-        class="cpg-controls-item-btn"
+        class="cpg-controls-item-btn cpg-cursor-pointer"
         :class="{ 'cpg-control-active': showInputTypes }"
-        role="button"
       >
         <span
           :class="

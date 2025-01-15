@@ -168,7 +168,8 @@
       @apply inline-block absolute left-50% top-50% -translate-x-50% -translate-y-50% w-5px h-5px rounded-50% bg-#fff;
     }
   }
-}
-[role='button'] {
-  cursor: pointer;
+
+  .cpg-cursor-pointer {
+    cursor: pointer;
+  }
 }

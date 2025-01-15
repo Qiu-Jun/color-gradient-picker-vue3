@@ -20,6 +20,7 @@
       class="cpg-pointer"
       :class="{
         'cpg-pointer-centerPoint': colorState.gradientColorsIdx === idx,
+        'cpg-cursor-pointer': dragging
       }"
       :style="{ left: point.left! * leftMultiplyer + 'px' }"
       @mousedown="handlePoinDown($event, idx)"
@@ -29,6 +30,7 @@
 
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
+import { throttle } from 'lodash-es'
 
 const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject(
   'colorProvider',
@@ -46,7 +48,7 @@ const stopDragging = () => {
   dragging.value = false
 }
 
-const onMousemove = (e) => {
+const onMousemove = e => {
   if (unref(dragging)) {
     const { gradientColors, gradientColorsIdx } = colorState
     const color = gradientColors![gradientColorsIdx!].value

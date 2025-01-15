@@ -15,6 +15,7 @@
     <div class="cpg-opacity-bar"></div>
     <div
       class="cpg-pointer"
+      :class="{'cpg-cursor-pointer': dragging}"
       :style="{ left: left * colorState.hc?.a + 'px' }"
     ></div>
     <div
@@ -27,6 +28,7 @@
 
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
+import { throttle } from 'lodash-es'
 
 const { colorState, changeColor } = inject('colorProvider') as any
 const dragging = ref(false)
@@ -54,11 +56,11 @@ const handleOpacity = (e: any) => {
   changeColor(newColor)
 }
 
-const onMouseMove = (e: any) => {
+const onMouseMove = throttle(function (e: any) {
   if (unref(dragging)) {
     handleOpacity(e)
   }
-}
+}, 80)
 
 const handleClick = (e: any) => {
   if (!unref(dragging)) {
