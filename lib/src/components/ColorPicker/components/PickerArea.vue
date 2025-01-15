@@ -13,7 +13,7 @@
     >
       <span
         class="cpg-pointer"
-        :class="{'cpg-cursor-pointer': dragging}"
+        :class="{ 'cpg-cursor-pointer': dragging }"
         :style="{
           left: `${dragPos.x}px`,
           top: `${dragPos.y}px`,

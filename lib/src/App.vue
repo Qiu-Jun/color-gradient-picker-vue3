@@ -51,5 +51,4 @@ const curColor2 = ref('rgba(0,0,0,1)')
 const onChange = (val: any) => {
   // console.log(val, 'colorpicker 回调')
 }
-
 </script>

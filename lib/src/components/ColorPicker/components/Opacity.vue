@@ -15,7 +15,7 @@
     <div class="cpg-opacity-bar"></div>
     <div
       class="cpg-pointer"
-      :class="{'cpg-cursor-pointer': dragging}"
+      :class="{ 'cpg-cursor-pointer': dragging }"
       :style="{ left: left * colorState.hc?.a + 'px' }"
     ></div>
     <div
