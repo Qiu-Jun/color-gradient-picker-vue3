@@ -9,7 +9,7 @@ lerna-debug.log*
 
 node_modules
 # dist
-packages/**/dist
+dist
 dist-ssr
 *.local
 docs/.vitepress/dist
