@@ -35,9 +35,17 @@
           @click="toggleShowAdvancedControl"
         />
       </div> -->
-      <!-- <div class="cpg-controls-item-btn cpg-cursor-pointer">
-        <SvgIcon ext-class="text-14px " icon="guide" />
-      </div> -->
+      <div class="cpg-controls-item-btn cpg-cursor-pointer">
+        <span
+          :class="
+            showInputTypes
+              ? 'text-14px iconfont cpg-xise text-#568cf5'
+              : 'iconfont cpg-xise text-14px'
+          "
+          icon=""
+          @click="handleXise"
+        />
+      </div>
       <div
         class="cpg-controls-item-btn cpg-cursor-pointer"
         :class="{ 'cpg-control-active': showInputTypes }"
@@ -79,6 +87,7 @@ import { debounce } from 'lodash-es'
 import { inputTypes } from '@/constants'
 import { InputType, Modes } from '@/enums'
 import { config } from '@/constants'
+import html2canvas from 'html2canvas'
 import type { IMode } from '@/interfaces'
 
 const { defaultColor, defaultGradient } = config
@@ -94,6 +103,29 @@ const toggleShowInputType = debounce(function () {
 const handleSetInputType = debounce(function (type: InputType) {
   setInputType(type)
   toggleShowInputType()
+}, 180)
+
+// 吸色
+const coverUp = ref(false)
+const handleXise = debounce(function() {
+  // @ts-ignore
+  if (!window?.EyeDropper) {
+    return;
+  }
+  const root = document.getElementById('app')
+  console.log(root, 'xxxxsss')
+  html2canvas(root!).then((canvas: any) => {
+    const blankCanvas = document.createElement('canvas')
+    const ctx = blankCanvas.getContext('2d', { willReadFrequently: true })
+
+    if (root && ctx) {
+      blankCanvas.width = root.offsetWidth * 2
+      blankCanvas.height = root.offsetHeight * 2
+      ctx.drawImage(canvas, 0, 0)
+    }
+
+    
+  })
 }, 250)
 
 // toggleShowAdvancedControl

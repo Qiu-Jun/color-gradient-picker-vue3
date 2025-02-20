@@ -1,0 +1,74 @@
+name: 向 color-gradient-picker-vue3 提交 Bug
+description: 创建一个 Issue 描述你遇到的问题。
+title: "[Bug 上报] 请在此填写标题"
+labels: ["🐞bug: need confirm"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        在向我们提交 Bug 报告前，请优先使用以下方式尝试解决问题：
+        - 在文档 [docs](https://qiu-jun.github.io/color-gradient-picker-vue3/index.html) 确认使用方法是否正确
+        - 尝试在 [Issue](https://github.com/Qiu-Jun/color-gradient-picker-vue3/issues) 列表中搜索相同问题
+        
+
+  - type: input
+    id: version
+    attributes:
+      label: color-gradient-picker-vue3 版本号
+      description: 你正在使用的组件库版本号
+      placeholder: 例如：0.1.1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 浏览器
+      multiple: true
+      description: 选择对应的平台
+      options:
+        - chrome
+        - 火狐
+        - Edge
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: reproduce
+    attributes:
+      label: 复现Demo地址
+      description: |
+        我们需要你提供一个最小重现demo，以便于我们帮你排查问题。
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: 重现步骤
+      description: |
+        请提供一个最简洁清晰的重现步骤，方便我们快速重现问题。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望的结果是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: actually-happening
+    attributes:
+      label: 实际的结果是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其他补充信息
+      description: |
+        根据你的分析，出现这个问题的原因可能在哪里，或者你认为可能产生关联的信息：比如 Vue 版本、vite 版本、Node 版本、采用哪种自动引入方案等，或者进行了哪些配置，使用了哪些插件等信息。
