@@ -1,7 +1,7 @@
 name: 向 color-gradient-picker-vue3 提交 Bug
 description: 创建一个 Issue 描述你遇到的问题。
-title: "[Bug 上报] 请在此填写标题"
-labels: ["🐞bug: need confirm"]
+title: '[Bug 上报] 请在此填写标题'
+labels: ['🐞bug: need confirm']
 body:
   - type: markdown
     attributes:
@@ -9,7 +9,6 @@ body:
         在向我们提交 Bug 报告前，请优先使用以下方式尝试解决问题：
         - 在文档 [docs](https://qiu-jun.github.io/color-gradient-picker-vue3/index.html) 确认使用方法是否正确
         - 尝试在 [Issue](https://github.com/Qiu-Jun/color-gradient-picker-vue3/issues) 列表中搜索相同问题
-        
 
   - type: input
     id: version

@@ -107,10 +107,10 @@ const handleSetInputType = debounce(function (type: InputType) {
 
 // 吸色
 const coverUp = ref(false)
-const handleXise = debounce(function() {
+const handleXise = debounce(function () {
   // @ts-ignore
   if (!window?.EyeDropper) {
-    return;
+    return
   }
   const root = document.getElementById('app')
   console.log(root, 'xxxxsss')
@@ -123,8 +123,6 @@ const handleXise = debounce(function() {
       blankCanvas.height = root.offsetHeight * 2
       ctx.drawImage(canvas, 0, 0)
     }
-
-    
   })
 }, 250)
 
