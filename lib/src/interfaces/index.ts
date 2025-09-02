@@ -20,7 +20,7 @@ export interface ColorPickerProps {
   showAdvancedSliders?: boolean
   hideInputs?: boolean
   hideOpacity?: boolean
-  hc?: any
+  hc?: IColorValue
   isGradient?: boolean
   inputType?: InputType
   onChange?: any
@@ -38,12 +38,44 @@ export type GradientProps = {
 
 export type IMode = Modes.solid | Modes.gradient
 
+/**
+ * 颜色值对象
+ */
+export interface IColorValue {
+  /** 红色分量 (0-255) */
+  r: number
+  /** 绿色分量 (0-255) */
+  g: number
+  /** 蓝色分量 (0-255) */
+  b: number
+  /** 透明度 (0-1) */
+  a: number
+  /** 色相 (0-360) */
+  h: number
+  /** 饱和度 (0-100) */
+  s: number
+  /** 明度 (0-100) */
+  v: number
+}
+
+/**
+ * 颜色对象接口
+ */
 export interface IColor {
+  /** 颜色模式 */
   mode?: IMode
+  /** 颜色值 */
   color?: string
+  /** 角度 */
   angle?: number
+  /** 度数 */
   degrees?: number
+  /** 渐变颜色数组 */
   colors?: { color: string; offset: number }[]
+  /** 渐变类型 */
+  gradientType?: string
+  /** 渐变颜色点 */
+  gradientColors?: { color: string; left?: number }[]
   [key: string]: any
 }
 

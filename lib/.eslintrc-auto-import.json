@@ -62,6 +62,14 @@
     "ExtractDefaultPropTypes": true,
     "ExtractPropTypes": true,
     "ExtractPublicPropTypes": true,
-    "WritableComputedRef": true
+    "WritableComputedRef": true,
+    "cloneDeep": true,
+    "debounce": true,
+    "onBeforeRouteLeave": true,
+    "onBeforeRouteUpdate": true,
+    "throttle": true,
+    "useLink": true,
+    "useRoute": true,
+    "useRouter": true
   }
 }

@@ -1,6 +1,6 @@
 /*
  * @Author: June
- * @Description:
+ * @Description: Vite构建配置文件
  * @Date: 2023-04-11 11:17:35
  * @LastEditors: June
  * @LastEditTime: 2024-12-22 12:46:23
@@ -15,25 +15,50 @@ import autoprefixer from 'autoprefixer'
 import { visualizer } from 'rollup-plugin-visualizer'
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
+  const isDev = command === 'serve'
+
   return {
     define: {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
+      __VUE_OPTIONS_API__: 'true',
+      __VUE_PROD_DEVTOOLS__: 'false',
     },
     plugins: [
-      vue(),
+      vue({
+        script: {
+          defineModel: true,
+          propsDestructure: true,
+        },
+      }),
       vueJsx(),
       UnoCSS(),
       AutoImport({
-        imports: ['vue'],
+        imports: [
+          'vue',
+          'vue-router',
+          {
+            'lodash-es': ['cloneDeep', 'debounce', 'throttle'],
+          },
+        ],
+        dts: true,
         eslintrc: {
           enabled: true,
         },
       }),
-      visualizer(),
+      visualizer({
+        open: false,
+        gzipSize: true,
+        brotliSize: true,
+      }),
     ],
     css: {
       postcss: {
         plugins: [autoprefixer],
+      },
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@/styles/variables.scss";`,
+        },
       },
     },
     resolve: {
@@ -54,6 +79,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     },
     server: {
       port: 3000,
+      host: true,
+      open: true,
     },
     build: {
       target: 'es2015',
@@ -61,25 +88,43 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       minify: 'terser',
       terserOptions: {
         compress: {
-          //生产环境时移除console
-          drop_console: true,
-          drop_debugger: true,
+          // 生产环境时移除console和debugger
+          drop_console: !isDev,
+          drop_debugger: !isDev,
+          pure_funcs: isDev ? [] : ['console.log', 'console.info'],
+        },
+        mangle: {
+          safari10: true,
         },
       },
-
       lib: {
         entry: path.resolve(__dirname, './index.ts'),
         name: 'color-gradient-picker-vue3',
         fileName: (format) => `color-gradient-picker-vue3.${format}.js`,
+        formats: ['es', 'umd'],
       },
       rollupOptions: {
-        external: ['vue'],
+        external: ['vue', 'tinycolor2', 'lodash-es'],
         output: {
           globals: {
             vue: 'Vue',
+            tinycolor2: 'tinycolor',
+            'lodash-es': '_',
+          },
+          exports: 'named',
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name === 'style.css') {
+              return 'color-gradient-picker-vue3.css'
+            }
+            return assetInfo.name || 'asset'
           },
         },
       },
+      sourcemap: isDev,
+      emptyOutDir: true,
+    },
+    optimizeDeps: {
+      include: ['vue', 'tinycolor2', 'lodash-es'],
     },
   }
 }

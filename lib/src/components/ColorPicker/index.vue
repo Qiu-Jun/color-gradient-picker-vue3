@@ -1,6 +1,6 @@
 <!--
  * @Author: June
- * @Description: Description
+ * @Description: Vue3颜色选择器主组件
  * @Date: 2024-11-30 21:19:44
  * @LastEditTime: 2024-12-22 00:06:48
  * @LastEditors: June
@@ -52,87 +52,104 @@ import { presetColors } from '@/constants'
 import { getColors, formatInputValues, low, high } from '@/utils/format'
 import { getDetails, getIsGradient } from '@/utils/utils'
 import tc from 'tinycolor2'
-import { InputType, GradientType, Modes } from '@/enums'
+import { InputType, GradientType, Modes, DEFAULT_VALUES } from '@/enums'
 import { cloneDeep } from 'lodash-es'
-import { createGradientStr } from '@/utils/color'
+import { createGradientStr, isValidColor } from '@/utils/color'
 import type {
   IColor,
   ColorPickerProps,
   GradientProps,
   IMode,
+  IColorValue,
+  IColorPicker,
 } from '@/interfaces'
 
-const emits = defineEmits(['update:value', 'change'])
-// const { init, colorState, isGradient } = useColor()
+// 定义事件
+const emits = defineEmits<{
+  'update:value': [value: string]
+  change: [color: IColor]
+}>()
 
-const props = defineProps({
-  value: {
-    type: String,
-    default: 'rgba(175, 51, 242, 1)',
+// 定义属性
+const props = withDefaults(
+  defineProps<{
+    value?: string
+    width?: number
+    hideInputs?: boolean
+    hideOpacity?: boolean
+    hideGradient?: boolean
+    presetColors?: string[]
+    hidePresets?: boolean
+    showAdvancedSliders?: boolean
+    inputType?: InputType
+  }>(),
+  {
+    value: DEFAULT_VALUES.DEFAULT_COLOR,
+    width: DEFAULT_VALUES.DEFAULT_WIDTH,
+    hideInputs: false,
+    hideOpacity: false,
+    hideGradient: false,
+    presetColors: () => presetColors,
+    hidePresets: false,
+    showAdvancedSliders: false,
+    inputType: InputType.rgb,
   },
-  width: {
-    type: Number,
-    default: 300,
-  },
-  hideInputs: {
-    type: Boolean,
-    default: false,
-  },
-  hideOpacity: {
-    type: Boolean,
-    default: false,
-  },
-  hideGradient: {
-    type: Boolean,
-    default: false,
-  },
-  presetColors: {
-    type: Array as PropType<string[]>,
-    default: () => presetColors,
-  },
-  hidePresets: {
-    type: Boolean,
-    default: false,
-  },
-})
+)
 
+// 响应式状态
 const colorState = reactive<ColorPickerProps>({
-  width: 300,
-  height: 300,
+  width: DEFAULT_VALUES.DEFAULT_WIDTH,
+  height: DEFAULT_VALUES.DEFAULT_WIDTH,
   showAdvancedSliders: false,
   mode: Modes.solid,
-  degrees: 90,
+  degrees: DEFAULT_VALUES.DEFAULT_DEGREES,
   degreesStr: '',
   gradientColor: '',
   gradientColors: [],
   gradientColorsIdx: 0,
+  value: DEFAULT_VALUES.DEFAULT_COLOR,
+  inputType: InputType.rgb,
+  presetColors: presetColors,
 })
+
 // 渐变类型
 const gradientType = ref<GradientType>(GradientType.linear)
 const tinycolor = ref<typeof tc | null>(null)
 
+/**
+ * 颜色变化回调函数
+ */
 const onChange = (val: IColor) => {
-  emits('update:value', val.color)
-  emits('change', { ...val })
+  if (val.color) {
+    emits('update:value', val.color)
+    emits('change', { ...val })
+  }
 }
 
-// 渐变类型
+// 计算属性
 const isGradient = computed(() => colorState.mode === Modes.gradient)
-// 设置纯色或渐变模式
+
+/**
+ * 设置纯色或渐变模式
+ */
 const setMode = (mode: IMode) => {
   if (mode === Modes.solid) {
-    colorState.degrees = 90
+    colorState.degrees = DEFAULT_VALUES.DEFAULT_DEGREES
     colorState.gradientColors = []
     colorState.gradientColorsIdx = 0
   }
   colorState.mode = mode
 }
 
-// 更新颜色
+/**
+ * 更新颜色值
+ */
 const setValue = (color?: string) => {
-  const _color = color || colorState.value!
+  const _color = color || colorState.value || DEFAULT_VALUES.DEFAULT_COLOR
+
   const colors: GradientProps[] = getColors(_color)
   const { degreeStr } = getDetails(_color)
+
   if (unref(isGradient)) {
     colorState.degreesStr = degreeStr
     colorState.gradientColors = colors
@@ -141,22 +158,32 @@ const setValue = (color?: string) => {
       unref(gradientType),
       colorState,
     )
-    tinycolor.value = tc(
-      colorState.gradientColors[colorState.gradientColorsIdx!].value,
-    )
-    // colorState.gradientColors[colorState.gradientColorsIdx].value = color
+
+    const currentColor =
+      colorState.gradientColors[colorState.gradientColorsIdx || 0]
+    if (currentColor) {
+      tinycolor.value = tc(currentColor.value)
+    }
   } else {
-    colorState.value = colors[0].value?.replace(/\s+/g, '')
-    tinycolor.value = tc(colors[0].value)
+    const solidColor =
+      colors[0]?.value?.replace(/\s+/g, '') || DEFAULT_VALUES.DEFAULT_COLOR
+    colorState.value = solidColor
+    tinycolor.value = tc(solidColor)
   }
-  const rgba = tinycolor.value.toRgb()
-  const hsv = tinycolor.value.toHsv()
-  colorState.hc = {
-    ...rgba,
-    s: hsv.s,
-    v: hsv.v,
-    h: hsv.h === 0 ? colorState.hc?.h || 0.1 : hsv.h,
+
+  // 更新颜色对象
+  if (tinycolor.value) {
+    const rgba = tinycolor.value.toRgb()
+    const hsv = tinycolor.value.toHsv()
+    colorState.hc = {
+      ...rgba,
+      s: hsv.s,
+      v: hsv.v,
+      h: hsv.h === 0 ? colorState.hc?.h || 0.1 : hsv.h,
+    } as IColorValue
   }
+
+  // 触发回调
   if (onChange) {
     if (unref(isGradient)) {
       onChange({
@@ -167,8 +194,8 @@ const setValue = (color?: string) => {
         gradientColors: cloneDeep(
           colorState.gradientColors?.map((i: GradientProps) => ({
             color: i.value?.toLowerCase(),
-            left: i.left,
-          })),
+            left: i.left || 0,
+          })) || [],
         ),
       })
     } else {
@@ -180,25 +207,46 @@ const setValue = (color?: string) => {
   }
 }
 
+/**
+ * 更新选中的颜色
+ */
 const updateSelectColor = (value: string) => {
+  if (!isValidColor(value)) {
+    console.warn('updateSelectColor: invalid color value', value)
+    return
+  }
+
   const colors = colorState.gradientColors || []
-  const colorValue = colors[colorState.gradientColorsIdx!]
+  const colorValue = colors[colorState.gradientColorsIdx || 0]
   if (!colorValue) return
+
   colorValue.value = value
   const newGradStr = createGradientStr(colors, unref(gradientType), colorState)
   setValue(newGradStr)
 }
 
+/**
+ * 处理渐变颜色变化
+ */
 const handleGradient = (newColor: string, left?: number) => {
+  if (!isValidColor(newColor)) {
+    console.warn('handleGradient: invalid color value', newColor)
+    return
+  }
+
   const colors = colorState.gradientColors || []
-  const colorValue = colors[colorState.gradientColorsIdx!]
+  const colorValue = colors[colorState.gradientColorsIdx || 0]
   if (!colorValue) return
+
   colorValue.left = left ?? colorValue.left
   colorValue.value = newColor
   const newGradStr = createGradientStr(colors, unref(gradientType), colorState)
   setValue(newGradStr)
 }
 
+/**
+ * 改变颜色
+ */
 const changeColor = (newColor: string) => {
   if (unref(isGradient)) {
     handleGradient(newColor)
@@ -207,64 +255,96 @@ const changeColor = (newColor: string) => {
   }
 }
 
+/**
+ * 设置色相值
+ */
 const setHcH = (h: number) => {
-  if (colorState.hc?.h) {
-    colorState.hc.h = h
+  if (colorState.hc?.h !== undefined) {
+    colorState.hc.h = formatInputValues(h, 0, 360)
   }
 }
 
+/**
+ * 设置选中颜色索引
+ */
 const setSelectColorIdx = (idx: number) => {
-  colorState.gradientColorsIdx = idx
-  // warning: Here is update hc， but not need to handle onChange
-  tinycolor.value = tc(
-    colorState.gradientColors![colorState.gradientColorsIdx!].value,
-  )
-  const rgba = tinycolor.value.toRgb()
-  const hsv = tinycolor.value.toHsv()
-  colorState.hc = { ...rgba, ...hsv }
+  const colors = colorState.gradientColors || []
+  if (idx >= 0 && idx < colors.length) {
+    colorState.gradientColorsIdx = idx
+    const selectedColor = colors[idx]
+    if (selectedColor) {
+      tinycolor.value = tc(selectedColor.value)
+      const rgba = tinycolor.value.toRgb()
+      const hsv = tinycolor.value.toHsv()
+      colorState.hc = { ...rgba, ...hsv } as IColorValue
+    }
+  }
 }
 
-// 设置inputs的类型
+/**
+ * 设置输入类型
+ */
 const setInputType = (type: InputType) => {
   colorState.inputType = type
 }
 
-// 设置线性渐变
+/**
+ * 设置线性渐变
+ */
 const setLinear = () => {
   const value = colorState.gradientColor?.split(/,(.+)/)[1]
-  value && setValue(`linear-gradient(90deg, ${value}`)
-  gradientType.value = GradientType.linear
+  if (value) {
+    setValue(`linear-gradient(90deg, ${value}`)
+    gradientType.value = GradientType.linear
+  }
 }
 
-// 设置径向渐变
+/**
+ * 设置径向渐变
+ */
 const setRadial = () => {
   const value = colorState.gradientColor?.split(/,(.+)/)[1]
-  value && setValue(`radial-gradient(circle, ${value}`)
-  gradientType.value = GradientType.radial
+  if (value) {
+    setValue(`radial-gradient(circle, ${value}`)
+    gradientType.value = GradientType.radial
+  }
 }
 
-// 设置角度
+/**
+ * 设置角度
+ */
 const setDegrees = (val: number) => {
-  if (gradientType.value !== GradientType.linear)
-    return console.log(
+  if (gradientType.value !== GradientType.linear) {
+    console.warn(
       'Warning: you are updating degrees when the gradient type is not linear. This will change the gradients type which may be undesired',
     )
+    return
+  }
 
   const remaining = colorState.gradientColor?.split(/,(.+)/)[1]
   if (!remaining) return
+
   colorState.degrees = val
-  setValue(`linear-gradient(${formatInputValues(val, 0, 360)}deg, ${remaining}`)
+  setValue(
+    `linear-gradient(${formatInputValues(val, 0, 360)}deg, ${remaining})`,
+  )
 }
 
-// 添加渐变点
+/**
+ * 添加渐变点
+ */
 const addPoint = (left: number) => {
-  if (!left && left !== 0) {
-    console.log(
+  if (left === undefined || left === null) {
+    console.warn(
       'You did not pass a stop value (left amount) for the new color point so it defaulted to 50',
     )
+    left = 50
   }
-  const colors = cloneDeep(colorState.gradientColors!)
-  const curColorValue = colors[colorState.gradientColorsIdx!]
+
+  const colors = cloneDeep(colorState.gradientColors || [])
+  const curColorValue = colors[colorState.gradientColorsIdx || 0]
+
+  if (!curColorValue) return
 
   const newColors = [
     ...colors?.map((c: GradientProps) => ({
@@ -279,37 +359,51 @@ const addPoint = (left: number) => {
   setValue(color)
 }
 
-// 删除渐变点
+/**
+ * 删除渐变点
+ */
 const deletePoint = (index?: number) => {
   const colors = colorState.gradientColors
-  if (colors && colors?.length > 2) {
+  if (colors && colors.length > DEFAULT_VALUES.MIN_GRADIENT_POINTS) {
     const pointToDelete = index ?? colorState.gradientColorsIdx
     const remaining = colors?.filter(
       (rc: GradientProps, i: number) => i !== pointToDelete,
     )
-    colorState.gradientColors = cloneDeep(remaining)
+    colorState.gradientColors = cloneDeep(remaining || [])
 
     const newGradientColor = createGradientStr(
-      remaining,
+      remaining || [],
       unref(gradientType),
       colorState,
     )
     setValue(newGradientColor)
   } else {
-    console.log(
-      'A gradient must have atleast two colors, disable your delete button when necessary',
+    console.warn(
+      'A gradient must have at least two colors, disable your delete button when necessary',
     )
   }
 }
 
+/**
+ * 初始化组件
+ */
 const init = () => {
+  // 合并属性到状态
   Object.assign(colorState, props)
+
+  // 设置尺寸
   colorState.width = props.width <= 320 ? 304 : props.width - 16
-  colorState.height = props.width // 让宽等于高，area区域称为正方形
+  colorState.height = props.width // 让宽等于高，area区域成为正方形
+
   // 控制预设色最多18个
-  if (colorState.presetColors && colorState.presetColors?.length > 18) {
-    colorState.presetColors.length = 18
+  if (
+    colorState.presetColors &&
+    colorState.presetColors.length > DEFAULT_VALUES.MAX_PRESET_COLORS
+  ) {
+    colorState.presetColors.length = DEFAULT_VALUES.MAX_PRESET_COLORS
   }
+
+  // 初始化颜色
   if (colorState.value) {
     const isGradient = getIsGradient(colorState.value)
     colorState.inputType = InputType.rgb
@@ -318,6 +412,7 @@ const init = () => {
   }
 }
 
+// 提供者对象
 const colorProvider = {
   isGradient,
   colorState,
@@ -338,7 +433,9 @@ const colorProvider = {
   deletePoint,
 }
 
+// 初始化
 init()
+
+// 提供依赖注入
 provide('colorProvider', colorProvider)
-// init(props, onChange)
 </script>
