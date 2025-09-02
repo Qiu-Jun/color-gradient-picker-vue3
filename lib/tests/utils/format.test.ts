@@ -84,7 +84,9 @@ describe('格式化工具函数', () => {
     })
 
     it('应该从渐变值中提取颜色', () => {
-      const result = getColors('linear-gradient(90deg, #ff0000 0%, #00ff00 100%)')
+      const result = getColors(
+        'linear-gradient(90deg, #ff0000 0%, #00ff00 100%)',
+      )
       expect(result).toEqual([
         { value: '#ff0000', left: 0 },
         { value: '#00ff00', left: 100 },

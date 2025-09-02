@@ -170,7 +170,7 @@ export const getDetails = (value: string) => {
       gradientType: '',
     }
   }
-  
+
   const gradientType = value.split('(')[0]
   const degrees = getDegrees(value)
   const degreeStr =

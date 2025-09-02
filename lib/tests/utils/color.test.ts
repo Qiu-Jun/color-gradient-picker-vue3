@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import { createGradientStr, isValidColor, formatColor, getColorContrast } from '../../src/utils/color'
+import {
+  createGradientStr,
+  isValidColor,
+  formatColor,
+  getColorContrast,
+} from '../../src/utils/color'
 import { GradientType } from '../../src/enums'
 import type { GradientProps, ColorPickerProps } from '../../src/interfaces'
 
@@ -8,10 +13,14 @@ describe('Color Utils', () => {
     it('should create linear gradient string', () => {
       const colors: GradientProps[] = [
         { value: '#ff0000', left: 0 },
-        { value: '#00ff00', left: 100 }
+        { value: '#00ff00', left: 100 },
       ]
-      const colorState: ColorPickerProps = { degrees: 90, degreesStr: '90deg', width: 300 }
-      
+      const colorState: ColorPickerProps = {
+        degrees: 90,
+        degreesStr: '90deg',
+        width: 300,
+      }
+
       const result = createGradientStr(colors, GradientType.linear, colorState)
       expect(result).toBe('linear-gradient(90deg, #ff0000 0%, #00ff00 100%)')
     })
@@ -19,7 +28,7 @@ describe('Color Utils', () => {
     it('should handle empty colors array', () => {
       const colors: GradientProps[] = []
       const colorState: ColorPickerProps = { degrees: 90, width: 300 }
-      
+
       const result = createGradientStr(colors, GradientType.linear, colorState)
       expect(result).toBe('')
     })
@@ -28,12 +37,14 @@ describe('Color Utils', () => {
       const colors: GradientProps[] = [
         { value: '#00ff00', left: 100 },
         { value: '#ff0000', left: 0 },
-        { value: '#0000ff', left: 50 }
+        { value: '#0000ff', left: 50 },
       ]
       const colorState: ColorPickerProps = { degrees: 90, width: 300 }
-      
+
       const result = createGradientStr(colors, GradientType.linear, colorState)
-      expect(result).toBe('linear-gradient(90deg, #ff0000 0%, #0000ff 50%, #00ff00 100%)')
+      expect(result).toBe(
+        'linear-gradient(90deg, #ff0000 0%, #0000ff 50%, #00ff00 100%)',
+      )
     })
   })
 
@@ -79,32 +90,76 @@ describe('Color Utils', () => {
 
     describe('Gradient Colors', () => {
       it('should validate linear gradients', () => {
-        expect(isValidColor('linear-gradient(90deg, rgb(245, 66, 245) 0%, rgb(0, 0, 255) 100%)')).toBe(true)
-        expect(isValidColor('linear-gradient(to right, #ff0000 0%, #00ff00 100%)')).toBe(true)
-        expect(isValidColor('linear-gradient(45deg, rgba(255, 0, 0, 0.5) 0%, rgba(0, 255, 0, 0.8) 100%)')).toBe(true)
+        expect(
+          isValidColor(
+            'linear-gradient(90deg, rgb(245, 66, 245) 0%, rgb(0, 0, 255) 100%)',
+          ),
+        ).toBe(true)
+        expect(
+          isValidColor('linear-gradient(to right, #ff0000 0%, #00ff00 100%)'),
+        ).toBe(true)
+        expect(
+          isValidColor(
+            'linear-gradient(45deg, rgba(255, 0, 0, 0.5) 0%, rgba(0, 255, 0, 0.8) 100%)',
+          ),
+        ).toBe(true)
       })
 
       it('should validate radial gradients', () => {
-        expect(isValidColor('radial-gradient(circle, #ff0000 0%, #00ff00 50%, #0000ff 100%)')).toBe(true)
-        expect(isValidColor('radial-gradient(ellipse, rgb(255, 0, 0) 0%, rgb(0, 255, 0) 100%)')).toBe(true)
+        expect(
+          isValidColor(
+            'radial-gradient(circle, #ff0000 0%, #00ff00 50%, #0000ff 100%)',
+          ),
+        ).toBe(true)
+        expect(
+          isValidColor(
+            'radial-gradient(ellipse, rgb(255, 0, 0) 0%, rgb(0, 255, 0) 100%)',
+          ),
+        ).toBe(true)
       })
 
       it('should validate conic gradients', () => {
-        expect(isValidColor('conic-gradient(from 0deg, #ff0000, #00ff00, #0000ff)')).toBe(true)
-        expect(isValidColor('conic-gradient(from 45deg, rgb(255, 0, 0) 0deg, rgb(0, 255, 0) 180deg)')).toBe(true)
+        expect(
+          isValidColor('conic-gradient(from 0deg, #ff0000, #00ff00, #0000ff)'),
+        ).toBe(true)
+        expect(
+          isValidColor(
+            'conic-gradient(from 45deg, rgb(255, 0, 0) 0deg, rgb(0, 255, 0) 180deg)',
+          ),
+        ).toBe(true)
       })
 
       it('should reject invalid gradients', () => {
-        expect(isValidColor('invalid-gradient(90deg, rgb(245, 66, 245) 0%, rgb(0, 0, 255) 100%)')).toBe(false)
-        expect(isValidColor('linear-gradient(90deg, invalid-color 0%, rgb(0, 0, 255) 100%)')).toBe(false)
-        expect(isValidColor('linear-gradient(90deg, rgb(245, 66, 245) 0%)')).toBe(false) // 只有一个颜色停止点
+        expect(
+          isValidColor(
+            'invalid-gradient(90deg, rgb(245, 66, 245) 0%, rgb(0, 0, 255) 100%)',
+          ),
+        ).toBe(false)
+        expect(
+          isValidColor(
+            'linear-gradient(90deg, invalid-color 0%, rgb(0, 0, 255) 100%)',
+          ),
+        ).toBe(false)
+        expect(
+          isValidColor('linear-gradient(90deg, rgb(245, 66, 245) 0%)'),
+        ).toBe(false) // 只有一个颜色停止点
         expect(isValidColor('linear-gradient(90deg)')).toBe(false) // 没有颜色停止点
       })
 
       it('should handle edge cases', () => {
-        expect(isValidColor('linear-gradient(90deg, #ff0000 0%, #00ff00 50%, #0000ff 100%)')).toBe(true)
-        expect(isValidColor('linear-gradient(90deg, #ff0000, #00ff00)')).toBe(true) // 没有位置
-        expect(isValidColor('linear-gradient(90deg, #ff0000 0%, #00ff00 50%, #0000ff 100%, #ffff00 150%)')).toBe(true) // 超过100%的位置
+        expect(
+          isValidColor(
+            'linear-gradient(90deg, #ff0000 0%, #00ff00 50%, #0000ff 100%)',
+          ),
+        ).toBe(true)
+        expect(isValidColor('linear-gradient(90deg, #ff0000, #00ff00)')).toBe(
+          true,
+        ) // 没有位置
+        expect(
+          isValidColor(
+            'linear-gradient(90deg, #ff0000 0%, #00ff00 50%, #0000ff 100%, #ffff00 150%)',
+          ),
+        ).toBe(true) // 超过100%的位置
       })
     })
   })

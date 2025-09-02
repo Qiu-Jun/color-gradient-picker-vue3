@@ -101,7 +101,7 @@ describe('工具函数', () => {
     it('应该处理边界值', () => {
       const result1 = computeSquareXY(0, 0, 200, 200)
       const result2 = computeSquareXY(1, 1, 200, 200)
-      
+
       expect(result1[0]).toBeLessThan(result2[0])
       expect(result1[1]).toBeGreaterThan(result2[1])
     })
@@ -245,7 +245,9 @@ describe('工具函数', () => {
 
     it('应该处理空数组', () => {
       const result = getColorObj([])
-      expect(result.currentColor).toBe('linear-gradient(90deg, #ff0000, #00ff00)')
+      expect(result.currentColor).toBe(
+        'linear-gradient(90deg, #ff0000, #00ff00)',
+      )
       expect(result.selectedColor).toBe(0)
       expect(result.currentLeft).toBe(0)
     })
@@ -253,8 +255,12 @@ describe('工具函数', () => {
 
   describe('getIsGradient', () => {
     it('应该检测渐变字符串', () => {
-      expect(getIsGradient('linear-gradient(90deg, #ff0000, #00ff00)')).toBe(true)
-      expect(getIsGradient('radial-gradient(circle, #ff0000, #00ff00)')).toBe(true)
+      expect(getIsGradient('linear-gradient(90deg, #ff0000, #00ff00)')).toBe(
+        true,
+      )
+      expect(getIsGradient('radial-gradient(circle, #ff0000, #00ff00)')).toBe(
+        true,
+      )
       expect(getIsGradient('#ff0000')).toBe(false)
       expect(getIsGradient('rgb(255, 0, 0)')).toBe(false)
     })

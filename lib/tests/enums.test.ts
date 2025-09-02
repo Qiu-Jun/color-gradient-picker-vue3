@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import { InputType, GradientType, Modes, EventType, DEFAULT_VALUES } from '@/enums'
+import {
+  InputType,
+  GradientType,
+  Modes,
+  EventType,
+  DEFAULT_VALUES,
+} from '@/enums'
 
 describe('枚举定义', () => {
   describe('InputType', () => {

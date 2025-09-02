@@ -68,7 +68,8 @@ export function isValidColor(color: string): boolean {
 
     // 检查基本结构：gradient-type(...)
     // 使用更宽松的正则表达式，允许嵌套括号
-    const gradientRegex = /^(linear-gradient|radial-gradient|conic-gradient)\s*\(.*\)$/i
+    const gradientRegex =
+      /^(linear-gradient|radial-gradient|conic-gradient)\s*\(.*\)$/i
     if (!gradientRegex.test(trimmedColor)) return false
 
     // 简单验证：至少包含两个颜色值

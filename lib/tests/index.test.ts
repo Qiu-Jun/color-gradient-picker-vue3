@@ -21,8 +21,8 @@ describe('测试套件', () => {
   it('应该能够处理数组', () => {
     const arr = [1, 2, 3, 4, 5]
     expect(arr.length).toBe(5)
-    expect(arr.map(x => x * 2)).toEqual([2, 4, 6, 8, 10])
-    expect(arr.filter(x => x > 3)).toEqual([4, 5])
+    expect(arr.map((x) => x * 2)).toEqual([2, 4, 6, 8, 10])
+    expect(arr.filter((x) => x > 3)).toEqual([4, 5])
   })
 
   it('应该能够处理对象', () => {
