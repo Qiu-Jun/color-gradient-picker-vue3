@@ -65,7 +65,9 @@ export function computePickerPosition(e: any) {
 // }
 
 export const isUpperCase = (str: string) => {
-  return str?.[0] === str?.[0]?.toUpperCase()
+  if (!str || typeof str !== 'string') return false
+  // 检查字符串中是否包含大写字母
+  return /[A-Z]/.test(str)
 }
 
 // export const compareGradients = (g1: string, g2: string) => {
@@ -97,7 +99,8 @@ const convertShortHandDeg = (dir: any) => {
     return 315
   } else {
     const safeDir = dir || 0
-    return parseInt(safeDir)
+    const parsed = parseInt(safeDir)
+    return isNaN(parsed) ? 0 : parsed
   }
 }
 
@@ -124,12 +127,20 @@ export const objectToString = (value: any) => {
 }
 
 export const getColorObj = (colors: GradientProps[]) => {
-  const idxCols = colors?.map((c: GradientProps, i: number) => ({
+  if (!colors || colors.length === 0) {
+    return {
+      currentColor: config?.defaultGradient,
+      selectedColor: 0,
+      currentLeft: 0,
+    }
+  }
+
+  const idxCols = colors.map((c: GradientProps, i: number) => ({
     ...c,
     index: i,
   }))
 
-  const upperObj = idxCols?.find((c: GradientProps) => isUpperCase(c.value))
+  const upperObj = idxCols.find((c: GradientProps) => isUpperCase(c.value))
   const ccObj = upperObj || idxCols[0]
 
   return {
@@ -140,15 +151,27 @@ export const getColorObj = (colors: GradientProps[]) => {
 }
 
 const getDegrees = (value: string) => {
-  const s1 = value?.split(',')[0]
+  if (!value || typeof value !== 'string') return 0
+  const s1 = value.split(',')[0]
   const s2 = s1?.split('(')[1]?.replace('deg', '')
   return convertShortHandDeg(s2)
 }
 
-export const getIsGradient = (value: string) => value?.includes('gradient')
+export const getIsGradient = (value: string) => {
+  if (!value || typeof value !== 'string') return false
+  return value.includes('gradient')
+}
 
 export const getDetails = (value: string) => {
-  const gradientType = value?.split('(')[0]
+  if (!value || typeof value !== 'string') {
+    return {
+      degrees: 0,
+      degreeStr: '0deg',
+      gradientType: '',
+    }
+  }
+  
+  const gradientType = value.split('(')[0]
   const degrees = getDegrees(value)
   const degreeStr =
     gradientType === 'linear-gradient' ? `${degrees}deg` : 'circle'
@@ -156,7 +179,6 @@ export const getDetails = (value: string) => {
   return {
     degrees,
     degreeStr,
-
     gradientType,
   }
 }

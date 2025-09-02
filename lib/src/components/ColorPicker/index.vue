@@ -2,8 +2,8 @@
  * @Author: June
  * @Description: Vue3颜色选择器主组件
  * @Date: 2024-11-30 21:19:44
- * @LastEditTime: 2024-12-22 00:06:48
- * @LastEditors: June
+ * @LastEditTime: 2025-09-02 14:05:14
+ * @LastEditors: June 1601745371@qq.com
 -->
 <template>
   <div class="cpg-box" :style="{ width: props.width + 'px' }">
@@ -146,6 +146,11 @@ const setMode = (mode: IMode) => {
  */
 const setValue = (color?: string) => {
   const _color = color || colorState.value || DEFAULT_VALUES.DEFAULT_COLOR
+
+  if (!isValidColor(_color)) {
+    console.warn('setValue: invalid color provided', _color)
+    return
+  }
 
   const colors: GradientProps[] = getColors(_color)
   const { degreeStr } = getDetails(_color)

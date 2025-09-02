@@ -57,7 +57,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       },
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "@/styles/variables.scss";`,
+          // 移除variables.scss的引用，因为文件不存在
+          // additionalData: `@import "@/styles/variables.scss";`,
         },
       },
     },

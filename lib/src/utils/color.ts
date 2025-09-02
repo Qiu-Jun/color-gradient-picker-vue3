@@ -51,10 +51,37 @@ export function createGradientStr(
 export function isValidColor(color: string): boolean {
   if (!color || typeof color !== 'string') return false
 
+  const trimmedColor = color.trim()
+
+  // 检查是否为渐变字符串
+  if (trimmedColor.includes('gradient')) {
+    // 简化的渐变验证：只要包含有效的渐变类型和至少两个颜色就认为是有效的
+    const gradientTypes = [
+      'linear-gradient',
+      'radial-gradient',
+      'conic-gradient',
+    ]
+    const hasValidType = gradientTypes.some((type) =>
+      trimmedColor.includes(type),
+    )
+    if (!hasValidType) return false
+
+    // 检查基本结构：gradient-type(...)
+    // 使用更宽松的正则表达式，允许嵌套括号
+    const gradientRegex = /^(linear-gradient|radial-gradient|conic-gradient)\s*\(.*\)$/i
+    if (!gradientRegex.test(trimmedColor)) return false
+
+    // 简单验证：至少包含两个颜色值
+    const colorMatches = trimmedColor.match(
+      /(#([0-9A-F]{3}){1,2}|rgb\(|rgba\(|hsl\(|hsla\()/gi,
+    )
+    return !!(colorMatches && colorMatches.length >= 2)
+  }
+
   // 检查是否为有效的CSS颜色值
   const colorRegex =
-    /^(#([0-9A-F]{3}){1,2}|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|hsl\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*\)|hsla\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*,\s*[\d.]+\s*\))$/i
-  return colorRegex.test(color.trim())
+    /^(#([0-9A-F]{3}){1,2}|rgb\(\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*\)|rgba\(\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:0|1|0\.\d+)\s*\)|hsl\(\s*(?:[0-2]?[0-9]?[0-9]|3[0-5][0-9]|360)\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:100|[1-9]?\d)%\s*\)|hsla\(\s*(?:[0-2]?[0-9]?[0-9]|3[0-5][0-9]|360)\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:0|1|0\.\d+)\s*\))$/i
+  return colorRegex.test(trimmedColor)
 }
 
 /**
@@ -78,7 +105,7 @@ export function getColorContrast(color: string): number {
 
   // 移除透明度，只考虑RGB分量
   const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i)
-  if (!rgbMatch) return 0.5
+  if (!rgbMatch) return 0
 
   const [, r, g, b] = rgbMatch
   const brightness =
