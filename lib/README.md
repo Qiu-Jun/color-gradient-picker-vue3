@@ -1,15 +1,15 @@
 # Color Gradient Picker Vue3
 
-一个现代化的Vue 3颜色和渐变选择器组件，支持TypeScript。
+一个现代化的 Vue 3 颜色和渐变选择器组件，支持 TypeScript。
 
 ## 特性
 
 - 🎨 支持纯色和渐变选择
 - 📱 响应式设计，支持移动端
 - 🔧 高度可定制
-- 📦 TypeScript支持
-- 🎯 零依赖（除了Vue 3）
-- ⚡ 基于Vite构建，开发体验优秀
+- 📦 TypeScript 支持
+- 🎯 零依赖（除了 Vue 3）
+- ⚡ 基于 Vite 构建，开发体验优秀
 
 ## 安装
 
@@ -26,8 +26,8 @@ pnpm add color-gradient-picker-vue3
 ```vue
 <template>
   <div>
-    <ColorPicker 
-      v-model:value="color" 
+    <ColorPicker
+      v-model:value="color"
       :width="300"
       @change="handleColorChange"
     />
@@ -51,24 +51,24 @@ const handleColorChange = (colorData: IColor) => {
 
 ### Props
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| value | string | 'rgba(175, 51, 242, 1)' | 当前颜色值 |
-| width | number | 300 | 组件宽度 |
-| hideInputs | boolean | false | 是否隐藏输入框 |
-| hideOpacity | boolean | false | 是否隐藏透明度控制 |
-| hideGradient | boolean | false | 是否隐藏渐变功能 |
-| presetColors | string[] | 预设颜色数组 | 预设颜色 |
-| hidePresets | boolean | false | 是否隐藏预设颜色 |
-| showAdvancedSliders | boolean | false | 是否显示高级滑块控制 |
-| inputType | InputType | 'RGB' | 输入框类型 |
+| 属性                | 类型      | 默认值                  | 说明                 |
+| ------------------- | --------- | ----------------------- | -------------------- |
+| value               | string    | 'rgba(175, 51, 242, 1)' | 当前颜色值           |
+| width               | number    | 300                     | 组件宽度             |
+| hideInputs          | boolean   | false                   | 是否隐藏输入框       |
+| hideOpacity         | boolean   | false                   | 是否隐藏透明度控制   |
+| hideGradient        | boolean   | false                   | 是否隐藏渐变功能     |
+| presetColors        | string[]  | 预设颜色数组            | 预设颜色             |
+| hidePresets         | boolean   | false                   | 是否隐藏预设颜色     |
+| showAdvancedSliders | boolean   | false                   | 是否显示高级滑块控制 |
+| inputType           | InputType | 'RGB'                   | 输入框类型           |
 
 ### Events
 
-| 事件名 | 参数 | 说明 |
-|--------|------|------|
+| 事件名       | 参数   | 说明       |
+| ------------ | ------ | ---------- |
 | update:value | string | 颜色值更新 |
-| change | IColor | 颜色变化 |
+| change       | IColor | 颜色变化   |
 
 ### 类型定义
 
@@ -112,8 +112,8 @@ interface ColorPickerProps {
 
 ```vue
 <template>
-  <ColorPicker 
-    v-model:value="gradientColor" 
+  <ColorPicker
+    v-model:value="gradientColor"
     :width="400"
     :hide-gradient="false"
     @change="handleGradientChange"
@@ -136,8 +136,8 @@ const handleGradientChange = (colorData: IColor) => {
 
 ```vue
 <template>
-  <ColorPicker 
-    v-model:value="color" 
+  <ColorPicker
+    v-model:value="color"
     :preset-colors="customPresetColors"
     :hide-presets="false"
   />
@@ -150,11 +150,11 @@ import { ColorPicker } from 'color-gradient-picker-vue3'
 const color = ref('#ff0000')
 const customPresetColors = [
   '#ff0000',
-  '#00ff00', 
+  '#00ff00',
   '#0000ff',
   '#ffff00',
   '#ff00ff',
-  '#00ffff'
+  '#00ffff',
 ]
 </script>
 ```
@@ -163,8 +163,8 @@ const customPresetColors = [
 
 ```vue
 <template>
-  <ColorPicker 
-    v-model:value="color" 
+  <ColorPicker
+    v-model:value="color"
     :hide-inputs="true"
     :hide-opacity="true"
     :hide-gradient="true"
@@ -178,7 +178,7 @@ const customPresetColors = [
 组件还提供了一些有用的工具函数：
 
 ```typescript
-import { 
+import {
   createGradientStr,
   isValidColor,
   formatColor,
@@ -188,7 +188,7 @@ import {
   round,
   clamp,
   percentToDecimal,
-  decimalToPercent
+  decimalToPercent,
 } from 'color-gradient-picker-vue3'
 
 // 验证颜色值
@@ -232,4 +232,4 @@ MIT License
 
 ## 贡献
 
-欢迎提交Issue和Pull Request！
+欢迎提交 Issue 和 Pull Request！
