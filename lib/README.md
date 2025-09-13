@@ -28,7 +28,7 @@ pnpm add color-gradient-picker-vue3
   <div>
     <ColorPicker
       v-model:value="color"
-      :width="300"
+      :width="320"
       @change="handleColorChange"
     />
   </div>
@@ -54,7 +54,7 @@ const handleColorChange = (colorData: IColor) => {
 | 属性                | 类型      | 默认值                  | 说明                 |
 | ------------------- | --------- | ----------------------- | -------------------- |
 | value               | string    | 'rgba(175, 51, 242, 1)' | 当前颜色值           |
-| width               | number    | 300                     | 组件宽度             |
+| width               | number    | 320                     | 组件宽度(最小320)             |
 | hideInputs          | boolean   | false                   | 是否隐藏输入框       |
 | hideOpacity         | boolean   | false                   | 是否隐藏透明度控制   |
 | hideGradient        | boolean   | false                   | 是否隐藏渐变功能     |
