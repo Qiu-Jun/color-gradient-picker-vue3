@@ -11,7 +11,7 @@
     <ColorPicker
       v-model:value="curColor"
       :preset-colors="presetColors"
-      :width="300"
+      :width="320"
       @change="onChange"
     />
 

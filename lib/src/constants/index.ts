@@ -10,8 +10,8 @@ import { InputType } from '@/enums'
 export const inputTypes: InputType[] = [
   InputType.rgb,
   InputType.hsl,
-  InputType.hsv,
-  InputType.cmyk,
+  // InputType.hsv,
+  // InputType.cmyk,
 ]
 
 export const config = {

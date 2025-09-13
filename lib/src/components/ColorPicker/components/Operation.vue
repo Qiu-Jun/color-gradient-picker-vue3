@@ -35,7 +35,7 @@
           @click="toggleShowAdvancedControl"
         />
       </div> -->
-      <div class="cpg-controls-item-btn cpg-cursor-pointer">
+      <!-- <div class="cpg-controls-item-btn cpg-cursor-pointer">
         <span
           :class="
             showInputTypes
@@ -45,7 +45,7 @@
           icon=""
           @click="handleXise"
         />
-      </div>
+      </div> -->
       <div
         class="cpg-controls-item-btn cpg-cursor-pointer"
         :class="{ 'cpg-control-active': showInputTypes }"
@@ -113,7 +113,7 @@ const handleXise = debounce(function () {
     return
   }
   const root = document.getElementById('app')
-  console.log(root, 'xxxxsss')
+
   html2canvas(root!).then((canvas: any) => {
     const blankCanvas = document.createElement('canvas')
     const ctx = blankCanvas.getContext('2d', { willReadFrequently: true })

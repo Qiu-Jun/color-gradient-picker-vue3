@@ -30,7 +30,6 @@
 
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
-import { throttle } from 'lodash-es'
 
 const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject(
   'colorProvider',
