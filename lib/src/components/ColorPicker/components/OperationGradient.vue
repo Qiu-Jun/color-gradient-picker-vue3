@@ -65,6 +65,8 @@ const {
 const disabledDelete = computed(
   () => !colorState.gradientColors || colorState.gradientColors.length <= 2,
 )
+
+console.log('sssssssssssssss', colorState.degrees)
 // 渐变类型
 const handleChangeType = debounce(function (type: GradientType) {
   if (type === unref(gradientType)) return

@@ -12,11 +12,9 @@ export function rgb2cmyk(r: number, g: number, b: number) {
     isNaN(g) ||
     isNaN(b)
   ) {
-    console.log('Please enter numeric RGB values!')
     return { c: 0, m: 0, k: 0, y: 1 }
   }
   if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
-    console.log('RGB values must be in the range 0 to 255.')
     return { c: 0, m: 0, k: 0, y: 1 }
   }
 

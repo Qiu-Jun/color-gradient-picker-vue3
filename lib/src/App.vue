@@ -43,7 +43,7 @@ const presetColors = [
   'rgba(192,192,192, 1)',
   '#f34250',
 ]
-const curColor = ref('rgba(175, 51, 242, 1)')
+const curColor = ref('linear-gradient(45deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 47%, rgba(0,0,255,1) 100%)')
 const curColor2 = ref('rgba(0,0,0,1)')
 // const curColor = ref(
 //   'linear-gradient(90deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 47%, rgba(0,0,255,1) 100%)',

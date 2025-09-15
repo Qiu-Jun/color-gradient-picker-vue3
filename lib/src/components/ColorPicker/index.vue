@@ -153,9 +153,10 @@ const setValue = (color?: string) => {
   }
 
   const colors: GradientProps[] = getColors(_color)
-  const { degreeStr } = getDetails(_color)
+  const { degreeStr, degrees } = getDetails(_color)
 
   if (unref(isGradient)) {
+    colorState.degrees = degrees
     colorState.degreesStr = degreeStr
     colorState.gradientColors = colors
     colorState.gradientColor = createGradientStr(
