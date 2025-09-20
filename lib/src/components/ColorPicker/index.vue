@@ -151,11 +151,11 @@ const setValue = (color?: string) => {
     console.warn('setValue: invalid color provided', _color)
     return
   }
-
   const colors: GradientProps[] = getColors(_color)
-  const { degreeStr, degrees } = getDetails(_color)
 
+  // 渐变色处理
   if (unref(isGradient)) {
+    const { degreeStr, degrees } = getDetails(_color)
     colorState.degrees = degrees
     colorState.degreesStr = degreeStr
     colorState.gradientColors = colors
@@ -326,13 +326,11 @@ const setDegrees = (val: number) => {
     )
     return
   }
-
   const remaining = colorState.gradientColor?.split(/,(.+)/)[1]
   if (!remaining) return
-
-  colorState.degrees = val
+  colorState.degrees = +val
   setValue(
-    `linear-gradient(${formatInputValues(val, 0, 360)}deg, ${remaining})`,
+    `linear-gradient(${formatInputValues(+val, 0, 360)}deg, ${remaining}`,
   )
 }
 
@@ -395,7 +393,9 @@ const deletePoint = (index?: number) => {
  */
 const init = () => {
   // 合并属性到状态
-  Object.assign(colorState, props)
+  const cloneProps = cloneDeep(props) as IColorPicker
+  cloneProps.value = cloneProps.value?.toLowerCase()
+  Object.assign(colorState, cloneProps)
 
   // 设置尺寸
   colorState.width = props.width <= 320 ? 304 : props.width - 16

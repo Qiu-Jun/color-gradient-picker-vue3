@@ -1,6 +1,6 @@
 <!--
  * @Author: June
- * @Description: Description
+ * @Description: 渐变bar
  * @Date: 2024-12-04 21:20:20
  * @LastEditTime: 2024-12-09 14:52:25
  * @LastEditors: June

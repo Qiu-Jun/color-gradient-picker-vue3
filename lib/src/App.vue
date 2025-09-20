@@ -20,7 +20,7 @@
       :style="{ background: curColor }"
     ></div>
 
-    <div
+    <!-- <div
       class="w-50px h-50px rounded-10px"
       :style="{ background: curColor2 }"
     ></div>
@@ -30,7 +30,7 @@
         <el-button class="m-2">Hover to activate</el-button>
       </template>
       <ColorPicker v-model:value="curColor2" />
-    </el-popover>
+    </el-popover> -->
   </div>
 </template>
 
@@ -51,6 +51,6 @@ const curColor2 = ref('rgba(0,0,0,1)')
 //   'linear-gradient(90deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 47%, rgba(0,0,255,1) 100%)',
 // )
 const onChange = (val: any) => {
-  // console.log(val, 'colorpicker 回调')
+  console.log(val, 'colorpicker 回调')
 }
 </script>

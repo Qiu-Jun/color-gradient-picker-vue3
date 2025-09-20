@@ -7,6 +7,7 @@
 -->
 <template>
   <section class="cpg-controls-wrapper">
+    <!-- 选择渐变模式 -->
     <div class="cpg-controls-item">
       <div
         class="cpg-controls-item-btn cpg-cursor-pointer"
@@ -24,6 +25,8 @@
         Gradient
       </div>
     </div>
+
+    <!-- 右侧菜单 -->
     <div class="cpg-controls-item">
       <!-- <div
         class="cpg-controls-item-btn cpg-cursor-pointer"

@@ -75,7 +75,7 @@ export const gradientParser = (input = '') => {
     return result
   }
 
-  function match(type: any, pattern: any, captureIndex: any) {
+  function match(type: string, pattern: any, captureIndex: number) {
     const captures = scan(pattern)
     if (captures) {
       return {
@@ -164,7 +164,7 @@ export const gradientParser = (input = '') => {
       error('Expected color definition')
     }
 
-    color.left = parseInt(matchDistance()?.value)
+    color.left = ~~matchDistance()?.value
     return color
   }
 
@@ -224,7 +224,6 @@ export const gradientParser = (input = '') => {
 
   function getAST() {
     const ast = matchListDefinitions()
-
     if (input.length > 0) {
       error('Invalid input not EOF')
     }
