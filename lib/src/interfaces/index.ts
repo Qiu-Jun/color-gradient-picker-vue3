@@ -14,7 +14,7 @@ export interface ColorPickerProps {
   gradientColorsIdx?: number // 当前的渐变点下标
   degrees?: number
   degreesStr?: string
-  gradientColor: string
+  gradientColor?: string
   value?: string
   hideGradient?: boolean
   showAdvancedSliders?: boolean
