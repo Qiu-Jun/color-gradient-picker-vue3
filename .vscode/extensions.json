@@ -5,7 +5,6 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "vue.volar",
-    "eamodio.gitlens",
-    "OBKoro1.korofileheader"
+    "eamodio.gitlens"
   ]
 }
