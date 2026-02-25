@@ -457,8 +457,8 @@ const colorProvider = {
   deletePoint,
 }
 
-// 初始化
-init()
+// 监听props.value初始化
+watch(() => props.value, init, { immediate: true })
 
 // 提供依赖注入
 provide('colorProvider', colorProvider)

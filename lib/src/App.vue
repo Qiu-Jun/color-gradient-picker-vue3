@@ -31,6 +31,8 @@
       </template>
       <ColorPicker v-model:value="curColor2" />
     </el-popover> -->
+
+    <div @click="handleChange">change Color Test</div>
   </div>
 </template>
 
@@ -47,11 +49,15 @@ const curColor = ref('#000000ff')
 // const curColor = ref(
 //   'linear-gradient(45deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 47%, rgba(0,0,255,1) 100%)',
 // )
-const curColor2 = ref('rgba(0,0,0,1)')
+// const curColor2 = ref('rgba(0,0,0,1)')
 // const curColor = ref(
 //   'linear-gradient(90deg, rgba(245,66,245,1) 0%, RGBA(245,66,245,1) 47%, rgba(0,0,255,1) 100%)',
 // )
 const onChange = (val: any) => {
   console.log(val, 'colorpicker 回调')
+}
+
+const handleChange = () => {
+  curColor.value = '#1f3a98'
 }
 </script>
