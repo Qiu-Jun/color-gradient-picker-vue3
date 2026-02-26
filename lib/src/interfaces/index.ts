@@ -86,3 +86,5 @@ export interface IProvide extends ColorPickerProps {
   hc: any
 }
 export type IColorPicker = any
+
+export type ILocales = 'zh' | 'en'

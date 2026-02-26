@@ -12,6 +12,7 @@
       v-model:value="curColor"
       :preset-colors="presetColors"
       :width="320"
+      :locale="curLocale"
       @change="onChange"
     />
 
@@ -31,9 +32,10 @@
       </template>
       <ColorPicker v-model:value="curColor2" />
     </el-popover> -->
-
-    <div @click="handleChange">change Color Test</div>
   </div>
+
+  <div @click="handleChange">change Color Test</div>
+  <div @click="changeLocale">changeLocale Test</div>
 </template>
 
 <script lang="ts" setup>
@@ -59,5 +61,12 @@ const onChange = (val: any) => {
 
 const handleChange = () => {
   curColor.value = '#1f3a98'
+}
+
+import type { ILocales } from '@/interfaces'
+
+const curLocale = ref<ILocales>('zh')
+const changeLocale = () => {
+  curLocale.value = curLocale.value === 'en' ? 'zh' : 'en'
 }
 </script>

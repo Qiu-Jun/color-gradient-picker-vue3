@@ -68,7 +68,10 @@ import type {
   IMode,
   IColorValue,
   IColorPicker,
+  ILocales,
 } from '@/interfaces'
+// 导出国际化相关函数
+import { setLang } from '@/utils/i18n'
 
 // 定义事件
 const emits = defineEmits<{
@@ -79,6 +82,7 @@ const emits = defineEmits<{
 // 定义属性
 const props = withDefaults(
   defineProps<{
+    locale: ILocales
     value?: string
     width?: number
     hideInputs?: boolean
@@ -90,6 +94,7 @@ const props = withDefaults(
     inputType?: InputType
   }>(),
   {
+    locale: DEFAULT_VALUES.LOCALE,
     value: DEFAULT_VALUES.DEFAULT_COLOR,
     width: DEFAULT_VALUES.DEFAULT_WIDTH,
     hideInputs: false,
@@ -466,6 +471,12 @@ const colorProvider = {
 
 // 监听props.value初始化
 watch(() => props.value, init, { immediate: true })
+
+watch(
+  () => props.locale,
+  (val) => setLang(val),
+  { immediate: true },
+)
 
 // 提供依赖注入
 provide('colorProvider', colorProvider)

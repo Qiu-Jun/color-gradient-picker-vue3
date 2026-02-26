@@ -64,6 +64,8 @@ export const DEFAULT_VALUES = {
   MAX_PRESET_COLORS: 18,
   /** 最小渐变点数量 */
   MIN_GRADIENT_POINTS: 2,
+  /** 默认语言 */
+  LOCALE: 'en',
 } as const
 
 // 输入类型

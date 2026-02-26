@@ -14,7 +14,7 @@
         :class="{ 'cpg-control-active': !isGradient }"
         @click="handleSetIsGradient(Modes.solid)"
       >
-        Solid
+        {{ t('solid') }}
       </div>
       <div
         v-if="!colorState.hideGradient"
@@ -22,7 +22,7 @@
         :class="{ 'cpg-control-active': isGradient }"
         @click="handleSetIsGradient(Modes.gradient)"
       >
-        Gradient
+        {{ t('gradient') }}
       </div>
     </div>
 
@@ -92,6 +92,7 @@ import { InputType, Modes } from '@/enums'
 import { config } from '@/constants'
 import html2canvas from 'html2canvas'
 import type { IMode } from '@/interfaces'
+import { t } from '@/utils/i18n'
 
 const { defaultColor, defaultGradient } = config
 const { colorState, isGradient, setInputType, setMode, setValue } = inject(
