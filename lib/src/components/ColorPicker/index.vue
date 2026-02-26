@@ -151,14 +151,19 @@ const setMode = (mode: IMode) => {
  * 更新颜色值
  */
 const setValue = (color: string, mode?: string) => {
-  const _color = color || colorState.value || DEFAULT_VALUES.DEFAULT_COLOR
+  let _color = color || colorState.value || DEFAULT_VALUES.DEFAULT_COLOR
 
+  // 处理无效颜色，特别是带无效透明度的十六进制颜色
   if (!isValidColor(_color)) {
-    console.warn('setValue: invalid color provided', _color)
-    return
+    // 尝试匹配 #RRGGBB 或 #RGB 格式
+    const colorMatch = _color.match(/#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})/i)
+    if (colorMatch) {
+      _color = `#${colorMatch[1]}`
+    } else {
+      return
+    }
   }
   const colors: GradientProps[] = getColors(_color)
-
   // 渐变色处理
   if (unref(isGradient)) {
     const { degreeStr, degrees } = getDetails(_color)
@@ -298,9 +303,11 @@ const setSelectColorIdx = (idx: number) => {
     const selectedColor = colors[idx]
     if (selectedColor) {
       tinycolor.value = getTinycolor(selectedColor.value)
-      const rgba = tinycolor.value.toRgb()
-      const hsv = tinycolor.value.toHsv()
-      colorState.hc = { ...rgba, ...hsv } as IColorValue
+      if (tinycolor.value) {
+        const rgba = tinycolor.value.toRgb()
+        const hsv = tinycolor.value.toHsv()
+        colorState.hc = { ...rgba, ...hsv } as IColorValue
+      }
     }
   }
 }

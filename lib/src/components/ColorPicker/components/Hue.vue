@@ -15,7 +15,7 @@
     <div
       class="cpg-pointer"
       :class="{ 'cpg-cursor-pointer': dragging }"
-      :style="{ left: colorState.hc.h * ((colorState.width! - 18) / 360) + 'px'}"
+      :style="{ left: (colorState.hc?.h || 0) * ((colorState.width! - 18) / 360) + 'px'}"
     ></div>
 
     <canvas
@@ -55,7 +55,7 @@ const handleHue = (e: any) => {
   })
   const { r, g, b } = tinyHsv.toRgb()
   setHcH(newHue)
-  const rgbaColor = `rgba(${r}, ${g}, ${b}, ${colorState.hc.a})`
+  const rgbaColor = `rgba(${r}, ${g}, ${b}, ${colorState.hc?.a || 1})`
   unref(isGradient) ? updateSelectColor(rgbaColor) : changeColor(rgbaColor)
 }
 const onMousemove = throttle(function (e: any) {

@@ -15,7 +15,18 @@ export function getTinycolor(color: string) {
   if (tinycolorCache.has(color)) {
     return tinycolorCache.get(color)
   }
-  const instance = tinycolor(color)
+  // 处理带透明度的十六进制颜色，如果透明度部分无效，截取掉透明度部分
+  let processedColor = color
+  const hexWithAlphaMatch = processedColor.match(/#([0-9A-Fa-f]{6})([0-9A-Fa-f]{1,2})/i)
+  if (hexWithAlphaMatch) {
+    const [, rgbPart, alphaPart] = hexWithAlphaMatch
+    // 检查透明度部分是否有效（应该是1-2位十六进制数字）
+    if (!/^[0-9A-Fa-f]{1,2}$/i.test(alphaPart)) {
+      // 透明度部分无效，截取掉透明度部分
+      processedColor = `#${rgbPart}`
+    }
+  }
+  const instance = tinycolor(processedColor)
   tinycolorCache.set(color, instance)
   return instance
 }
@@ -98,13 +109,8 @@ export function isValidColor(color: string): boolean {
     return !!(colorMatches && colorMatches.length >= 2)
   }
 
-  // 检查是否为有效的CSS颜色值
-  // const colorRegex =
-  //   /^(#([0-9A-F]{3}){1,2}|rgb\(\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*\)|rgba\(\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:0|1|0\.\d+)\s*\)|hsl\(\s*(?:[0-2]?[0-9]?[0-9]|3[0-5][0-9]|360)\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:100|[1-9]?\d)%\s*\)|hsla\(\s*(?:[0-2]?[0-9]?[0-9]|3[0-5][0-9]|360)\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:0|1|0\.\d+)\s*\))$/i
-  // 新正则：支持 #RGB / #RGBA / #RRGGBB / #RRGGBBAA 格式
-  const colorRegex =
-    /^(#([0-9A-F]{3}|[0-9A-F]{4})([0-9A-F]{3}|[0-9A-F]{4})?|rgb\(\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*\)|rgba\(\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:25[0-5]|2[0-4]\d|1\d\d|\d{1,2})\s*,\s*(?:0|1|0\.\d+)\s*\)|hsl\(\s*(?:[0-2]?[0-9]?[0-9]|3[0-5][0-9]|360)\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:100|[1-9]?\d)%\s*\)|hsla\(\s*(?:[0-2]?[0-9]?[0-9]|3[0-5][0-9]|360)\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:100|[1-9]?\d)%\s*,\s*(?:0|1|0\.\d+)\s*\))$/i
-  return colorRegex.test(trimmedColor)
+  // 使用 tinycolor2 验证单个颜色，支持所有格式包括 #RRGGBBAA
+  return tinycolor(trimmedColor).isValid()
 }
 
 /**

@@ -8,6 +8,7 @@
 import { gradientParser } from './gradientParser'
 import { config } from '@/constants'
 import type { GradientProps } from '@/interfaces'
+import tc from 'tinycolor2'
 
 const { defaultColor, defaultGradient } = config
 
@@ -59,6 +60,15 @@ export const getColors = (value: string): GradientProps[] => {
     }
   } else {
     const safeValue = value || defaultColor
+    // 使用 tinycolor2 处理颜色，确保透明度信息被正确保留
+    const colorInstance = tc(safeValue)
+    const { r, g, b, a } = colorInstance.toRgb()
+    console.log(r, g, b, a, 'rgba')
+    if (colorInstance.isValid()) {
+      // 转换为 rgba 格式以确保透明度信息被保留
+      const { r, g, b, a } = colorInstance.toRgb()
+      return [{ value: `rgba(${r}, ${g}, ${b}, ${a})` }]
+    }
     return [{ value: safeValue }]
   }
 }
