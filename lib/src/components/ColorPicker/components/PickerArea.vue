@@ -77,7 +77,7 @@ const handleMove = throttle(function (e: any) {
   if (unref(dragging)) {
     handleColor(e)
   }
-}, 50)
+}, 16)
 const handleCanvasDown = (e: any) => {
   setDragging(true)
   handleColor(e)

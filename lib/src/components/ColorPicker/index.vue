@@ -51,7 +51,7 @@ import {
 import { presetColors } from '@/constants'
 import { getColors, formatInputValues, low, high } from '@/utils/format'
 import { getDetails, getIsGradient } from '@/utils/utils'
-import tc from 'tinycolor2'
+import { getTinycolor } from '@/utils/color'
 import {
   InputType,
   GradientType,
@@ -103,7 +103,7 @@ const props = withDefaults(
 )
 
 // 响应式状态
-const colorState = reactive<ColorPickerProps>({
+const colorState = shallowReactive<ColorPickerProps>({
   width: DEFAULT_VALUES.DEFAULT_WIDTH,
   height: DEFAULT_VALUES.DEFAULT_WIDTH,
   showAdvancedSliders: false,
@@ -120,7 +120,7 @@ const colorState = reactive<ColorPickerProps>({
 
 // 渐变类型
 const gradientType = ref<GradientType>(GradientType.linear)
-const tinycolor = ref<typeof tc | null>(null)
+const tinycolor = ref<any>(null)
 
 /**
  * 颜色变化回调函数
@@ -186,13 +186,13 @@ const setValue = (color: string, mode?: string) => {
     const currentColor =
       colorState.gradientColors[colorState.gradientColorsIdx || 0]
     if (currentColor) {
-      tinycolor.value = tc(currentColor.value)
+      tinycolor.value = getTinycolor(currentColor.value)
     }
   } else {
     const solidColor =
       colors[0]?.value?.replace(/\s+/g, '') || DEFAULT_VALUES.DEFAULT_COLOR
     colorState.value = solidColor
-    tinycolor.value = tc(solidColor)
+    tinycolor.value = getTinycolor(solidColor)
   }
 
   // 更新颜色对象
@@ -297,7 +297,7 @@ const setSelectColorIdx = (idx: number) => {
     colorState.gradientColorsIdx = idx
     const selectedColor = colors[idx]
     if (selectedColor) {
-      tinycolor.value = tc(selectedColor.value)
+      tinycolor.value = getTinycolor(selectedColor.value)
       const rgba = tinycolor.value.toRgb()
       const hsv = tinycolor.value.toHsv()
       colorState.hc = { ...rgba, ...hsv } as IColorValue

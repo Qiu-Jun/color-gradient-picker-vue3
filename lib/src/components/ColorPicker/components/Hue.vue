@@ -62,7 +62,7 @@ const onMousemove = throttle(function (e: any) {
   if (unref(dragging)) {
     handleHue(e)
   }
-}, 80)
+}, 16)
 
 const handleClick = debounce(function (e) {
   if (!unref(dragging)) {

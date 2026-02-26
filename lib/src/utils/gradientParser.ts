@@ -1,8 +1,16 @@
 import { high, low } from './format'
 import { isUpperCase } from './utils'
+import { getTinycolor } from './color'
 import tinycolor from 'tinycolor2'
 
+// 缓存机制，避免重复解析相同的渐变字符串
+const gradientCache = new Map<string, any>()
+
 export const gradientParser = (input = '') => {
+  // 检查缓存
+  if (gradientCache.has(input)) {
+    return gradientCache.get(input)
+  }
   const tokens = {
     linearGradient: /^(-(webkit|o|ms|moz)-)?(linear-gradient)/i,
     repeatingLinearGradient:
@@ -88,9 +96,12 @@ export const gradientParser = (input = '') => {
   function matchHexColor() {
     const hexObj = match('hex', tokens.hexColor, 1)
     if (hexObj?.value) {
-      const { r, g, b, a } = tinycolor(hexObj?.value).toRgb()
-      return {
-        value: `rgba(${r}, ${g}, ${b}, ${a})`,
+      const tinycolorInstance = getTinycolor(hexObj?.value)
+      if (tinycolorInstance) {
+        const { r, g, b, a } = tinycolorInstance.toRgb()
+        return {
+          value: `rgba(${r}, ${g}, ${b}, ${a})`,
+        }
       }
     }
   }
@@ -135,9 +146,12 @@ export const gradientParser = (input = '') => {
   function matchLiteralColor() {
     const litObj = match('literal', tokens.literalColor, 0)
     if (litObj?.value) {
-      const { r, g, b, a } = tinycolor(litObj?.value).toRgb()
-      return {
-        value: `rgba(${r}, ${g}, ${b}, ${a})`,
+      const tinycolorInstance = getTinycolor(litObj?.value)
+      if (tinycolorInstance) {
+        const { r, g, b, a } = tinycolorInstance.toRgb()
+        return {
+          value: `rgba(${r}, ${g}, ${b}, ${a})`,
+        }
       }
     }
   }
@@ -379,12 +393,13 @@ export const gradientParser = (input = '') => {
   const convertHsl = (val: any) => {
     const capIt = isUpperCase(val?.[0])
     const hsl = matchListing(matchNumber)
-    const { r, g, b, a } = tinycolor({
+    const tinycolorInstance = tinycolor({
       h: hsl[0],
       s: hsl[1],
       l: hsl[2],
       a: hsl[3] || 1,
-    }).toRgb()
+    })
+    const { r, g, b, a } = tinycolorInstance.toRgb()
     return {
       value: `${capIt ? 'RGBA' : 'rgba'}(${r}, ${g}, ${b}, ${a})`,
     }
@@ -393,12 +408,13 @@ export const gradientParser = (input = '') => {
   const convertHsv = (val: any) => {
     const capIt = isUpperCase(val?.[0])
     const hsv = matchListing(matchNumber)
-    const { r, g, b, a } = tinycolor({
+    const tinycolorInstance = tinycolor({
       h: hsv[0],
       s: hsv[1],
       v: hsv[2],
       a: hsv[3] || 1,
-    }).toRgb()
+    })
+    const { r, g, b, a } = tinycolorInstance.toRgb()
     return {
       value: `${capIt ? 'RGBA' : 'rgba'}(${r}, ${g}, ${b}, ${a})`,
     }
@@ -425,5 +441,8 @@ export const gradientParser = (input = '') => {
     return match('position-keyword', tokens.positionKeywords, 1)
   }
 
-  return getAST()
+  const result = getAST()
+  // 存入缓存
+  gradientCache.set(input, result)
+  return result
 }

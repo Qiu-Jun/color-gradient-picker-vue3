@@ -1,5 +1,24 @@
 import { GradientProps, ColorPickerProps } from '@/interfaces'
 import { GradientType } from '@/enums'
+import tinycolor from 'tinycolor2'
+
+// 缓存机制，避免重复创建 tinycolor 实例
+const tinycolorCache = new Map<string, any>()
+
+/**
+ * 获取 tinycolor 实例，使用缓存避免重复创建
+ * @param color 颜色值
+ * @returns tinycolor 实例
+ */
+export function getTinycolor(color: string) {
+  if (!color) return null
+  if (tinycolorCache.has(color)) {
+    return tinycolorCache.get(color)
+  }
+  const instance = tinycolor(color)
+  tinycolorCache.set(color, instance)
+  return instance
+}
 
 /**
  * 生成渐变色字符串

@@ -30,6 +30,7 @@
 
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
+import { throttle } from 'lodash-es'
 
 const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject(
   'colorProvider',
@@ -47,13 +48,13 @@ const stopDragging = () => {
   dragging.value = false
 }
 
-const onMousemove = (e) => {
+const onMousemove = throttle(function (e: any) {
   if (unref(dragging)) {
     const { gradientColors, gradientColorsIdx } = colorState
     const color = gradientColors![gradientColorsIdx!].value
     handleGradient(color, getHandleValue(e))
   }
-}
+}, 16)
 
 const handlePoinDown = (e: any, idx: number) => {
   e.stopPropagation()

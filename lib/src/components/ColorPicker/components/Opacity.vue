@@ -60,7 +60,7 @@ const onMouseMove = throttle(function (e: any) {
   if (unref(dragging)) {
     handleOpacity(e)
   }
-}, 80)
+}, 16)
 
 const handleClick = (e: any) => {
   if (!unref(dragging)) {
