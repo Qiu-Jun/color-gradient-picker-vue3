@@ -17,7 +17,9 @@ export function getTinycolor(color: string) {
   }
   // 处理带透明度的十六进制颜色，如果透明度部分无效，截取掉透明度部分
   let processedColor = color
-  const hexWithAlphaMatch = processedColor.match(/#([0-9A-Fa-f]{6})([0-9A-Fa-f]{1,2})/i)
+  const hexWithAlphaMatch = processedColor.match(
+    /#([0-9A-Fa-f]{6})([0-9A-Fa-f]{1,2})/i,
+  )
   if (hexWithAlphaMatch) {
     const [, rgbPart, alphaPart] = hexWithAlphaMatch
     // 检查透明度部分是否有效（应该是1-2位十六进制数字）
