@@ -44,7 +44,7 @@ const handleColorChange = (colorData: IColor) => {
 
 | 属性                | 类型      | 默认值                  | 说明                 |
 | ------------------- | --------- | ----------------------- | -------------------- |
-| locale              | string    | 'en'   | en： 英文   zh: 中文 |
+| locale              | string    | 'en'                    | en： 英文 zh: 中文   |
 | value               | string    | 'rgba(175, 51, 242, 1)' | 当前颜色值           |
 | width               | number    | 320                     | 组件宽度(最小 320)   |
 | hideInputs          | boolean   | false                   | 是否隐藏输入框       |

@@ -31,6 +31,7 @@ const onChange = (val: any) => {
 ```
 
 ## 多语言配置
+
 ```HTML
 <template>
   <div id="app" :style="{ display: 'flex', textAlign: 'center' }">

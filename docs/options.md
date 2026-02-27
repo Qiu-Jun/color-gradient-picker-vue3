@@ -44,4 +44,4 @@ yarn add color-gradient-picker-vue3
 | hideOpacity  | Boolean  | false                 | 隐藏透明度设置滑块                       |
 | hideGradient | Boolean  | false                 | 隐藏渐变                                 |
 | presetColors | String[] | String[]              | 预设颜色                                 |
-| locale   | String | en           | 语言(v3.1.7新增)  en 英文  zh 中文                         |
+| locale       | String   | en                    | 语言(v3.1.7 新增) en 英文 zh 中文        |
