@@ -22,14 +22,14 @@ outline: deep
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ColorPicker } from 'color-gradient-picker-vue3'
-import 'color-gradient-picker-vue3/dist/style.css'
+  import { ref } from 'vue'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
-const curColor = ref('rgba(175, 51, 242, 1)')
-const onChange = (val: any) => {
-  console.log(val, 'colorpicker 回调')
-}
+  const curColor = ref('rgba(175, 51, 242, 1)')
+  const onChange = (val: any) => {
+    console.log(val, 'colorpicker 回调')
+  }
 </script>
 ```
 
@@ -40,25 +40,29 @@ const onChange = (val: any) => {
 ```html
 <template>
   <div :style="{ display: 'flex', alignItems: 'center', gap: '16px' }">
-    <ColorPicker v-model:value="curColor" :locale="curLocale" @change="onChange" />
+    <ColorPicker
+      v-model:value="curColor"
+      :locale="curLocale"
+      @change="onChange"
+    />
     <button @click="toggleLocale">切换语言</button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ColorPicker } from 'color-gradient-picker-vue3'
-import type { ILocales } from 'color-gradient-picker-vue3'
-import 'color-gradient-picker-vue3/dist/style.css'
+  import { ref } from 'vue'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import type { ILocales } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
-const curColor = ref('rgba(175, 51, 242, 1)')
-const curLocale = ref<ILocales>('zh')
-const toggleLocale = () => {
-  curLocale.value = curLocale.value === 'en' ? 'zh' : 'en'
-}
-const onChange = (val: any) => {
-  console.log(val, 'colorpicker 回调')
-}
+  const curColor = ref('rgba(175, 51, 242, 1)')
+  const curLocale = ref<ILocales>('zh')
+  const toggleLocale = () => {
+    curLocale.value = curLocale.value === 'en' ? 'zh' : 'en'
+  }
+  const onChange = (val: any) => {
+    console.log(val, 'colorpicker 回调')
+  }
 </script>
 ```
 
@@ -68,26 +72,23 @@ const onChange = (val: any) => {
 
 ```html
 <template>
-  <ColorPicker
-    v-model:value="curColor"
-    :preset-colors="customColors"
-  />
+  <ColorPicker v-model:value="curColor" :preset-colors="customColors" />
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ColorPicker } from 'color-gradient-picker-vue3'
-import 'color-gradient-picker-vue3/dist/style.css'
+  import { ref } from 'vue'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
-const curColor = ref('rgba(255, 0, 0, 1)')
-const customColors = [
-  'rgba(255, 0, 0, 1)',
-  'rgba(0, 255, 0, 1)',
-  'rgba(0, 0, 255, 1)',
-  'rgba(255, 255, 0, 1)',
-  'rgba(255, 0, 255, 1)',
-  'rgba(0, 255, 255, 1)',
-]
+  const curColor = ref('rgba(255, 0, 0, 1)')
+  const customColors = [
+    'rgba(255, 0, 0, 1)',
+    'rgba(0, 255, 0, 1)',
+    'rgba(0, 0, 255, 1)',
+    'rgba(255, 255, 0, 1)',
+    'rgba(255, 0, 255, 1)',
+    'rgba(0, 255, 255, 1)',
+  ]
 </script>
 ```
 
@@ -109,11 +110,11 @@ const customColors = [
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ColorPicker } from 'color-gradient-picker-vue3'
-import 'color-gradient-picker-vue3/dist/style.css'
+  import { ref } from 'vue'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
-const color = ref('rgba(175, 51, 242, 1)')
+  const color = ref('rgba(175, 51, 242, 1)')
 </script>
 ```
 
@@ -127,16 +128,16 @@ const color = ref('rgba(175, 51, 242, 1)')
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ColorPicker } from 'color-gradient-picker-vue3'
-import 'color-gradient-picker-vue3/dist/style.css'
+  import { ref } from 'vue'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
-const gradientColor = ref(
-  'linear-gradient(90deg, rgba(245, 66, 245, 1) 0%, rgba(0, 0, 255, 1) 100%)'
-)
-const onChange = (val: any) => {
-  console.log(val)
-}
+  const gradientColor = ref(
+    'linear-gradient(90deg, rgba(245, 66, 245, 1) 0%, rgba(0, 0, 255, 1) 100%)',
+  )
+  const onChange = (val: any) => {
+    console.log(val)
+  }
 </script>
 ```
 
@@ -150,10 +151,10 @@ const onChange = (val: any) => {
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ColorPicker } from 'color-gradient-picker-vue3'
-import 'color-gradient-picker-vue3/dist/style.css'
+  import { ref } from 'vue'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
-const color = ref('rgba(175, 51, 242, 1)')
+  const color = ref('rgba(175, 51, 242, 1)')
 </script>
 ```

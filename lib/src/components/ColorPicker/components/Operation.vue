@@ -73,9 +73,8 @@ import { COLOR_PROVIDER_KEY } from '@/interfaces'
 import { t } from '@/utils/i18n'
 
 const { defaultColor, defaultGradient } = config
-const { colorState, isGradient, setInputType, setMode, setValue } = inject(
-  COLOR_PROVIDER_KEY,
-)!
+const { colorState, isGradient, setInputType, setMode, setValue } =
+  inject(COLOR_PROVIDER_KEY)!
 
 const showInputTypes = ref(false)
 const toggleShowInputType = debounce(function () {

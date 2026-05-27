@@ -175,7 +175,11 @@ export function useColorProvider(
     if (!colorValue) return
 
     colorValue.value = value
-    const newGradStr = createGradientStr(colors, unref(gradientType), colorState)
+    const newGradStr = createGradientStr(
+      colors,
+      unref(gradientType),
+      colorState,
+    )
     setValue(newGradStr)
   }
 
@@ -191,7 +195,11 @@ export function useColorProvider(
 
     colorValue.left = left ?? colorValue.left
     colorValue.value = newColor
-    const newGradStr = createGradientStr(colors, unref(gradientType), colorState)
+    const newGradStr = createGradientStr(
+      colors,
+      unref(gradientType),
+      colorState,
+    )
     setValue(newGradStr)
   }
 
@@ -354,7 +362,11 @@ export function useColorProvider(
 
   watch(() => props.value, init, { immediate: true })
 
-  watch(() => props.locale, (val) => setLang(val), { immediate: true })
+  watch(
+    () => props.locale,
+    (val) => setLang(val),
+    { immediate: true },
+  )
 
   return {
     colorState,

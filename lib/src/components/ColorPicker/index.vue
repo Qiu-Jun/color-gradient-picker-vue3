@@ -49,15 +49,8 @@ import {
   AdvancedControls,
 } from './components'
 import { presetColors } from '@/constants'
-import {
-  InputType,
-  DEFAULT_VALUES,
-} from '@/enums'
-import {
-  COLOR_PROVIDER_KEY,
-  type IColor,
-  type ILocales,
-} from '@/interfaces'
+import { InputType, DEFAULT_VALUES } from '@/enums'
+import { COLOR_PROVIDER_KEY, type IColor, type ILocales } from '@/interfaces'
 import { useColorProvider } from '@/composables/useColorProvider'
 
 const emits = defineEmits<{

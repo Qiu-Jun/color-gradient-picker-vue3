@@ -37,9 +37,8 @@ import { debounce } from 'lodash-es'
 import { DEBOUNCE_DELAY } from '@/constants'
 import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, isGradient, changeColor, setValue } = inject(
-  COLOR_PROVIDER_KEY,
-)!
+const { colorState, isGradient, changeColor, setValue } =
+  inject(COLOR_PROVIDER_KEY)!
 
 const colorValue = computed(() => {
   if (unref(isGradient)) {

@@ -38,9 +38,8 @@ import { throttle } from 'lodash-es'
 import { config, THROTTLE_DELAY } from '@/constants'
 import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject(
-  COLOR_PROVIDER_KEY,
-)!
+const { colorState, handleGradient, addPoint, setSelectColorIdx } =
+  inject(COLOR_PROVIDER_KEY)!
 const { barSize } = config
 const leftMultiplyer = (colorState.width - barSize) / 100
 

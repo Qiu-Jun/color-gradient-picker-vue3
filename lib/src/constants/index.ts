@@ -1,9 +1,6 @@
 import { InputType } from '@/enums'
 
-export const inputTypes: InputType[] = [
-  InputType.rgb,
-  InputType.hsl,
-]
+export const inputTypes: InputType[] = [InputType.rgb, InputType.hsl]
 
 export const config = {
   barSize: 18,

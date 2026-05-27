@@ -42,48 +42,49 @@ yarn add color-gradient-picker-vue3
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ColorPicker } from 'color-gradient-picker-vue3'
-import 'color-gradient-picker-vue3/dist/style.css'
+  import { ref } from 'vue'
+  import { ColorPicker } from 'color-gradient-picker-vue3'
+  import 'color-gradient-picker-vue3/dist/style.css'
 
-const color = ref('rgba(175, 51, 242, 1)')
-const onChange = (val: any) => {
-  console.log(val, 'colorpicker callback')
-}
+  const color = ref('rgba(175, 51, 242, 1)')
+  const onChange = (val: any) => {
+    console.log(val, 'colorpicker callback')
+  }
 </script>
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| value | `String` | `'rgba(175, 51, 242, 1)'` | Color value. Supports solid colors (e.g. `rgba(...)`, `#hex`) and gradients (e.g. `linear-gradient(...)`, `radial-gradient(...)`) |
-| width | `Number` | `300` | Picker width (min 320px, picker area height equals width) |
-| locale | `'en' \| 'zh'` | `'en'` | Language setting. `'en'` for English, `'zh'` for Chinese |
-| hideInputs | `Boolean` | `false` | Hide color value inputs |
-| hideOpacity | `Boolean` | `false` | Hide opacity slider |
-| hideGradient | `Boolean` | `false` | Hide gradient mode (solid color only) |
-| hidePresets | `Boolean` | `false` | Hide preset colors |
-| presetColors | `String[]` | 18 built-in colors | Custom preset color array (max 18) |
-| showAdvancedSliders | `Boolean` | `false` | Show advanced sliders (saturation, lightness, brightness) |
-| inputType | `'RGB' \| 'HSL' \| 'HSV' \| 'CMYK'` | `'RGB'` | Color input mode |
+| Prop                | Type                                | Default                   | Description                                                                                                                       |
+| ------------------- | ----------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| value               | `String`                            | `'rgba(175, 51, 242, 1)'` | Color value. Supports solid colors (e.g. `rgba(...)`, `#hex`) and gradients (e.g. `linear-gradient(...)`, `radial-gradient(...)`) |
+| width               | `Number`                            | `300`                     | Picker width (min 320px, picker area height equals width)                                                                         |
+| locale              | `'en' \| 'zh'`                      | `'en'`                    | Language setting. `'en'` for English, `'zh'` for Chinese                                                                          |
+| hideInputs          | `Boolean`                           | `false`                   | Hide color value inputs                                                                                                           |
+| hideOpacity         | `Boolean`                           | `false`                   | Hide opacity slider                                                                                                               |
+| hideGradient        | `Boolean`                           | `false`                   | Hide gradient mode (solid color only)                                                                                             |
+| hidePresets         | `Boolean`                           | `false`                   | Hide preset colors                                                                                                                |
+| presetColors        | `String[]`                          | 18 built-in colors        | Custom preset color array (max 18)                                                                                                |
+| showAdvancedSliders | `Boolean`                           | `false`                   | Show advanced sliders (saturation, lightness, brightness)                                                                         |
+| inputType           | `'RGB' \| 'HSL' \| 'HSV' \| 'CMYK'` | `'RGB'`                   | Color input mode                                                                                                                  |
 
 ## Events
 
-| Event | Parameters | Description |
-| --- | --- | --- |
-| update:value | `(value: string)` | Emitted when color changes, usable with `v-model:value` |
-| change | `(color: IColor)` | Emitted when color changes, returns detailed color info object |
+| Event        | Parameters        | Description                                                    |
+| ------------ | ----------------- | -------------------------------------------------------------- |
+| update:value | `(value: string)` | Emitted when color changes, usable with `v-model:value`        |
+| change       | `(color: IColor)` | Emitted when color changes, returns detailed color info object |
 
 ### IColor Type
 
 ```typescript
 interface IColor {
-  mode?: 'solid' | 'gradient'     // Current mode
-  color?: string                    // Color value (solid: color string, gradient: CSS gradient string)
-  degrees?: number                  // Gradient angle (gradient mode only)
-  gradientType?: string             // Gradient type: 'linear' or 'radial'
-  gradientColors?: {                 // Gradient color stops (gradient mode only)
+  mode?: 'solid' | 'gradient' // Current mode
+  color?: string // Color value (solid: color string, gradient: CSS gradient string)
+  degrees?: number // Gradient angle (gradient mode only)
+  gradientType?: string // Gradient type: 'linear' or 'radial'
+  gradientColors?: {
+    // Gradient color stops (gradient mode only)
     color: string
     left?: number
   }[]
