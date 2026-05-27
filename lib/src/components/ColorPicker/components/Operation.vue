@@ -1,6 +1,6 @@
 <!--
  * @Author: June
- * @Description: Description
+ * @Description: 操作栏组件
  * @Date: 2024-12-03 10:28:59
  * @LastEditTime: 2024-12-13 17:17:19
  * @LastEditors: June
@@ -28,27 +28,6 @@
 
     <!-- 右侧菜单 -->
     <div class="cpg-controls-item">
-      <!-- <div
-        class="cpg-controls-item-btn cpg-cursor-pointer"
-        :class="{ 'cpg-control-active': showAdvancedControl }"
-      >
-        <SvgIcon
-          ext-class="text-14px "
-          icon="regulate"
-          @click="toggleShowAdvancedControl"
-        />
-      </div> -->
-      <!-- <div class="cpg-controls-item-btn cpg-cursor-pointer">
-        <span
-          :class="
-            showInputTypes
-              ? 'text-14px iconfont cpg-xise text-#568cf5'
-              : 'iconfont cpg-xise text-14px'
-          "
-          icon=""
-          @click="handleXise"
-        />
-      </div> -->
       <div
         class="cpg-controls-item-btn cpg-cursor-pointer"
         :class="{ 'cpg-control-active': showInputTypes }"
@@ -87,59 +66,29 @@
 
 <script lang="ts" setup>
 import { debounce } from 'lodash-es'
-import { inputTypes } from '@/constants'
+import { inputTypes, config, DEBOUNCE_DELAY } from '@/constants'
 import { InputType, Modes } from '@/enums'
-import { config } from '@/constants'
-import html2canvas from 'html2canvas'
 import type { IMode } from '@/interfaces'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 import { t } from '@/utils/i18n'
 
 const { defaultColor, defaultGradient } = config
 const { colorState, isGradient, setInputType, setMode, setValue } = inject(
-  'colorProvider',
-) as any
+  COLOR_PROVIDER_KEY,
+)!
 
-// input type
 const showInputTypes = ref(false)
 const toggleShowInputType = debounce(function () {
   showInputTypes.value = !showInputTypes.value
-}, 250)
+}, DEBOUNCE_DELAY)
 const handleSetInputType = debounce(function (type: InputType) {
   setInputType(type)
   toggleShowInputType()
 }, 180)
 
-// 吸色
-const coverUp = ref(false)
-const handleXise = debounce(function () {
-  // @ts-ignore
-  if (!window?.EyeDropper) {
-    return
-  }
-  const root = document.getElementById('app')
-
-  html2canvas(root!).then((canvas: any) => {
-    const blankCanvas = document.createElement('canvas')
-    const ctx = blankCanvas.getContext('2d', { willReadFrequently: true })
-
-    if (root && ctx) {
-      blankCanvas.width = root.offsetWidth * 2
-      blankCanvas.height = root.offsetHeight * 2
-      ctx.drawImage(canvas, 0, 0)
-    }
-  })
-}, 250)
-
-// toggleShowAdvancedControl
-// const showAdvancedControl = ref(false)
-// const toggleShowAdvancedControl = debounce(function () {
-//   showAdvancedControl.value = !showAdvancedControl.value
-//   setShowAdvance(showAdvancedControl.value)
-// }, 250)
-
 const handleSetIsGradient = debounce(function (mode: IMode) {
   if (colorState.mode === mode) return
   setMode(mode)
   setValue(mode === Modes.gradient ? defaultGradient : defaultColor)
-}, 250)
+}, DEBOUNCE_DELAY)
 </script>

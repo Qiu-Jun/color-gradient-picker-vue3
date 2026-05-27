@@ -11,8 +11,11 @@
       class="cpg-gradientBar"
       :style="{ width: colorState.width + 'px', backgroundImage }"
       @mousedown="onMouseBarDown"
+      @touchstart="onMouseBarDown"
       @mousemove="onMousemove"
+      @touchmove="onMousemove"
       @mouseup="stopDragging"
+      @touchend="stopDragging"
     ></div>
     <div
       v-for="(point, idx) in colorState.gradientColors"
@@ -24,6 +27,7 @@
       }"
       :style="{ left: point.left! * leftMultiplyer + 'px' }"
       @mousedown="handlePoinDown($event, idx)"
+      @touchstart="handlePoinDown($event, idx)"
     ></div>
   </div>
 </template>
@@ -31,11 +35,14 @@
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
 import { throttle } from 'lodash-es'
+import { config, THROTTLE_DELAY } from '@/constants'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
 const { colorState, handleGradient, addPoint, setSelectColorIdx } = inject(
-  'colorProvider',
-) as any
-const leftMultiplyer = (colorState.width - 18) / 100
+  COLOR_PROVIDER_KEY,
+)!
+const { barSize } = config
+const leftMultiplyer = (colorState.width - barSize) / 100
 
 const backgroundImage = computed(() => {
   return colorState.gradientColor
@@ -50,11 +57,12 @@ const stopDragging = () => {
 
 const onMousemove = throttle(function (e: any) {
   if (unref(dragging)) {
+    e.preventDefault()
     const { gradientColors, gradientColorsIdx } = colorState
     const color = gradientColors![gradientColorsIdx!].value
     handleGradient(color, getHandleValue(e))
   }
-}, 16)
+}, THROTTLE_DELAY)
 
 const handlePoinDown = (e: any, idx: number) => {
   e.stopPropagation()

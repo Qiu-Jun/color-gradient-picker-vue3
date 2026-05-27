@@ -1,17 +1,8 @@
-/*
- * @Author: June
- * @Description: Description
- * @Date: 2024-11-30 21:13:34
- * @LastEditTime: 2024-12-22 00:03:52
- * @LastEditors: June
- */
 import { InputType } from '@/enums'
 
 export const inputTypes: InputType[] = [
   InputType.rgb,
   InputType.hsl,
-  // InputType.hsv,
-  // InputType.cmyk,
 ]
 
 export const config = {
@@ -22,6 +13,15 @@ export const config = {
   defaultGradient:
     'linear-gradient(90deg, rgb(245, 66, 245) 0%, rgb(0, 0, 255) 100%)',
 }
+
+/** 拖拽节流间隔（ms） */
+export const THROTTLE_DELAY = 16
+
+/** 点击防抖间隔（ms） */
+export const DEBOUNCE_DELAY = 250
+
+/** Hue/Opacity 条高度 */
+export const BAR_HEIGHT = 14
 
 export const defaultLocales = {
   CONTROLS: {

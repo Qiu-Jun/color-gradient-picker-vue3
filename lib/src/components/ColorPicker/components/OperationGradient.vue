@@ -34,10 +34,6 @@
 
         <div class="absolute top-4px right-0 font-400 text-12px">°</div>
       </div>
-      <!-- <div class="cpg-gradient-btn">
-        <span class="text-12px">STOP</span>
-        <input class="cpg-deg-input" value="22" />
-      </div> -->
       <div class="cpg-gradient-btn" @click="handleDeletePoint">
         <i
           class="text-14px iconfont cpg-delete"
@@ -51,7 +47,8 @@
 <script lang="ts" setup>
 import { GradientType } from '@/enums'
 import { debounce } from 'lodash-es'
-import { createGradientStr } from '@/utils/color'
+import { DEBOUNCE_DELAY } from '@/constants'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
 const {
   colorState,
@@ -59,9 +56,8 @@ const {
   setLinear,
   setRadial,
   setDegrees,
-  setValue,
   deletePoint,
-} = inject('colorProvider') as any
+} = inject(COLOR_PROVIDER_KEY)!
 const disabledDelete = computed(
   () => !colorState.gradientColors || colorState.gradientColors.length <= 2,
 )
@@ -71,27 +67,18 @@ const handleChangeType = debounce(function (type: GradientType) {
   if (type === unref(gradientType)) return
   type === GradientType.linear && setLinear()
   type === GradientType.radial && setRadial()
-  colorState.gradientColors &&
-    setValue(
-      createGradientStr(
-        colorState.gradientColors,
-        unref(gradientType),
-        colorState,
-      ),
-    )
-}, 250)
+}, DEBOUNCE_DELAY)
 
 // 角度设置
-const onSetDegrees = (e) => {
-  const val = e.target.value
+const onSetDegrees = (e: Event) => {
+  const target = e.target as HTMLInputElement
+  const val = parseFloat(target.value)
+  if (isNaN(val)) return
   setDegrees(val)
 }
 
-// 位置设置
-
-// 删除点
 const handleDeletePoint = debounce(function () {
   if (unref(disabledDelete)) return
   deletePoint()
-}, 250)
+}, DEBOUNCE_DELAY)
 </script>

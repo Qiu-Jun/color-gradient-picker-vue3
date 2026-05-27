@@ -31,6 +31,7 @@ import {
   InputItem,
 } from './components'
 import { InputType } from '@/enums'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, changeColor } = inject('colorProvider') as any
+const { colorState, changeColor } = inject(COLOR_PROVIDER_KEY)!
 </script>
