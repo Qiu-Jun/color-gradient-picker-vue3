@@ -4,30 +4,36 @@ on:
   push:
     branches: ['main']
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: main # 这一步检查 main 代码
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js and pnpm
-        uses: actions/setup-node@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: '20.10.0' # 设置 nodejs 的版本
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Build
         run: |
-          npm i -g pnpm
           pnpm install
           pnpm run build:docs
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.DEPLOY }}
-          publish_dir: docs/.vitepress/dist # 指定该文件夹中的 dist
-          publish_branch: gh-pages # 推送到关联仓库的 gh-pages 分支
+          github_token: ${{ secrets.DEPLOY || github.token }}
+          publish_dir: docs/.vitepress/dist
+          publish_branch: gh-pages
