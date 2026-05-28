@@ -55,8 +55,11 @@ export function createGradientStr(
     return `${color.value} ${left}%`
   })
 
-  const degreesStr = colorState.degreesStr || `${colorState.degrees || 90}deg`
-  return `${gradientType}-gradient(${degreesStr}, ${colorString.join(', ')})`
+  const orientation =
+    gradientType === GradientType.radial
+      ? 'circle'
+      : colorState.degreesStr || `${colorState.degrees || 90}deg`
+  return `${gradientType}-gradient(${orientation}, ${colorString.join(', ')})`
 }
 
 /**

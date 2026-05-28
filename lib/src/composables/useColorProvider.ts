@@ -68,6 +68,7 @@ export function useColorProvider(
 
   const onChange = (val: IColor) => {
     if (val.color) {
+      lastEmittedValue = val.color.toLowerCase()
       emits('update:value', val.color)
       emits('change', { ...val })
     }
@@ -317,9 +318,21 @@ export function useColorProvider(
     }
   }
 
+  // 防止 init 和 watch 形成无限递归
+  // 记录最后一次内部 emit 出去的值，当 props.value 回传与此一致时跳过初始化
+  let lastEmittedValue = ''
+
   const init = () => {
+    const incomingValue = (props.value || '').toLowerCase()
+
+    // 如果外部传入的值就是内部刚 emit 出去的，跳过避免死循环
+    // （lastEmittedValue 为空时表示首次加载或尚未 emit 过，不跳过）
+    if (lastEmittedValue && incomingValue === lastEmittedValue) {
+      return
+    }
+
     const cloneProps = cloneDeep(props)
-    cloneProps.value = cloneProps.value?.toLowerCase()
+    cloneProps.value = incomingValue
     Object.assign(colorState, cloneProps)
 
     colorState.width = props.width! <= 320 ? 304 : props.width! - 16
