@@ -15,8 +15,9 @@
 <script lang="ts" setup>
 import tc from 'tinycolor2'
 import { SETCOLOR_MODE } from '@/enums'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, setValue } = inject('colorProvider') as any
+const { colorState, setValue } = inject(COLOR_PROVIDER_KEY)!
 const hexVal = ref('')
 
 const onChange = (e) => {

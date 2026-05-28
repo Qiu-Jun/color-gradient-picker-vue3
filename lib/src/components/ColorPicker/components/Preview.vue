@@ -34,10 +34,11 @@
 
 <script lang="ts" setup>
 import { debounce } from 'lodash-es'
+import { DEBOUNCE_DELAY } from '@/constants'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, isGradient, changeColor, setValue } = inject(
-  'colorProvider',
-) as any
+const { colorState, isGradient, changeColor, setValue } =
+  inject(COLOR_PROVIDER_KEY)!
 
 const colorValue = computed(() => {
   if (unref(isGradient)) {
@@ -55,5 +56,5 @@ const handleUpdateValue = debounce(function (e) {
   } else {
     setValue(color)
   }
-}, 250)
+}, DEBOUNCE_DELAY)
 </script>

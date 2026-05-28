@@ -10,6 +10,7 @@
       @mousedown="handleCanvasDown"
       @touchstart="handleCanvasDown"
       @mousemove="handleMove"
+      @touchmove="handleMove"
     >
       <span
         class="cpg-pointer"
@@ -19,10 +20,13 @@
           top: `${dragPos.y}px`,
         }"
         @mousedown="handleMouseDown"
+        @touchstart="handleMouseDown"
       ></span>
       <canvas
         ref="canvasRef"
         class="cpg-picker-area"
+        :width="colorState.width"
+        :height="colorState.height"
         :style="{
           width: `${colorState.width}px`,
           height: `${colorState.height}px`,
@@ -35,12 +39,12 @@
 <script lang="ts" setup>
 import { throttle } from 'lodash-es'
 import { computePickerPosition, computeSquareXY } from '@/utils/utils'
-import { config } from '@/constants'
+import { config, THROTTLE_DELAY } from '@/constants'
 import tc from 'tinycolor2'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, isGradient, setValue, updateSelectColor } = inject(
-  'colorProvider',
-) as any
+const { colorState, isGradient, setValue, updateSelectColor } =
+  inject(COLOR_PROVIDER_KEY)!
 const { crossSize } = config
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
@@ -56,7 +60,7 @@ const dragPos = reactive({
 
 const handleColor = (e: any) => {
   const [x, y] = computePickerPosition(e)
-  if (x && y) {
+  if (x !== undefined && y !== undefined) {
     const width = colorState.width!
     const height = colorState.height!
     const x1 = Math.min(x + crossSize / 2, width - 1)
@@ -75,9 +79,10 @@ const handleColor = (e: any) => {
 
 const handleMove = throttle(function (e: any) {
   if (unref(dragging)) {
+    e.preventDefault()
     handleColor(e)
   }
-}, 16)
+}, THROTTLE_DELAY)
 const handleCanvasDown = (e: any) => {
   setDragging(true)
   handleColor(e)
@@ -89,19 +94,37 @@ const handleUp = () => {
   stopDragging()
 }
 
-onMounted(() => {
-  window.addEventListener('mouseup', handleUp)
-})
+// drawing - 绘制色相面板
+const drawCanvas = () => {
+  const canvas = unref(canvasRef)
+  const hue = colorState.hc?.h
+  if (!canvas || hue === undefined) return
+  const width = colorState.width!
+  const height = colorState.height!
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })
+  if (ctx) {
+    ctx.fillStyle = `hsl(${hue}, 100%, 50%)`
+    ctx.fillRect(0, 0, width, height)
+    const gradientWhite = ctx.createLinearGradient(0, 0, width, 0)
+    gradientWhite.addColorStop(0, `rgba(255, 255, 255, 1)`)
+    gradientWhite.addColorStop(1, `rgba(255, 255, 255, 0)`)
+    ctx.fillStyle = gradientWhite
+    ctx.fillRect(0, 0, width, height)
+    const gradientBlack = ctx.createLinearGradient(0, 0, 0, height)
+    gradientBlack.addColorStop(0, `rgba(0, 0, 0, 0)`)
+    gradientBlack.addColorStop(1, `rgba(0, 0, 0, 1)`)
+    ctx.fillStyle = gradientBlack
+    ctx.fillRect(0, 0, width, height)
+  }
+}
 
-onBeforeUnmount(() => {
-  window.removeEventListener('mouseup', handleUp)
-})
+watch(() => colorState.hc?.h, drawCanvas)
 
 watchEffect(() => {
   if (colorState.hc) {
     const [x, y] = computeSquareXY(
-      colorState.hc?.s,
-      colorState.hc?.v * 100,
+      colorState.hc.s,
+      colorState.hc.v * 100,
       colorState.width!,
       colorState.height!,
     )
@@ -110,28 +133,12 @@ watchEffect(() => {
   }
 })
 
-// drawing
-watchEffect(() => {
-  const canvas = unref(canvasRef)
-  if (canvas) {
-    const width = colorState.width!
-    const height = colorState.height!
-    const hue = colorState.hc?.h
-    const ctx = canvas.getContext('2d', { willReadFrequently: true })
-    if (ctx) {
-      ctx.fillStyle = `hsl(${hue}, 100%, 50%)`
-      ctx.fillRect(0, 0, colorState.width!, height)
-      const gradientWhite = ctx.createLinearGradient(0, 0, width, 0)
-      gradientWhite.addColorStop(0, `rgba(255, 255, 255, 1)`)
-      gradientWhite.addColorStop(1, `rgba(255, 255, 255, 0)`)
-      ctx.fillStyle = gradientWhite
-      ctx.fillRect(0, 0, width, height)
-      const gradientBlack = ctx.createLinearGradient(0, 0, 0, height)
-      gradientBlack.addColorStop(0, `rgba(0, 0, 0, 0)`)
-      gradientBlack.addColorStop(1, `rgba(0, 0, 0, 1)`)
-      ctx.fillStyle = gradientBlack
-      ctx.fillRect(0, 0, width, height)
-    }
-  }
+onMounted(() => {
+  drawCanvas()
+  window.addEventListener('mouseup', handleUp)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('mouseup', handleUp)
 })
 </script>

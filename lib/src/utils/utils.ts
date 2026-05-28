@@ -19,7 +19,7 @@ export const safeBounds = (e: any) => {
 export function getHandleValue(e: any) {
   const { offsetLeft, clientWidth } = safeBounds(e)
   const pos = e.clientX - offsetLeft - barSize / 2
-  const adjuster = clientWidth - 18
+  const adjuster = clientWidth - barSize
   const bounded = formatInputValues(pos, 0, adjuster)
   return Math.round(bounded / (adjuster / 100))
 }
@@ -60,25 +60,10 @@ export function computePickerPosition(e: any) {
   return [getX(), getY()]
 }
 
-// export const getGradientType = (value: string) => {
-//   return value?.split('(')[0]
-// }
-
 export const isUpperCase = (str: string) => {
   if (!str || typeof str !== 'string') return false
-  // 检查字符串中是否包含大写字母
   return /[A-Z]/.test(str)
 }
-
-// export const compareGradients = (g1: string, g2: string) => {
-//   const ng1 = g1?.toLowerCase()?.replaceAll(' ', '')
-//   const ng2 = g2?.toLowerCase()?.replaceAll(' ', '')
-//   if (ng1 === ng2) {
-//     return true
-//   } else {
-//     return false
-//   }
-// }
 
 const convertShortHandDeg = (dir: any) => {
   if (dir === 'to top') {

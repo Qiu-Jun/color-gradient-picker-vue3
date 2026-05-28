@@ -1,6 +1,6 @@
 <!--
  * @Author: June
- * @Description: Description
+ * @Description: 色相条组件
  * @Date: 2024-12-03 11:02:31
  * @LastEditTime: 2024-12-09 14:31:43
  * @LastEditors: June
@@ -9,8 +9,11 @@
   <div
     class="cpg-hue-wrap"
     @mousedown="onMousedown"
+    @touchstart="onMousedown"
     @mousemove="onMousemove"
+    @touchmove="onMousemove"
     @mouseup="stopDragging"
+    @touchend="stopDragging"
   >
     <div
       class="cpg-pointer"
@@ -21,7 +24,7 @@
     <canvas
       ref="canvasRef"
       :width="colorState.width"
-      height="14"
+      :height="BAR_HEIGHT"
       class="cpg-hue-colors"
       @click="handleClick"
     />
@@ -32,9 +35,11 @@
 import tinycolor from 'tinycolor2'
 import { debounce, throttle } from 'lodash-es'
 import { getHandleValue } from '@/utils/utils'
+import { THROTTLE_DELAY, DEBOUNCE_DELAY, BAR_HEIGHT } from '@/constants'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
 const { colorState, isGradient, changeColor, setHcH, updateSelectColor } =
-  inject('colorProvider') as any
+  inject(COLOR_PROVIDER_KEY)!
 // 渲染颜色
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const dragging = ref(false)
@@ -60,22 +65,23 @@ const handleHue = (e: any) => {
 }
 const onMousemove = throttle(function (e: any) {
   if (unref(dragging)) {
+    e.preventDefault()
     handleHue(e)
   }
-}, 16)
+}, THROTTLE_DELAY)
 
 const handleClick = debounce(function (e) {
   if (!unref(dragging)) {
     handleHue(e)
   }
-}, 250)
+}, DEBOUNCE_DELAY)
 
 onMounted(() => {
   const canvas = unref(canvasRef)
   if (canvas) {
     const ctx = canvas?.getContext('2d', { willReadFrequently: true })
     if (ctx) {
-      ctx.rect(0, 0, colorState.width!, 14)
+      ctx.rect(0, 0, colorState.width!, BAR_HEIGHT)
 
       const gradient = ctx.createLinearGradient(0, 0, colorState.width!, 0)
       for (let i = 0; i <= 360; i += 30) {

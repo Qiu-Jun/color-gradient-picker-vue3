@@ -12,15 +12,14 @@ export function rgb2cmyk(r: number, g: number, b: number) {
     isNaN(g) ||
     isNaN(b)
   ) {
-    return { c: 0, m: 0, k: 0, y: 1 }
+    return { c: 0, m: 0, y: 0, k: 1 }
   }
   if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
-    return { c: 0, m: 0, k: 0, y: 1 }
+    return { c: 0, m: 0, y: 0, k: 1 }
   }
 
   if (r === 0 && g === 0 && b === 0) {
-    computedK = 1
-    return { c: 0, m: 0, k: 0, y: 1 }
+    return { c: 0, m: 0, y: 0, k: 1 }
   }
 
   computedC = 1 - r / 255
@@ -51,5 +50,5 @@ export const cmykToRgb = ({
   const g = 255 * (1 - m) * (1 - k)
   const b = 255 * (1 - y) * (1 - k)
 
-  return { r: r, g: g, b: b }
+  return { r, g, b }
 }

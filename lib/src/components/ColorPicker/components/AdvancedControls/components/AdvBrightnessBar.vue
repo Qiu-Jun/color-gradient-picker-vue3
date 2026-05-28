@@ -8,27 +8,28 @@
 
 <script lang="ts" setup>
 import tc from 'tinycolor2'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, tinycolor } = inject('colorProvider') as any
+const { colorState, tinycolor } = inject(COLOR_PROVIDER_KEY)!
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
 watchEffect(() => {
   const canvas = unref(canvasRef)
-  if (canvas) {
-    const { s } = tinycolor.value.toHsl()
-    const ctx = canvas?.getContext('2d', { willReadFrequently: true })
-    if (ctx) {
-      ctx.rect(0, 0, colorState.width, 14)
+  if (!canvas) return
+  const hc = colorState.hc
+  if (!hc) return
+  const { s } = tinycolor.value.toHsl()
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })
+  if (!ctx) return
 
-      const gradient = ctx.createLinearGradient(0, 0, colorState.width, 0)
-      for (let i = 0; i <= 100; i += 10) {
-        const hsl = tc({ h: colorState.hc.h, s: s * 100, v: i })
-        gradient.addColorStop(i / 100, hsl.toHslString())
-      }
-      ctx.fillStyle = gradient
-      ctx.fill()
-    }
+  ctx.rect(0, 0, colorState.width, 14)
+  const gradient = ctx.createLinearGradient(0, 0, colorState.width, 0)
+  for (let i = 0; i <= 100; i += 10) {
+    const hsl = tc({ h: hc.h, s: s * 100, v: i })
+    gradient.addColorStop(i / 100, hsl.toHslString())
   }
+  ctx.fillStyle = gradient
+  ctx.fill()
 })
 </script>

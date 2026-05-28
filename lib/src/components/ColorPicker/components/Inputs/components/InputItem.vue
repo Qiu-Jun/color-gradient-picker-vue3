@@ -14,8 +14,9 @@
 
 <script lang="ts" setup>
 import { formatInputValues } from '@/utils/format'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState } = inject('colorProvider') as any
+const { colorState } = inject(COLOR_PROVIDER_KEY)!
 const width = computed(() => (colorState.hideOpacity ? '22%' : '18%'))
 
 const emits = defineEmits(['update:inputVal'])

@@ -1,6 +1,6 @@
 <template>
   <InputItem
-    :input-val="round(colorState.hc?.h)"
+    :input-val="round(colorState.hc?.h ?? 0)"
     label="H"
     :max="360"
     :callback="(val: number) => handleH(val, sVal, lVal)"
@@ -24,10 +24,11 @@ import InputItem from './InputItem.vue'
 import { round } from '@/utils/format'
 import tc from 'tinycolor2'
 import { InputType } from '@/enums'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
 const sVal = ref(0)
 const lVal = ref(0)
-const { colorState, changeColor, tinycolor } = inject('colorProvider') as any
+const { colorState, changeColor, tinycolor } = inject(COLOR_PROVIDER_KEY)!
 
 const handleSl = (value: any) => {
   const { r, g, b } = tc(value).toRgb()

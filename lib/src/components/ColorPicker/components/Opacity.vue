@@ -1,6 +1,6 @@
 <!--
  * @Author: June
- * @Description: Description
+ * @Description: 透明度条组件
  * @Date: 2024-12-02 12:33:56
  * @LastEditTime: 2024-12-16 17:48:28
  * @LastEditors: June
@@ -9,8 +9,11 @@
   <section
     class="cpg-opacity-wrap"
     @mousedown="onMousedown"
+    @touchstart="onMousedown"
     @mousemove="onMouseMove"
+    @touchmove="onMouseMove"
     @mouseup="stopDragging"
+    @touchend="stopDragging"
   >
     <div class="cpg-opacity-bar"></div>
     <div
@@ -29,10 +32,13 @@
 <script lang="ts" setup>
 import { getHandleValue } from '@/utils/utils'
 import { throttle } from 'lodash-es'
+import { config, THROTTLE_DELAY } from '@/constants'
+import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, changeColor } = inject('colorProvider') as any
+const { colorState, changeColor } = inject(COLOR_PROVIDER_KEY)!
+const { barSize } = config
 const dragging = ref(false)
-const left = ref(colorState.width! - 18) //  18是point的大小
+const left = ref(colorState.width! - barSize)
 const bg = computed(() => {
   if (colorState.hc) {
     const { r, g, b } = colorState.hc
@@ -58,9 +64,10 @@ const handleOpacity = (e: any) => {
 
 const onMouseMove = throttle(function (e: any) {
   if (unref(dragging)) {
+    e.preventDefault()
     handleOpacity(e)
   }
-}, 16)
+}, THROTTLE_DELAY)
 
 const handleClick = (e: any) => {
   if (!unref(dragging)) {

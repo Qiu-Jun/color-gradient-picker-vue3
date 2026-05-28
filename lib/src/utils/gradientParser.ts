@@ -2,14 +2,15 @@ import { high, low } from './format'
 import { isUpperCase } from './utils'
 import { getTinycolor } from './color'
 import tinycolor from 'tinycolor2'
+import { LRUCache } from './lruCache'
 
-// 缓存机制，避免重复解析相同的渐变字符串
-const gradientCache = new Map<string, any>()
+const gradientCache = new LRUCache<string, any>(50)
 
 export const gradientParser = (input = '') => {
+  const originalInput = input
   // 检查缓存
-  if (gradientCache.has(input)) {
-    return gradientCache.get(input)
+  if (gradientCache.has(originalInput)) {
+    return gradientCache.get(originalInput)
   }
   const tokens = {
     linearGradient: /^(-(webkit|o|ms|moz)-)?(linear-gradient)/i,
@@ -442,7 +443,7 @@ export const gradientParser = (input = '') => {
   }
 
   const result = getAST()
-  // 存入缓存
-  gradientCache.set(input, result)
+  // 存入缓存（使用原始输入作为 key）
+  gradientCache.set(originalInput, result)
   return result
 }
