@@ -96,3 +96,32 @@ export const COLOR_PROVIDER_KEY: InjectionKey<IColorProvider> =
   Symbol('colorProvider')
 
 export type ILocales = 'zh' | 'en'
+
+/**
+ * 颜色提供者简化接口（必填属性版本）
+ */
+export interface IProvide extends ColorPickerProps {
+  value: string
+  width: number
+  height: number
+  hc: IColorValue
+}
+
+/**
+ * 颜色选择器操作接口
+ */
+export interface IColorPicker {
+  setValue: (color?: string) => void
+  setMode: (mode: IMode) => void
+  updateSelectColor: (value: string) => void
+  handleGradient: (newColor: string, left?: number) => void
+  changeColor: (newColor: string) => void
+  setHcH: (h: number) => void
+  setInputType: (type: InputType) => void
+  setLinear: () => void
+  setRadial: () => void
+  setDegrees: (val: number) => void
+  setSelectColorIdx: (idx: number) => void
+  addPoint: (left: number) => void
+  deletePoint: (index?: number) => void
+}

@@ -40,6 +40,7 @@
 
 <script lang="ts" setup>
 import { ColorPicker } from '@/components/ColorPicker'
+import type { ILocales } from '@/interfaces'
 
 const presetColors = [
   'rgba(0,0,0,1)',
@@ -62,8 +63,6 @@ const onChange = (val: any) => {
 const handleChange = () => {
   curColor.value = '#1f3a98'
 }
-
-import type { ILocales } from '@/interfaces'
 
 const curLocale = ref<ILocales>('zh')
 const changeLocale = () => {

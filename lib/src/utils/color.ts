@@ -93,3 +93,23 @@ export function isValidColor(color: string): boolean {
 
   return tinycolor(trimmedColor).isValid()
 }
+
+/**
+ * 格式化颜色字符串（转小写、去空格）
+ */
+export function formatColor(color: string): string {
+  if (!color || typeof color !== 'string') return ''
+  return color.trim().toLowerCase()
+}
+
+/**
+ * 计算颜色对比度（0-1 范围，白色=1，黑色=0）
+ */
+export function getColorContrast(color: string): number {
+  if (!color) return 0
+  const instance = tinycolor(color)
+  if (!instance.isValid()) return 0
+  const rgb = instance.toRgb()
+  const luminance = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255
+  return Math.round(luminance * 100) / 100
+}
