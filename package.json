@@ -12,6 +12,7 @@
     "build:docs": "pnpm run -C docs docs:build",
     "eslint": "eslint --ext .ts,.tsx,.jsx,.js,.vue --ignore-path .gitignore --fix src",
     "prettier": "prettier --write .",
+    "stage": "git add . && prettier --write .",
     "prepare": "husky install",
     "commit": "git-cz"
   },
