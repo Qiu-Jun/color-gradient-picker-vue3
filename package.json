@@ -14,7 +14,11 @@
     "prettier": "prettier --write .",
     "stage": "git add . && prettier --write .",
     "prepare": "husky install",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:first": "standard-version --first-release"
   },
   "config": {
     "commitizen": {
@@ -51,7 +55,8 @@
     "typescript": "^4.9.3",
     "unplugin-auto-import": "^0.16.6",
     "vite": "^6.0.3",
-    "vue-tsc": "^1.0.11"
+    "vue-tsc": "^1.0.11",
+    "standard-version": "^9.5.0"
   },
   "dependencies": {
     "vue": "^3.5.13"
