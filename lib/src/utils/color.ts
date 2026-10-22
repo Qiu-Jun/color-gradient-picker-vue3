@@ -55,10 +55,13 @@ export function createGradientStr(
     return `${color.value} ${left}%`
   })
 
+  // Always derive linear orientation from numeric degrees — never reuse
+  // degreesStr, which is set to 'circle' while in radial mode and would
+  // produce linear-gradient(circle, ...) (parsed as an extra black stop).
   const orientation =
     gradientType === GradientType.radial
       ? 'circle'
-      : colorState.degreesStr || `${colorState.degrees || 90}deg`
+      : `${colorState.degrees ?? 90}deg`
   return `${gradientType}-gradient(${orientation}, ${colorString.join(', ')})`
 }
 
