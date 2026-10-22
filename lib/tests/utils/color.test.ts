@@ -46,6 +46,39 @@ describe('Color Utils', () => {
         'linear-gradient(90deg, #ff0000 0%, #0000ff 50%, #00ff00 100%)',
       )
     })
+
+    it('should preserve decimal stop positions', () => {
+      const colors: GradientProps[] = [
+        { value: '#ff0000', left: 0 },
+        { value: '#00ff00', left: 33.5 },
+        { value: '#0000ff', left: 100 },
+      ]
+      const colorState: ColorPickerProps = {
+        degrees: 90,
+        degreesStr: '90deg',
+        width: 300,
+      }
+
+      const result = createGradientStr(colors, GradientType.linear, colorState)
+      expect(result).toBe(
+        'linear-gradient(90deg, #ff0000 0%, #00ff00 33.5%, #0000ff 100%)',
+      )
+    })
+
+    it('should use degreesStr for linear orientation', () => {
+      const colors: GradientProps[] = [
+        { value: '#ff0000', left: 0 },
+        { value: '#00ff00', left: 100 },
+      ]
+      const colorState: ColorPickerProps = {
+        degrees: 45,
+        degreesStr: '120deg',
+        width: 300,
+      }
+
+      const result = createGradientStr(colors, GradientType.linear, colorState)
+      expect(result).toBe('linear-gradient(120deg, #ff0000 0%, #00ff00 100%)')
+    })
   })
 
   describe('isValidColor', () => {

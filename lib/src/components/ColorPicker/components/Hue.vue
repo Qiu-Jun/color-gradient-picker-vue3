@@ -8,6 +8,7 @@
 <template>
   <div
     class="cpg-hue-wrap"
+    :class="{ 'cpg-cursor-grabbing': dragging }"
     @mousedown="onMousedown"
     @touchstart="onMousedown"
     @mousemove="onMousemove"
@@ -17,7 +18,6 @@
   >
     <div
       class="cpg-pointer"
-      :class="{ 'cpg-cursor-pointer': dragging }"
       :style="{ left: (colorState.hc?.h || 0) * ((colorState.width! - 18) / 360) + 'px'}"
     ></div>
 

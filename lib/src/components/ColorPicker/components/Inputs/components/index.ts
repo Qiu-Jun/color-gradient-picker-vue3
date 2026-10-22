@@ -1,5 +1,6 @@
 export { default as InputItem } from './InputItem.vue'
 export { default as InputHex } from './InputHex.vue'
+export { default as PositionInput } from './PositionInput.vue'
 export { default as HSLInputs } from './HSLInputs.vue'
 export { default as RGBInputs } from './RGBInputs.vue'
 export { default as HSVInputs } from './HSVInputs.vue'
