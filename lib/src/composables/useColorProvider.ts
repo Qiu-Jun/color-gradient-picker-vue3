@@ -97,9 +97,15 @@ export function useColorProvider(
     const colors: GradientProps[] = getColors(_color)
 
     if (unref(isGradient)) {
-      const { degreeStr, degrees } = getDetails(_color)
-      colorState.degrees = degrees
-      colorState.degreesStr = degreeStr
+      const { degreeStr, degrees, gradientType: parsedType } = getDetails(_color)
+      // Radial orientation is 'circle', not an angle — don't overwrite the
+      // linear degrees so switching back to linear keeps the previous angle.
+      if (parsedType === 'linear-gradient') {
+        colorState.degrees = degrees
+        colorState.degreesStr = degreeStr
+      } else {
+        colorState.degreesStr = degreeStr
+      }
 
       if (mode === SETCOLOR_MODE.input) {
         const oldGradientColors = cloneDeep(colorState.gradientColors) || []
@@ -240,6 +246,7 @@ export function useColorProvider(
 
   const setLinear = () => {
     gradientType.value = GradientType.linear
+    colorState.degreesStr = `${colorState.degrees ?? 90}deg`
     const colors = colorState.gradientColors || []
     if (colors.length > 0) {
       const gradStr = createGradientStr(colors, unref(gradientType), colorState)

@@ -46,6 +46,25 @@ describe('Color Utils', () => {
         'linear-gradient(90deg, #ff0000 0%, #0000ff 50%, #00ff00 100%)',
       )
     })
+
+    it('should ignore stale radial degreesStr when creating linear gradient', () => {
+      // After switching from radial, degreesStr remains 'circle'. Using it as
+      // the linear orientation produces linear-gradient(circle, ...) which the
+      // parser treats as an extra black color stop.
+      const colors: GradientProps[] = [
+        { value: '#ff0000', left: 0 },
+        { value: '#00ff00', left: 100 },
+      ]
+      const colorState: ColorPickerProps = {
+        degrees: 90,
+        degreesStr: 'circle',
+        width: 300,
+      }
+
+      const result = createGradientStr(colors, GradientType.linear, colorState)
+      expect(result).toBe('linear-gradient(90deg, #ff0000 0%, #00ff00 100%)')
+      expect(result).not.toContain('circle')
+    })
   })
 
   describe('isValidColor', () => {
