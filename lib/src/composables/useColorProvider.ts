@@ -126,7 +126,7 @@ export function useColorProvider(
         )
       }
       const currentColor =
-        colorState.gradientColors[colorState.gradientColorsIdx || 0]
+        (colorState.gradientColors || [])[colorState.gradientColorsIdx || 0]
       if (currentColor) {
         tinycolorRef.value = getTinycolor(currentColor.value)
       }
