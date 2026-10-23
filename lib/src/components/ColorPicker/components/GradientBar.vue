@@ -6,7 +6,10 @@
  * @LastEditors: June
 -->
 <template>
-  <div class="cpg-gradientBar-warp">
+  <div
+    class="cpg-gradientBar-warp"
+    :class="{ 'cpg-cursor-grabbing': dragging }"
+  >
     <div
       class="cpg-gradientBar"
       :style="{ width: colorState.width + 'px', backgroundImage }"
@@ -23,7 +26,6 @@
       class="cpg-pointer"
       :class="{
         'cpg-pointer-centerPoint': colorState.gradientColorsIdx === idx,
-        'cpg-cursor-pointer': dragging,
       }"
       :style="{ left: point.left! * leftMultiplyer + 'px' }"
       @mousedown="handlePoinDown($event, idx)"

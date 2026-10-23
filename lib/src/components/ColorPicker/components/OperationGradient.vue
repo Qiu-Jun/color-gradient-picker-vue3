@@ -27,9 +27,14 @@
       >
         <i class="text-14px iconfont cpg-deg"></i>
         <input
+          type="number"
           class="cpg-deg-input text-right"
+          min="0"
+          max="360"
+          step="1"
           :value="colorState.degrees"
           @change="onSetDegrees"
+          @input="onSetDegrees"
         />
 
         <div class="absolute top-4px right-0 font-400 text-12px">°</div>
