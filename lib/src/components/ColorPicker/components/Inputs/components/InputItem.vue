@@ -7,7 +7,16 @@
 -->
 <template>
   <div class="cpg-inputItem-wrap" :style="{ width }">
-    <input v-model="inputVal" class="cpg-input" @change="onChange" />
+    <input
+      v-model.number="inputVal"
+      type="number"
+      class="cpg-input"
+      :min="min"
+      :max="max"
+      :step="step"
+      @change="onChange"
+      @input="onChange"
+    />
     <div class="cpg-input-label">{{ props.label }}</div>
   </div>
 </template>
@@ -16,8 +25,13 @@
 import { formatInputValues } from '@/utils/format'
 import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState } = inject(COLOR_PROVIDER_KEY)!
-const width = computed(() => (colorState.hideOpacity ? '22%' : '18%'))
+const { colorState, isGradient } = inject(COLOR_PROVIDER_KEY)!
+const width = computed(() => {
+  if (unref(isGradient)) {
+    return colorState.hideOpacity ? '18%' : '14%'
+  }
+  return colorState.hideOpacity ? '22%' : '18%'
+})
 
 const emits = defineEmits(['update:inputVal'])
 const props = defineProps({
@@ -25,9 +39,17 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  min: {
+    type: Number,
+    default: 0,
+  },
   max: {
     type: Number,
     default: 100,
+  },
+  step: {
+    type: [Number, String],
+    default: 1,
   },
   label: {
     type: String,
@@ -40,8 +62,9 @@ const props = defineProps({
 
 const inputVal = ref<number>(0)
 
-const onChange = (e) => {
-  const newVal = formatInputValues(parseFloat(e.target.value), 0, props.max)
+const onChange = (e: Event) => {
+  const target = e.target as HTMLInputElement
+  const newVal = formatInputValues(parseFloat(target.value), props.min, props.max)
   inputVal.value = newVal
   emits('update:inputVal', newVal)
   props.callback &&

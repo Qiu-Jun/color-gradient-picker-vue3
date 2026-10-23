@@ -36,6 +36,14 @@
       @apply text-center text-12px;
       .cpg-input {
         @apply border-1px border-solid border-#bebebe rounded-6px box-border text-#000 h-32px font-400 outline-none p-2px w-full text-center;
+        &[type='number'] {
+          -moz-appearance: textfield;
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
       }
       .cpg-input-label {
         @apply text-#565656 font-700;
@@ -116,7 +124,13 @@
   .cpg-gradient-controls-wrapper {
     @apply w-full flex justify-between items-center h-28px;
     .cpg-deg-input {
-      @apply bg-transparent border-none text-#323136 text-12px font-500 h-24px outline-none  w-28px;
+      @apply bg-transparent border-none text-#323136 text-12px font-500 h-24px outline-none w-28px;
+      -moz-appearance: textfield;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
     .cpg-gradient-btn {
       @apply box-border rounded-4px f-center px-8px py-4px cursor-pointer;
@@ -160,6 +174,7 @@
   .cpg-pointer {
     transition: all 10ms linear;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    cursor: grab;
     @apply w-18px h-18px absolute left-0 -top-2px box-border border-2px border-solid border-#fff z-10 rounded-50%;
   }
   .cpg-pointer-centerPoint {
@@ -171,5 +186,10 @@
 
   .cpg-cursor-pointer {
     cursor: pointer;
+  }
+
+  .cpg-cursor-grabbing,
+  .cpg-cursor-grabbing .cpg-pointer {
+    cursor: grabbing;
   }
 }
