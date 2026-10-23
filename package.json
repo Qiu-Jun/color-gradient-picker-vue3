@@ -15,6 +15,7 @@
     "stage": "git add . && prettier --write .",
     "prepare": "husky install",
     "commit": "git-cz",
+    "tag": "node scripts/tag.js",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
