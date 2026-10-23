@@ -179,7 +179,8 @@ export const gradientParser = (input = '') => {
       error('Expected color definition')
     }
 
-    color.left = ~~matchDistance()?.value
+    const distance = matchDistance()?.value
+    color.left = distance !== undefined ? parseFloat(distance) || 0 : 0
     return color
   }
 

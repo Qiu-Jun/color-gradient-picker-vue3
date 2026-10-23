@@ -7,6 +7,7 @@
 -->
 <template>
   <div class="cpg-inputs-wrap">
+    <PositionInput v-if="isGradient" />
     <InputHex v-if="colorState.inputType !== InputType.cmyk" />
     <HSLInputs v-if="colorState.inputType === InputType.hsl" />
     <RGBInputs v-if="colorState.inputType === InputType.rgb" />
@@ -29,9 +30,10 @@ import {
   HSVInputs,
   CMYKInputs,
   InputItem,
+  PositionInput,
 } from './components'
 import { InputType } from '@/enums'
 import { COLOR_PROVIDER_KEY } from '@/interfaces'
 
-const { colorState, changeColor } = inject(COLOR_PROVIDER_KEY)!
+const { colorState, changeColor, isGradient } = inject(COLOR_PROVIDER_KEY)!
 </script>

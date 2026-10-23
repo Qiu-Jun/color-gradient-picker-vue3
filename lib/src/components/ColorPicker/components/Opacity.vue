@@ -8,6 +8,7 @@
 <template>
   <section
     class="cpg-opacity-wrap"
+    :class="{ 'cpg-cursor-grabbing': dragging }"
     @mousedown="onMousedown"
     @touchstart="onMousedown"
     @mousemove="onMouseMove"
@@ -18,7 +19,6 @@
     <div class="cpg-opacity-bar"></div>
     <div
       class="cpg-pointer"
-      :class="{ 'cpg-cursor-pointer': dragging }"
       :style="{ left: left * (colorState.hc?.a ?? 1) + 'px' }"
     ></div>
     <div

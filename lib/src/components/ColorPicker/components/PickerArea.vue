@@ -2,6 +2,7 @@
   <section class="relative">
     <div
       class="cpg-picker-wrap"
+      :class="{ 'cpg-cursor-grabbing': dragging }"
       :style="{
         width: `${colorState.width}px`,
       }"
@@ -14,7 +15,6 @@
     >
       <span
         class="cpg-pointer"
-        :class="{ 'cpg-cursor-pointer': dragging }"
         :style="{
           left: `${dragPos.x}px`,
           top: `${dragPos.y}px`,

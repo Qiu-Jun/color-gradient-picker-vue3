@@ -273,6 +273,7 @@ export function useColorProvider(
     const colors = colorState.gradientColors || []
     if (colors.length === 0) return
     colorState.degrees = formatInputValues(+val, 0, 360)
+    colorState.degreesStr = `${colorState.degrees}deg`
     const gradStr = createGradientStr(colors, unref(gradientType), colorState)
     setValue(gradStr)
   }
